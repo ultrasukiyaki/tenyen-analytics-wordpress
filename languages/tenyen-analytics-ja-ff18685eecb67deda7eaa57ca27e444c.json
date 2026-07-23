@@ -1,0 +1,423 @@
+{
+    "translation-revision-date": "2026-07-23 04:57+0000",
+    "generator": "tools\/make-json-translations.php",
+    "source": "assets\/admin-history.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "tenyen-analytics",
+                "lang": "ja",
+                "plural-forms": "nplurals=1; plural=0;"
+            },
+            "Analytics": [
+                "アクセス解析"
+            ],
+            "Tenyen Analytics": [
+                "Tenyen Analytics"
+            ],
+            "Dashboard": [
+                "ダッシュボード"
+            ],
+            "Realtime": [
+                "リアルタイム"
+            ],
+            "Access History": [
+                "アクセス履歴"
+            ],
+            "Content": [
+                "コンテンツ"
+            ],
+            "Referrers": [
+                "参照元"
+            ],
+            "ASN \/ Organizations": [
+                "ASN／組織"
+            ],
+            "Audience": [
+                "利用環境"
+            ],
+            "Engagement": [
+                "エンゲージメント"
+            ],
+            "System": [
+                "システム"
+            ],
+            "Settings": [
+                "設定"
+            ],
+            "Pageviews": [
+                "ページビュー"
+            ],
+            "Visitors": [
+                "訪問者"
+            ],
+            "Sessions": [
+                "セッション"
+            ],
+            "A compact entry point for monitoring site-wide activity.": [
+                "サイト全体の動きを簡潔に確認できます。"
+            ],
+            "Period analysis": [
+                "期間分析"
+            ],
+            "Estimated visitors": [
+                "推定訪問者"
+            ],
+            "Average duration": [
+                "平均滞在時間"
+            ],
+            "Average scroll": [
+                "平均スクロール率"
+            ],
+            "Bot events": [
+                "Botイベント"
+            ],
+            "Pageviews \/ Visitors \/ Sessions trend": [
+                "ページビュー／訪問者／セッションの推移"
+            ],
+            "Notable organization activity": [
+                "注目組織のアクセス"
+            ],
+            "No notable organization activity yet.": [
+                "注目組織のアクセスはまだありません。"
+            ],
+            "Popular pages": [
+                "人気ページ"
+            ],
+            "pageviews": [
+                "ページビュー"
+            ],
+            "sessions": [
+                "セッション"
+            ],
+            "No data": [
+                "データなし"
+            ],
+            "Recent views": [
+                "最近の閲覧"
+            ],
+            "Date": [
+                "日時"
+            ],
+            "Organization": [
+                "組織"
+            ],
+            "Page": [
+                "ページ"
+            ],
+            "Referrer": [
+                "参照元"
+            ],
+            "No data yet.": [
+                "データはまだありません。"
+            ],
+            "This screen refreshes every 30 seconds with recent pageviews.": [
+                "この画面は最近のページビューを30秒ごとに更新します。"
+            ],
+            "Interval": [
+                "間隔"
+            ],
+            "%d minutes": [
+                "%d分"
+            ],
+            "Apply": [
+                "適用"
+            ],
+            "Status": [
+                "状態"
+            ],
+            "ASN \/ organization": [
+                "ASN／組織"
+            ],
+            "Duration \/ scroll": [
+                "滞在時間／スクロール"
+            ],
+            "Viewed & measured": [
+                "閲覧・計測済み"
+            ],
+            "New view": [
+                "新規閲覧"
+            ],
+            "No activity in this timeframe yet.": [
+                "この時間帯のアクセスはまだありません。"
+            ],
+            "History": [
+                "履歴"
+            ],
+            "Browse raw events with asynchronous search, filters, and paging.": [
+                "非同期検索、フィルター、ページングでイベントを確認できます。"
+            ],
+            "View page performance for posts and pages.": [
+                "投稿と固定ページの実績を確認できます。"
+            ],
+            "Top content": [
+                "上位コンテンツ"
+            ],
+            "Check direct, search, external sources, and outbound clicks.": [
+                "直接流入、検索、外部流入、外部クリックを確認できます。"
+            ],
+            "Referrer domains": [
+                "参照元ドメイン"
+            ],
+            "External clicks & downloads": [
+                "外部クリックとダウンロード"
+            ],
+            "Type": [
+                "種類"
+            ],
+            "Target URL": [
+                "対象URL"
+            ],
+            "Count": [
+                "件数"
+            ],
+            "ASN & organizations": [
+                "ASNと組織"
+            ],
+            "Classify network organizations registered to incoming IPs.": [
+                "アクセス元IPに登録されたネットワーク組織を分類します。"
+            ],
+            "ASN & organization ranking": [
+                "ASN・組織ランキング"
+            ],
+            "Classification": [
+                "分類"
+            ],
+            "ASN \/ registered organization": [
+                "ASN／登録組織"
+            ],
+            "Last seen": [
+                "最終確認"
+            ],
+            "Unknown": [
+                "不明"
+            ],
+            "Browser": [
+                "ブラウザ"
+            ],
+            "OS": [
+                "OS"
+            ],
+            "Device": [
+                "端末"
+            ],
+            "Country": [
+                "国"
+            ],
+            "Review browser, OS, device, and country composition.": [
+                "ブラウザ、OS、端末、国の構成を確認できます。"
+            ],
+            "Audience environment": [
+                "利用環境"
+            ],
+            "Monitor average visit time and scroll rate by page.": [
+                "ページ別の平均滞在時間とスクロール率を確認できます。"
+            ],
+            "Page engagement": [
+                "ページエンゲージメント"
+            ],
+            "Check collection, database, and GeoLite2 status in one place.": [
+                "収集、データベース、GeoLite2の状態をまとめて確認できます。"
+            ],
+            "Saved events": [
+                "保存済みイベント"
+            ],
+            "items": [
+                "件"
+            ],
+            "Last received": [
+                "最終受信"
+            ],
+            "Not received": [
+                "未受信"
+            ],
+            "GeoIP Reader": [
+                "GeoIP Reader"
+            ],
+            "Official Reader": [
+                "公式Reader"
+            ],
+            "Built-in Reader": [
+                "内蔵Reader"
+            ],
+            "Unavailable": [
+                "利用不可"
+            ],
+            "Unconfigured": [
+                "未設定"
+            ],
+            "Collection endpoints": [
+                "収集エンドポイント"
+            ],
+            "REST API": [
+                "REST API"
+            ],
+            "History API": [
+                "履歴API"
+            ],
+            "DB table": [
+                "DBテーブル"
+            ],
+            "UI build": [
+                "UIビルド"
+            ],
+            "You do not have permission.": [
+                "この操作を実行する権限がありません。"
+            ],
+            "Period": [
+                "期間"
+            ],
+            "Today": [
+                "今日"
+            ],
+            "Yesterday": [
+                "昨日"
+            ],
+            "Last 7 days": [
+                "過去7日間"
+            ],
+            "Last 30 days": [
+                "過去30日間"
+            ],
+            "This month": [
+                "今月"
+            ],
+            "Custom": [
+                "カスタム"
+            ],
+            "Start date": [
+                "開始日"
+            ],
+            "End date": [
+                "終了日"
+            ],
+            "Actor": [
+                "対象"
+            ],
+            "Humans only": [
+                "Humanのみ"
+            ],
+            "Bots only": [
+                "Botのみ"
+            ],
+            "All": [
+                "すべて"
+            ],
+            "Event type": [
+                "イベント種別"
+            ],
+            "Location": [
+                "地域"
+            ],
+            "ASN \/ candidate organization": [
+                "ASN／候補組織"
+            ],
+            "Environment": [
+                "利用環境"
+            ],
+            "Details": [
+                "詳細"
+            ],
+            "No matching access records found.": [
+                "条件に一致するアクセス記録はありません。"
+            ],
+            "Duration": [
+                "滞在時間"
+            ],
+            "Scroll": [
+                "スクロール"
+            ],
+            "Session": [
+                "セッション"
+            ],
+            "Visitor": [
+                "訪問者"
+            ],
+            "Screen": [
+                "画面"
+            ],
+            "User-Agent": [
+                "User-Agent"
+            ],
+            "Full referrer": [
+                "参照元の全URL"
+            ],
+            "of": [
+                "／"
+            ],
+            "History paging": [
+                "履歴のページ移動"
+            ],
+            "‹ Previous": [
+                "‹ 前へ"
+            ],
+            "Next ›": [
+                "次へ ›"
+            ],
+            "Tenyen Analytics Settings": [
+                "Tenyen Analytics設定"
+            ],
+            "Reader": [
+                "Reader"
+            ],
+            "Not installed": [
+                "未導入"
+            ],
+            "City DB": [
+                "City DB"
+            ],
+            "ASN DB": [
+                "ASN DB"
+            ],
+            "Raw log retention days": [
+                "生ログの保持日数"
+            ],
+            "Exclude administrator access": [
+                "管理者のアクセスを除外"
+            ],
+            "Record bots as well": [
+                "Botも記録"
+            ],
+            "IP header to use": [
+                "使用するIPヘッダー"
+            ],
+            "REMOTE_ADDR (default)": [
+                "REMOTE_ADDR（既定）"
+            ],
+            "Change only if you understand your proxy configuration.": [
+                "プロキシ構成を理解している場合だけ変更してください。"
+            ],
+            "Organization classification overrides": [
+                "組織分類の上書き"
+            ],
+            "Site token": [
+                "サイトトークン"
+            ],
+            "Enabled": [
+                "有効"
+            ],
+            "confidence": [
+                "信頼度"
+            ],
+            "%d sec": [
+                "%d秒"
+            ],
+            "%d min %02d sec": [
+                "%d分%02d秒"
+            ],
+            "%d hr %d min": [
+                "%d時間%d分"
+            ],
+            "Other": [
+                "その他"
+            ],
+            "Refresh": [
+                "更新"
+            ],
+            "Loading…": [
+                "読み込んでいます…"
+            ]
+        }
+    }
+}
