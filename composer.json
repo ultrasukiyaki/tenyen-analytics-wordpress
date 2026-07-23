@@ -1,0 +1,16 @@
+{
+  "name": "tenyendama/tenyen-analytics-wordpress",
+  "description": "A self-hosted analytics plugin for WordPress with pageviews, sessions, engagement metrics, GeoLite2 geolocation, ASN insights, bot detection, and asynchronous admin reports.",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "php": ">=8.1"
+  },
+  "suggest": {
+    "maxmind-db/reader": "Optional official MaxMind DB reader. Tenyen Analytics includes a built-in fallback reader."
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  }
+}

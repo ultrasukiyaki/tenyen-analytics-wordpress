@@ -1,0 +1,56 @@
+# Operating systems and editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Local environment and logs
+.env
+.env.*
+!.env.example
+*.local
+*.log
+/logs/
+/cache/
+/tmp/
+
+# PHP / Composer development files
+/vendor/
+composer.phar
+.phpunit.result.cache
+.phpunit.cache/
+.php-cs-fixer.cache
+.phpstan.cache/
+
+# Node / build tools
+/node_modules/
+/coverage/
+/build/
+/dist/
+.junit.xml
+
+# Local WordPress and test environments
+/wordpress/
+/wp-content/
+/tests/tmp/
+
+# Generated release archives and checksums
+/*.zip
+/*.tar.gz
+/*.tgz
+/*SHA256SUMS*.txt
+*.sha256
+SHA256SUMS
+
+# GeoLite2 databases and downloaded archives
+*.mmdb
+GeoLite2-*.tar.gz
+GeoLite2-*.zip
+
+# Local backup files
+*.bak
+*.old
+*.orig
