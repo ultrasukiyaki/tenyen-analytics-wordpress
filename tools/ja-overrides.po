@@ -1,0 +1,497 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Tenyen Analytics for WordPress 0.5.5\n"
+"PO-Revision-Date: 2026-07-23 00:00+0900\n"
+"Last-Translator: 10yendama.com\n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Analytics"
+msgstr "アクセス解析"
+
+msgid "Dashboard"
+msgstr "ダッシュボード"
+
+msgid "Realtime"
+msgstr "リアルタイム"
+
+msgid "Access History"
+msgstr "アクセス履歴"
+
+msgid "Content"
+msgstr "コンテンツ"
+
+msgid "Referrers"
+msgstr "参照元"
+
+msgid "ASN / Organizations"
+msgstr "ASN／組織"
+
+msgid "Audience"
+msgstr "利用環境"
+
+msgid "Engagement"
+msgstr "エンゲージメント"
+
+msgid "System"
+msgstr "システム"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Refresh"
+msgstr "更新"
+
+msgid "Retry"
+msgstr "再試行"
+
+msgid "Loading…"
+msgstr "読み込んでいます…"
+
+msgid "No analytics data is available yet."
+msgstr "アクセスデータはまだありません。"
+
+msgid "Failed to load analytics data."
+msgstr "アクセスデータの取得に失敗しました。"
+
+msgid "Failed to load access history."
+msgstr "アクセス履歴の取得に失敗しました。"
+
+msgid "Today pageviews"
+msgstr "今日のページビュー"
+
+msgid "Today visitors"
+msgstr "今日の推定ユニーク訪問者"
+
+msgid "Today sessions"
+msgstr "今日のセッション"
+
+msgid "Human sessions (30 min)"
+msgstr "Humanセッション（30分）"
+
+msgid "Notable organizations"
+msgstr "注目組織"
+
+msgid "Top pages today"
+msgstr "今日の上位ページ"
+
+msgid "No top pages yet."
+msgstr "上位ページはまだありません。"
+
+msgid "Last received: %s"
+msgstr "最終受信: %s"
+
+msgid "Open analytics dashboard"
+msgstr "アクセス解析ダッシュボードを開く"
+
+msgid "Never"
+msgstr "受信なし"
+
+msgid "Unable to parse response."
+msgstr "応答を解析できません。"
+
+msgid "An unexpected error occurred."
+msgstr "予期しないエラーが発生しました。"
+
+msgid "You do not have permission."
+msgstr "この操作を実行する権限がありません。"
+
+msgid "Settings have been saved."
+msgstr "設定を保存しました。"
+
+msgid "Search"
+msgstr "検索"
+
+msgid "Reset"
+msgstr "リセット"
+
+msgid "Apply"
+msgstr "適用"
+
+msgid "Details"
+msgstr "詳細"
+
+msgid "Close"
+msgstr "閉じる"
+
+msgid "Open history"
+msgstr "履歴を開く"
+
+msgid "Close history"
+msgstr "履歴を閉じる"
+
+msgid "No data available."
+msgstr "データがありません。"
+
+msgid "Tenyen Analytics"
+msgstr "Tenyen Analytics"
+
+msgid "Pageviews"
+msgstr "ページビュー"
+
+msgid "Visitors"
+msgstr "訪問者"
+
+msgid "Sessions"
+msgstr "セッション"
+
+msgid "A compact entry point for monitoring site-wide activity."
+msgstr "サイト全体の動きを簡潔に確認できます。"
+
+msgid "Period analysis"
+msgstr "期間分析"
+
+msgid "Estimated visitors"
+msgstr "推定訪問者"
+
+msgid "Average duration"
+msgstr "平均滞在時間"
+
+msgid "Average scroll"
+msgstr "平均スクロール率"
+
+msgid "Bot events"
+msgstr "Botイベント"
+
+msgid "Pageviews / Visitors / Sessions trend"
+msgstr "ページビュー／訪問者／セッションの推移"
+
+msgid "Notable organization activity"
+msgstr "注目組織のアクセス"
+
+msgid "No notable organization activity yet."
+msgstr "注目組織のアクセスはまだありません。"
+
+msgid "Popular pages"
+msgstr "人気ページ"
+
+msgid "pageviews"
+msgstr "ページビュー"
+
+msgid "sessions"
+msgstr "セッション"
+
+msgid "No data"
+msgstr "データなし"
+
+msgid "Recent views"
+msgstr "最近の閲覧"
+
+msgid "Date"
+msgstr "日時"
+
+msgid "Organization"
+msgstr "組織"
+
+msgid "Page"
+msgstr "ページ"
+
+msgid "Referrer"
+msgstr "参照元"
+
+msgid "No data yet."
+msgstr "データはまだありません。"
+
+msgid "This screen refreshes every 30 seconds with recent pageviews."
+msgstr "この画面は最近のページビューを30秒ごとに更新します。"
+
+msgid "Interval"
+msgstr "間隔"
+
+msgid "%d minutes"
+msgstr "%d分"
+
+msgid "Status"
+msgstr "状態"
+
+msgid "ASN / organization"
+msgstr "ASN／組織"
+
+msgid "Duration / scroll"
+msgstr "滞在時間／スクロール"
+
+msgid "Viewed & measured"
+msgstr "閲覧・計測済み"
+
+msgid "New view"
+msgstr "新規閲覧"
+
+msgid "No activity in this timeframe yet."
+msgstr "この時間帯のアクセスはまだありません。"
+
+msgid "History"
+msgstr "履歴"
+
+msgid "Browse raw events with asynchronous search, filters, and paging."
+msgstr "非同期検索、フィルター、ページングでイベントを確認できます。"
+
+msgid "View page performance for posts and pages."
+msgstr "投稿と固定ページの実績を確認できます。"
+
+msgid "Top content"
+msgstr "上位コンテンツ"
+
+msgid "Check direct, search, external sources, and outbound clicks."
+msgstr "直接流入、検索、外部流入、外部クリックを確認できます。"
+
+msgid "Referrer domains"
+msgstr "参照元ドメイン"
+
+msgid "External clicks & downloads"
+msgstr "外部クリックとダウンロード"
+
+msgid "Type"
+msgstr "種類"
+
+msgid "Target URL"
+msgstr "対象URL"
+
+msgid "Count"
+msgstr "件数"
+
+msgid "ASN & organizations"
+msgstr "ASNと組織"
+
+msgid "Classify network organizations registered to incoming IPs."
+msgstr "アクセス元IPに登録されたネットワーク組織を分類します。"
+
+msgid "ASN & organization ranking"
+msgstr "ASN・組織ランキング"
+
+msgid "Displayed organizations are not a definitive identification of individual visitors."
+msgstr "表示される組織は個々の訪問者の所属を確定するものではありません。"
+
+msgid "Classification"
+msgstr "分類"
+
+msgid "ASN / registered organization"
+msgstr "ASN／登録組織"
+
+msgid "Last seen"
+msgstr "最終確認"
+
+msgid "Unknown"
+msgstr "不明"
+
+msgid "Browser"
+msgstr "ブラウザ"
+
+msgid "OS"
+msgstr "OS"
+
+msgid "Device"
+msgstr "端末"
+
+msgid "Country"
+msgstr "国"
+
+msgid "Review browser, OS, device, and country composition."
+msgstr "ブラウザ、OS、端末、国の構成を確認できます。"
+
+msgid "Audience environment"
+msgstr "利用環境"
+
+msgid "Monitor average visit time and scroll rate by page."
+msgstr "ページ別の平均滞在時間とスクロール率を確認できます。"
+
+msgid "Page engagement"
+msgstr "ページエンゲージメント"
+
+msgid "Check collection, database, and GeoLite2 status in one place."
+msgstr "収集、データベース、GeoLite2の状態をまとめて確認できます。"
+
+msgid "Saved events"
+msgstr "保存済みイベント"
+
+msgid "items"
+msgstr "件"
+
+msgid "Last received"
+msgstr "最終受信"
+
+msgid "Not received"
+msgstr "未受信"
+
+msgid "GeoIP Reader"
+msgstr "GeoIP Reader"
+
+msgid "Official Reader"
+msgstr "公式Reader"
+
+msgid "Built-in Reader"
+msgstr "内蔵Reader"
+
+msgid "Unavailable"
+msgstr "利用不可"
+
+msgid "Unconfigured"
+msgstr "未設定"
+
+msgid "Collection endpoints"
+msgstr "収集エンドポイント"
+
+msgid "REST API"
+msgstr "REST API"
+
+msgid "History API"
+msgstr "履歴API"
+
+msgid "DB table"
+msgstr "DBテーブル"
+
+msgid "UI build"
+msgstr "UIビルド"
+
+msgid "Period"
+msgstr "期間"
+
+msgid "Today"
+msgstr "今日"
+
+msgid "Yesterday"
+msgstr "昨日"
+
+msgid "Last 7 days"
+msgstr "過去7日間"
+
+msgid "Last 30 days"
+msgstr "過去30日間"
+
+msgid "This month"
+msgstr "今月"
+
+msgid "Custom"
+msgstr "カスタム"
+
+msgid "Start date"
+msgstr "開始日"
+
+msgid "End date"
+msgstr "終了日"
+
+msgid "Actor"
+msgstr "対象"
+
+msgid "Humans only"
+msgstr "Humanのみ"
+
+msgid "Bots only"
+msgstr "Botのみ"
+
+msgid "All"
+msgstr "すべて"
+
+msgid "Unique visitors are estimated by deduplicating visitor_id within the selected period."
+msgstr "ユニーク訪問者は選択期間内のvisitor_idを重複排除して推定します。"
+
+msgid "Event type"
+msgstr "イベント種別"
+
+msgid "Location"
+msgstr "地域"
+
+msgid "ASN / candidate organization"
+msgstr "ASN／候補組織"
+
+msgid "Environment"
+msgstr "利用環境"
+
+msgid "No matching access records found."
+msgstr "条件に一致するアクセス記録はありません。"
+
+msgid "Duration"
+msgstr "滞在時間"
+
+msgid "Scroll"
+msgstr "スクロール"
+
+msgid "Session"
+msgstr "セッション"
+
+msgid "Visitor"
+msgstr "訪問者"
+
+msgid "Screen"
+msgstr "画面"
+
+msgid "User-Agent"
+msgstr "User-Agent"
+
+msgid "Full referrer"
+msgstr "参照元の全URL"
+
+msgid "of"
+msgstr "／"
+
+msgid "History paging"
+msgstr "履歴のページ移動"
+
+msgid "‹ Previous"
+msgstr "‹ 前へ"
+
+msgid "Next ›"
+msgstr "次へ ›"
+
+msgid "Tenyen Analytics Settings"
+msgstr "Tenyen Analytics設定"
+
+msgid "Reader"
+msgstr "Reader"
+
+msgid "Not installed"
+msgstr "未導入"
+
+msgid "City DB"
+msgstr "City DB"
+
+msgid "ASN DB"
+msgstr "ASN DB"
+
+msgid "Raw log retention days"
+msgstr "生ログの保持日数"
+
+msgid "Exclude administrator access"
+msgstr "管理者のアクセスを除外"
+
+msgid "Record bots as well"
+msgstr "Botも記録"
+
+msgid "IP header to use"
+msgstr "使用するIPヘッダー"
+
+msgid "REMOTE_ADDR (default)"
+msgstr "REMOTE_ADDR（既定）"
+
+msgid "Change only if you understand your proxy configuration."
+msgstr "プロキシ構成を理解している場合だけ変更してください。"
+
+msgid "Organization classification overrides"
+msgstr "組織分類の上書き"
+
+msgid "one per line. Categories are research / government / company / isp / cloud / proxy / bot / unknown."
+msgstr "1行に1件入力します。カテゴリーはresearch / government / company / isp / cloud / proxy / bot / unknownです。"
+
+msgid "Site token"
+msgstr "サイトトークン"
+
+msgid "Enabled"
+msgstr "有効"
+
+msgid "confidence"
+msgstr "信頼度"
+
+msgid "%d sec"
+msgstr "%d秒"
+
+msgid "%d min %02d sec"
+msgstr "%d分%02d秒"
+
+msgid "%d hr %d min"
+msgstr "%d時間%d分"
+
+msgid "Other"
+msgstr "その他"
