@@ -18,7 +18,7 @@ xgettext \
     --keyword=esc_html__ \
     --keyword=esc_attr__ \
     --package-name='Tenyen Analytics for WordPress' \
-    --package-version='0.5.5' \
+    --package-version='0.5.6' \
     --msgid-bugs-address='https://www.10yendama.com/' \
     --copyright-holder='10yendama.com' \
     --output="$pot" \

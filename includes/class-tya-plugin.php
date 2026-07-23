@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Plugin
 {
-    public const UI_BUILD = '0.5.5-navigation';
+    public const UI_BUILD = '0.5.6-navigation';
     private static ?self $instance = null;
 
     public static function instance(): self

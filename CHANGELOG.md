@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.5.6 - 2026-07-23
+
+### Fixed
+
+- Fixed long User-Agent, URL, and identifier values overlapping adjacent fields in the expanded access-history detail view.
+- Improved responsive wrapping for access-history detail content.
+
+### 修正
+
+- アクセス履歴の詳細表示で、長いUser-Agent、URL、識別子が隣接項目へ重なる問題を修正しました。
+- 詳細表示の折り返しとレスポンシブ表示を改善しました。
+
 ## 0.5.5
 
 - Renamed the main plugin class to `TYA_Plugin` and its file to `includes/class-tya-plugin.php`.
