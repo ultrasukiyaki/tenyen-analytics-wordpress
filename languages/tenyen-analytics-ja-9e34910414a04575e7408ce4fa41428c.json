@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-07-23 12:00+0000",
+    "translation-revision-date": "2026-07-24 02:33+0000",
     "generator": "tools\/make-json-translations.php",
     "source": "assets\/admin-charts.js",
     "domain": "messages",
@@ -354,6 +354,42 @@
             ],
             "Next ›": [
                 "次へ ›"
+            ],
+            "Detailed access history": [
+                "アクセス履歴の取得に失敗しました。"
+            ],
+            "Not loaded": [
+                "未導入"
+            ],
+            "Open history": [
+                "履歴を開く"
+            ],
+            "Auto refresh": [
+                "更新"
+            ],
+            "Disabled": [
+                "有効"
+            ],
+            "1 minute": [
+                "%d分"
+            ],
+            "5 minutes": [
+                "%d分"
+            ],
+            "Apply settings": [
+                "設定"
+            ],
+            "Search": [
+                "検索"
+            ],
+            "Event": [
+                "イベント種別"
+            ],
+            "All browsers": [
+                "ブラウザ"
+            ],
+            "Reset": [
+                "リセット"
             ],
             "Tenyen Analytics Settings": [
                 "Tenyen Analytics設定"

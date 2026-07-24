@@ -22,7 +22,7 @@ Tenyen Analytics is a self-hosted WordPress analytics plugin for pageviews, esti
 
 ## Installation
 
-Upload the release ZIP in **Plugins → Add New → Upload Plugin**, or copy the `tenyen-analytics` directory to `wp-content/plugins/`, then activate it. Existing installations can be updated by overwriting the plugin directory; v0.5.6 requires no database migration.
+Upload the release ZIP in **Plugins → Add New → Upload Plugin**, or copy the `tenyen-analytics` directory to `wp-content/plugins/`, then activate it. Existing installations can be updated by overwriting the plugin directory; v0.5.7 requires no database migration.
 
 ## GeoLite2 setup
 
@@ -38,7 +38,7 @@ Raw IP addresses are stored using reversible encryption; HMAC values support exa
 
 ## Updating
 
-Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.5.6 retains existing tables, options, routes, payload fields, preferences, and collected data.
+Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.5.7 retains existing tables, options, routes, payload fields, preferences, and collected data.
 
 ## Troubleshooting
 

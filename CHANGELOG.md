@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.5.7 - 2026-07-24
+
+### Fixed
+
+- Fixed PHP translation expressions appearing as literal text in headings, filters, buttons, and help text throughout the access-history screen.
+- Added a rendering regression check to prevent untranslated PHP expressions from leaking into the access-history HTML.
+
+### 修正
+
+- アクセス履歴画面の見出し、フィルター、ボタン、ヘルプ文にPHP翻訳関数の式がそのまま表示される問題を修正しました。
+- PHP式がアクセス履歴のHTMLへ漏れ出す問題の再発を防ぐ描画テストを追加しました。
+
 ## 0.5.6 - 2026-07-23
 
 ### Fixed

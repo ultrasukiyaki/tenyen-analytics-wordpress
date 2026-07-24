@@ -3,7 +3,7 @@ Contributors: 10yendama
 Tags: analytics, privacy, pageviews, sessions, geolocation
 Requires at least: 6.2
 Requires PHP: 8.1
-Stable tag: 0.5.6
+Stable tag: 0.5.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,11 @@ No. The built-in MMDB reader and local analytics reports work without Composer o
 
 == Changelog ==
 
+= 0.5.7 =
+
+* Fixed PHP translation expressions appearing as literal text throughout the access-history screen.
+* Added a rendering regression check for the access-history interface.
+
 = 0.5.6 =
 
 * Fixed long User-Agent, URL, and identifier values overlapping adjacent fields in expanded access-history details.
@@ -52,6 +57,10 @@ No. The built-in MMDB reader and local analytics reports work without Composer o
 * Added a built-in MMDB reader and asynchronous access history.
 
 == Upgrade Notice ==
+
+= 0.5.7 =
+
+No database migration is required. Existing analytics data and settings are preserved.
 
 = 0.5.6 =
 

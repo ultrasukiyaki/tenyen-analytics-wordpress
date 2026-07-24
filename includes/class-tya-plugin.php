@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Plugin
 {
-    public const UI_BUILD = '0.5.6-navigation';
+    public const UI_BUILD = '0.5.7-history-rendering';
     private static ?self $instance = null;
 
     public static function instance(): self
@@ -1009,27 +1009,27 @@ final class TYA_Plugin
         <section id="tya-history" class="tya-history">
             <header class="tya-history-header">
                 <div>
-                    <h2>' . esc_html__('Detailed access history', 'tenyen-analytics') . '</h2>
-                    <span class="tya-history-status" data-history-status>' . esc_html__('Not loaded', 'tenyen-analytics') . '</span>
+                    <h2><?= esc_html__('Detailed access history', 'tenyen-analytics') ?></h2>
+                    <span class="tya-history-status" data-history-status><?= esc_html__('Not loaded', 'tenyen-analytics') ?></span>
                 </div>
                 <div class="tya-history-actions">
-                    <button type="button" class="button" data-history-toggle aria-expanded="false">' . esc_html__('Open history', 'tenyen-analytics') . '</button>
-                    <button type="button" class="button" data-history-settings-toggle aria-expanded="false">⚙ ' . esc_html__('Display settings', 'tenyen-analytics') . '</button>
+                    <button type="button" class="button" data-history-toggle aria-expanded="false"><?= esc_html__('Open history', 'tenyen-analytics') ?></button>
+                    <button type="button" class="button" data-history-settings-toggle aria-expanded="false">⚙ <?= esc_html__('Display settings', 'tenyen-analytics') ?></button>
                 </div>
             </header>
 
             <div class="tya-history-settings" data-history-settings hidden>
                 <div class="tya-history-settings-grid">
                     <fieldset>
-                        <legend>' . esc_html__('Display density', 'tenyen-analytics') . '</legend>
-                        <label><input type="radio" name="history_density" value="compact"> ' . esc_html__('Compact', 'tenyen-analytics') . '</label>
-                        <label><input type="radio" name="history_density" value="standard"> ' . esc_html__('Standard', 'tenyen-analytics') . '</label>
-                        <label><input type="checkbox" name="history_wrap"> ' . esc_html__('Wrap cells', 'tenyen-analytics') . '</label>
-                        <label><input type="checkbox" name="history_sticky"> ' . esc_html__('Sticky header', 'tenyen-analytics') . '</label>
-                        <label><input type="checkbox" name="history_collapsed"> ' . esc_html__('Collapsed by default', 'tenyen-analytics') . '</label>
+                        <legend><?= esc_html__('Display density', 'tenyen-analytics') ?></legend>
+                        <label><input type="radio" name="history_density" value="compact"> <?= esc_html__('Compact', 'tenyen-analytics') ?></label>
+                        <label><input type="radio" name="history_density" value="standard"> <?= esc_html__('Standard', 'tenyen-analytics') ?></label>
+                        <label><input type="checkbox" name="history_wrap"> <?= esc_html__('Wrap cells', 'tenyen-analytics') ?></label>
+                        <label><input type="checkbox" name="history_sticky"> <?= esc_html__('Sticky header', 'tenyen-analytics') ?></label>
+                        <label><input type="checkbox" name="history_collapsed"> <?= esc_html__('Collapsed by default', 'tenyen-analytics') ?></label>
                     </fieldset>
                     <fieldset>
-                        <legend>' . esc_html__('Visible columns', 'tenyen-analytics') . '</legend>
+                        <legend><?= esc_html__('Visible columns', 'tenyen-analytics') ?></legend>
                         <?php foreach ([
                             'datetime' => __('Date', 'tenyen-analytics'),
                             'event' => __('Event type', 'tenyen-analytics'),
@@ -1045,63 +1045,63 @@ final class TYA_Plugin
                         <?php endforeach; ?>
                     </fieldset>
                     <fieldset>
-                        <legend>' . esc_html__('Auto refresh', 'tenyen-analytics') . '</legend>
-                        <label>' . esc_html__('Interval', 'tenyen-analytics') . '
+                        <legend><?= esc_html__('Auto refresh', 'tenyen-analytics') ?></legend>
+                        <label><?= esc_html__('Interval', 'tenyen-analytics') ?>
                             <select name="history_auto_refresh">
-                                <option value="0">' . esc_html__('Disabled', 'tenyen-analytics') . '</option>
-                                <option value="30">' . esc_html__('30 seconds', 'tenyen-analytics') . '</option>
-                                <option value="60">' . esc_html__('1 minute', 'tenyen-analytics') . '</option>
-                                <option value="300">' . esc_html__('5 minutes', 'tenyen-analytics') . '</option>
+                                <option value="0"><?= esc_html__('Disabled', 'tenyen-analytics') ?></option>
+                                <option value="30"><?= esc_html__('30 seconds', 'tenyen-analytics') ?></option>
+                                <option value="60"><?= esc_html__('1 minute', 'tenyen-analytics') ?></option>
+                                <option value="300"><?= esc_html__('5 minutes', 'tenyen-analytics') ?></option>
                             </select>
                         </label>
-                        <p class="description">' . esc_html__('Display settings are saved to localStorage in this browser. The access data itself is not stored here.', 'tenyen-analytics') . '</p>
+                        <p class="description"><?= esc_html__('Display settings are saved to localStorage in this browser. The access data itself is not stored here.', 'tenyen-analytics') ?></p>
                     </fieldset>
                 </div>
                 <div class="tya-history-settings-actions">
-                    <button type="button" class="button button-primary" data-settings-apply>' . esc_html__('Apply settings', 'tenyen-analytics') . '</button>
-                    <button type="button" class="button" data-settings-reset>' . esc_html__('Reset to defaults', 'tenyen-analytics') . '</button>
+                    <button type="button" class="button button-primary" data-settings-apply><?= esc_html__('Apply settings', 'tenyen-analytics') ?></button>
+                    <button type="button" class="button" data-settings-reset><?= esc_html__('Reset to defaults', 'tenyen-analytics') ?></button>
                 </div>
             </div>
 
             <div class="tya-history-body" data-history-body hidden>
                 <form class="tya-history-filter" data-history-form>
-                    <label>' . esc_html__('Search', 'tenyen-analytics') . '<input type="search" name="q" placeholder="' . esc_attr__('IP, URL, title, location, ASN, environment', 'tenyen-analytics') . '" autocomplete="off"></label>
-                    <label>' . esc_html__('From', 'tenyen-analytics') . '<input type="date" name="from"></label>
-                    <label>' . esc_html__('To', 'tenyen-analytics') . '<input type="date" name="to"></label>
-                    <label>' . esc_html__('Event', 'tenyen-analytics') . '
+                    <label><?= esc_html__('Search', 'tenyen-analytics') ?><input type="search" name="q" placeholder="<?= esc_attr__('IP, URL, title, location, ASN, environment', 'tenyen-analytics') ?>" autocomplete="off"></label>
+                    <label><?= esc_html__('From', 'tenyen-analytics') ?><input type="date" name="from"></label>
+                    <label><?= esc_html__('To', 'tenyen-analytics') ?><input type="date" name="to"></label>
+                    <label><?= esc_html__('Event', 'tenyen-analytics') ?>
                         <select name="event">
-                            <option value="all">' . esc_html__('All', 'tenyen-analytics') . '</option>
+                            <option value="all"><?= esc_html__('All', 'tenyen-analytics') ?></option>
                             <option value="pageview">pageview</option>
                             <option value="engagement">engagement</option>
                             <option value="external_click">external_click</option>
                             <option value="download">download</option>
                         </select>
                     </label>
-                    <label>' . esc_html__('Visitor', 'tenyen-analytics') . '
+                    <label><?= esc_html__('Visitor', 'tenyen-analytics') ?>
                         <select name="actor">
-                            <option value="human">' . esc_html__('Humans only', 'tenyen-analytics') . '</option>
-                            <option value="bot">' . esc_html__('Bots only', 'tenyen-analytics') . '</option>
-                            <option value="all">' . esc_html__('All', 'tenyen-analytics') . '</option>
+                            <option value="human"><?= esc_html__('Humans only', 'tenyen-analytics') ?></option>
+                            <option value="bot"><?= esc_html__('Bots only', 'tenyen-analytics') ?></option>
+                            <option value="all"><?= esc_html__('All', 'tenyen-analytics') ?></option>
                         </select>
                     </label>
-                    <label>' . esc_html__('Country', 'tenyen-analytics') . '<select name="country"><option value="">' . esc_html__('All countries', 'tenyen-analytics') . '</option></select></label>
-                    <label>' . esc_html__('Browser', 'tenyen-analytics') . '<select name="browser"><option value="">' . esc_html__('All browsers', 'tenyen-analytics') . '</option></select></label>
-                    <label>' . esc_html__('OS', 'tenyen-analytics') . '<select name="os"><option value="">' . esc_html__('All operating systems', 'tenyen-analytics') . '</option></select></label>
-                    <label>' . esc_html__('Device', 'tenyen-analytics') . '<select name="device"><option value="">' . esc_html__('All devices', 'tenyen-analytics') . '</option></select></label>
-                    <label>' . esc_html__('Items per page', 'tenyen-analytics') . '
+                    <label><?= esc_html__('Country', 'tenyen-analytics') ?><select name="country"><option value=""><?= esc_html__('All countries', 'tenyen-analytics') ?></option></select></label>
+                    <label><?= esc_html__('Browser', 'tenyen-analytics') ?><select name="browser"><option value=""><?= esc_html__('All browsers', 'tenyen-analytics') ?></option></select></label>
+                    <label><?= esc_html__('OS', 'tenyen-analytics') ?><select name="os"><option value=""><?= esc_html__('All operating systems', 'tenyen-analytics') ?></option></select></label>
+                    <label><?= esc_html__('Device', 'tenyen-analytics') ?><select name="device"><option value=""><?= esc_html__('All devices', 'tenyen-analytics') ?></option></select></label>
+                    <label><?= esc_html__('Items per page', 'tenyen-analytics') ?>
                         <select name="per_page"><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>
                     </label>
-                    <label>' . esc_html__('Sort order', 'tenyen-analytics') . '
-                        <select name="order"><option value="desc">' . esc_html__('Newest first', 'tenyen-analytics') . '</option><option value="asc">' . esc_html__('Oldest first', 'tenyen-analytics') . '</option></select>
+                    <label><?= esc_html__('Sort order', 'tenyen-analytics') ?>
+                        <select name="order"><option value="desc"><?= esc_html__('Newest first', 'tenyen-analytics') ?></option><option value="asc"><?= esc_html__('Oldest first', 'tenyen-analytics') ?></option></select>
                     </label>
                     <div class="tya-history-filter-actions">
-                        <button type="submit" class="button button-primary">' . esc_html__('Search', 'tenyen-analytics') . '</button>
-                        <button type="button" class="button" data-filter-reset>' . esc_html__('Reset', 'tenyen-analytics') . '</button>
+                        <button type="submit" class="button button-primary"><?= esc_html__('Search', 'tenyen-analytics') ?></button>
+                        <button type="button" class="button" data-filter-reset><?= esc_html__('Reset', 'tenyen-analytics') ?></button>
                     </div>
                 </form>
-                <p class="tya-history-help">' . esc_html__('Search, filters, and paging update asynchronously without reloading the whole page. Raw IP search is exact; others are partial matches.', 'tenyen-analytics') . '</p>
+                <p class="tya-history-help"><?= esc_html__('Search, filters, and paging update asynchronously without reloading the whole page. Raw IP search is exact; others are partial matches.', 'tenyen-analytics') ?></p>
                 <div class="tya-history-range" data-history-range-top></div>
-                <div data-history-table><div class="tya-history-empty">' . esc_html__('Open the history panel to load events.', 'tenyen-analytics') . '</div></div>
+                <div data-history-table><div class="tya-history-empty"><?= esc_html__('Open the history panel to load events.', 'tenyen-analytics') ?></div></div>
                 <div class="tya-history-range" data-history-range-bottom></div>
             </div>
         </section>

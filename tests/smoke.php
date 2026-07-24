@@ -23,7 +23,10 @@ function add_filter(): void {}
 function is_admin(): bool { return true; }
 function current_user_can(string $capability): bool { return $capability === 'manage_options' && $GLOBALS['tya_can_manage']; }
 function __($text): string { return $text; }
+function esc_html($text): string { return $text; }
 function esc_html__($text): string { return $text; }
+function esc_attr__($text): string { return $text; }
+function esc_attr($text): string { return $text; }
 function add_menu_page(): void {}
 function add_submenu_page($parent, $title, $label, $capability, $slug): void { $GLOBALS['tya_submenus'][] = $slug; }
 function register_rest_route(string $namespace, string $route, array $args): void { $GLOBALS['tya_routes'][$namespace . $route] = $args; }
@@ -49,6 +52,16 @@ class WP_REST_Response
 require dirname(__DIR__) . '/tenyen-analytics.php';
 
 $plugin = TYA_Plugin::instance();
+$historyShellMethod = new ReflectionMethod($plugin, 'renderHistoryShell');
+$historyShellMethod->setAccessible(true);
+$historyShell = $historyShellMethod->invoke($plugin);
+if (!str_contains($historyShell, '<h2>Detailed access history</h2>')) {
+    throw new RuntimeException('Access history heading did not render.');
+}
+if (str_contains($historyShell, "esc_html__(") || str_contains($historyShell, "esc_attr__(")) {
+    throw new RuntimeException('Access history leaked PHP translation expressions into the HTML.');
+}
+
 $plugin->registerAdminMenu();
 if (count($GLOBALS['tya_submenus']) !== 10) {
     throw new RuntimeException('Expected all ten plugin submenu pages.');

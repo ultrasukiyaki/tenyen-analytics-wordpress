@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Security fixes are provided for the current release line. Version 0.5.6 is currently supported; administrators should update from older versions.
+Security fixes are provided for the current release line. Version 0.5.7 is currently supported; administrators should update from older versions.
 
 ## Reporting a vulnerability
 
