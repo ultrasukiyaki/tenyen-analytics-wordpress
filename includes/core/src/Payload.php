@@ -6,13 +6,16 @@ namespace Tenyen\Analytics;
 
 final class Payload
 {
-    private const EVENT_TYPES = ['pageview', 'engagement', 'outbound', 'download'];
+    private const EVENT_TYPES = [
+        'pageview', 'engagement', 'outbound', 'download', 'internal_link_click',
+        'button_click', 'form_submit', 'not_found', 'custom',
+    ];
 
     public static function normalize(array $input): array
     {
         $event = self::text($input['event'] ?? 'pageview', 32);
         if (!in_array($event, self::EVENT_TYPES, true)) {
-            $event = 'pageview';
+            $event = 'custom';
         }
 
         return [
@@ -29,7 +32,30 @@ final class Payload
             'duration_ms' => self::integer($input['duration_ms'] ?? 0, 0, 86400000),
             'scroll_depth' => self::integer($input['scroll_depth'] ?? 0, 0, 100),
             'target_url' => self::text($input['target_url'] ?? '', 2048),
+            'event_name' => self::eventName($input['event_name'] ?? ''),
+            'event_meta' => self::metadata($input['metadata'] ?? []),
         ];
+    }
+
+    private static function eventName(mixed $value): string
+    {
+        $value = self::text($value, 64);
+        return preg_match('/^[a-z][a-z0-9_.-]{0,63}$/', $value) ? $value : '';
+    }
+
+    /** @return array<string,string|int|float|bool> */
+    private static function metadata(mixed $value): array
+    {
+        if (!is_array($value) || array_is_list($value)) return [];
+        $result = [];
+        foreach ($value as $key => $item) {
+            if (count($result) >= 10 || !is_string($key) || !preg_match('/^[a-z][a-z0-9_.-]{0,31}$/i', $key) || !is_scalar($item)) continue;
+            if (is_string($item)) {
+                $item = self::text($item, 256);
+            }
+            $result[$key] = $item;
+        }
+        return $result;
     }
 
     private static function uuid(mixed $value): string

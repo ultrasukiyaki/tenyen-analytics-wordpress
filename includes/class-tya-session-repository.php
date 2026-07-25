@@ -83,8 +83,10 @@ final class TYA_Session_Repository
         $events = $this->wpdb->get_results(
             $this->wpdb->prepare(
                 "SELECT event_id,occurred_at,event_type,visitor_id,session_id,country_code,country_name,
-                    region,city,asn,asn_org,path,page_title,referrer,target_url,user_agent,browser,os,
-                    device_type,duration_ms,scroll_depth,is_bot
+                    region,city,asn,asn_org,path,page_title,referrer,target_url,target_host,
+                    event_name,event_meta,traffic_channel,referrer_host,utm_source,utm_medium,
+                    utm_campaign,utm_content,utm_term,user_agent,browser,os,device_type,
+                    duration_ms,scroll_depth,is_bot
                  FROM {$this->table} WHERE session_id=%s AND session_id<>''
                  ORDER BY occurred_at ASC,event_id ASC",
                 $sessionId

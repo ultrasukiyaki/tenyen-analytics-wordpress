@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Installer
 {
+    public const SCHEMA_VERSION = '0.6.1';
     public static function tableName(): string
     {
         global $wpdb;
@@ -43,6 +44,16 @@ final class TYA_Installer
             page_title VARCHAR(512) NOT NULL DEFAULT '',
             referrer TEXT NULL,
             target_url TEXT NULL,
+            target_host VARCHAR(255) NOT NULL DEFAULT '',
+            event_name VARCHAR(64) NOT NULL DEFAULT '',
+            event_meta TEXT NULL,
+            traffic_channel VARCHAR(32) NOT NULL DEFAULT '',
+            referrer_host VARCHAR(255) NOT NULL DEFAULT '',
+            utm_source VARCHAR(128) NOT NULL DEFAULT '',
+            utm_medium VARCHAR(128) NOT NULL DEFAULT '',
+            utm_campaign VARCHAR(256) NOT NULL DEFAULT '',
+            utm_content VARCHAR(256) NOT NULL DEFAULT '',
+            utm_term VARCHAR(256) NOT NULL DEFAULT '',
             user_agent VARCHAR(1024) NOT NULL DEFAULT '',
             browser VARCHAR(64) NOT NULL DEFAULT '',
             os VARCHAR(64) NOT NULL DEFAULT '',
@@ -61,10 +72,14 @@ final class TYA_Installer
             KEY ip_time (ip_hash, occurred_at),
             KEY asn_time (asn, occurred_at),
             KEY country_time (country_code, occurred_at),
-            KEY bot_time (is_bot, occurred_at)
+            KEY bot_time (is_bot, occurred_at),
+            KEY channel_time (traffic_channel, occurred_at),
+            KEY campaign_time (utm_source, utm_medium, occurred_at),
+            KEY event_name_time (event_name, occurred_at)
         ) {$charset};";
 
         dbDelta($sql);
+        update_option('tya_schema_version', self::SCHEMA_VERSION, false);
 
         if (!get_option('tya_site_token')) {
             add_option('tya_site_token', wp_generate_password(32, false, false), '', false);
@@ -74,6 +89,9 @@ final class TYA_Installer
         add_option('tya_proxy_header', '', '', false);
         add_option('tya_log_bots', 1, '', false);
         add_option('tya_org_overrides', '', '', false);
+        add_option('tya_track_internal_links', 0, '', false);
+        add_option('tya_track_buttons', 0, '', false);
+        add_option('tya_track_forms', 0, '', false);
 
         $upload = wp_upload_dir();
         $geoDir = trailingslashit($upload['basedir']) . 'tenyen-analytics';
@@ -85,6 +103,13 @@ final class TYA_Installer
 
         if (!wp_next_scheduled('tya_daily_cleanup')) {
             wp_schedule_event(time() + HOUR_IN_SECONDS, 'daily', 'tya_daily_cleanup');
+        }
+    }
+
+    public static function maybeUpgrade(): void
+    {
+        if ((string)get_option('tya_schema_version', '') !== self::SCHEMA_VERSION) {
+            self::activate();
         }
     }
 
