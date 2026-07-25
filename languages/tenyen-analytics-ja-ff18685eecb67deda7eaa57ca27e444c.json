@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-07-25 03:02+0000",
+    "translation-revision-date": "2026-07-25 21:00+0000",
     "generator": "tools\/make-json-translations.php",
     "source": "assets\/admin-history.js",
     "domain": "messages",
@@ -442,6 +442,15 @@
             "Event": [
                 "イベント"
             ],
+            "Event name": [
+                "イベント種別"
+            ],
+            "Source page": [
+                "人気ページ"
+            ],
+            "Target domain": [
+                "参照元ドメイン"
+            ],
             "All countries": [
                 "すべての国"
             ],
@@ -597,6 +606,9 @@
             ],
             "Bounce (estimated)": [
                 "直帰（推定）"
+            ],
+            "Referrer domain": [
+                "参照元ドメイン"
             ],
             "Engaged time (estimated)": [
                 "エンゲージ時間（推定）"

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Tenyen Analytics for WordPress
  * Description: A self-hosted analytics plugin for WordPress with pageviews, sessions, engagement metrics, GeoLite2 geolocation, ASN insights, bot detection, and asynchronous admin reports.
- * Version: 0.6.0
+ * Version: 0.6.1
  * Requires at least: 6.2
  * Requires PHP: 8.1
  * Author: 10yendama.com
@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('TYA_VERSION', '0.6.0');
+define('TYA_VERSION', '0.6.1');
 define('TYA_FILE', __FILE__);
 define('TYA_DIR', plugin_dir_path(__FILE__));
 define('TYA_URL', plugin_dir_url(__FILE__));

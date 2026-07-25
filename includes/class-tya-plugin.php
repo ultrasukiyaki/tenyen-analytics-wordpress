@@ -8,6 +8,7 @@ use Tenyen\Analytics\GeoIp;
 use Tenyen\Analytics\IpResolver;
 use Tenyen\Analytics\OrganizationClassifierV040;
 use Tenyen\Analytics\Payload;
+use Tenyen\Analytics\TrafficAttribution;
 use Tenyen\Analytics\UserAgentParser;
 
 if (!defined('ABSPATH')) {
@@ -16,7 +17,7 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Plugin
 {
-    public const UI_BUILD = '0.6.0-session-journeys';
+    public const UI_BUILD = '0.6.1-traffic-events';
     private static ?self $instance = null;
     private ?TYA_Session_Admin $sessionAdmin = null;
 
@@ -27,6 +28,7 @@ final class TYA_Plugin
 
     public function boot(): void
     {
+        TYA_Installer::maybeUpgrade();
         add_action('wp_enqueue_scripts', [$this, 'enqueueTracker']);
         add_action('rest_api_init', [$this, 'registerRoutes']);
         add_action('admin_menu', [$this, 'registerAdminMenu']);
@@ -149,6 +151,10 @@ final class TYA_Plugin
         $config = [
             'endpoint' => esc_url_raw(rest_url('tenyen-analytics/v1/collect')),
             'token' => (string)get_option('tya_site_token', ''),
+            'notFound' => is_404(),
+            'trackInternalLinks' => (bool)get_option('tya_track_internal_links', 0),
+            'trackButtons' => (bool)get_option('tya_track_buttons', 0),
+            'trackForms' => (bool)get_option('tya_track_forms', 0),
         ];
         wp_add_inline_script(
             'tenyen-analytics',
@@ -234,6 +240,16 @@ final class TYA_Plugin
         }
 
         $payload = Payload::normalize($input);
+        if ($payload['event'] === 'custom' && $payload['event_name'] === '') {
+            return new WP_REST_Response(['ok' => false, 'error' => 'invalid_event_name'], 400);
+        }
+        $attribution = TrafficAttribution::fromPage($payload['path'], $payload['referrer'], home_url('/'));
+        if ($payload['session_id'] !== '') {
+            $firstTouch = $this->firstTouchAttribution($payload['session_id']);
+            if ($firstTouch !== null) {
+                $attribution = $firstTouch;
+            }
+        }
         $ua = substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 1024);
         $isBot = BotDetector::isBot($ua);
         if ($isBot && !(bool)get_option('tya_log_bots', 1)) {
@@ -270,6 +286,16 @@ final class TYA_Plugin
                 'page_title' => $payload['title'],
                 'referrer' => $payload['referrer'],
                 'target_url' => $payload['target_url'],
+                'target_host' => TrafficAttribution::host($payload['target_url']),
+                'event_name' => $payload['event_name'],
+                'event_meta' => $payload['event_meta'] === [] ? null : wp_json_encode($payload['event_meta'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'traffic_channel' => $attribution['traffic_channel'],
+                'referrer_host' => $attribution['referrer_host'],
+                'utm_source' => $attribution['utm_source'],
+                'utm_medium' => $attribution['utm_medium'],
+                'utm_campaign' => $attribution['utm_campaign'],
+                'utm_content' => $attribution['utm_content'],
+                'utm_term' => $attribution['utm_term'],
                 'user_agent' => $ua,
                 'browser' => $agent['browser'],
                 'os' => $agent['os'],
@@ -287,6 +313,20 @@ final class TYA_Plugin
         $response = new WP_REST_Response(['ok' => $inserted !== false], $inserted !== false ? 201 : 500);
         $response->header('Cache-Control', 'no-store, private');
         return $response;
+    }
+
+    /** @return array<string,string>|null */
+    private function firstTouchAttribution(string $sessionId): ?array
+    {
+        global $wpdb;
+        $table = TYA_Installer::tableName();
+        $row = $wpdb->get_row($wpdb->prepare(
+            "SELECT traffic_channel,referrer_host,utm_source,utm_medium,utm_campaign,utm_content,utm_term
+             FROM {$table} WHERE session_id=%s AND event_type='pageview'
+             ORDER BY occurred_at ASC,event_id ASC LIMIT 1",
+            $sessionId
+        ), ARRAY_A);
+        return is_array($row) ? array_map('strval', $row) : null;
     }
 
     private function isSameSiteRequest(WP_REST_Request $request): bool
@@ -389,6 +429,11 @@ final class TYA_Plugin
         register_setting('tya_settings', 'tya_org_overrides', [
             'type' => 'string', 'sanitize_callback' => 'sanitize_textarea_field', 'default' => '',
         ]);
+        foreach (['tya_track_internal_links', 'tya_track_buttons', 'tya_track_forms'] as $option) {
+            register_setting('tya_settings', $option, [
+                'type' => 'boolean', 'sanitize_callback' => static fn($v) => $v ? 1 : 0, 'default' => 0,
+            ]);
+        }
     }
 
     public function renderDashboard(): void
@@ -544,7 +589,7 @@ final class TYA_Plugin
         $this->ensureAdmin();
         global $wpdb;$table=TYA_Installer::tableName();$analysis=$this->analysisFilters();$actorSql=$this->actorSql($analysis['actor']);
         $rows = $wpdb->get_results($wpdb->prepare("SELECT CASE WHEN referrer='' THEN 'Direct' ELSE COALESCE(NULLIF(SUBSTRING_INDEX(SUBSTRING_INDEX(referrer,'/',3),'/',-1),''),'Unknown') END referrer_host,MAX(referrer) sample_url,COUNT(*) pageviews,COUNT(DISTINCT session_id) sessions FROM {$table} WHERE event_type='pageview' AND occurred_at>=%s AND occurred_at<%s{$actorSql} GROUP BY referrer_host ORDER BY pageviews DESC LIMIT 100",$analysis['start_utc'],$analysis['end_utc']),ARRAY_A)?:[];
-        $clicks = $wpdb->get_results($wpdb->prepare("SELECT event_type,target_url,COUNT(*) events FROM {$table} WHERE event_type IN('external_click','download') AND occurred_at>=%s AND occurred_at<%s{$actorSql} GROUP BY event_type,target_url ORDER BY events DESC LIMIT 50",$analysis['start_utc'],$analysis['end_utc']),ARRAY_A)?:[];
+        $clicks = $wpdb->get_results($wpdb->prepare("SELECT event_type,target_url,COUNT(*) events FROM {$table} WHERE event_type IN('outbound','download','internal_link_click') AND occurred_at>=%s AND occurred_at<%s{$actorSql} GROUP BY event_type,target_url ORDER BY events DESC LIMIT 50",$analysis['start_utc'],$analysis['end_utc']),ARRAY_A)?:[];
         $this->pageStart(__('Referrers', 'tenyen-analytics'), __('Check direct, search, external sources, and outbound clicks.', 'tenyen-analytics'));
         echo '<section class="tya-panel"><h2>'.esc_html__('Referrer domains', 'tenyen-analytics').'</h2>';
         $this->analysisFilterForm($analysis);
@@ -785,7 +830,7 @@ final class TYA_Plugin
         $query = function_exists('mb_substr') ? mb_substr($query, 0, 255) : substr($query, 0, 255);
 
         $event = sanitize_key((string)($source['event'] ?? 'all'));
-        if (!in_array($event, ['all', 'pageview', 'engagement', 'external_click', 'download'], true)) {
+        if (!in_array($event, ['all', 'pageview', 'engagement', 'outbound', 'download', 'internal_link_click', 'button_click', 'form_submit', 'not_found', 'custom'], true)) {
             $event = 'all';
         }
         $actor = sanitize_key((string)($source['actor'] ?? 'human'));
@@ -820,6 +865,13 @@ final class TYA_Plugin
             'browser' => $cleanExact($source['browser'] ?? ''),
             'os' => $cleanExact($source['os'] ?? ''),
             'device' => $cleanExact($source['device'] ?? ''),
+            'event_name' => $cleanExact($source['event_name'] ?? ''),
+            'source_page' => $cleanExact($source['source_page'] ?? ''),
+            'target_host' => $cleanExact($source['target_host'] ?? ''),
+            'utm_source' => $cleanExact($source['utm_source'] ?? ''),
+            'utm_medium' => $cleanExact($source['utm_medium'] ?? ''),
+            'utm_campaign' => $cleanExact($source['utm_campaign'] ?? ''),
+            'organization' => $cleanExact($source['organization'] ?? ''),
             'per_page' => $perPage,
             'page' => max(1, (int)($source['page'] ?? 1)),
             'order' => $order,
@@ -860,10 +912,21 @@ final class TYA_Plugin
             'browser' => 'browser',
             'os' => 'os',
             'device' => 'device_type',
+            'event_name' => 'event_name',
+            'target_host' => 'target_host',
+            'utm_source' => 'utm_source',
+            'utm_medium' => 'utm_medium',
+            'utm_campaign' => 'utm_campaign',
         ] as $filterName => $column) {
             if ($filters[$filterName] !== '') {
                 $where[] = "{$column} = %s";
                 $params[] = $filters[$filterName];
+            }
+        }
+        foreach (['source_page' => 'path', 'organization' => 'asn_org'] as $filterName => $column) {
+            if ($filters[$filterName] !== '') {
+                $where[] = "{$column} LIKE %s";
+                $params[] = '%' . $wpdb->esc_like($filters[$filterName]) . '%';
             }
         }
 
@@ -874,6 +937,8 @@ final class TYA_Plugin
             foreach ([
                 'event_type', 'visitor_id', 'session_id', 'country_code', 'country_name',
                 'region', 'city', 'asn_org', 'path', 'page_title', 'referrer', 'target_url',
+                'event_name', 'event_meta', 'traffic_channel', 'referrer_host', 'target_host',
+                'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
                 'user_agent', 'browser', 'os', 'device_type', 'language', 'timezone',
             ] as $column) {
                 $or[] = "{$column} LIKE %s";
@@ -1105,10 +1170,22 @@ final class TYA_Plugin
                             <option value="all"><?= esc_html__('All', 'tenyen-analytics') ?></option>
                             <option value="pageview">pageview</option>
                             <option value="engagement">engagement</option>
-                            <option value="external_click">external_click</option>
+                            <option value="outbound">outbound</option>
                             <option value="download">download</option>
+                            <option value="internal_link_click">internal_link_click</option>
+                            <option value="button_click">button_click</option>
+                            <option value="form_submit">form_submit</option>
+                            <option value="not_found">not_found</option>
+                            <option value="custom">custom</option>
                         </select>
                     </label>
+                    <label><?= esc_html__('Event name', 'tenyen-analytics') ?><input type="text" name="event_name" maxlength="64"></label>
+                    <label><?= esc_html__('Source page', 'tenyen-analytics') ?><input type="text" name="source_page" maxlength="128"></label>
+                    <label><?= esc_html__('Target domain', 'tenyen-analytics') ?><input type="text" name="target_host" maxlength="128"></label>
+                    <label>UTM source<input type="text" name="utm_source" maxlength="128"></label>
+                    <label>UTM medium<input type="text" name="utm_medium" maxlength="128"></label>
+                    <label>UTM campaign<input type="text" name="utm_campaign" maxlength="128"></label>
+                    <label><?= esc_html__('ASN / organization', 'tenyen-analytics') ?><input type="text" name="organization" maxlength="128"></label>
                     <label><?= esc_html__('Visitor', 'tenyen-analytics') ?>
                         <select name="actor">
                             <option value="human"><?= esc_html__('Humans only', 'tenyen-analytics') ?></option>
@@ -1157,6 +1234,9 @@ final class TYA_Plugin
         $this->numberRow(__('Raw log retention days', 'tenyen-analytics'), 'tya_retention_days', (int)get_option('tya_retention_days', 90), 1, 3650);
         $this->checkboxRow(__('Exclude administrator access', 'tenyen-analytics'), 'tya_exclude_admins', (bool)get_option('tya_exclude_admins', 1));
         $this->checkboxRow(__('Record bots as well', 'tenyen-analytics'), 'tya_log_bots', (bool)get_option('tya_log_bots', 1));
+        $this->checkboxRow(__('Track internal link clicks', 'tenyen-analytics'), 'tya_track_internal_links', (bool)get_option('tya_track_internal_links', 0));
+        $this->checkboxRow(__('Track generic button clicks', 'tenyen-analytics'), 'tya_track_buttons', (bool)get_option('tya_track_buttons', 0));
+        $this->checkboxRow(__('Track opted-in form submissions', 'tenyen-analytics'), 'tya_track_forms', (bool)get_option('tya_track_forms', 0));
         echo '<tr><th>' . esc_html__('IP header to use', 'tenyen-analytics') . '</th><td><select name="tya_proxy_header">';
         $selected = (string)get_option('tya_proxy_header', '');
         foreach ([

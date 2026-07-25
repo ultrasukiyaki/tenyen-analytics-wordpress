@@ -1,4 +1,4 @@
-[English](README.md)
+[English](README.md) | 日本語
 
 # Tenyen Analytics for WordPress
 
@@ -22,7 +22,7 @@ Tenyen Analyticsは、ページビュー、推定ユニーク訪問者、セッ�
 
 ## インストール
 
-「プラグイン → 新規追加 → プラグインのアップロード」からリリースZIPをアップロードするか、`tenyen-analytics`ディレクトリを`wp-content/plugins/`へ配置して有効化します。既存環境はプラグインディレクトリを上書きして更新できます。v0.6.0にDB移行はありません。
+「プラグイン → 新規追加 → プラグインのアップロード」からリリースZIPをアップロードするか、`tenyen-analytics-wordpress`ディレクトリを`wp-content/plugins/`へ配置して有効化します。
 
 ## GeoLite2の設定
 
@@ -38,7 +38,23 @@ Tenyen Analyticsメニューには、ダッシュボード、リアルタイム�
 
 ## 更新
 
-WordPressをバックアップしてから、新しいプラグインをアップロードまたは上書きしてください。uploads内のGeoLite2ファイルは保持してください。v0.6.0は既存のテーブル、オプション、ペイロード項目、表示設定、収集済みデータを維持します。
+WordPressをバックアップしてから、新しいプラグインをアップロードまたは上書きしてください。uploads内のGeoLite2ファイルは保持してください。v0.6.1は帰属・イベント用のnullable項目を追加し、v0.6.0の既存行と識別子を維持します。
+
+## 流入帰属とイベント
+
+各セッションは、最初に保存されたページビューのファーストタッチ帰属を使用します。UTMのsource、medium、campaignがあればCampaign、それ以外はDirect、Internal、Organic Search、Social、Referral、Unknownへ分類します。`utm_source`、`utm_medium`、`utm_campaign`、`utm_content`、`utm_term`に対応します。
+
+外部リンクと設定済み拡張子のダウンロードを自動記録し、ダウンロードを外部クリックとして重複計上しません。内部リンクと一般ボタンの記録は初期状態で無効です。フォームは設定または`data-tenyen-track`で明示した場合のみ保守的に記録し、入力値は収集しません。WordPressの404では、曖昧なページビューではなく`not_found`を記録します。
+
+独自連携では次のAPIを使用できます。
+
+```javascript
+window.TenyenAnalytics.trackEvent('radio_play', {station: 'example-station', server: 'primary'});
+window.TenyenAnalytics.trackEvent('stream_server_change', {server: 'backup'});
+window.TenyenAnalytics.trackEvent('feature_used', {area: 'header'});
+```
+
+戻り値は送信対象としてローカルで受理したかを示し、配送はベストエフォートです。名前、メタデータのキー数、scalar値、長さを制限し、関数、DOMノード、入れ子、循環値を拒否します。この例だけでラジオ連携が自動導入されることはありません。
 
 ## セッションと訪問経路
 

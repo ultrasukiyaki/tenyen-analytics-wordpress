@@ -1,4 +1,4 @@
-[日本語](README.ja.md)
+English | [日本語](README.ja.md)
 
 # Tenyen Analytics for WordPress
 
@@ -22,7 +22,7 @@ Tenyen Analytics is a self-hosted WordPress analytics plugin for pageviews, esti
 
 ## Installation
 
-Upload the release ZIP in **Plugins → Add New → Upload Plugin**, or copy the `tenyen-analytics` directory to `wp-content/plugins/`, then activate it. Existing installations can be updated by overwriting the plugin directory; v0.6.0 requires no database migration.
+Upload the release ZIP in **Plugins → Add New → Upload Plugin**, or copy the `tenyen-analytics-wordpress` directory to `wp-content/plugins/`, then activate it.
 
 ## GeoLite2 setup
 
@@ -38,7 +38,23 @@ Raw IP addresses are stored using reversible encryption; HMAC values support exa
 
 ## Updating
 
-Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.6.0 retains existing tables, options, payload fields, preferences, and collected data.
+Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.6.1 adds nullable attribution/event fields and preserves existing v0.6.0 rows and identifiers.
+
+## Traffic attribution and events
+
+Each session uses first-touch attribution from its first stored pageview. A recognized UTM source, medium, or campaign is classified as Campaign; otherwise traffic is Direct, Internal, Organic Search, Social, Referral, or Unknown. Supported fields are `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, and `utm_term`.
+
+External links and configured download extensions are tracked automatically without double-counting a download as an external click. Internal-link and generic-button tracking are disabled by default. Form tracking is conservative and requires configuration or `data-tenyen-track`; field values are never collected. WordPress 404 requests produce `not_found` instead of an ambiguous pageview.
+
+Custom integrations can call:
+
+```javascript
+window.TenyenAnalytics.trackEvent('radio_play', {station: 'example-station', server: 'primary'});
+window.TenyenAnalytics.trackEvent('stream_server_change', {server: 'backup'});
+window.TenyenAnalytics.trackEvent('feature_used', {area: 'header'});
+```
+
+The method returns whether the payload was accepted locally for transport. Delivery is best-effort. Names, metadata keys/counts, scalar values, and lengths are bounded; functions, DOM nodes, nested and cyclic values are rejected. These examples do not install radio integration automatically.
 
 ## Session and visitor journeys
 

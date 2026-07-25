@@ -191,6 +191,13 @@ final class TYA_Session_Admin
             <dl><dt><?= esc_html__('Anonymous visitor', 'tenyen-analytics') ?></dt><dd><button class="button-link" data-visitor-id="<?= esc_attr($session['visitor_id']) ?>"><code><?= esc_html($session['visitor_id'] ?: '―') ?></code></button></dd></dl>
             <dl><dt><?= esc_html__('Start / last activity', 'tenyen-analytics') ?></dt><dd><?= esc_html(get_date_from_gmt($session['started_at'], 'Y-m-d H:i:s') . ' – ' . get_date_from_gmt($session['ended_at'], 'Y-m-d H:i:s')) ?></dd></dl>
             <dl><dt><?= esc_html__('Pageviews', 'tenyen-analytics') ?></dt><dd><?= (int)$session['pageviews'] ?><?= $session['bounce'] ? ' · ' . esc_html__('Bounce (estimated)', 'tenyen-analytics') : '' ?></dd></dl>
+            <dl><dt><?= esc_html__('Traffic channel', 'tenyen-analytics') ?></dt><dd><?= esc_html((string)($session['landing']['traffic_channel'] ?? 'Unknown')) ?></dd></dl>
+            <dl><dt><?= esc_html__('Referrer domain', 'tenyen-analytics') ?></dt><dd class="tya-break"><?= esc_html((string)($session['landing']['referrer_host'] ?? '') ?: '―') ?></dd></dl>
+            <dl><dt>UTM</dt><dd class="tya-break"><?= esc_html(implode(' / ', array_filter([
+                $session['landing']['utm_source'] ?? '', $session['landing']['utm_medium'] ?? '',
+                $session['landing']['utm_campaign'] ?? '', $session['landing']['utm_content'] ?? '',
+                $session['landing']['utm_term'] ?? '',
+            ])) ?: '―') ?></dd></dl>
             <dl><dt><?= esc_html__('Engaged time (estimated)', 'tenyen-analytics') ?></dt><dd><?= esc_html($this->duration((int)$session['engaged_ms'])) ?></dd></dl>
             <dl><dt><?= esc_html__('Session span', 'tenyen-analytics') ?></dt><dd><?= esc_html($this->duration((int)$session['span_seconds'] * 1000)) ?></dd></dl>
             <dl><dt><?= esc_html__('Country / region', 'tenyen-analytics') ?></dt><dd><?= esc_html(trim($environment['country_name'] . ' / ' . $environment['region'], ' /') ?: '―') ?></dd></dl>
@@ -203,10 +210,12 @@ final class TYA_Session_Admin
         <?php foreach ($session['events'] as $event): $engagement = $session['engagement_by_path'][$event['path']] ?? null; ?>
             <li><time><?= esc_html(get_date_from_gmt($event['occurred_at'], 'Y-m-d H:i:s')) ?></time>
                 <strong><?= esc_html($event['event_type']) ?></strong>
+                <?php if ($event['event_name'] ?? ''): ?><small class="tya-break"><?= esc_html__('Event name', 'tenyen-analytics') ?>: <?= esc_html($event['event_name']) ?></small><?php endif; ?>
                 <div class="tya-break"><?= esc_html($event['page_title'] ?: $event['path'] ?: '―') ?></div>
                 <?php if ($event['event_type'] === 'pageview' && $engagement): ?><small><?= esc_html__('Final engagement', 'tenyen-analytics') ?>: <?= esc_html($this->duration((int)$engagement['duration_ms'])) ?> / <?= (int)$engagement['scroll_depth'] ?>%</small><?php endif; ?>
                 <?php if ($event['referrer']): ?><small class="tya-break"><?= esc_html__('Referrer', 'tenyen-analytics') ?>: <?= esc_html($event['referrer']) ?></small><?php endif; ?>
                 <?php if ($event['target_url']): ?><small class="tya-break"><?= esc_html__('Target URL', 'tenyen-analytics') ?>: <?= esc_html($event['target_url']) ?></small><?php endif; ?>
+                <?php if ($event['event_meta'] ?? ''): ?><small class="tya-break"><?= esc_html__('Metadata', 'tenyen-analytics') ?>: <?= esc_html($event['event_meta']) ?></small><?php endif; ?>
                 <details><summary><?= esc_html__('Raw event', 'tenyen-analytics') ?></summary><pre><?= esc_html(wp_json_encode($event, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)) ?></pre></details>
             </li>
         <?php endforeach; ?></ol>

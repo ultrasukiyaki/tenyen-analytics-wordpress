@@ -3,7 +3,7 @@ set -euo pipefail
 
 project_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 version="$(sed -n "s/^define('TYA_VERSION', '\\([^']*\\)');$/\\1/p" "$project_dir/tenyen-analytics.php")"
-expected_version="0.6.0"
+expected_version="0.6.1"
 
 if [[ "$version" != "$expected_version" ]]; then
     echo "Expected version $expected_version, found ${version:-none}." >&2
@@ -12,7 +12,7 @@ fi
 
 stage_dir="$(mktemp -d)"
 trap 'rm -rf "$stage_dir"' EXIT
-plugin_dir="$stage_dir/tenyen-analytics"
+plugin_dir="$stage_dir/tenyen-analytics-wordpress"
 archive="$project_dir/dist/tenyen-analytics-wordpress-v${version}-stable.zip"
 checksums="$project_dir/dist/tenyen-analytics-wordpress-v${version}-SHA256SUMS.txt"
 
@@ -46,14 +46,14 @@ mkdir -p "$plugin_dir" "$project_dir/dist"
 rm -f "$archive" "$checksums"
 (
     cd "$stage_dir"
-    zip -q -r "$archive" tenyen-analytics
+    zip -q -r "$archive" tenyen-analytics-wordpress
 )
 
 unzip -t "$archive" >/dev/null
 
 top_levels="$(unzip -Z1 "$archive" | cut -d/ -f1 | sort -u)"
-if [[ "$top_levels" != 'tenyen-analytics' ]]; then
-    echo "Archive must contain only the tenyen-analytics top-level directory." >&2
+if [[ "$top_levels" != 'tenyen-analytics-wordpress' ]]; then
+    echo "Archive must contain only the tenyen-analytics-wordpress top-level directory." >&2
     exit 1
 fi
 
