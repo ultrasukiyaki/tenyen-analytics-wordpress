@@ -6,6 +6,8 @@
 
 Tenyen Analyticsは、ページビュー、推定ユニーク訪問者、セッション、エンゲージメント、参照元、利用環境、GeoLite2の地域・ASN情報、Bot判定をWordPress内で集計するセルフホスト型プラグインです。外部のアクセス解析サービスは必要ありません。
 
+![Tenyen Analyticsのダッシュボード](screenshot_dashboard.png)
+
 ## 機能
 
 - ページビュー、推定UU、セッション、滞在時間、スクロール率、外部クリック、ダウンロード

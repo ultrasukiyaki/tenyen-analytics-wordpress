@@ -6,6 +6,8 @@ English | [日本語](README.ja.md)
 
 Tenyen Analytics is a self-hosted WordPress analytics plugin for pageviews, estimated unique visitors, sessions, engagement, referrers, audience details, GeoLite2 location and ASN insights, and bot detection. Analytics reports stay in WordPress and do not require an external analytics service.
 
+![Tenyen Analytics dashboard](screenshot_dashboard.png)
+
 ## Features
 
 - Pageviews, estimated unique visitors, sessions, duration, scroll depth, external clicks, and downloads
