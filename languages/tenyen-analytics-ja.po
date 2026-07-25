@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tenyen Analytics for WordPress 0.5.7\n"
+"Project-Id-Version: Tenyen Analytics for WordPress 0.6.0\n"
 "Report-Msgid-Bugs-To: https://www.10yendama.com/\n"
-"POT-Creation-Date: 2026-07-24 11:33+0900\n"
+"POT-Creation-Date: 2026-07-25 12:02+0900\n"
 "PO-Revision-Date: 2026-07-23 00:00+0900\n"
 "Last-Translator: 10yendama.com\n"
 "Language-Team: Japanese\n"
@@ -12,756 +12,819 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:45
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:46
 msgid "Analytics"
 msgstr "アクセス解析"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:302
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:327
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-dashboard-widget.php:25
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-dashboard-widget.php:75
 msgid "Tenyen Analytics"
 msgstr "Tenyen Analytics"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:310
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:417
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:335
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:448
 msgid "Dashboard"
 msgstr "ダッシュボード"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:311
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:467
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:336
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:498
 msgid "Realtime"
 msgstr "リアルタイム"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:312
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:337
 msgid "Access History"
 msgstr "アクセス履歴"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:313
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:498
-msgid "Content"
-msgstr "コンテンツ"
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:314
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:516
-msgid "Referrers"
-msgstr "参照元"
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:315
-msgid "ASN / Organizations"
-msgstr "ASN／組織"
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:316
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:567
-msgid "Audience"
-msgstr "利用環境"
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:317
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:589
-msgid "Engagement"
-msgstr "エンゲージメント"
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:318
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:613
-msgid "System"
-msgstr "システム"
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:319
-msgid "Settings"
-msgstr "設定"
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:415
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:422
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:431
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:501
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:519
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:542
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:592
-msgid "Pageviews"
-msgstr "ページビュー"
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:415
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:431
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:501
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:542
-msgid "Visitors"
-msgstr "訪問者"
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:415
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:424
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:431
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:501
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:519
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:542
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:338
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:446
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:455
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:462
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:533
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:551
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:574
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:32
 msgid "Sessions"
 msgstr "セッション"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:417
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:339
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:529
+msgid "Content"
+msgstr "コンテンツ"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:340
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:548
+msgid "Referrers"
+msgstr "参照元"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:341
+msgid "ASN / Organizations"
+msgstr "ASN／組織"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:342
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:599
+msgid "Audience"
+msgstr "利用環境"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:343
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:621
+msgid "Engagement"
+msgstr "エンゲージメント"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:344
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:645
+msgid "System"
+msgstr "システム"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:345
+msgid "Settings"
+msgstr "設定"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:446
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:453
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:462
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:533
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:551
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:574
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:624
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:191
+msgid "Pageviews"
+msgstr "ページビュー"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:446
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:462
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:574
+msgid "Visitors"
+msgstr "訪問者"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:448
 msgid "A compact entry point for monitoring site-wide activity."
 msgstr "サイト全体の動きを簡潔に確認できます。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:418
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:449
 msgid "Period analysis"
 msgstr "期間分析"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:423
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:454
 msgid "Estimated visitors"
 msgstr "推定訪問者"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:425
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:592
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:456
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:624
 msgid "Average duration"
 msgstr "平均滞在時間"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:426
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:592
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:457
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:624
 msgid "Average scroll"
 msgstr "平均スクロール率"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:427
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:458
 msgid "Bot events"
 msgstr "Botイベント"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:431
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:462
 msgid "Pageviews / Visitors / Sessions trend"
 msgstr "ページビュー／訪問者／セッションの推移"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:432
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:463
 msgid "Notable organization activity"
 msgstr "注目組織のアクセス"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:433
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:464
 msgid "No notable organization activity yet."
 msgstr "注目組織のアクセスはまだありません。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:439
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:470
 msgid "Popular pages"
 msgstr "人気ページ"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:440
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:473
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:575
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:471
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:504
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:607
 msgid "pageviews"
 msgstr "ページビュー"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:440
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:471
 msgid "sessions"
 msgstr "セッション"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:441
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:505
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:524
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:529
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:548
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:596
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:472
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:537
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:556
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:561
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:580
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:628
 msgid "No data"
 msgstr "データなし"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:442
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:473
 msgid "Recent views"
 msgstr "最近の閲覧"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:442
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:473
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:899
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1034
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:504
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:931
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1066
 msgid "Date"
 msgstr "日時"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:442
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:473
 msgid "Organization"
 msgstr "組織"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:442
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:473
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:501
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:592
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:904
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1039
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:504
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:533
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:624
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:936
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1071
 msgid "Page"
 msgstr "ページ"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:442
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:473
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:519
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:905
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1040
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:504
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:551
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:937
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1072
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:156
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:206
 msgid "Referrer"
 msgstr "参照元"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:447
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:478
 msgid "No data yet."
 msgstr "データはまだありません。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:467
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:498
 msgid "This screen refreshes every 30 seconds with recent pageviews."
 msgstr "この画面は最近のページビューを30秒ごとに更新します。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:469
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1049
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:500
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1081
 msgid "Interval"
 msgstr "間隔"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:471
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:502
 #, php-format
 msgid "%d minutes"
 msgstr "%d分"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:473
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:676
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:504
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:708
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:47
 msgid "Apply"
 msgstr "適用"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:473
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:504
 msgid "Status"
 msgstr "状態"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:473
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:945
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:504
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:977
 msgid "ASN / organization"
 msgstr "ASN／組織"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:473
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:504
 msgid "Duration / scroll"
 msgstr "滞在時間／スクロール"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:476
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:507
 msgid "Viewed & measured"
 msgstr "閲覧・計測済み"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:476
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:507
 msgid "New view"
 msgstr "新規閲覧"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:479
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:510
 msgid "No activity in this timeframe yet."
 msgstr "この時間帯のアクセスはまだありません。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:487
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:518
 msgid "History"
 msgstr "履歴"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:487
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:518
 msgid "Browse raw events with asynchronous search, filters, and paging."
 msgstr "非同期検索、フィルター、ページングでイベントを確認できます。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:498
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:529
 msgid "View page performance for posts and pages."
 msgstr "投稿と固定ページの実績を確認できます。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:499
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:530
 msgid "Top content"
 msgstr "上位コンテンツ"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:516
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:532
+msgid ""
+"Bounce rate is single-page entry sessions divided by entry sessions. Exit "
+"rate is exit sessions divided by pageviews."
+msgstr ""
+"直帰率は1ページだけ閲覧した入口セッション数を入口セッション数で割った値です。"
+"離脱率はそのページで終了したセッション数をページビュー数で割った値です。"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:533
+msgid "Entries"
+msgstr "入口"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:533
+msgid "Exits"
+msgstr "離脱"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:533
+msgid "Bounces"
+msgstr "直帰"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:533
+msgid "Bounce rate (estimated)"
+msgstr "直帰率（推定）"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:533
+msgid "Exit rate"
+msgstr "離脱率"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:533
+msgid "Pageviews per session"
+msgstr "セッションあたりのページビュー"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:548
 msgid "Check direct, search, external sources, and outbound clicks."
 msgstr "直接流入、検索、外部流入、外部クリックを確認できます。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:517
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:549
 msgid "Referrer domains"
 msgstr "参照元ドメイン"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:525
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:557
 msgid "External clicks & downloads"
 msgstr "外部クリックとダウンロード"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:525
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:557
 msgid "Type"
 msgstr "種類"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:525
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:953
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:557
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:985
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:207
 msgid "Target URL"
 msgstr "対象URL"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:525
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:557
 msgid "Count"
 msgstr "件数"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:539
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:571
 msgid "ASN & organizations"
 msgstr "ASNと組織"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:539
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:571
 msgid "Classify network organizations registered to incoming IPs."
 msgstr "アクセス元IPに登録されたネットワーク組織を分類します。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:540
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:572
 msgid "ASN & organization ranking"
 msgstr "ASN・組織ランキング"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:542
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:574
 msgid ""
 "Displayed organizations are not a definitive identification of individual "
 "visitors."
 msgstr "表示される組織は個々の訪問者の所属を確定するものではありません。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:542
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:942
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:574
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:974
 msgid "Classification"
 msgstr "分類"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:542
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:574
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:195
 msgid "ASN / registered organization"
 msgstr "ASN／登録組織"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:542
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:574
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:222
 msgid "Last seen"
 msgstr "最終確認"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:545
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1393
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:577
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1425
 msgid "Unknown"
 msgstr "不明"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:559
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1088
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:591
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1120
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:42
 msgid "Browser"
 msgstr "ブラウザ"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:560
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1089
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:592
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1121
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:43
 msgid "OS"
 msgstr "OS"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:561
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1090
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:593
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1122
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:44
 msgid "Device"
 msgstr "端末"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:562
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1087
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:594
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1119
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:41
 msgid "Country"
 msgstr "国"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:567
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:599
 msgid "Review browser, OS, device, and country composition."
 msgstr "ブラウザ、OS、端末、国の構成を確認できます。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:568
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:600
 msgid "Audience environment"
 msgstr "利用環境"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:589
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:621
 msgid "Monitor average visit time and scroll rate by page."
 msgstr "ページ別の平均滞在時間とスクロール率を確認できます。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:590
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:622
 msgid "Page engagement"
 msgstr "ページエンゲージメント"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:614
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:646
 msgid "Check collection, database, and GeoLite2 status in one place."
 msgstr "収集、データベース、GeoLite2の状態をまとめて確認できます。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:621
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:653
 msgid "Saved events"
 msgstr "保存済みイベント"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:621
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:968
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:653
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1000
 msgid "items"
 msgstr "件"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:622
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:654
 msgid "Last received"
 msgstr "最終受信"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:622
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:654
 msgid "Not received"
 msgstr "未受信"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:623
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:655
 msgid "GeoIP Reader"
 msgstr "GeoIP Reader"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:623
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:655
 msgid "Official Reader"
 msgstr "公式Reader"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:623
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:655
 msgid "Built-in Reader"
 msgstr "内蔵Reader"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:623
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:655
 msgid "Unavailable"
 msgstr "利用不可"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:624
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:625
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1121
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:656
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:657
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1153
 msgid "Unconfigured"
 msgstr "未設定"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:631
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:663
 msgid "Collection endpoints"
 msgstr "収集エンドポイント"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:632
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:664
 msgid "REST API"
 msgstr "REST API"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:633
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:665
 msgid "History API"
 msgstr "履歴API"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:634
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:666
 msgid "DB table"
 msgstr "DBテーブル"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:635
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:667
 msgid "UI build"
 msgstr "UIビルド"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:642
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:722
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1115
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1446
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:674
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:754
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1147
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1478
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:27
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:68
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:78
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:94
 msgid "You do not have permission."
 msgstr "この操作を実行する権限がありません。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:664
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:696
 msgid "Period"
 msgstr "期間"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:665
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:697
 msgid "Today"
 msgstr "今日"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:665
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:697
 msgid "Yesterday"
 msgstr "昨日"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:665
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:697
 msgid "Last 7 days"
 msgstr "過去7日間"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:665
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:697
 msgid "Last 30 days"
 msgstr "過去30日間"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:665
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:697
 msgid "This month"
 msgstr "今月"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:665
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:697
 msgid "Custom"
 msgstr "カスタム"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:669
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:701
 msgid "Start date"
 msgstr "開始日"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:670
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:702
 msgid "End date"
 msgstr "終了日"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:671
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:703
 msgid "Actor"
 msgstr "対象"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:672
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1082
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:704
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1114
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:40
 msgid "Humans only"
 msgstr "Humanのみ"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:672
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1083
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:704
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1115
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:40
 msgid "Bots only"
 msgstr "Botのみ"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:672
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1073
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1084
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:704
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1105
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1116
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:40
 msgid "All"
 msgstr "すべて"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:677
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:709
 msgid ""
 "Unique visitors are estimated by deduplicating visitor_id within the "
 "selected period."
 msgstr "ユニーク訪問者は選択期間内のvisitor_idを重複排除して推定します。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:900
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1035
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:932
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1067
 msgid "Event type"
 msgstr "イベント種別"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:902
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:944
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1037
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:934
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:976
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1069
 msgid "Location"
 msgstr "地域"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:903
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1038
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:935
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1070
 msgid "ASN / candidate organization"
 msgstr "ASN／候補組織"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:906
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1041
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:938
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1073
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:156
 msgid "Environment"
 msgstr "利用環境"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:907
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:937
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1042
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:939
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:969
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1074
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:57
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:156
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:169
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:231
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:232
 msgid "Details"
 msgstr "詳細"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:911
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:943
 msgid "No matching access records found."
 msgstr "条件に一致するアクセス記録はありません。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:946
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:978
 msgid "Duration"
 msgstr "滞在時間"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:947
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:979
 msgid "Scroll"
 msgstr "スクロール"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:948
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:980
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:188
 msgid "Session"
 msgstr "セッション"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:949
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1080
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:981
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1112
 msgid "Visitor"
 msgstr "訪問者"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:950
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:982
 msgid "Screen"
 msgstr "画面"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:951
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:983
 msgid "User-Agent"
 msgstr "User-Agent"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:952
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:984
 msgid "Full referrer"
 msgstr "参照元の全URL"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:968
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1000
 msgid "of"
 msgstr "／"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:984
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1016
 msgid "History paging"
 msgstr "履歴のページ移動"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:986
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1259
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1018
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1291
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:241
 msgid "‹ Previous"
 msgstr "‹ 前へ"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:999
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1260
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1031
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1292
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:243
 msgid "Next ›"
 msgstr "次へ ›"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1012
-#, fuzzy
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1044
 msgid "Detailed access history"
-msgstr "アクセス履歴の取得に失敗しました。"
+msgstr "詳細なアクセス履歴"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1013
-#, fuzzy
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1045
 msgid "Not loaded"
-msgstr "未導入"
+msgstr "未読み込み"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1016
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1048
 msgid "Open history"
 msgstr "履歴を開く"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1017
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1049
 msgid "Display settings"
-msgstr ""
+msgstr "表示設定"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1024
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1056
 msgid "Display density"
-msgstr ""
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1025
-msgid "Compact"
-msgstr ""
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1026
-msgid "Standard"
-msgstr ""
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1027
-msgid "Wrap cells"
-msgstr ""
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1028
-msgid "Sticky header"
-msgstr ""
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1029
-msgid "Collapsed by default"
-msgstr ""
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1032
-msgid "Visible columns"
-msgstr ""
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1048
-#, fuzzy
-msgid "Auto refresh"
-msgstr "更新"
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1051
-#, fuzzy
-msgid "Disabled"
-msgstr "有効"
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1052
-msgid "30 seconds"
-msgstr ""
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1053
-#, fuzzy
-msgid "1 minute"
-msgstr "%d分"
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1054
-#, fuzzy
-msgid "5 minutes"
-msgstr "%d分"
+msgstr "表示密度"
 
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1057
+msgid "Compact"
+msgstr "コンパクト"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1058
+msgid "Standard"
+msgstr "標準"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1059
+msgid "Wrap cells"
+msgstr "セル内で折り返す"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1060
+msgid "Sticky header"
+msgstr "見出しを固定"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1061
+msgid "Collapsed by default"
+msgstr "初期状態で閉じる"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1064
+msgid "Visible columns"
+msgstr "表示する列"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1080
+msgid "Auto refresh"
+msgstr "自動更新"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1083
+msgid "Disabled"
+msgstr "無効"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1084
+msgid "30 seconds"
+msgstr "30秒"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1085
+msgid "1 minute"
+msgstr "1分"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1086
+msgid "5 minutes"
+msgstr "5分"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1089
 msgid ""
 "Display settings are saved to localStorage in this browser. The access data "
 "itself is not stored here."
 msgstr ""
+"表示設定はこのブラウザーのlocalStorageに保存されます。アクセスデータ自体は保"
+"存されません。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1061
-#, fuzzy
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1093
 msgid "Apply settings"
-msgstr "設定"
+msgstr "設定を適用"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1062
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1094
 msgid "Reset to defaults"
-msgstr ""
+msgstr "初期設定に戻す"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1068
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1098
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1100
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1130
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:37
 msgid "Search"
 msgstr "検索"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1068
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1100
 msgid "IP, URL, title, location, ASN, environment"
-msgstr ""
+msgstr "IP、URL、タイトル、地域、ASN、環境"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1069
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1101
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:38
 msgid "From"
-msgstr ""
+msgstr "開始日"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1070
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1102
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:39
 msgid "To"
-msgstr ""
+msgstr "終了日"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1071
-#, fuzzy
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1103
 msgid "Event"
-msgstr "イベント種別"
+msgstr "イベント"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1087
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1119
 msgid "All countries"
-msgstr ""
+msgstr "すべての国"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1088
-#, fuzzy
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1120
 msgid "All browsers"
-msgstr "ブラウザ"
+msgstr "すべてのブラウザー"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1089
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1121
 msgid "All operating systems"
-msgstr ""
+msgstr "すべてのOS"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1090
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1122
 msgid "All devices"
-msgstr ""
+msgstr "すべてのデバイス"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1091
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1123
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:45
 msgid "Items per page"
-msgstr ""
+msgstr "1ページの件数"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1094
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1126
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:46
 msgid "Sort order"
-msgstr ""
+msgstr "並び順"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1095
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1127
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:46
 msgid "Newest first"
-msgstr ""
+msgstr "新しい順"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1095
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1127
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:46
 msgid "Oldest first"
-msgstr ""
+msgstr "古い順"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1099
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1131
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:48
 msgid "Reset"
 msgstr "リセット"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1102
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1134
 msgid ""
 "Search, filters, and paging update asynchronously without reloading the "
 "whole page. Raw IP search is exact; others are partial matches."
 msgstr ""
+"検索、絞り込み、ページ移動は画面全体を再読み込みせず非同期で更新します。IPは"
+"完全一致、その他は部分一致です。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1104
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1136
 msgid "Open the history panel to load events."
-msgstr ""
+msgstr "履歴パネルを開くとイベントを読み込みます。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1120
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1152
 msgid "Tenyen Analytics Settings"
 msgstr "Tenyen Analytics設定"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1121
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1153
 msgid "Reader"
 msgstr "Reader"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1121
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1153
 msgid "Not installed"
 msgstr "未導入"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1121
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1153
 msgid "City DB"
 msgstr "City DB"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1121
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1153
 msgid "ASN DB"
 msgstr "ASN DB"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1125
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1157
 msgid "Raw log retention days"
 msgstr "生ログの保持日数"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1126
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1158
 msgid "Exclude administrator access"
 msgstr "管理者のアクセスを除外"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1127
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1159
 msgid "Record bots as well"
 msgstr "Botも記録"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1128
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1160
 msgid "IP header to use"
 msgstr "使用するIPヘッダー"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1131
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1163
 msgid "REMOTE_ADDR (default)"
 msgstr "REMOTE_ADDR（既定）"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1138
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1170
 msgid "Change only if you understand your proxy configuration."
 msgstr "プロキシ構成を理解している場合だけ変更してください。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1141
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1173
 msgid "Organization classification overrides"
 msgstr "組織分類の上書き"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1142
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1174
 msgid ""
 "one per line. Categories are research / government / company / isp / cloud / "
 "proxy / bot / unknown."
@@ -769,34 +832,34 @@ msgstr ""
 "1行に1件入力します。カテゴリーはresearch / government / company / isp / "
 "cloud / proxy / bot / unknownです。"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1145
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1177
 msgid "Site token"
 msgstr "サイトトークン"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1155
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1187
 msgid "Enabled"
 msgstr "有効"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1293
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1325
 msgid "confidence"
 msgstr "信頼度"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1300
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1332
 #, php-format
 msgid "%d sec"
 msgstr "%d秒"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1305
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1337
 #, php-format
 msgid "%d min %02d sec"
 msgstr "%d分%02d秒"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1308
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1340
 #, php-format
 msgid "%d hr %d min"
 msgstr "%d時間%d分"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1397
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1429
 msgid "Other"
 msgstr "その他"
 
@@ -805,8 +868,190 @@ msgid "Refresh"
 msgstr "更新"
 
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-dashboard-widget.php:79
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:51
 msgid "Loading…"
 msgstr "読み込んでいます…"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:33
+msgid "Browse ordered anonymous visitor journeys."
+msgstr "匿名訪問者の時系列の訪問経路を確認します。"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:37
+msgid "Session, visitor, URL, referrer, or environment"
+msgstr "セッション、訪問者、URL、参照元、環境"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:40
+msgid "Visitor type"
+msgstr "訪問者種別"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:50
+msgid ""
+"Legacy events without a session ID are excluded. Duration and bounce are "
+"estimated analytics metrics."
+msgstr ""
+"セッションIDがない過去イベントは除外されます。滞在時間と直帰は推定の分析指標"
+"です。"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:57
+msgid "Close"
+msgstr "閉じる"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:82
+msgid "Invalid session identifier."
+msgstr "セッション識別子が正しくありません。"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:86
+msgid "Session no longer available."
+msgstr "セッションは利用できなくなりました。"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:88
+msgid "Session detail"
+msgstr "セッション詳細"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:98
+msgid "Invalid visitor identifier."
+msgstr "訪問者識別子が正しくありません。"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:102
+msgid "Anonymous visitor no longer available."
+msgstr "匿名訪問者は利用できなくなりました。"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:104
+msgid "Anonymous visitor detail"
+msgstr "匿名訪問者の詳細"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:151
+#, php-format
+msgid "%1$s–%2$s of %3$s sessions"
+msgstr "%3$s件中%1$s〜%2$s件のセッション"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:153
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:231
+msgid "Session start"
+msgstr "セッション開始"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:153
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:231
+msgid "Last activity"
+msgstr "最終活動"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:154
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:189
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:220
+msgid "Anonymous visitor"
+msgstr "匿名訪問者"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:154
+msgid "Estimated duration"
+msgstr "推定時間"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:155
+msgid "Landing page"
+msgstr "入口ページ"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:155
+msgid "Exit page"
+msgstr "離脱ページ"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:158
+msgid "No sessions found."
+msgstr "セッションが見つかりません。"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:167
+msgid "Direct"
+msgstr "直接"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:190
+msgid "Start / last activity"
+msgstr "開始／最終活動"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:191
+msgid "Bounce (estimated)"
+msgstr "直帰（推定）"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:192
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:225
+msgid "Engaged time (estimated)"
+msgstr "エンゲージ時間（推定）"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:193
+msgid "Session span"
+msgstr "セッションの経過時間"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:194
+msgid "Country / region"
+msgstr "国／地域"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:196
+msgid "Organization category"
+msgstr "組織カテゴリー"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:197
+msgid "Browser / OS / device"
+msgstr "ブラウザー／OS／デバイス"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:199
+msgid "Ordered journey"
+msgstr "時系列の訪問経路"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:205
+msgid "Final engagement"
+msgstr "最終エンゲージメント"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:208
+msgid "Raw event"
+msgstr "元のイベント"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:218
+msgid ""
+"This is an anonymous browser identifier. It may change when browser storage "
+"is cleared or another browser or device is used, and is not proof of a "
+"person’s identity."
+msgstr ""
+"これは匿名のブラウザー識別子です。ブラウザーの保存データを消去した場合や、別"
+"のブラウザーまたはデバイスを使用した場合は変わることがあり、個人の同一性を証"
+"明するものではありません。"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:221
+msgid "First seen"
+msgstr "初回確認"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:223
+msgid "Total sessions"
+msgstr "合計セッション"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:224
+msgid "Total pageviews"
+msgstr "合計ページビュー"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:226
+msgid "Most recent environment"
+msgstr "最近の利用環境"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:228
+msgid "Common landing pages"
+msgstr "よく使われる入口ページ"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:229
+msgid "Common content"
+msgstr "よく閲覧するコンテンツ"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:230
+msgid "Common referrers"
+msgstr "よく使われる参照元"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:231
+msgid "Historical sessions"
+msgstr "過去のセッション"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:240
+msgid "Session paging"
+msgstr "セッションのページ移動"
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:242
+#, php-format
+msgid "Page %1$d of %2$d"
+msgstr "%2$dページ中%1$dページ"
 
 #~ msgid "Retry"
 #~ msgstr "再試行"
@@ -858,9 +1103,6 @@ msgstr "読み込んでいます…"
 
 #~ msgid "Settings have been saved."
 #~ msgstr "設定を保存しました。"
-
-#~ msgid "Close"
-#~ msgstr "閉じる"
 
 #~ msgid "Close history"
 #~ msgstr "履歴を閉じる"

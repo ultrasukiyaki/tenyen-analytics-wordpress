@@ -3,7 +3,7 @@ set -euo pipefail
 
 project_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 version="$(sed -n "s/^define('TYA_VERSION', '\\([^']*\\)');$/\\1/p" "$project_dir/tenyen-analytics.php")"
-expected_version="0.5.7"
+expected_version="0.6.0"
 
 if [[ "$version" != "$expected_version" ]]; then
     echo "Expected version $expected_version, found ${version:-none}." >&2
@@ -34,6 +34,7 @@ mkdir -p "$plugin_dir" "$project_dir/dist"
         ! -name 'composer.lock' \
         ! -name '*.mmdb' \
         ! -name '*.log' \
+        ! -name '*~' \
         ! -name '*.zip' \
         -print0 |
     while IFS= read -r -d '' file; do

@@ -3,7 +3,7 @@ Contributors: 10yendama
 Tags: analytics, privacy, pageviews, sessions, geolocation
 Requires at least: 6.2
 Requires PHP: 8.1
-Stable tag: 0.5.7
+Stable tag: 0.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,13 @@ No. The built-in MMDB reader and local analytics reports work without Composer o
 
 == Changelog ==
 
+= 0.6.0 =
+
+* Added administrator-only asynchronous session lists, ordered journey details, and anonymous browser visitor history.
+* Added entry, exit, bounce, bounce-rate, exit-rate, session, and pageviews-per-session content metrics.
+* Added links from access history to related session and anonymous visitor details.
+* Added responsive long-value wrapping and accessible journey dialogs.
+
 = 0.5.7 =
 
 * Fixed PHP translation expressions appearing as literal text throughout the access-history screen.
@@ -57,6 +64,10 @@ No. The built-in MMDB reader and local analytics reports work without Composer o
 * Added a built-in MMDB reader and asynchronous access history.
 
 == Upgrade Notice ==
+
+= 0.6.0 =
+
+No database migration is required. Existing v0.5.7 analytics data and settings are preserved. Legacy events without a session ID remain in access history but are excluded from session analytics.
 
 = 0.5.7 =
 

@@ -22,7 +22,7 @@ Tenyen Analytics is a self-hosted WordPress analytics plugin for pageviews, esti
 
 ## Installation
 
-Upload the release ZIP in **Plugins → Add New → Upload Plugin**, or copy the `tenyen-analytics` directory to `wp-content/plugins/`, then activate it. Existing installations can be updated by overwriting the plugin directory; v0.5.7 requires no database migration.
+Upload the release ZIP in **Plugins → Add New → Upload Plugin**, or copy the `tenyen-analytics` directory to `wp-content/plugins/`, then activate it. Existing installations can be updated by overwriting the plugin directory; v0.6.0 requires no database migration.
 
 ## GeoLite2 setup
 
@@ -38,7 +38,13 @@ Raw IP addresses are stored using reversible encryption; HMAC values support exa
 
 ## Updating
 
-Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.5.7 retains existing tables, options, routes, payload fields, preferences, and collected data.
+Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.6.0 retains existing tables, options, payload fields, preferences, and collected data.
+
+## Session and visitor journeys
+
+The administrator-only Sessions screen lists stored sessions and opens ordered event journeys asynchronously. Stored `session_id` values are canonical; legacy events without one remain available in Access History but are not inferred into sessions. Anonymous visitor summaries use the existing browser-dependent `visitor_id` and must not be treated as proof of a person’s identity.
+
+Engaged time uses the maximum cumulative engagement duration for each session and path. A bounce is a session with exactly one pageview. For content, bounce rate is bounced entry sessions divided by entry sessions, and exit rate is sessions exiting on the page divided by that page’s pageviews. These metrics are estimates and safely return zero when their denominator is zero.
 
 ## Troubleshooting
 

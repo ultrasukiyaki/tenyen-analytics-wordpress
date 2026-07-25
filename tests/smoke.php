@@ -63,14 +63,20 @@ if (str_contains($historyShell, "esc_html__(") || str_contains($historyShell, "e
 }
 
 $plugin->registerAdminMenu();
-if (count($GLOBALS['tya_submenus']) !== 10) {
-    throw new RuntimeException('Expected all ten plugin submenu pages.');
+if (count($GLOBALS['tya_submenus']) !== 11 || !in_array('tenyen-analytics-sessions', $GLOBALS['tya_submenus'], true)) {
+    throw new RuntimeException('Expected all eleven plugin submenu pages including sessions.');
 }
 
 $plugin->registerRoutes();
 $widgetRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/dashboard-widget'] ?? null;
 if (!$widgetRoute || $widgetRoute['methods'] !== WP_REST_Server::READABLE) {
     throw new RuntimeException('Dashboard widget REST route did not register as readable.');
+}
+$sessionRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/sessions'] ?? null;
+$sessionDetailRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/sessions/(?P<id>[A-Za-z0-9_-]+)'] ?? null;
+$visitorRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/visitors/(?P<id>[A-Za-z0-9_-]+)'] ?? null;
+if (!$sessionRoute || !$sessionDetailRoute || !$visitorRoute) {
+    throw new RuntimeException('Session and visitor REST routes did not register.');
 }
 
 TYA_Dashboard_Widget::register();
@@ -85,6 +91,11 @@ if (count($GLOBALS['tya_widgets']) !== 1) {
 }
 if (($widgetRoute['permission_callback'])() !== false) {
     throw new RuntimeException('Unauthorized REST permission callback was allowed.');
+}
+foreach ([$sessionRoute, $sessionDetailRoute, $visitorRoute] as $route) {
+    if (($route['permission_callback'])() !== false) {
+        throw new RuntimeException('Unauthorized session analytics REST permission callback was allowed.');
+    }
 }
 $response = $plugin->dashboardWidget(new WP_REST_Request());
 if ($response->status !== 403) {
