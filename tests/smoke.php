@@ -27,6 +27,8 @@ function esc_html($text): string { return $text; }
 function esc_html__($text): string { return $text; }
 function esc_attr__($text): string { return $text; }
 function esc_attr($text): string { return $text; }
+function get_date_from_gmt(string $date, string $format): string { return $date; }
+function wp_json_encode(mixed $value, int $flags = 0): string|false { return json_encode($value, $flags); }
 function add_menu_page(): void {}
 function add_submenu_page($parent, $title, $label, $capability, $slug): void { $GLOBALS['tya_submenus'][] = $slug; }
 function register_rest_route(string $namespace, string $route, array $args): void { $GLOBALS['tya_routes'][$namespace . $route] = $args; }
@@ -52,6 +54,32 @@ class WP_REST_Response
 require dirname(__DIR__) . '/tenyen-analytics.php';
 
 $plugin = TYA_Plugin::instance();
+$sessionAdmin = new TYA_Session_Admin();
+$sessionHtmlMethod = new ReflectionMethod($sessionAdmin, 'sessionHtml');
+$sessionHtmlMethod->setAccessible(true);
+$sessionHtml = $sessionHtmlMethod->invoke($sessionAdmin, [
+    'session_id' => 'session-a',
+    'visitor_id' => 'visitor-a',
+    'started_at' => '2026-07-25 00:00:00',
+    'ended_at' => '2026-07-25 00:00:01',
+    'span_seconds' => 1,
+    'engaged_ms' => 1000,
+    'pageviews' => 1,
+    'bounce' => true,
+    'environment' => [
+        'asn' => 2516, 'asn_org' => 'KDDI CORPORATION', 'is_bot' => 0,
+        'country_name' => 'Japan', 'region' => 'Tokyo', 'browser' => 'Chrome',
+        'os' => 'Windows', 'device_type' => 'desktop',
+    ],
+    'engagement_by_path' => ['/one' => ['duration_ms' => 1000, 'scroll_depth' => 50]],
+    'events' => [[
+        'event_id' => 1, 'occurred_at' => '2026-07-25 00:00:00', 'event_type' => 'pageview',
+        'path' => '/one', 'page_title' => 'One', 'referrer' => '', 'target_url' => '',
+    ]],
+]);
+if (!str_contains($sessionHtml, 'KDDI CORPORATION') || !str_contains($sessionHtml, 'Ordered journey')) {
+    throw new RuntimeException('Session detail HTML did not render with organization classification.');
+}
 $historyShellMethod = new ReflectionMethod($plugin, 'renderHistoryShell');
 $historyShellMethod->setAccessible(true);
 $historyShell = $historyShellMethod->invoke($plugin);

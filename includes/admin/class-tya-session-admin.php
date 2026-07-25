@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Tenyen\Analytics\OrganizationClassifierV040;
+
 if (!defined('ABSPATH')) {
     exit;
 }

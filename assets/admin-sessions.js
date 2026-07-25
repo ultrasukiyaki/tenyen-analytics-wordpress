@@ -45,6 +45,11 @@
     node.textContent = String(value || '');
     return node.innerHTML;
   };
+  const errorText = value => {
+    const node = document.createElement('textarea');
+    node.innerHTML = String(value || '').replace(/<[^>]*>/g, ' ');
+    return node.value.replace(/\s+/g, ' ').trim() || wp.i18n.__('Server error. Please retry.', 'tenyen-analytics');
+  };
   const open = async (kind, id, trigger) => {
     if (!id) return;
     returnFocus = trigger || document.activeElement;
@@ -58,7 +63,7 @@
       title.textContent = payload.title || wp.i18n.__('Details', 'tenyen-analytics');
       content.innerHTML = payload.html || '';
     } catch (error) {
-      if (error.name !== 'AbortError') content.innerHTML = `<p class="notice notice-error">${escapeHtml(error.message)}</p>`;
+      if (error.name !== 'AbortError') content.innerHTML = `<p class="notice notice-error">${escapeHtml(errorText(error.message))}</p>`;
     }
   };
   const close = () => {
