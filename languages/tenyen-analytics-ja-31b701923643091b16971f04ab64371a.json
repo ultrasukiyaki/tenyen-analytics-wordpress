@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-07-24 02:33+0000",
+    "translation-revision-date": "2026-07-25 03:02+0000",
     "generator": "tools\/make-json-translations.php",
     "source": "assets\/dashboard-widget.js",
     "domain": "messages",
@@ -24,6 +24,9 @@
             ],
             "Access History": [
                 "アクセス履歴"
+            ],
+            "Sessions": [
+                "セッション"
             ],
             "Content": [
                 "コンテンツ"
@@ -51,9 +54,6 @@
             ],
             "Visitors": [
                 "訪問者"
-            ],
-            "Sessions": [
-                "セッション"
             ],
             "A compact entry point for monitoring site-wide activity.": [
                 "サイト全体の動きを簡潔に確認できます。"
@@ -153,6 +153,24 @@
             ],
             "Top content": [
                 "上位コンテンツ"
+            ],
+            "Entries": [
+                "入口"
+            ],
+            "Exits": [
+                "離脱"
+            ],
+            "Bounces": [
+                "直帰"
+            ],
+            "Bounce rate (estimated)": [
+                "直帰率（推定）"
+            ],
+            "Exit rate": [
+                "離脱率"
+            ],
+            "Pageviews per session": [
+                "セッションあたりのページビュー"
             ],
             "Check direct, search, external sources, and outbound clicks.": [
                 "直接流入、検索、外部流入、外部クリックを確認できます。"
@@ -356,40 +374,103 @@
                 "次へ ›"
             ],
             "Detailed access history": [
-                "アクセス履歴の取得に失敗しました。"
+                "詳細なアクセス履歴"
             ],
             "Not loaded": [
-                "未導入"
+                "未読み込み"
             ],
             "Open history": [
                 "履歴を開く"
             ],
+            "Display settings": [
+                "表示設定"
+            ],
+            "Display density": [
+                "表示密度"
+            ],
+            "Compact": [
+                "コンパクト"
+            ],
+            "Standard": [
+                "標準"
+            ],
+            "Wrap cells": [
+                "セル内で折り返す"
+            ],
+            "Sticky header": [
+                "見出しを固定"
+            ],
+            "Collapsed by default": [
+                "初期状態で閉じる"
+            ],
+            "Visible columns": [
+                "表示する列"
+            ],
             "Auto refresh": [
-                "更新"
+                "自動更新"
             ],
             "Disabled": [
-                "有効"
+                "無効"
+            ],
+            "30 seconds": [
+                "30秒"
             ],
             "1 minute": [
-                "%d分"
+                "1分"
             ],
             "5 minutes": [
-                "%d分"
+                "5分"
             ],
             "Apply settings": [
-                "設定"
+                "設定を適用"
+            ],
+            "Reset to defaults": [
+                "初期設定に戻す"
             ],
             "Search": [
                 "検索"
             ],
+            "IP, URL, title, location, ASN, environment": [
+                "IP、URL、タイトル、地域、ASN、環境"
+            ],
+            "From": [
+                "開始日"
+            ],
+            "To": [
+                "終了日"
+            ],
             "Event": [
-                "イベント種別"
+                "イベント"
+            ],
+            "All countries": [
+                "すべての国"
             ],
             "All browsers": [
-                "ブラウザ"
+                "すべてのブラウザー"
+            ],
+            "All operating systems": [
+                "すべてのOS"
+            ],
+            "All devices": [
+                "すべてのデバイス"
+            ],
+            "Items per page": [
+                "1ページの件数"
+            ],
+            "Sort order": [
+                "並び順"
+            ],
+            "Newest first": [
+                "新しい順"
+            ],
+            "Oldest first": [
+                "古い順"
             ],
             "Reset": [
                 "リセット"
+            ],
+            "Open the history panel to load events.": [
+                "履歴パネルを開くとイベントを読み込みます。"
             ],
             "Tenyen Analytics Settings": [
                 "Tenyen Analytics設定"
@@ -453,6 +534,123 @@
             ],
             "Loading…": [
                 "読み込んでいます…"
+            ],
+            "Browse ordered anonymous visitor journeys.": [
+                "匿名訪問者の時系列の訪問経路を確認します。"
+            ],
+            "Session, visitor, URL, referrer, or environment": [
+                "セッション、訪問者、URL、参照元、環境"
+            ],
+            "Visitor type": [
+                "訪問者種別"
+            ],
+            "Close": [
+                "閉じる"
+            ],
+            "Invalid session identifier.": [
+                "セッション識別子が正しくありません。"
+            ],
+            "Session no longer available.": [
+                "セッションは利用できなくなりました。"
+            ],
+            "Session detail": [
+                "セッション詳細"
+            ],
+            "Invalid visitor identifier.": [
+                "訪問者識別子が正しくありません。"
+            ],
+            "Anonymous visitor no longer available.": [
+                "匿名訪問者は利用できなくなりました。"
+            ],
+            "Anonymous visitor detail": [
+                "匿名訪問者の詳細"
+            ],
+            "%1$s–%2$s of %3$s sessions": [
+                "%3$s件中%1$s〜%2$s件のセッション"
+            ],
+            "Session start": [
+                "セッション開始"
+            ],
+            "Last activity": [
+                "最終活動"
+            ],
+            "Anonymous visitor": [
+                "匿名訪問者"
+            ],
+            "Estimated duration": [
+                "推定時間"
+            ],
+            "Landing page": [
+                "入口ページ"
+            ],
+            "Exit page": [
+                "離脱ページ"
+            ],
+            "No sessions found.": [
+                "セッションが見つかりません。"
+            ],
+            "Direct": [
+                "直接"
+            ],
+            "Start \/ last activity": [
+                "開始／最終活動"
+            ],
+            "Bounce (estimated)": [
+                "直帰（推定）"
+            ],
+            "Engaged time (estimated)": [
+                "エンゲージ時間（推定）"
+            ],
+            "Session span": [
+                "セッションの経過時間"
+            ],
+            "Country \/ region": [
+                "国／地域"
+            ],
+            "Organization category": [
+                "組織カテゴリー"
+            ],
+            "Browser \/ OS \/ device": [
+                "ブラウザー／OS／デバイス"
+            ],
+            "Ordered journey": [
+                "時系列の訪問経路"
+            ],
+            "Final engagement": [
+                "最終エンゲージメント"
+            ],
+            "Raw event": [
+                "元のイベント"
+            ],
+            "First seen": [
+                "初回確認"
+            ],
+            "Total sessions": [
+                "合計セッション"
+            ],
+            "Total pageviews": [
+                "合計ページビュー"
+            ],
+            "Most recent environment": [
+                "最近の利用環境"
+            ],
+            "Common landing pages": [
+                "よく使われる入口ページ"
+            ],
+            "Common content": [
+                "よく閲覧するコンテンツ"
+            ],
+            "Common referrers": [
+                "よく使われる参照元"
+            ],
+            "Historical sessions": [
+                "過去のセッション"
+            ],
+            "Session paging": [
+                "セッションのページ移動"
+            ],
+            "Page %1$d of %2$d": [
+                "%2$dページ中%1$dページ"
             ]
         }
     }

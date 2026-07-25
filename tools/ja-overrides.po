@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tenyen Analytics for WordPress 0.5.7\n"
+"Project-Id-Version: Tenyen Analytics for WordPress 0.6.0\n"
 "PO-Revision-Date: 2026-07-23 00:00+0900\n"
 "Last-Translator: 10yendama.com\n"
 "Language-Team: Japanese\n"
@@ -9,6 +9,245 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Bounce rate is single-page entry sessions divided by entry sessions. Exit rate is exit sessions divided by pageviews."
+msgstr "直帰率は1ページだけ閲覧した入口セッション数を入口セッション数で割った値です。離脱率はそのページで終了したセッション数をページビュー数で割った値です。"
+
+msgid "Entries"
+msgstr "入口"
+
+msgid "Exits"
+msgstr "離脱"
+
+msgid "Bounces"
+msgstr "直帰"
+
+msgid "Bounce rate (estimated)"
+msgstr "直帰率（推定）"
+
+msgid "Exit rate"
+msgstr "離脱率"
+
+msgid "Display settings"
+msgstr "表示設定"
+
+msgid "Display density"
+msgstr "表示密度"
+
+msgid "Compact"
+msgstr "コンパクト"
+
+msgid "Standard"
+msgstr "標準"
+
+msgid "Wrap cells"
+msgstr "セル内で折り返す"
+
+msgid "Sticky header"
+msgstr "見出しを固定"
+
+msgid "Collapsed by default"
+msgstr "初期状態で閉じる"
+
+msgid "Visible columns"
+msgstr "表示する列"
+
+msgid "30 seconds"
+msgstr "30秒"
+
+msgid "Display settings are saved to localStorage in this browser. The access data itself is not stored here."
+msgstr "表示設定はこのブラウザーのlocalStorageに保存されます。アクセスデータ自体は保存されません。"
+
+msgid "Reset to defaults"
+msgstr "初期設定に戻す"
+
+msgid "IP, URL, title, location, ASN, environment"
+msgstr "IP、URL、タイトル、地域、ASN、環境"
+
+msgid "From"
+msgstr "開始日"
+
+msgid "To"
+msgstr "終了日"
+
+msgid "All countries"
+msgstr "すべての国"
+
+msgid "All operating systems"
+msgstr "すべてのOS"
+
+msgid "All devices"
+msgstr "すべてのデバイス"
+
+msgid "Items per page"
+msgstr "1ページの件数"
+
+msgid "Sort order"
+msgstr "並び順"
+
+msgid "Newest first"
+msgstr "新しい順"
+
+msgid "Oldest first"
+msgstr "古い順"
+
+msgid "Search, filters, and paging update asynchronously without reloading the whole page. Raw IP search is exact; others are partial matches."
+msgstr "検索、絞り込み、ページ移動は画面全体を再読み込みせず非同期で更新します。IPは完全一致、その他は部分一致です。"
+
+msgid "Open the history panel to load events."
+msgstr "履歴パネルを開くとイベントを読み込みます。"
+
+msgid "Browse ordered anonymous visitor journeys."
+msgstr "匿名訪問者の時系列の訪問経路を確認します。"
+
+msgid "Session, visitor, URL, referrer, or environment"
+msgstr "セッション、訪問者、URL、参照元、環境"
+
+msgid "Legacy events without a session ID are excluded. Duration and bounce are estimated analytics metrics."
+msgstr "セッションIDがない過去イベントは除外されます。滞在時間と直帰は推定の分析指標です。"
+
+msgid "Invalid session identifier."
+msgstr "セッション識別子が正しくありません。"
+
+msgid "Session no longer available."
+msgstr "セッションは利用できなくなりました。"
+
+msgid "Invalid visitor identifier."
+msgstr "訪問者識別子が正しくありません。"
+
+msgid "Anonymous visitor no longer available."
+msgstr "匿名訪問者は利用できなくなりました。"
+
+msgid "Anonymous visitor detail"
+msgstr "匿名訪問者の詳細"
+
+#, php-format
+msgid "%1$s–%2$s of %3$s sessions"
+msgstr "%3$s件中%1$s〜%2$s件のセッション"
+
+msgid "Landing page"
+msgstr "入口ページ"
+
+msgid "Exit page"
+msgstr "離脱ページ"
+
+msgid "Direct"
+msgstr "直接"
+
+msgid "Start / last activity"
+msgstr "開始／最終活動"
+
+msgid "Bounce (estimated)"
+msgstr "直帰（推定）"
+
+msgid "Engaged time (estimated)"
+msgstr "エンゲージ時間（推定）"
+
+msgid "Browser / OS / device"
+msgstr "ブラウザー／OS／デバイス"
+
+msgid "Ordered journey"
+msgstr "時系列の訪問経路"
+
+msgid "This is an anonymous browser identifier. It may change when browser storage is cleared or another browser or device is used, and is not proof of a person’s identity."
+msgstr "これは匿名のブラウザー識別子です。ブラウザーの保存データを消去した場合や、別のブラウザーまたはデバイスを使用した場合は変わることがあり、個人の同一性を証明するものではありません。"
+
+#, php-format
+msgid "Page %1$d of %2$d"
+msgstr "%2$dページ中%1$dページ"
+
+msgid "Pageviews per session"
+msgstr "セッションあたりのページビュー"
+
+msgid "Detailed access history"
+msgstr "詳細なアクセス履歴"
+
+msgid "Not loaded"
+msgstr "未読み込み"
+
+msgid "Auto refresh"
+msgstr "自動更新"
+
+msgid "Disabled"
+msgstr "無効"
+
+msgid "1 minute"
+msgstr "1分"
+
+msgid "5 minutes"
+msgstr "5分"
+
+msgid "Apply settings"
+msgstr "設定を適用"
+
+msgid "Event"
+msgstr "イベント"
+
+msgid "All browsers"
+msgstr "すべてのブラウザー"
+
+msgid "Visitor type"
+msgstr "訪問者種別"
+
+msgid "Session detail"
+msgstr "セッション詳細"
+
+msgid "Session start"
+msgstr "セッション開始"
+
+msgid "Last activity"
+msgstr "最終活動"
+
+msgid "Anonymous visitor"
+msgstr "匿名訪問者"
+
+msgid "Estimated duration"
+msgstr "推定時間"
+
+msgid "No sessions found."
+msgstr "セッションが見つかりません。"
+
+msgid "Session span"
+msgstr "セッションの経過時間"
+
+msgid "Country / region"
+msgstr "国／地域"
+
+msgid "Final engagement"
+msgstr "最終エンゲージメント"
+
+msgid "Raw event"
+msgstr "元のイベント"
+
+msgid "First seen"
+msgstr "初回確認"
+
+msgid "Total sessions"
+msgstr "合計セッション"
+
+msgid "Total pageviews"
+msgstr "合計ページビュー"
+
+msgid "Most recent environment"
+msgstr "最近の利用環境"
+
+msgid "Common content"
+msgstr "よく閲覧するコンテンツ"
+
+msgid "Historical sessions"
+msgstr "過去のセッション"
+
+msgid "Session paging"
+msgstr "セッションのページ移動"
+
+msgid "Organization category"
+msgstr "組織カテゴリー"
+
+msgid "Common landing pages"
+msgstr "よく使われる入口ページ"
+
+msgid "Common referrers"
+msgstr "よく使われる参照元"
 
 msgid "Analytics"
 msgstr "アクセス解析"

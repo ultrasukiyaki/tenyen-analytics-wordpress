@@ -27,6 +27,8 @@ function esc_html($text): string { return $text; }
 function esc_html__($text): string { return $text; }
 function esc_attr__($text): string { return $text; }
 function esc_attr($text): string { return $text; }
+function get_date_from_gmt(string $date, string $format): string { return $date; }
+function wp_json_encode(mixed $value, int $flags = 0): string|false { return json_encode($value, $flags); }
 function add_menu_page(): void {}
 function add_submenu_page($parent, $title, $label, $capability, $slug): void { $GLOBALS['tya_submenus'][] = $slug; }
 function register_rest_route(string $namespace, string $route, array $args): void { $GLOBALS['tya_routes'][$namespace . $route] = $args; }
@@ -52,6 +54,32 @@ class WP_REST_Response
 require dirname(__DIR__) . '/tenyen-analytics.php';
 
 $plugin = TYA_Plugin::instance();
+$sessionAdmin = new TYA_Session_Admin();
+$sessionHtmlMethod = new ReflectionMethod($sessionAdmin, 'sessionHtml');
+$sessionHtmlMethod->setAccessible(true);
+$sessionHtml = $sessionHtmlMethod->invoke($sessionAdmin, [
+    'session_id' => 'session-a',
+    'visitor_id' => 'visitor-a',
+    'started_at' => '2026-07-25 00:00:00',
+    'ended_at' => '2026-07-25 00:00:01',
+    'span_seconds' => 1,
+    'engaged_ms' => 1000,
+    'pageviews' => 1,
+    'bounce' => true,
+    'environment' => [
+        'asn' => 2516, 'asn_org' => 'KDDI CORPORATION', 'is_bot' => 0,
+        'country_name' => 'Japan', 'region' => 'Tokyo', 'browser' => 'Chrome',
+        'os' => 'Windows', 'device_type' => 'desktop',
+    ],
+    'engagement_by_path' => ['/one' => ['duration_ms' => 1000, 'scroll_depth' => 50]],
+    'events' => [[
+        'event_id' => 1, 'occurred_at' => '2026-07-25 00:00:00', 'event_type' => 'pageview',
+        'path' => '/one', 'page_title' => 'One', 'referrer' => '', 'target_url' => '',
+    ]],
+]);
+if (!str_contains($sessionHtml, 'KDDI CORPORATION') || !str_contains($sessionHtml, 'Ordered journey')) {
+    throw new RuntimeException('Session detail HTML did not render with organization classification.');
+}
 $historyShellMethod = new ReflectionMethod($plugin, 'renderHistoryShell');
 $historyShellMethod->setAccessible(true);
 $historyShell = $historyShellMethod->invoke($plugin);
@@ -63,14 +91,20 @@ if (str_contains($historyShell, "esc_html__(") || str_contains($historyShell, "e
 }
 
 $plugin->registerAdminMenu();
-if (count($GLOBALS['tya_submenus']) !== 10) {
-    throw new RuntimeException('Expected all ten plugin submenu pages.');
+if (count($GLOBALS['tya_submenus']) !== 11 || !in_array('tenyen-analytics-sessions', $GLOBALS['tya_submenus'], true)) {
+    throw new RuntimeException('Expected all eleven plugin submenu pages including sessions.');
 }
 
 $plugin->registerRoutes();
 $widgetRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/dashboard-widget'] ?? null;
 if (!$widgetRoute || $widgetRoute['methods'] !== WP_REST_Server::READABLE) {
     throw new RuntimeException('Dashboard widget REST route did not register as readable.');
+}
+$sessionRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/sessions'] ?? null;
+$sessionDetailRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/sessions/(?P<id>[A-Za-z0-9_-]+)'] ?? null;
+$visitorRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/visitors/(?P<id>[A-Za-z0-9_-]+)'] ?? null;
+if (!$sessionRoute || !$sessionDetailRoute || !$visitorRoute) {
+    throw new RuntimeException('Session and visitor REST routes did not register.');
 }
 
 TYA_Dashboard_Widget::register();
@@ -85,6 +119,11 @@ if (count($GLOBALS['tya_widgets']) !== 1) {
 }
 if (($widgetRoute['permission_callback'])() !== false) {
     throw new RuntimeException('Unauthorized REST permission callback was allowed.');
+}
+foreach ([$sessionRoute, $sessionDetailRoute, $visitorRoute] as $route) {
+    if (($route['permission_callback'])() !== false) {
+        throw new RuntimeException('Unauthorized session analytics REST permission callback was allowed.');
+    }
 }
 $response = $plugin->dashboardWidget(new WP_REST_Request());
 if ($response->status !== 403) {

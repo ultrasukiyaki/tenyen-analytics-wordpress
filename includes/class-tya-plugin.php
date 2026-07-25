@@ -16,8 +16,9 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Plugin
 {
-    public const UI_BUILD = '0.5.7-history-rendering';
+    public const UI_BUILD = '0.6.0-session-journeys';
     private static ?self $instance = null;
+    private ?TYA_Session_Admin $sessionAdmin = null;
 
     public static function instance(): self
     {
@@ -125,6 +126,9 @@ final class TYA_Plugin
                 'after'
             );
         }
+        if ($page === 'tenyen-analytics-sessions') {
+            $this->sessionAdmin()->enqueue();
+        }
     }
 
     public function enqueueTracker(): void
@@ -177,6 +181,27 @@ final class TYA_Plugin
             'args' => [
                 'fresh' => ['type' => 'boolean'],
             ],
+        ]);
+        register_rest_route('tenyen-analytics/v1', '/admin/sessions', [
+            'methods' => WP_REST_Server::READABLE,
+            'callback' => [$this->sessionAdmin(), 'listRest'],
+            'permission_callback' => static fn(): bool => current_user_can('manage_options'),
+            'args' => [
+                'page' => ['type' => 'integer', 'minimum' => 1],
+                'per_page' => ['type' => 'integer', 'enum' => [25, 50, 100]],
+                'order' => ['type' => 'string', 'enum' => ['asc', 'desc']],
+                'actor' => ['type' => 'string', 'enum' => ['all', 'human', 'bot']],
+            ],
+        ]);
+        register_rest_route('tenyen-analytics/v1', '/admin/sessions/(?P<id>[A-Za-z0-9_-]+)', [
+            'methods' => WP_REST_Server::READABLE,
+            'callback' => [$this->sessionAdmin(), 'sessionRest'],
+            'permission_callback' => static fn(): bool => current_user_can('manage_options'),
+        ]);
+        register_rest_route('tenyen-analytics/v1', '/admin/visitors/(?P<id>[A-Za-z0-9_-]+)', [
+            'methods' => WP_REST_Server::READABLE,
+            'callback' => [$this->sessionAdmin(), 'visitorRest'],
+            'permission_callback' => static fn(): bool => current_user_can('manage_options'),
         ]);
     }
 
@@ -310,6 +335,7 @@ final class TYA_Plugin
             ['tenyen-analytics', __('Dashboard', 'tenyen-analytics'), 'renderDashboard'],
             ['tenyen-analytics-realtime', __('Realtime', 'tenyen-analytics'), 'renderRealtime'],
             ['tenyen-analytics-history', __('Access History', 'tenyen-analytics'), 'renderHistory'],
+            ['tenyen-analytics-sessions', __('Sessions', 'tenyen-analytics'), 'renderSessions'],
             ['tenyen-analytics-content', __('Content', 'tenyen-analytics'), 'renderContent'],
             ['tenyen-analytics-referrers', __('Referrers', 'tenyen-analytics'), 'renderReferrers'],
             ['tenyen-analytics-organizations', __('ASN / Organizations', 'tenyen-analytics'), 'renderOrganizations'],
@@ -328,6 +354,11 @@ final class TYA_Plugin
                 [$this, $callback]
             );
         }
+    }
+
+    public function renderSessions(): void
+    {
+        $this->sessionAdmin()->renderPage();
     }
 
     public function registerSettings(): void
@@ -494,15 +525,16 @@ final class TYA_Plugin
         $this->ensureAdmin();
         global $wpdb;
         $table=TYA_Installer::tableName();$analysis=$this->analysisFilters();$actorSql=$this->actorSql($analysis['actor']);
-        $rows=$wpdb->get_results($wpdb->prepare("SELECT path,MAX(page_title) page_title,COUNT(*) pageviews,COUNT(DISTINCT NULLIF(visitor_id,'')) visitors,COUNT(DISTINCT NULLIF(session_id,'')) sessions FROM {$table} WHERE event_type='pageview' AND occurred_at>=%s AND occurred_at<%s{$actorSql} GROUP BY path ORDER BY pageviews DESC LIMIT 100",$analysis['start_utc'],$analysis['end_utc']),ARRAY_A)?:[];
+        $rows=(new TYA_Session_Repository($wpdb,$table))->contentJourneyMetrics($analysis['start_utc'],$analysis['end_utc'],$analysis['actor']);
         $this->pageStart(__('Content', 'tenyen-analytics'), __('View page performance for posts and pages.', 'tenyen-analytics'));
         echo '<section class="tya-panel"><h2>'.esc_html__('Top content', 'tenyen-analytics').'</h2>';
         $this->analysisFilterForm($analysis);
-        echo '<div class="tya-table-wrap"><table><thead><tr><th>#</th><th>'.esc_html__('Page', 'tenyen-analytics').'</th><th>'.esc_html__('Pageviews', 'tenyen-analytics').'</th><th>'.esc_html__('Visitors', 'tenyen-analytics').'</th><th>'.esc_html__('Sessions', 'tenyen-analytics').'</th></tr></thead><tbody>';
+        echo '<p class="description">'.esc_html__('Bounce rate is single-page entry sessions divided by entry sessions. Exit rate is exit sessions divided by pageviews.', 'tenyen-analytics').'</p>';
+        echo '<div class="tya-table-wrap"><table><thead><tr><th>#</th><th>'.esc_html__('Page', 'tenyen-analytics').'</th><th>'.esc_html__('Pageviews', 'tenyen-analytics').'</th><th>'.esc_html__('Sessions', 'tenyen-analytics').'</th><th>'.esc_html__('Entries', 'tenyen-analytics').'</th><th>'.esc_html__('Exits', 'tenyen-analytics').'</th><th>'.esc_html__('Bounces', 'tenyen-analytics').'</th><th>'.esc_html__('Bounce rate (estimated)', 'tenyen-analytics').'</th><th>'.esc_html__('Exit rate', 'tenyen-analytics').'</th><th>'.esc_html__('Pageviews per session', 'tenyen-analytics').'</th></tr></thead><tbody>';
         foreach ($rows as $i => $row) {
-            echo '<tr><td>'.($i + 1).'</td><td><b>'.$this->pageLink((string)$row['path'], (string)$row['page_title']).'</b><br><code>'.esc_html((string)$row['path']).'</code></td><td>'.number_format((int)$row['pageviews']).'</td><td>'.number_format((int)$row['visitors']).'</td><td>'.number_format((int)$row['sessions']).'</td></tr>';
+            echo '<tr><td>'.($i + 1).'</td><td><b>'.$this->pageLink((string)$row['path'], (string)$row['page_title']).'</b><br><code>'.esc_html((string)$row['path']).'</code></td><td>'.number_format((int)$row['pageviews']).'</td><td>'.number_format((int)$row['sessions']).'</td><td>'.number_format((int)$row['entries']).'</td><td>'.number_format((int)$row['exits']).'</td><td>'.number_format((int)$row['bounces']).'</td><td>'.number_format((float)$row['bounce_rate'],1).'%</td><td>'.number_format((float)$row['exit_rate'],1).'%</td><td>'.number_format((float)$row['pageviews_per_session'],2).'</td></tr>';
         }
-        if ($rows === []) echo '<tr><td colspan="5">'.esc_html__('No data', 'tenyen-analytics').'</td></tr>';
+        if ($rows === []) echo '<tr><td colspan="10">'.esc_html__('No data', 'tenyen-analytics').'</td></tr>';
         echo '</tbody></table></div></section>';
         $this->pageEnd();
     }
@@ -945,8 +977,8 @@ final class TYA_Plugin
                                 <dl><dt><?= esc_html__('ASN / organization', 'tenyen-analytics') ?></dt><dd><?= esc_html($asnText ?: '―') ?></dd></dl>
                                 <dl><dt><?= esc_html__('Duration', 'tenyen-analytics') ?></dt><dd><?= esc_html($this->formatDuration((int)$row['duration_ms'])) ?></dd></dl>
                                 <dl><dt><?= esc_html__('Scroll', 'tenyen-analytics') ?></dt><dd><?= esc_html((string)(int)$row['scroll_depth']) ?>%</dd></dl>
-                                <dl><dt><?= esc_html__('Session', 'tenyen-analytics') ?></dt><dd><code><?= esc_html((string)$row['session_id']) ?></code></dd></dl>
-                                <dl><dt><?= esc_html__('Visitor', 'tenyen-analytics') ?></dt><dd><code><?= esc_html((string)$row['visitor_id']) ?></code></dd></dl>
+                                <dl><dt><?= esc_html__('Session', 'tenyen-analytics') ?></dt><dd><?php if ((string)$row['session_id'] !== ''): ?><a href="<?= esc_url(add_query_arg(['page' => 'tenyen-analytics-sessions', 'session' => (string)$row['session_id']], admin_url('admin.php'))) ?>"><code><?= esc_html((string)$row['session_id']) ?></code></a><?php else: ?>―<?php endif; ?></dd></dl>
+                                <dl><dt><?= esc_html__('Visitor', 'tenyen-analytics') ?></dt><dd><?php if ((string)$row['visitor_id'] !== ''): ?><a href="<?= esc_url(add_query_arg(['page' => 'tenyen-analytics-sessions', 'visitor' => (string)$row['visitor_id']], admin_url('admin.php'))) ?>"><code><?= esc_html((string)$row['visitor_id']) ?></code></a><?php else: ?>―<?php endif; ?></dd></dl>
                                 <dl><dt><?= esc_html__('Screen', 'tenyen-analytics') ?></dt><dd><?= esc_html(trim((string)$row['screen'] . ' / ' . (string)$row['viewport'], ' /') ?: '―') ?></dd></dl>
                                 <dl><dt><?= esc_html__('User-Agent', 'tenyen-analytics') ?></dt><dd><?= esc_html((string)$row['user_agent']) ?></dd></dl>
                                 <dl><dt><?= esc_html__('Full referrer', 'tenyen-analytics') ?></dt><dd><?= $row['referrer'] !== '' ? $this->absoluteLink((string)$row['referrer'], (string)$row['referrer']) : 'Direct' ?></dd></dl>
@@ -1552,5 +1584,10 @@ final class TYA_Plugin
         echo '<a href="https://www.10yendama.com/" target="_blank" rel="noopener noreferrer">10yendama.com</a>';
         echo esc_html(sprintf(' — © %s 10yendama.com', $copyright));
         echo '</div>';
+    }
+
+    private function sessionAdmin(): TYA_Session_Admin
+    {
+        return $this->sessionAdmin ??= new TYA_Session_Admin();
     }
 }

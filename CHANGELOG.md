@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.6.0 - 2026-07-25
+
+### Added
+- Added an asynchronous administrator-only session list with ordered raw-event journeys.
+- Added anonymous browser visitor summaries and historical session navigation.
+- Added content entries, exits, bounces, bounce rate, exit rate, sessions, and pageviews-per-session metrics.
+
+### Changed
+- Added access-history navigation to related session and anonymous visitor details.
+- Added responsive long-value wrapping and keyboard-accessible detail dialogs.
+- Updated English and standard-Japanese documentation and interface translations.
+
+### Security
+- Restricted all session and visitor analytics REST routes to users with `manage_options`.
+
+### Compatibility
+- No schema or index migration is required; existing v0.5.7 events and settings are preserved.
+- Events without a stored session ID remain available in Access History and are excluded from session analytics.
+
 ## 0.5.7 - 2026-07-24
 
 ### Fixed
