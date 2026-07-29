@@ -17,9 +17,10 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Plugin
 {
-    public const UI_BUILD = '0.6.1-traffic-events';
+    public const UI_BUILD = '0.6.2-knowledge';
     private static ?self $instance = null;
     private ?TYA_Session_Admin $sessionAdmin = null;
+    private ?TYA_Metadata $metadata = null;
 
     public static function instance(): self
     {
@@ -131,6 +132,16 @@ final class TYA_Plugin
         if ($page === 'tenyen-analytics-sessions') {
             $this->sessionAdmin()->enqueue();
         }
+        if ($page === 'tenyen-analytics-knowledge') {
+            wp_enqueue_script('tenyen-analytics-metadata', TYA_URL . 'assets/admin-metadata.js', ['wp-i18n'], TYA_VERSION, true);
+            wp_set_script_translations('tenyen-analytics-metadata', 'tenyen-analytics', TYA_DIR . 'languages');
+            wp_add_inline_script('tenyen-analytics-metadata', 'window.TYAMetadata=' . wp_json_encode([
+                'annotations' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/annotations')),
+                'tags' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/tags')),
+                'views' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/saved-views')),
+                'nonce' => wp_create_nonce('wp_rest'),
+            ], JSON_UNESCAPED_SLASHES) . ';', 'before');
+        }
     }
 
     public function enqueueTracker(): void
@@ -165,6 +176,7 @@ final class TYA_Plugin
 
     public function registerRoutes(): void
     {
+        $this->metadata()->registerRoutes();
         register_rest_route('tenyen-analytics/v1', '/collect', [
             'methods' => WP_REST_Server::CREATABLE,
             'callback' => [$this, 'collect'],
@@ -379,6 +391,7 @@ final class TYA_Plugin
             ['tenyen-analytics-content', __('Content', 'tenyen-analytics'), 'renderContent'],
             ['tenyen-analytics-referrers', __('Referrers', 'tenyen-analytics'), 'renderReferrers'],
             ['tenyen-analytics-organizations', __('ASN / Organizations', 'tenyen-analytics'), 'renderOrganizations'],
+            ['tenyen-analytics-knowledge', __('Knowledge', 'tenyen-analytics'), 'renderKnowledge'],
             ['tenyen-analytics-audience', __('Audience', 'tenyen-analytics'), 'renderAudience'],
             ['tenyen-analytics-engagement', __('Engagement', 'tenyen-analytics'), 'renderEngagement'],
             ['tenyen-analytics-system', __('System', 'tenyen-analytics'), 'renderSystem'],
@@ -399,6 +412,11 @@ final class TYA_Plugin
     public function renderSessions(): void
     {
         $this->sessionAdmin()->renderPage();
+    }
+
+    public function renderKnowledge(): void
+    {
+        $this->metadata()->renderManager();
     }
 
     public function registerSettings(): void
@@ -1669,5 +1687,10 @@ final class TYA_Plugin
     private function sessionAdmin(): TYA_Session_Admin
     {
         return $this->sessionAdmin ??= new TYA_Session_Admin();
+    }
+
+    private function metadata(): TYA_Metadata
+    {
+        return $this->metadata ??= new TYA_Metadata();
     }
 }

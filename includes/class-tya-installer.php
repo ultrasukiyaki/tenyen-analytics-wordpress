@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Installer
 {
-    public const SCHEMA_VERSION = '0.6.1';
+    public const SCHEMA_VERSION = '0.6.2';
     public static function tableName(): string
     {
         global $wpdb;
@@ -79,6 +79,62 @@ final class TYA_Installer
         ) {$charset};";
 
         dbDelta($sql);
+
+        $annotations = self::annotationsTable();
+        $tags = self::tagsTable();
+        $relations = self::entityTagsTable();
+        $views = self::savedViewsTable();
+        dbDelta("CREATE TABLE {$annotations} (
+            annotation_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+            entity_type VARCHAR(32) NOT NULL,
+            entity_key VARBINARY(191) NOT NULL,
+            original_value VARCHAR(512) NOT NULL DEFAULT '',
+            context_json TEXT NULL,
+            alias VARCHAR(120) NOT NULL DEFAULT '',
+            note TEXT NULL,
+            watched TINYINT(1) NOT NULL DEFAULT 0,
+            created_by BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            updated_by BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            created_at DATETIME NOT NULL,
+            updated_at DATETIME NOT NULL,
+            PRIMARY KEY  (annotation_id),
+            UNIQUE KEY entity_identity (entity_type,entity_key),
+            KEY watched_type (watched,entity_type),
+            KEY updated_at (updated_at)
+        ) {$charset};");
+        dbDelta("CREATE TABLE {$tags} (
+            tag_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+            name VARCHAR(50) NOT NULL,
+            normalized_name VARCHAR(100) NOT NULL,
+            color VARCHAR(16) NOT NULL DEFAULT 'blue',
+            created_at DATETIME NOT NULL,
+            updated_at DATETIME NOT NULL,
+            PRIMARY KEY  (tag_id),
+            UNIQUE KEY normalized_name (normalized_name)
+        ) {$charset};");
+        dbDelta("CREATE TABLE {$relations} (
+            annotation_id BIGINT UNSIGNED NOT NULL,
+            tag_id BIGINT UNSIGNED NOT NULL,
+            created_at DATETIME NOT NULL,
+            PRIMARY KEY  (annotation_id,tag_id),
+            KEY tag_annotation (tag_id,annotation_id)
+        ) {$charset};");
+        dbDelta("CREATE TABLE {$views} (
+            view_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+            user_id BIGINT UNSIGNED NOT NULL,
+            report VARCHAR(32) NOT NULL,
+            name VARCHAR(120) NOT NULL,
+            description VARCHAR(500) NOT NULL DEFAULT '',
+            schema_version SMALLINT UNSIGNED NOT NULL DEFAULT 1,
+            filters_json TEXT NOT NULL,
+            pinned TINYINT(1) NOT NULL DEFAULT 0,
+            is_default TINYINT(1) NOT NULL DEFAULT 0,
+            created_at DATETIME NOT NULL,
+            updated_at DATETIME NOT NULL,
+            PRIMARY KEY  (view_id),
+            KEY owner_report (user_id,report),
+            KEY owner_pinned (user_id,pinned,is_default)
+        ) {$charset};");
         update_option('tya_schema_version', self::SCHEMA_VERSION, false);
 
         if (!get_option('tya_site_token')) {
@@ -105,6 +161,11 @@ final class TYA_Installer
             wp_schedule_event(time() + HOUR_IN_SECONDS, 'daily', 'tya_daily_cleanup');
         }
     }
+
+    public static function annotationsTable(): string { global $wpdb; return $wpdb->prefix . 'tya_annotations'; }
+    public static function tagsTable(): string { global $wpdb; return $wpdb->prefix . 'tya_tags'; }
+    public static function entityTagsTable(): string { global $wpdb; return $wpdb->prefix . 'tya_entity_tags'; }
+    public static function savedViewsTable(): string { global $wpdb; return $wpdb->prefix . 'tya_saved_views'; }
 
     public static function maybeUpgrade(): void
     {

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tenyen Analytics for WordPress 0.6.1\n"
+"Project-Id-Version: Tenyen Analytics for WordPress 0.6.2\n"
 "PO-Revision-Date: 2026-07-23 00:00+0900\n"
 "Last-Translator: 10yendama.com\n"
 "Language-Team: Japanese\n"
@@ -9,6 +9,63 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Knowledge"
+msgstr "ナレッジ"
+
+msgid "No more than 50 tags may be assigned."
+msgstr "割り当てられるタグは50件までです。"
+
+msgid "Metadata could not be saved."
+msgstr "メタデータを保存できませんでした。"
+
+msgid "Invalid tag name or color."
+msgstr "タグ名または色が正しくありません。"
+
+msgid "A tag with that name already exists."
+msgstr "同じ名前のタグがすでに存在します。"
+
+msgid "Saved view could not be saved."
+msgstr "保存ビューを保存できませんでした。"
+
+msgid "Manage administrator annotations, tags, organization watchlists, and private saved views."
+msgstr "管理者用の注釈、タグ、組織ウォッチリスト、非公開の保存ビューを管理します。"
+
+msgid "Knowledge sections"
+msgstr "ナレッジの項目"
+
+msgid "Tags"
+msgstr "タグ"
+
+msgid "Access was observed from an IP address registered to the shown ASN/organization. This does not identify a person or prove employment or intent."
+msgstr "表示されたASN／組織に登録されたIPアドレスからアクセスが観測されました。個人を特定したり、勤務や意図を証明したりするものではありません。"
+
+msgid "The saved view contains an unsupported filter."
+msgstr "保存ビューに未対応のフィルターが含まれています。"
+
+msgid "A saved filter has too many values."
+msgstr "保存フィルターの値が多すぎます。"
+
+msgid "Unsupported sort direction."
+msgstr "未対応の並び順です。"
+
+msgid "Unsupported page size."
+msgstr "未対応の表示件数です。"
+
+msgid "Track internal link clicks"
+msgstr "内部リンクのクリックを記録"
+
+msgid "Track generic button clicks"
+msgstr "一般ボタンのクリックを記録"
+
+msgid "Track opted-in form submissions"
+msgstr "明示されたフォーム送信を記録"
+
+msgid "Traffic channel"
+msgstr "流入チャネル"
+
+msgid "Metadata"
+msgstr "メタデータ"
 
 msgid "Bounce rate is single-page entry sessions divided by entry sessions. Exit rate is exit sessions divided by pageviews."
 msgstr "直帰率は1ページだけ閲覧した入口セッション数を入口セッション数で割った値です。離脱率はそのページで終了したセッション数をページビュー数で割った値です。"

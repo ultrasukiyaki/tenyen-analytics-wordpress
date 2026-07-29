@@ -2,6 +2,19 @@ English | [日本語](CHANGELOG.ja.md)
 
 # Changelog
 
+## 0.6.2 - 2026-07-30
+
+### Added
+- Added administrator aliases, plain-text notes, reusable tags, ASN organization watchlists, and private saved views.
+- Added a centralized Knowledge screen and administrator-only metadata REST API.
+
+### Security
+- Added allowlisted entity types, type-specific keys, bounded plain text, preset tag colors, prepared queries, and saved-view owner isolation.
+
+### Compatibility
+- Added four prefixed metadata tables and focused identity, watchlist, tag-relation, and owner/report indexes.
+- Existing v0.6.1 analytics rows remain unchanged; uninstall continues to preserve plugin data.
+
 ## 0.6.1 - 2026-07-26
 
 ### Added

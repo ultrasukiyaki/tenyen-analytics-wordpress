@@ -29,6 +29,7 @@ function esc_attr__($text): string { return $text; }
 function esc_attr($text): string { return $text; }
 function get_date_from_gmt(string $date, string $format): string { return $date; }
 function wp_json_encode(mixed $value, int $flags = 0): string|false { return json_encode($value, $flags); }
+function wp_strip_all_tags(string $value): string { return strip_tags($value); }
 function add_menu_page(): void {}
 function add_submenu_page($parent, $title, $label, $capability, $slug): void { $GLOBALS['tya_submenus'][] = $slug; }
 function register_rest_route(string $namespace, string $route, array $args): void { $GLOBALS['tya_routes'][$namespace . $route] = $args; }
@@ -38,6 +39,8 @@ final class WP_REST_Server
 {
     public const CREATABLE = 'POST';
     public const READABLE = 'GET';
+    public const EDITABLE = 'PUT';
+    public const DELETABLE = 'DELETE';
 }
 
 class WP_REST_Request
@@ -91,8 +94,8 @@ if (str_contains($historyShell, "esc_html__(") || str_contains($historyShell, "e
 }
 
 $plugin->registerAdminMenu();
-if (count($GLOBALS['tya_submenus']) !== 11 || !in_array('tenyen-analytics-sessions', $GLOBALS['tya_submenus'], true)) {
-    throw new RuntimeException('Expected all eleven plugin submenu pages including sessions.');
+if (count($GLOBALS['tya_submenus']) !== 12 || !in_array('tenyen-analytics-sessions', $GLOBALS['tya_submenus'], true) || !in_array('tenyen-analytics-knowledge', $GLOBALS['tya_submenus'], true)) {
+    throw new RuntimeException('Expected all twelve plugin submenu pages including sessions and knowledge.');
 }
 
 $plugin->registerRoutes();
@@ -105,6 +108,18 @@ $sessionDetailRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/sessions
 $visitorRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/visitors/(?P<id>[A-Za-z0-9_-]+)'] ?? null;
 if (!$sessionRoute || !$sessionDetailRoute || !$visitorRoute) {
     throw new RuntimeException('Session and visitor REST routes did not register.');
+}
+$annotationRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/annotations'] ?? null;
+$tagRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/tags'] ?? null;
+$viewRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/saved-views'] ?? null;
+if (!$annotationRoute || !$tagRoute || !$viewRoute) {
+    throw new RuntimeException('Metadata and saved-view REST routes did not register.');
+}
+if (TYA_Metadata::entityKey('organization', 2516) !== '2516'
+    || TYA_Metadata::entityKey('organization', 0) !== ''
+    || TYA_Metadata::entityKey('visitor', 'visitor_A-1') !== 'visitor_A-1'
+    || TYA_Metadata::entityKey('referrer', 'Example.COM.') !== 'example.com') {
+    throw new RuntimeException('Metadata entity-key normalization failed.');
 }
 
 TYA_Dashboard_Widget::register();

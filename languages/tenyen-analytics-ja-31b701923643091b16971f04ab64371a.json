@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-07-25 21:00+0000",
+    "translation-revision-date": "2026-07-29 19:52+0000",
     "generator": "tools\/make-json-translations.php",
     "source": "assets\/dashboard-widget.js",
     "domain": "messages",
@@ -36,6 +36,9 @@
             ],
             "ASN \/ Organizations": [
                 "ASN／組織"
+            ],
+            "Knowledge": [
+                "ナレッジ"
             ],
             "Audience": [
                 "利用環境"
@@ -505,6 +508,15 @@
             "Record bots as well": [
                 "Botも記録"
             ],
+            "Track internal link clicks": [
+                "内部リンクのクリックを記録"
+            ],
+            "Track generic button clicks": [
+                "一般ボタンのクリックを記録"
+            ],
+            "Track opted-in form submissions": [
+                "明示されたフォーム送信を記録"
+            ],
             "IP header to use": [
                 "使用するIPヘッダー"
             ],
@@ -537,6 +549,57 @@
             ],
             "Other": [
                 "その他"
+            ],
+            "Invalid analytics entity.": [
+                "訪問者識別子が正しくありません。"
+            ],
+            "No more than 50 tags may be assigned.": [
+                "割り当てられるタグは50件までです。"
+            ],
+            "Metadata could not be saved.": [
+                "メタデータを保存できませんでした。"
+            ],
+            "Invalid tag name or color.": [
+                "タグ名または色が正しくありません。"
+            ],
+            "A tag with that name already exists.": [
+                "同じ名前のタグがすでに存在します。"
+            ],
+            "Invalid saved view.": [
+                "セッション識別子が正しくありません。"
+            ],
+            "Saved view not found.": [
+                "保存済みイベント"
+            ],
+            "Saved view could not be saved.": [
+                "保存ビューを保存できませんでした。"
+            ],
+            "Knowledge sections": [
+                "ナレッジの項目"
+            ],
+            "Annotations": [
+                "地域"
+            ],
+            "Watched organizations": [
+                "注目組織"
+            ],
+            "Tags": [
+                "タグ"
+            ],
+            "Saved views": [
+                "保存済みイベント"
+            ],
+            "The saved view contains an unsupported filter.": [
+                "保存ビューに未対応のフィルターが含まれています。"
+            ],
+            "A saved filter has too many values.": [
+                "保存フィルターの値が多すぎます。"
+            ],
+            "Unsupported sort direction.": [
+                "未対応の並び順です。"
+            ],
+            "Unsupported page size.": [
+                "未対応の表示件数です。"
             ],
             "Refresh": [
                 "更新"
@@ -607,6 +670,9 @@
             "Bounce (estimated)": [
                 "直帰（推定）"
             ],
+            "Traffic channel": [
+                "流入チャネル"
+            ],
             "Referrer domain": [
                 "参照元ドメイン"
             ],
@@ -630,6 +696,9 @@
             ],
             "Final engagement": [
                 "最終エンゲージメント"
+            ],
+            "Metadata": [
+                "メタデータ"
             ],
             "Raw event": [
                 "元のイベント"

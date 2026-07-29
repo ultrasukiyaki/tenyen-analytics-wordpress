@@ -16,6 +16,7 @@ Tenyen Analytics is a self-hosted WordPress analytics plugin for pageviews, esti
 - Local GeoLite2 City and ASN lookup with an optional official MaxMind reader
 - Asynchronous access history and a compact WordPress Dashboard widget
 - Notable-organization categories while preserving MaxMind organization names verbatim
+- Administrator aliases, plain-text notes, reusable tags, organization watchlists, and private saved views
 
 ## Requirements
 
@@ -40,7 +41,13 @@ Raw IP addresses are stored using reversible encryption; HMAC values support exa
 
 ## Updating
 
-Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.6.1 adds nullable attribution/event fields and preserves existing v0.6.0 rows and identifiers.
+Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.6.2 adds separate metadata tables and preserves all v0.6.1 analytics rows and identifiers.
+
+## Administrator knowledge
+
+The Knowledge screen manages aliases, notes (up to 4,000 characters), tags (up to 50 characters and 50 per entity), watched ASN organizations, and private saved views. Supported identities are numeric ASN, the existing anonymous visitor ID, post ID or canonical content path, normalized referrer domain, a deterministic hash of the five first-touch UTM dimensions, and normalized external target domain. Aliases never overwrite raw values. Orphaned annotations remain manageable.
+
+Watching only marks and filters an ASN; it sends no notification and changes no analytics fact. Access was observed from an IP address registered to the ASN/organization—it does not identify a person, employment, affiliation, or intent. Saved views belong to one WordPress administrator. Relative date presets are recalculated when loaded; custom dates remain absolute. Pinned and one-per-report default states are supported by the storage/API model. Uninstall preserves the metadata tables under the existing data-retention policy. Notifications and exclusion management remain deferred.
 
 ## Traffic attribution and events
 
