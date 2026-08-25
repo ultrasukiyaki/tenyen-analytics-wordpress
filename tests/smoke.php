@@ -5,6 +5,8 @@ declare(strict_types=1);
 define('ABSPATH', __DIR__ . '/wordpress/');
 define('ARRAY_A', 'ARRAY_A');
 define('MINUTE_IN_SECONDS', 60);
+define('HOUR_IN_SECONDS', 3600);
+define('DAY_IN_SECONDS', 86400);
 
 $GLOBALS['tya_actions'] = [];
 $GLOBALS['tya_routes'] = [];
@@ -58,8 +60,8 @@ class WP_REST_Response
 require dirname(__DIR__) . '/tenyen-analytics.php';
 
 $plugin = TYA_Plugin::instance();
-if (TYA_VERSION !== '0.7.1' || TYA_Installer::SCHEMA_VERSION !== '0.7.1') {
-    throw new RuntimeException('v0.7.1 aggregate schema upgrade failed.');
+if (TYA_VERSION !== '0.8.0' || TYA_Installer::SCHEMA_VERSION !== '0.7.1') {
+    throw new RuntimeException('v0.8.0 application version or retained aggregate schema version is incorrect.');
 }
 $sessionAdmin = new TYA_Session_Admin();
 $sessionHtmlMethod = new ReflectionMethod($sessionAdmin, 'sessionHtml');
@@ -170,6 +172,13 @@ foreach ([$lifecycleDiagnostics,$lifecycleRetention,$lifecyclePreview,$lifecycle
 }
 foreach ([$aggregationStatus,$aggregationRebuild] as $route) {
     if (($route['permission_callback'])() !== false) throw new RuntimeException('Unauthorized aggregate operation was allowed.');
+}
+$geoStatus = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/geolite/status'] ?? null;
+$geoSettings = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/geolite/settings'] ?? null;
+$geoUpdate = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/geolite/update'] ?? null;
+if (!$geoStatus || !$geoSettings || !$geoUpdate) throw new RuntimeException('GeoLite2 status, settings, and update routes did not register.');
+foreach ([$geoStatus,$geoSettings,$geoUpdate] as $route) {
+    if (($route['permission_callback'])() !== false) throw new RuntimeException('Unauthorized GeoLite2 operation was allowed.');
 }
 $response = $plugin->dashboardWidget(new WP_REST_Request());
 if ($response->status !== 403) {

@@ -2,6 +2,16 @@ English | [日本語](CHANGELOG.ja.md)
 
 # Changelog
 
+## 0.8.0 - 2026-08-25
+
+### Added
+- Added optional weekly GeoLite2 City and ASN updates using the fixed MaxMind HTTPS download endpoints, encrypted credentials, independent status, manual update-now controls, overlap locking, and bounded retry backoff.
+- Added independent health checks for missing, unreadable, stale, corrupt, and wrong-type databases, including safe filenames, build dates, sizes, last attempts, last successful updates, failures, and next scheduled work.
+
+### Security and compatibility
+- Downloads use the WordPress HTTP API and Basic Authentication. Archives and extracted files are size bounded, traversal and links are rejected, expected MMDB types are verified, and a validated file is atomically activated only after the working database is backed up.
+- Failed City updates do not invalidate ASN and vice versa. Existing valid databases remain active after any failure, manual paths remain supported, MMDB files stay excluded from release packages, and the schema/index version remains 0.7.1.
+
 ## 0.7.1 - 2026-08-25
 
 ### Added

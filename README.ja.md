@@ -13,7 +13,7 @@ Tenyen Analyticsは、ページビュー、推定ユニーク訪問者、セッ�
 - ページビュー、推定UU、セッション、滞在時間、スクロール率、外部クリック、ダウンロード
 - Human／Botフィルターとローカル描画のグラフ
 - 生IPアドレスの暗号化保存とHMACによる完全一致検索
-- GeoLite2 City／ASNのローカル参照と任意のMaxMind公式Reader
+- GeoLite2 City／ASNのローカル参照、health check、安全な任意の自動更新
 - 非同期アクセス履歴とコンパクトなWordPressダッシュボードウィジェット
 - MaxMindの組織名を変更せずに表示する注目組織カテゴリー
 - 管理者用の別名、プレーンテキストメモ、再利用可能なタグ、組織ウォッチリスト、非公開の保存ビュー
@@ -32,7 +32,9 @@ Tenyen Analyticsは、ページビュー、推定ユニーク訪問者、セッ�
 
 ## GeoLite2の設定
 
-GeoLite2のMMDBファイルは同梱されません。サイト管理者が[MaxMindの利用条件](https://www.maxmind.com/)に従って`GeoLite2-City.mmdb`と`GeoLite2-ASN.mmdb`を取得し、`wp-content/uploads/tenyen-analytics/`へ配置するか、設定画面でパスを指定してください。ファイルがなくても基本的な収集は動作します。
+GeoLite2のMMDBファイルは同梱されません。サイト管理者が[MaxMindの利用条件](https://www.maxmind.com/)に従って取得してください。手動管理も引き続き利用でき、`GeoLite2-City.mmdb`と`GeoLite2-ASN.mmdb`を`wp-content/uploads/tenyen-analytics/`へ配置するか、設定画面でパスを指定します。ファイルがなくても基本的な収集は動作します。
+
+任意の自動管理は「Tenyen Analytics → システム」で、数値のMaxMind account IDとlicense keyを設定します。license keyはWordPress Salt由来の鍵で暗号化して保存し、画面ではmaskし、status responseには含めず、HTTPS上のBasic AuthenticationでMaxMindだけへ送信します。CityとASNは独立してdownload、検証、有効化、状態表示します。週次jobはlockと上限付きretry backoffを使います。download失敗、危険なarchive、想定MMDBの欠落／種別違い、破損、置換失敗があっても、現在動作中のDBを維持します。WordPress Saltを変更した場合は保存済みlicense keyを再入力してください。
 
 ## ダッシュボードとレポート
 
@@ -44,7 +46,7 @@ Tenyen Analyticsメニューには、ダッシュボード、リアルタイム�
 
 ## 更新
 
-WordPressをバックアップしてから、新しいプラグインをアップロードまたは上書きしてください。uploads内のGeoLite2ファイルは保持してください。v0.7.1は2つの集計tableを追加し、schemaを0.6.3から更新します。既存event row、注釈、tag、watchlist、保存view、除外、設定、GeoLite file、keyは維持します。
+WordPressをバックアップしてから、新しいプラグインをアップロードまたは上書きしてください。uploads内のGeoLite2ファイルは保持してください。v0.8.0はv0.7.1のschemaとindexを変更しません。既存event row、aggregate、注釈、tag、watchlist、保存view、除外、設定、手動管理のGeoLite2 file、keyは維持します。管理者が資格情報を設定して明示的に有効化するまで自動更新は無効です。
 
 ## エクスポート、保持、削除
 
@@ -100,7 +102,7 @@ window.TenyenAnalytics.trackEvent('feature_used', {area: 'header'});
 
 ## トラブルシューティング
 
-「Tenyen Analytics → システム」で収集エンドポイントとGeoLite2の状態を確認できます。地域やASNが空の場合はMMDBのパスと読み取り権限を確認してください。イベントが記録されない場合は、キャッシュやセキュリティ設定、およびブラウザのネットワーク画面で収集APIの応答を確認してください。
+「Tenyen Analytics → システム」で収集endpointと、City／ASNそれぞれのhealth、build date、安全なfilename、size、最終試行、最終成功、次回週次実行、retry、失敗状態を確認できます。自動更新に失敗した場合は、MaxMind accountの権限、資格情報、設定directoryの書き込み権限、外向きHTTPS接続を確認してください。以前の有効なMMDBは維持されます。手動modeで地域やASNが空の場合は、両MMDBのpathと読み取り権限を確認してください。eventが記録されない場合は、cacheやsecurity設定、browserのnetwork画面で収集APIのresponseを確認してください。
 
 ## 開発
 

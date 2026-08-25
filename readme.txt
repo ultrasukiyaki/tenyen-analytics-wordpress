@@ -3,7 +3,7 @@ Contributors: 10yendama
 Tags: analytics, privacy, pageviews, sessions, geolocation
 Requires at least: 6.2
 Requires PHP: 8.1
-Stable tag: 0.7.1
+Stable tag: 0.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ A self-hosted analytics plugin with pageviews, sessions, engagement, GeoLite2, A
 
 Tenyen Analytics stores analytics in WordPress and provides pageview, estimated visitor, session, engagement, referrer, audience, organization, and bot reports. Raw IP addresses are encrypted and HMAC values support exact-match search.
 
-GeoLite2 MMDB files are not included. Site administrators must obtain them under MaxMind's terms. ASN organization names identify the registered organization for an address range and do not prove visitor affiliation.
+GeoLite2 MMDB files are not included. Site administrators must obtain them under MaxMind's terms. Manual paths remain supported, and optional weekly updates use administrator-supplied MaxMind credentials. ASN organization names identify the registered organization for an address range and do not prove visitor affiliation.
 
 == Installation ==
 
@@ -33,6 +33,13 @@ No. Analytics data is preserved unless an administrator removes it manually.
 No. The built-in MMDB reader and local analytics reports work without Composer or an external analytics service.
 
 == Changelog ==
+
+= 0.8.0 =
+
+* Added optional weekly and manual-now GeoLite2 City/ASN updates with independent health and failure state.
+* Encrypts the MaxMind license key, uses fixed HTTPS endpoints, and never returns the secret to browser status data.
+* Validates bounded archives and MMDB type before atomic replacement, retaining each working database independently on failure.
+* Preserves manual paths and the v0.7.1 schema; MMDB files remain excluded from release packages.
 
 = 0.7.1 =
 
@@ -94,6 +101,10 @@ No. The built-in MMDB reader and local analytics reports work without Composer o
 * Added a built-in MMDB reader and asynchronous access history.
 
 == Upgrade Notice ==
+
+= 0.8.0 =
+
+Adds optional safe GeoLite2 automatic updates without a schema migration. Existing manually maintained City and ASN files remain supported, and automatic updates stay disabled until explicitly configured.
 
 = 0.7.1 =
 

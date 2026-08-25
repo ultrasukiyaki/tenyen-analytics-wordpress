@@ -27,13 +27,18 @@ final class Crypto
 
     public function encryptIp(string $ip): string
     {
-        if ($ip === '') {
+        return $this->encrypt($ip);
+    }
+
+    public function encrypt(string $plainText): string
+    {
+        if ($plainText === '') {
             return '';
         }
 
         if (function_exists('sodium_crypto_secretbox')) {
             $nonce = random_bytes(SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
-            $cipher = sodium_crypto_secretbox($ip, $nonce, $this->encryptionKey);
+            $cipher = sodium_crypto_secretbox($plainText, $nonce, $this->encryptionKey);
             return "S" . $nonce . $cipher;
         }
 
@@ -59,6 +64,11 @@ final class Crypto
 
     public function decryptIp(?string $payload): string
     {
+        return $this->decrypt($payload);
+    }
+
+    public function decrypt(?string $payload): string
+    {
         if ($payload === null || $payload === '') {
             return '';
         }
@@ -68,6 +78,9 @@ final class Crypto
 
         if ($mode === 'S' && function_exists('sodium_crypto_secretbox_open')) {
             $nonceLength = SODIUM_CRYPTO_SECRETBOX_NONCEBYTES;
+            if (strlen($data) < $nonceLength + SODIUM_CRYPTO_SECRETBOX_MACBYTES) {
+                return '';
+            }
             $nonce = substr($data, 0, $nonceLength);
             $cipher = substr($data, $nonceLength);
             $plain = sodium_crypto_secretbox_open($cipher, $nonce, $this->encryptionKey);
@@ -75,6 +88,9 @@ final class Crypto
         }
 
         if ($mode === 'O' && function_exists('openssl_decrypt')) {
+            if (strlen($data) < 29) {
+                return '';
+            }
             $iv = substr($data, 0, 12);
             $tag = substr($data, 12, 16);
             $cipher = substr($data, 28);

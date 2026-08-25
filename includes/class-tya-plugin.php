@@ -17,13 +17,14 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Plugin
 {
-    public const UI_BUILD = '0.7.1-aggregation';
+    public const UI_BUILD = '0.8.0-geolite-health';
     private static ?self $instance = null;
     private ?TYA_Session_Admin $sessionAdmin = null;
     private ?TYA_Metadata $metadata = null;
     private ?TYA_Exclusions $exclusions = null;
     private ?TYA_Aggregation $aggregation = null;
     private ?TYA_Lifecycle $lifecycle = null;
+    private ?TYA_GeoLite_Updater $geoLiteUpdater = null;
 
     public static function instance(): self
     {
@@ -35,6 +36,7 @@ final class TYA_Plugin
         TYA_Installer::maybeUpgrade();
         $this->aggregation()->boot();
         $this->lifecycle()->boot();
+        $this->geoLiteUpdater()->boot();
         add_action('wp_enqueue_scripts', [$this, 'enqueueTracker']);
         add_action('rest_api_init', [$this, 'registerRoutes']);
         add_action('admin_menu', [$this, 'registerAdminMenu']);
@@ -170,6 +172,16 @@ final class TYA_Plugin
                 'nonce' => wp_create_nonce('wp_rest'),
             ], JSON_UNESCAPED_SLASHES) . ';', 'before');
         }
+        if ($page === 'tenyen-analytics-system') {
+            wp_enqueue_script('tenyen-analytics-geolite', TYA_URL . 'assets/admin-geolite.js', ['wp-i18n'], TYA_VERSION, true);
+            wp_set_script_translations('tenyen-analytics-geolite', 'tenyen-analytics', TYA_DIR . 'languages');
+            wp_add_inline_script('tenyen-analytics-geolite', 'window.TYAGeoLite=' . wp_json_encode([
+                'status' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/geolite/status')),
+                'settings' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/geolite/settings')),
+                'update' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/geolite/update')),
+                'nonce' => wp_create_nonce('wp_rest'),
+            ], JSON_UNESCAPED_SLASHES) . ';', 'before');
+        }
     }
 
     public function enqueueTracker(): void
@@ -208,6 +220,7 @@ final class TYA_Plugin
         $this->exclusions()->registerRoutes();
         $this->aggregation()->registerRoutes();
         $this->lifecycle()->registerRoutes();
+        $this->geoLiteUpdater()->registerRoutes();
         register_rest_route('tenyen-analytics/v1', '/collect', [
             'methods' => WP_REST_Server::CREATABLE,
             'callback' => [$this, 'collect'],
@@ -790,6 +803,17 @@ final class TYA_Plugin
         echo '<dt>' . esc_html__('DB table', 'tenyen-analytics') . '</dt><dd><code>' . esc_html($table) . '</code></dd>';
         echo '<dt>' . esc_html__('UI build', 'tenyen-analytics') . '</dt><dd>' . esc_html(self::UI_BUILD) . '</dd>';
         echo '</dl></section>';
+
+        echo '<section class="tya-panel" id="tya-geolite"><h2>' . esc_html__('GeoLite2 database maintenance', 'tenyen-analytics') . '</h2>';
+        echo '<p>' . esc_html__('Automatic updates use MaxMind Basic Authentication over HTTPS. The license key is encrypted at rest and never returned to the browser.', 'tenyen-analytics') . '</p>';
+        echo '<form class="tya-filters" data-geolite-settings>';
+        echo '<label>' . esc_html__('MaxMind account ID', 'tenyen-analytics') . '<input name="account_id" inputmode="numeric" maxlength="20" autocomplete="off"></label>';
+        echo '<label>' . esc_html__('MaxMind license key', 'tenyen-analytics') . '<input type="password" name="license_key" maxlength="128" autocomplete="new-password" placeholder="••••••••"></label>';
+        echo '<label><input type="checkbox" name="automatic" value="1"> ' . esc_html__('Enable weekly automatic updates', 'tenyen-analytics') . '</label>';
+        echo '<label><input type="checkbox" name="clear_license_key" value="1"> ' . esc_html__('Remove saved license key', 'tenyen-analytics') . '</label>';
+        echo '<button class="button button-primary" type="submit">' . esc_html__('Save update settings', 'tenyen-analytics') . '</button></form>';
+        echo '<div class="tya-geolite-actions"><label>' . esc_html__('Database', 'tenyen-analytics') . ' <select data-geolite-database><option value="all">' . esc_html__('City and ASN', 'tenyen-analytics') . '</option><option value="city">City</option><option value="asn">ASN</option></select></label> <button class="button" type="button" data-geolite-update>' . esc_html__('Update now', 'tenyen-analytics') . '</button></div>';
+        echo '<div data-geolite-message aria-live="polite"></div><div data-geolite-status>' . esc_html__('Loading…', 'tenyen-analytics') . '</div></section>';
         $this->pageEnd();
     }
 
@@ -1769,5 +1793,10 @@ final class TYA_Plugin
     private function aggregation(): TYA_Aggregation
     {
         return $this->aggregation ??= new TYA_Aggregation();
+    }
+
+    private function geoLiteUpdater(): TYA_GeoLite_Updater
+    {
+        return $this->geoLiteUpdater ??= new TYA_GeoLite_Updater();
     }
 }

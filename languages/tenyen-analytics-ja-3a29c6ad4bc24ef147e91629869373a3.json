@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-08-25 01:54+0000",
+    "translation-revision-date": "2026-08-25 02:21+0000",
     "generator": "tools\/make-json-translations.php",
     "source": "assets\/admin-exclusions.js",
     "domain": "messages",
@@ -288,6 +288,36 @@
             ],
             "UI build": [
                 "UIビルド"
+            ],
+            "GeoLite2 database maintenance": [
+                "GeoLite2データベース管理"
+            ],
+            "MaxMind account ID": [
+                "MaxMind account ID"
+            ],
+            "MaxMind license key": [
+                "MaxMind license key"
+            ],
+            "Enable weekly automatic updates": [
+                "週次自動更新を有効化"
+            ],
+            "Remove saved license key": [
+                "保存済みlicense keyを削除"
+            ],
+            "Save update settings": [
+                "更新設定を保存"
+            ],
+            "Database": [
+                "データベース"
+            ],
+            "City and ASN": [
+                "CityとASN"
+            ],
+            "Update now": [
+                "今すぐ更新"
+            ],
+            "Loading…": [
+                "読み込んでいます…"
             ],
             "You do not have permission.": [
                 "この操作を実行する権限がありません。"
@@ -784,9 +814,6 @@
             "Daily aggregation": [
                 "日次集計"
             ],
-            "Loading…": [
-                "読み込んでいます…"
-            ],
             "Rebuild aggregates": [
                 "集計を再構築"
             ],
@@ -864,6 +891,99 @@
             ],
             "Download export": [
                 "エクスポートをダウンロード"
+            ],
+            "Once weekly": [
+                "週1回"
+            ],
+            "MaxMind account ID must contain digits only.": [
+                "MaxMind account IDは数字だけで入力してください。"
+            ],
+            "MaxMind license key format is invalid.": [
+                "MaxMind license keyの形式が正しくありません。"
+            ],
+            "Account ID and license key are required for automatic updates.": [
+                "自動更新にはaccount IDとlicense keyが必要です。"
+            ],
+            "The MaxMind license key could not be encrypted.": [
+                "MaxMind license keyを暗号化できませんでした。"
+            ],
+            "Unknown GeoLite2 database selection.": [
+                "選択されたGeoLite2データベースを認識できません。"
+            ],
+            "Valid MaxMind credentials are required.": [
+                "有効なMaxMind資格情報が必要です。"
+            ],
+            "MaxMind credentials are missing or invalid.": [
+                "MaxMind資格情報がないか、正しくありません。"
+            ],
+            "The GeoLite2 database path is not configured.": [
+                "GeoLite2データベースのパスが設定されていません。"
+            ],
+            "The configured GeoLite2 directory is not writable.": [
+                "設定されたGeoLite2ディレクトリへ書き込めません。"
+            ],
+            "Could not create a temporary update directory.": [
+                "更新用の一時ディレクトリを作成できませんでした。"
+            ],
+            "The downloaded GeoLite2 archive has an invalid size.": [
+                "ダウンロードしたGeoLite2アーカイブのサイズが正しくありません。"
+            ],
+            "The archive contains the wrong MaxMind database type.": [
+                "アーカイブ内のMaxMindデータベース種別が正しくありません。"
+            ],
+            "The extracted MMDB has invalid build metadata.": [
+                "展開したMMDBのbuild metadataが正しくありません。"
+            ],
+            "The extracted MMDB is corrupt or unreadable.": [
+                "展開したMMDBが破損しているか読み取れません。"
+            ],
+            "A stale GeoLite2 backup could not be removed.": [
+                "古いGeoLite2バックアップを削除できませんでした。"
+            ],
+            "The existing GeoLite2 database could not be backed up.": [
+                "既存のGeoLite2データベースをバックアップできませんでした。"
+            ],
+            "The validated GeoLite2 database could not be activated.": [
+                "検証済みGeoLite2データベースを有効化できませんでした。"
+            ],
+            "The GeoLite2 edition is not allowed.": [
+                "許可されていないGeoLite2 editionです。"
+            ],
+            "The MaxMind download request failed.": [
+                "MaxMindへのダウンロード要求に失敗しました。"
+            ],
+            "MaxMind rejected the configured credentials.": [
+                "設定された資格情報がMaxMindに拒否されました。"
+            ],
+            "MaxMind returned an unsuccessful response.": [
+                "MaxMindから正常でない応答が返されました。"
+            ],
+            "The downloaded GeoLite2 archive is invalid.": [
+                "ダウンロードしたGeoLite2アーカイブが正しくありません。"
+            ],
+            "The GeoLite2 archive contains too many files.": [
+                "GeoLite2アーカイブ内のファイル数が上限を超えています。"
+            ],
+            "The GeoLite2 archive contains an unsafe path.": [
+                "GeoLite2アーカイブに安全でないパスが含まれています。"
+            ],
+            "The GeoLite2 archive contains an unsafe link.": [
+                "GeoLite2アーカイブに安全でないリンクが含まれています。"
+            ],
+            "The GeoLite2 database exceeds the size limit.": [
+                "GeoLite2データベースがサイズ上限を超えています。"
+            ],
+            "The expected MMDB file is missing from the archive.": [
+                "アーカイブ内に想定されたMMDBファイルがありません。"
+            ],
+            "The MMDB file could not be extracted safely.": [
+                "MMDBファイルを安全に展開できませんでした。"
+            ],
+            "The extracted MMDB exceeds the size limit.": [
+                "展開したMMDBがサイズ上限を超えています。"
+            ],
+            "GeoLite2 validation failed. The existing database was kept.": [
+                "GeoLite2の検証に失敗しました。既存のデータベースは維持されました。"
             ],
             "Refresh": [
                 "更新"
@@ -1215,6 +1335,72 @@
             ],
             "Aggregating…": [
                 "集計しています…"
+            ],
+            "Current": [
+                "正常"
+            ],
+            "Stale": [
+                "古い"
+            ],
+            "Missing": [
+                "なし"
+            ],
+            "Unreadable": [
+                "読み取り不可"
+            ],
+            "Wrong type": [
+                "種別違い"
+            ],
+            "Corrupt": [
+                "破損"
+            ],
+            "Automatic updates": [
+                "自動更新"
+            ],
+            "Credentials": [
+                "資格情報"
+            ],
+            "Configured": [
+                "設定済み"
+            ],
+            "Not configured": [
+                "未設定"
+            ],
+            "Next retry": [
+                "次回再試行"
+            ],
+            "Update lock": [
+                "更新ロック"
+            ],
+            "Active": [
+                "有効"
+            ],
+            "Idle": [
+                "待機中"
+            ],
+            "Health": [
+                "健全性"
+            ],
+            "File": [
+                "ファイル"
+            ],
+            "Build date": [
+                "ビルド日時"
+            ],
+            "Size": [
+                "サイズ"
+            ],
+            "Last successful update": [
+                "最終更新成功"
+            ],
+            "Last attempt": [
+                "最終試行"
+            ],
+            "GeoLite2 update settings saved.": [
+                "GeoLite2更新設定を保存しました。"
+            ],
+            "Updating GeoLite2 databases…": [
+                "GeoLite2データベースを更新しています…"
             ],
             "Never": [
                 "受信なし"

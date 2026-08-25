@@ -220,6 +220,10 @@ final class TYA_Installer
         }
         add_option('tya_city_db', $geoDir . '/GeoLite2-City.mmdb', '', false);
         add_option('tya_asn_db', $geoDir . '/GeoLite2-ASN.mmdb', '', false);
+        add_option('tya_maxmind_account_id', '', '', false);
+        add_option('tya_maxmind_license_key', '', '', false);
+        add_option('tya_geolite_auto_update', 0, '', false);
+        add_option('tya_geolite_state', [], '', false);
 
         if (!wp_next_scheduled('tya_daily_cleanup')) {
             wp_schedule_event(time() + HOUR_IN_SECONDS, 'daily', 'tya_daily_cleanup');
@@ -253,6 +257,10 @@ final class TYA_Installer
         $continuation = wp_next_scheduled('tya_cleanup_continue');
         if ($continuation) wp_unschedule_event($continuation, 'tya_cleanup_continue');
         foreach (['tya_daily_aggregation', 'tya_aggregation_continue'] as $hook) {
+            $timestamp = wp_next_scheduled($hook);
+            if ($timestamp) wp_unschedule_event($timestamp, $hook);
+        }
+        foreach (['tya_geolite_weekly_update', 'tya_geolite_retry'] as $hook) {
             $timestamp = wp_next_scheduled($hook);
             if ($timestamp) wp_unschedule_event($timestamp, $hook);
         }

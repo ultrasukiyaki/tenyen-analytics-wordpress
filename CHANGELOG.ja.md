@@ -2,6 +2,16 @@
 
 # 変更履歴
 
+## 0.8.0 - 2026-08-25
+
+### 追加
+- 固定されたMaxMind HTTPS download endpoint、暗号化した資格情報、独立した状態、手動の即時更新、重複実行lock、上限付きretry backoffを使う任意の週次GeoLite2 City／ASN自動更新を追加しました。
+- DBごとにmissing、unreadable、stale、corrupt、wrong typeを判定し、安全なfilename、build date、size、最終試行、最終成功、失敗、次回予定を表示するhealth checkを追加しました。
+
+### セキュリティと互換性
+- WordPress HTTP APIとBasic Authenticationでdownloadします。archive／展開fileのsizeを制限し、path traversalとlinkを拒否し、想定MMDB typeを検証し、動作中DBをbackupしてから検証済みfileだけをatomicに有効化します。
+- Cityの失敗はASNを、ASNの失敗はCityを無効化しません。どの失敗でも既存の有効DBを維持し、手動pathを引き続き利用でき、release packageからMMDBを除外し、schema／index versionは0.7.1のままです。
+
 ## 0.7.1 - 2026-08-25
 
 ### 追加

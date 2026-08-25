@@ -13,7 +13,7 @@ Tenyen Analytics is a self-hosted WordPress analytics plugin for pageviews, esti
 - Pageviews, estimated unique visitors, sessions, duration, scroll depth, external clicks, and downloads
 - Human/Bot filters and locally rendered charts
 - Encrypted raw IP storage and HMAC-based exact-match IP search
-- Local GeoLite2 City and ASN lookup with an optional official MaxMind reader
+- Local GeoLite2 City and ASN lookup, health checks, and safe optional automatic updates
 - Asynchronous access history and a compact WordPress Dashboard widget
 - Notable-organization categories while preserving MaxMind organization names verbatim
 - Administrator aliases, plain-text notes, reusable tags, organization watchlists, and private saved views
@@ -32,7 +32,9 @@ Upload the release ZIP in **Plugins → Add New → Upload Plugin**, or copy the
 
 ## GeoLite2 setup
 
-GeoLite2 MMDB files are not included. The site administrator must obtain `GeoLite2-City.mmdb` and `GeoLite2-ASN.mmdb` under [MaxMind's terms](https://www.maxmind.com/) and place them in `wp-content/uploads/tenyen-analytics/`, or configure their paths in the plugin. Basic collection works without them.
+GeoLite2 MMDB files are not included. The site administrator must obtain them under [MaxMind's terms](https://www.maxmind.com/). Manual maintenance remains supported: place `GeoLite2-City.mmdb` and `GeoLite2-ASN.mmdb` in `wp-content/uploads/tenyen-analytics/`, or configure their paths in the plugin. Basic collection works without them.
+
+Optional automatic maintenance is configured under **Tenyen Analytics → System** with a numeric MaxMind account ID and license key. The license key is encrypted at rest with a WordPress-Salt-derived key, masked in the interface, omitted from status responses, and sent only to MaxMind through Basic Authentication over HTTPS. City and ASN are downloaded, validated, activated, and reported independently. The weekly job uses a lock and bounded retry backoff. A failed download, unsafe archive, missing or wrong MMDB type, corrupt database, or failed replacement leaves the currently working database in place. Changing WordPress salts makes the saved license key unusable; enter it again.
 
 ## Dashboard and reports
 
@@ -44,7 +46,7 @@ Raw IP addresses are stored using reversible encryption; HMAC values support exa
 
 ## Updating
 
-Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.7.1 upgrades the schema from 0.6.3 by adding two aggregate tables. Existing event rows, annotations, tags, watchlists, saved views, exclusions, settings, GeoLite files, and keys are preserved.
+Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.8.0 does not change the 0.7.1 schema or indexes. Existing event rows, aggregates, annotations, tags, watchlists, saved views, exclusions, settings, manually maintained GeoLite2 files, and keys are preserved. Automatic updates are disabled until an administrator explicitly configures credentials and enables them.
 
 ## Export, retention, and cleanup
 
@@ -100,7 +102,7 @@ Engaged time uses the maximum cumulative engagement duration for each session an
 
 ## Troubleshooting
 
-Use **Tenyen Analytics → System** to check collection endpoints and GeoLite2 status. If location or ASN fields are empty, verify that both MMDB paths are readable. If no events appear, check page caching/security rules and the browser network response from the collection endpoint.
+Use **Tenyen Analytics → System** to check collection endpoints and the independent City/ASN health, build date, safe filename, size, last attempt, last success, next weekly run, retry, and failure status. If an automatic update fails, verify the MaxMind account permissions, credentials, configured directory permissions, and outbound HTTPS access; the previous valid MMDB remains active. If location or ASN fields are empty in manual mode, verify both MMDB paths and read permissions. If no events appear, check page caching/security rules and the browser network response from the collection endpoint.
 
 ## Development
 

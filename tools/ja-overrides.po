@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tenyen Analytics for WordPress 0.7.1\n"
+"Project-Id-Version: Tenyen Analytics for WordPress 0.8.0\n"
 "PO-Revision-Date: 2026-07-23 00:00+0900\n"
 "Last-Translator: 10yendama.com\n"
 "Language-Team: Japanese\n"
@@ -1331,3 +1331,195 @@ msgstr "削除済み合計"
 
 msgid "Remaining"
 msgstr "残件数"
+
+msgid "GeoLite2 database maintenance"
+msgstr "GeoLite2データベース管理"
+
+msgid "Automatic updates use MaxMind Basic Authentication over HTTPS. The license key is encrypted at rest and never returned to the browser."
+msgstr "自動更新はHTTPS経由のMaxMind Basic Authenticationを使用します。license keyは暗号化して保存し、ブラウザーへ返しません。"
+
+msgid "MaxMind account ID"
+msgstr "MaxMind account ID"
+
+msgid "MaxMind license key"
+msgstr "MaxMind license key"
+
+msgid "Enable weekly automatic updates"
+msgstr "週次自動更新を有効化"
+
+msgid "Remove saved license key"
+msgstr "保存済みlicense keyを削除"
+
+msgid "Save update settings"
+msgstr "更新設定を保存"
+
+msgid "Database"
+msgstr "データベース"
+
+msgid "City and ASN"
+msgstr "CityとASN"
+
+msgid "Update now"
+msgstr "今すぐ更新"
+
+msgid "Once weekly"
+msgstr "週1回"
+
+msgid "MaxMind account ID must contain digits only."
+msgstr "MaxMind account IDは数字だけで入力してください。"
+
+msgid "MaxMind license key format is invalid."
+msgstr "MaxMind license keyの形式が正しくありません。"
+
+msgid "The MaxMind license key could not be encrypted."
+msgstr "MaxMind license keyを暗号化できませんでした。"
+
+msgid "Account ID and license key are required for automatic updates."
+msgstr "自動更新にはaccount IDとlicense keyが必要です。"
+
+msgid "Unknown GeoLite2 database selection."
+msgstr "選択されたGeoLite2データベースを認識できません。"
+
+msgid "Valid MaxMind credentials are required."
+msgstr "有効なMaxMind資格情報が必要です。"
+
+msgid "MaxMind credentials are missing or invalid."
+msgstr "MaxMind資格情報がないか、正しくありません。"
+
+msgid "The configured GeoLite2 directory is not writable."
+msgstr "設定されたGeoLite2ディレクトリへ書き込めません。"
+
+msgid "The GeoLite2 database path is not configured."
+msgstr "GeoLite2データベースのパスが設定されていません。"
+
+msgid "Could not create a temporary update directory."
+msgstr "更新用の一時ディレクトリを作成できませんでした。"
+
+msgid "The downloaded GeoLite2 archive has an invalid size."
+msgstr "ダウンロードしたGeoLite2アーカイブのサイズが正しくありません。"
+
+msgid "The archive contains the wrong MaxMind database type."
+msgstr "アーカイブ内のMaxMindデータベース種別が正しくありません。"
+
+msgid "The extracted MMDB is corrupt or unreadable."
+msgstr "展開したMMDBが破損しているか読み取れません。"
+
+msgid "The extracted MMDB has invalid build metadata."
+msgstr "展開したMMDBのbuild metadataが正しくありません。"
+
+msgid "A stale GeoLite2 backup could not be removed."
+msgstr "古いGeoLite2バックアップを削除できませんでした。"
+
+msgid "The existing GeoLite2 database could not be backed up."
+msgstr "既存のGeoLite2データベースをバックアップできませんでした。"
+
+msgid "The validated GeoLite2 database could not be activated."
+msgstr "検証済みGeoLite2データベースを有効化できませんでした。"
+
+msgid "The GeoLite2 edition is not allowed."
+msgstr "許可されていないGeoLite2 editionです。"
+
+msgid "The MaxMind download request failed."
+msgstr "MaxMindへのダウンロード要求に失敗しました。"
+
+msgid "MaxMind rejected the configured credentials."
+msgstr "設定された資格情報がMaxMindに拒否されました。"
+
+msgid "MaxMind returned an unsuccessful response."
+msgstr "MaxMindから正常でない応答が返されました。"
+
+msgid "The downloaded GeoLite2 archive is invalid."
+msgstr "ダウンロードしたGeoLite2アーカイブが正しくありません。"
+
+msgid "The GeoLite2 archive contains too many files."
+msgstr "GeoLite2アーカイブ内のファイル数が上限を超えています。"
+
+msgid "The GeoLite2 archive contains an unsafe path."
+msgstr "GeoLite2アーカイブに安全でないパスが含まれています。"
+
+msgid "The GeoLite2 archive contains an unsafe link."
+msgstr "GeoLite2アーカイブに安全でないリンクが含まれています。"
+
+msgid "The GeoLite2 database exceeds the size limit."
+msgstr "GeoLite2データベースがサイズ上限を超えています。"
+
+msgid "The expected MMDB file is missing from the archive."
+msgstr "アーカイブ内に想定されたMMDBファイルがありません。"
+
+msgid "The MMDB file could not be extracted safely."
+msgstr "MMDBファイルを安全に展開できませんでした。"
+
+msgid "The extracted MMDB exceeds the size limit."
+msgstr "展開したMMDBがサイズ上限を超えています。"
+
+msgid "GeoLite2 validation failed. The existing database was kept."
+msgstr "GeoLite2の検証に失敗しました。既存のデータベースは維持されました。"
+
+msgid "Automatic updates"
+msgstr "自動更新"
+
+msgid "Credentials"
+msgstr "資格情報"
+
+msgid "Configured"
+msgstr "設定済み"
+
+msgid "Not configured"
+msgstr "未設定"
+
+msgid "Next retry"
+msgstr "次回再試行"
+
+msgid "Update lock"
+msgstr "更新ロック"
+
+msgid "Active"
+msgstr "有効"
+
+msgid "Idle"
+msgstr "待機中"
+
+msgid "Health"
+msgstr "健全性"
+
+msgid "File"
+msgstr "ファイル"
+
+msgid "Build date"
+msgstr "ビルド日時"
+
+msgid "Size"
+msgstr "サイズ"
+
+msgid "Last successful update"
+msgstr "最終更新成功"
+
+msgid "Last attempt"
+msgstr "最終試行"
+
+msgid "GeoLite2 update settings saved."
+msgstr "GeoLite2更新設定を保存しました。"
+
+msgid "Updating GeoLite2 databases…"
+msgstr "GeoLite2データベースを更新しています…"
+
+msgid "GeoLite2 update attempt finished. Review each database status."
+msgstr "GeoLite2の更新処理が完了しました。各データベースの状態を確認してください。"
+
+msgid "Current"
+msgstr "正常"
+
+msgid "Stale"
+msgstr "古い"
+
+msgid "Missing"
+msgstr "なし"
+
+msgid "Unreadable"
+msgstr "読み取り不可"
+
+msgid "Wrong type"
+msgstr "種別違い"
+
+msgid "Corrupt"
+msgstr "破損"
