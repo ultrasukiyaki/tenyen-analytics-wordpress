@@ -60,8 +60,8 @@ class WP_REST_Response
 require dirname(__DIR__) . '/tenyen-analytics.php';
 
 $plugin = TYA_Plugin::instance();
-if (TYA_VERSION !== '0.8.0' || TYA_Installer::SCHEMA_VERSION !== '0.7.1') {
-    throw new RuntimeException('v0.8.0 application version or retained aggregate schema version is incorrect.');
+if (TYA_VERSION !== '0.8.1' || TYA_Installer::SCHEMA_VERSION !== '0.7.1') {
+    throw new RuntimeException('v0.8.1 application version or retained aggregate schema version is incorrect.');
 }
 $sessionAdmin = new TYA_Session_Admin();
 $sessionHtmlMethod = new ReflectionMethod($sessionAdmin, 'sessionHtml');

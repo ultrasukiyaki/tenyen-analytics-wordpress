@@ -6,7 +6,7 @@ define('ABSPATH', __DIR__ . '/wordpress/');
 define('DAY_IN_SECONDS', 86400);
 define('HOUR_IN_SECONDS', 3600);
 define('MINUTE_IN_SECONDS', 60);
-define('TYA_VERSION', '0.8.0');
+define('TYA_VERSION', '0.8.1');
 define('AUTH_KEY', 'test-auth-key-that-is-not-a-real-secret');
 define('SECURE_AUTH_SALT', 'test-secure-salt-that-is-not-a-real-secret');
 
@@ -91,6 +91,15 @@ $updater = new TYA_GeoLite_Updater($download, $extract, $inspect);
 $updater->boot();
 $updater->registerRoutes();
 assertGeo(TYA_GeoLite_Updater::cronSchedules([])['tya_weekly']['interval'] === 7 * DAY_IN_SECONDS, 'GeoLite2 automatic update schedule is not conservative and weekly.');
+$downloadError = new ReflectionMethod(TYA_GeoLite_Updater::class, 'downloadError');
+assertGeo(str_contains($downloadError->invoke($updater, 401), 'account ID or license key'), 'A MaxMind authentication failure was not identified correctly.');
+assertGeo(str_contains($downloadError->invoke($updater, 403), 'not permitted'), 'A MaxMind product-permission failure was incorrectly reported as invalid credentials.');
+assertGeo(str_contains($downloadError->invoke($updater, 429), 'rate-limited'), 'A MaxMind rate limit was not identified correctly.');
+assertGeo(str_contains($downloadError->invoke($updater, 404), '404'), 'An unexpected MaxMind HTTP status was hidden from diagnostics.');
+$downloadRedirect = new ReflectionMethod(TYA_GeoLite_Updater::class, 'validDownloadRedirect');
+assertGeo($downloadRedirect->invoke($updater, 'https://mm-prod-geoip-databases.a2649acb697e2c09b632799562c076f2.r2.cloudflarestorage.com/file?signature=test'), 'The documented MaxMind R2 download host was rejected.');
+assertGeo(!$downloadRedirect->invoke($updater, 'https://example.com/file?signature=test'), 'An untrusted download redirect host was accepted.');
+assertGeo(!$downloadRedirect->invoke($updater, 'http://mm-prod-geoip-databases.a2649acb697e2c09b632799562c076f2.r2.cloudflarestorage.com/file'), 'A non-HTTPS download redirect was accepted.');
 assertGeo($updater->status()['databases']['city']['health'] === 'missing' && $updater->status()['databases']['asn']['health'] === 'missing', 'Missing database health was not detected independently.');
 assertGeo(isset($GLOBALS['geo_actions'][TYA_GeoLite_Updater::CRON_HOOK], $GLOBALS['geo_actions'][TYA_GeoLite_Updater::RETRY_HOOK]), 'GeoLite2 Cron hooks were not registered.');
 foreach (['/admin/geolite/status', '/admin/geolite/settings', '/admin/geolite/update'] as $route) {

@@ -2,6 +2,17 @@ English | [日本語](CHANGELOG.ja.md)
 
 # Changelog
 
+## 0.8.1 - 2026-08-25
+
+### Fixed
+- Fixed GeoLite2 City and ASN downloads after MaxMind redirects authenticated requests to signed Cloudflare R2 artifact URLs. The plugin now follows the documented HTTPS host explicitly without forwarding the Basic Authentication header to object storage.
+- Split MaxMind failures into invalid credentials, missing product permission, rate limiting, and safe numeric HTTP status diagnostics for other responses.
+- Fixed the OpenSSL credential-encryption fallback using an undefined variable.
+
+### Security and compatibility
+- Redirected downloads are restricted to the documented MaxMind R2 hostname over HTTPS, with no embedded credentials or non-standard port. Archive, MMDB validation, atomic activation, and failure rollback remain unchanged.
+- No schema or index change. Existing analytics, settings, encrypted credentials, manually maintained databases, and valid automatically downloaded databases are preserved.
+
 ## 0.8.0 - 2026-08-25
 
 ### Added

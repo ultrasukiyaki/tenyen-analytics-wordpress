@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-08-25 02:21+0000",
+    "translation-revision-date": "2026-08-25 03:12+0000",
     "generator": "tools\/make-json-translations.php",
     "source": "assets\/dashboard-widget.js",
     "domain": "messages",
@@ -952,11 +952,14 @@
             "The MaxMind download request failed.": [
                 "MaxMindへのダウンロード要求に失敗しました。"
             ],
-            "MaxMind rejected the configured credentials.": [
-                "設定された資格情報がMaxMindに拒否されました。"
+            "MaxMind returned an invalid database download redirect.": [
+                "MaxMindから安全でないデータベースダウンロード転送先が返されました。"
             ],
-            "MaxMind returned an unsuccessful response.": [
-                "MaxMindから正常でない応答が返されました。"
+            "MaxMind rejected the configured account ID or license key.": [
+                "設定されたaccount IDまたはlicense keyがMaxMindに拒否されました。"
+            ],
+            "MaxMind returned HTTP status %d.": [
+                "MaxMindからHTTPステータス%dが返されました。"
             ],
             "The downloaded GeoLite2 archive is invalid.": [
                 "ダウンロードしたGeoLite2アーカイブが正しくありません。"

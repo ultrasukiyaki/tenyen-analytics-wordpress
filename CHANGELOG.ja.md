@@ -2,6 +2,17 @@
 
 # 変更履歴
 
+## 0.8.1 - 2026-08-25
+
+### 修正
+- MaxMindが認証済みrequestを署名付きCloudflare R2 artifact URLへ転送した後、GeoLite2 City／ASNをdownloadできない問題を修正しました。documented HTTPS hostへ明示的に追従し、object storageにはBasic Authentication headerを転送しません。
+- MaxMindの失敗を、資格情報不正、製品権限不足、rate limit、その他の安全なHTTP status番号へ分けて表示します。
+- OpenSSLによる資格情報暗号化fallbackで未定義変数を使用していた問題を修正しました。
+
+### セキュリティと互換性
+- 転送先downloadはHTTPS上のdocumented MaxMind R2 hostnameに限定し、埋め込み資格情報と非標準portを拒否します。archive／MMDB検証、atomicな有効化、失敗時rollbackは従来どおりです。
+- schema／index変更はありません。既存の解析、設定、暗号化済み資格情報、手動管理DB、正常な自動取得済みDBを維持します。
+
 ## 0.8.0 - 2026-08-25
 
 ### 追加

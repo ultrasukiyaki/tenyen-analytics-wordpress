@@ -17,7 +17,7 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Plugin
 {
-    public const UI_BUILD = '0.8.0-geolite-health';
+    public const UI_BUILD = '0.8.1-geolite-hotfix';
     private static ?self $instance = null;
     private ?TYA_Session_Admin $sessionAdmin = null;
     private ?TYA_Metadata $metadata = null;

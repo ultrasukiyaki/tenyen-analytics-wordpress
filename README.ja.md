@@ -46,7 +46,7 @@ Tenyen Analyticsメニューには、ダッシュボード、リアルタイム�
 
 ## 更新
 
-WordPressをバックアップしてから、新しいプラグインをアップロードまたは上書きしてください。uploads内のGeoLite2ファイルは保持してください。v0.8.0はv0.7.1のschemaとindexを変更しません。既存event row、aggregate、注釈、tag、watchlist、保存view、除外、設定、手動管理のGeoLite2 file、keyは維持します。管理者が資格情報を設定して明示的に有効化するまで自動更新は無効です。
+WordPressをバックアップしてから、新しいプラグインをアップロードまたは上書きしてください。uploads内のGeoLite2ファイルは保持してください。v0.8.1はv0.7.1のschemaとindexを変更しません。既存event row、aggregate、注釈、tag、watchlist、保存view、除外、設定、手動管理のGeoLite2 file、keyは維持します。管理者が資格情報を設定して明示的に有効化するまで自動更新は無効です。
 
 ## エクスポート、保持、削除
 

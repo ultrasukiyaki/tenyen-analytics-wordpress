@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Tenyen Analytics for WordPress 0.8.0\n"
+"Project-Id-Version: Tenyen Analytics for WordPress 0.8.1\n"
 "Report-Msgid-Bugs-To: https://www.10yendama.com/\n"
-"POT-Creation-Date: 2026-08-25 11:21+0900\n"
+"POT-Creation-Date: 2026-08-25 12:12+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1531,52 +1531,69 @@ msgstr ""
 msgid "The GeoLite2 edition is not allowed."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:339
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:340
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:352
 msgid "The MaxMind download request failed."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:344
-msgid "MaxMind rejected the configured credentials."
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:346
+msgid "MaxMind returned an invalid database download redirect."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:345
-msgid "MaxMind returned an unsuccessful response."
-msgstr ""
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:358
-msgid "The downloaded GeoLite2 archive is invalid."
-msgstr ""
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:366
-msgid "The GeoLite2 archive contains too many files."
-msgstr ""
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:370
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:374
-msgid "The GeoLite2 archive contains an unsafe path."
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:376
+msgid "MaxMind rejected the configured account ID or license key."
 msgstr ""
 
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:377
+msgid ""
+"MaxMind accepted the credentials, but this account is not permitted to "
+"download the selected GeoLite2 database. Check GeoLite enrollment and "
+"product permissions."
+msgstr ""
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:378
+msgid "MaxMind temporarily rate-limited database downloads. Try again later."
+msgstr ""
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:380
+#, php-format
+msgid "MaxMind returned HTTP status %d."
+msgstr ""
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:395
+msgid "The downloaded GeoLite2 archive is invalid."
+msgstr ""
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:403
+msgid "The GeoLite2 archive contains too many files."
+msgstr ""
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:407
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:411
+msgid "The GeoLite2 archive contains an unsafe path."
+msgstr ""
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:414
 msgid "The GeoLite2 archive contains an unsafe link."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:381
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:418
 msgid "The GeoLite2 database exceeds the size limit."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:387
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:424
 msgid "The expected MMDB file is missing from the archive."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:394
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:431
 msgid "The MMDB file could not be extracted safely."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:401
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:438
 msgid "The extracted MMDB exceeds the size limit."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:532
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-geolite-updater.php:569
 msgid "GeoLite2 validation failed. The existing database was kept."
 msgstr ""
 

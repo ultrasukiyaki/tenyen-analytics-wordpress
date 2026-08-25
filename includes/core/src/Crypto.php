@@ -46,7 +46,7 @@ final class Crypto
             $iv = random_bytes(12);
             $tag = '';
             $cipher = openssl_encrypt(
-                $ip,
+                $plainText,
                 'aes-256-gcm',
                 $this->encryptionKey,
                 OPENSSL_RAW_DATA,
@@ -54,7 +54,7 @@ final class Crypto
                 $tag
             );
             if ($cipher === false) {
-                throw new RuntimeException('IP encryption failed.');
+                throw new RuntimeException('Encryption failed.');
             }
             return "O" . $iv . $tag . $cipher;
         }

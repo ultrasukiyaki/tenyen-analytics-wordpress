@@ -3,7 +3,7 @@ Contributors: 10yendama
 Tags: analytics, privacy, pageviews, sessions, geolocation
 Requires at least: 6.2
 Requires PHP: 8.1
-Stable tag: 0.8.0
+Stable tag: 0.8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,13 @@ No. Analytics data is preserved unless an administrator removes it manually.
 No. The built-in MMDB reader and local analytics reports work without Composer or an external analytics service.
 
 == Changelog ==
+
+= 0.8.1 =
+
+* Fixed MaxMind database downloads after redirects to signed Cloudflare R2 URLs by separating the authenticated request from the credential-free artifact request.
+* Added safe HTTP status diagnostics for authentication, permissions, rate limits, and unexpected download responses.
+* Fixed the OpenSSL credential-encryption fallback using an undefined variable.
+* Restricts artifact redirects to the documented HTTPS MaxMind R2 host and preserves existing valid databases on failure.
 
 = 0.8.0 =
 
@@ -101,6 +108,10 @@ No. The built-in MMDB reader and local analytics reports work without Composer o
 * Added a built-in MMDB reader and asynchronous access history.
 
 == Upgrade Notice ==
+
+= 0.8.1 =
+
+Fixes GeoLite2 City and ASN automatic downloads on MaxMind's signed R2 delivery path. No schema migration is required and existing settings, credentials, analytics, and valid MMDB files are preserved.
 
 = 0.8.0 =
 

@@ -326,24 +326,61 @@ final class TYA_GeoLite_Updater
             throw new TYA_GeoLite_Safe_Exception(__('The GeoLite2 edition is not allowed.', 'tenyen-analytics'));
         }
         $url = 'https://download.maxmind.com/geoip/databases/' . rawurlencode($edition) . '/download?suffix=tar.gz';
-        $response = wp_safe_remote_get($url, [
+        $request = [
             'timeout' => 60,
-            'redirection' => 3,
+            'redirection' => 0,
             'stream' => true,
             'filename' => $destination,
             'limit_response_size' => self::MAX_ARCHIVE_BYTES,
             'headers' => ['Authorization' => 'Basic ' . base64_encode($account . ':' . $license)],
             'user-agent' => 'Tenyen-Analytics/' . TYA_VERSION,
-        ]);
+        ];
+        $response = wp_safe_remote_get($url, $request);
         if (is_wp_error($response)) {
             throw new TYA_GeoLite_Safe_Exception(__('The MaxMind download request failed.', 'tenyen-analytics'));
         }
         $code = (int)wp_remote_retrieve_response_code($response);
-        if ($code !== 200) {
-            throw new TYA_GeoLite_Safe_Exception($code === 401 || $code === 403
-                ? __('MaxMind rejected the configured credentials.', 'tenyen-analytics')
-                : __('MaxMind returned an unsuccessful response.', 'tenyen-analytics'));
+        if (in_array($code, [301, 302, 303, 307, 308], true)) {
+            $redirect = (string)wp_remote_retrieve_header($response, 'location');
+            if (!$this->validDownloadRedirect($redirect)) {
+                throw new TYA_GeoLite_Safe_Exception(__('MaxMind returned an invalid database download redirect.', 'tenyen-analytics'));
+            }
+            unset($request['headers']);
+            $request['redirection'] = 2;
+            $response = wp_safe_remote_get($redirect, $request);
+            if (is_wp_error($response)) {
+                throw new TYA_GeoLite_Safe_Exception(__('The MaxMind download request failed.', 'tenyen-analytics'));
+            }
+            $code = (int)wp_remote_retrieve_response_code($response);
         }
+        if ($code !== 200) {
+            throw new TYA_GeoLite_Safe_Exception($this->downloadError($code));
+        }
+    }
+
+    private function validDownloadRedirect(string $url): bool
+    {
+        $parts = parse_url($url);
+        if (!is_array($parts) || strtolower((string)($parts['scheme'] ?? '')) !== 'https') {
+            return false;
+        }
+        if (isset($parts['user']) || isset($parts['pass']) || (isset($parts['port']) && (int)$parts['port'] !== 443)) {
+            return false;
+        }
+        return strtolower((string)($parts['host'] ?? '')) === 'mm-prod-geoip-databases.a2649acb697e2c09b632799562c076f2.r2.cloudflarestorage.com';
+    }
+
+    private function downloadError(int $code): string
+    {
+        return match ($code) {
+            401 => __('MaxMind rejected the configured account ID or license key.', 'tenyen-analytics'),
+            403 => __('MaxMind accepted the credentials, but this account is not permitted to download the selected GeoLite2 database. Check GeoLite enrollment and product permissions.', 'tenyen-analytics'),
+            429 => __('MaxMind temporarily rate-limited database downloads. Try again later.', 'tenyen-analytics'),
+            default => sprintf(
+                __('MaxMind returned HTTP status %d.', 'tenyen-analytics'),
+                $code
+            ),
+        };
     }
 
     private function extract(string $archive, string $expectedFilename, string $destination): void

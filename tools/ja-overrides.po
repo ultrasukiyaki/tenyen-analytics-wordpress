@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tenyen Analytics for WordPress 0.8.0\n"
+"Project-Id-Version: Tenyen Analytics for WordPress 0.8.1\n"
 "PO-Revision-Date: 2026-07-23 00:00+0900\n"
 "Last-Translator: 10yendama.com\n"
 "Language-Team: Japanese\n"
@@ -1422,11 +1422,20 @@ msgstr "許可されていないGeoLite2 editionです。"
 msgid "The MaxMind download request failed."
 msgstr "MaxMindへのダウンロード要求に失敗しました。"
 
-msgid "MaxMind rejected the configured credentials."
-msgstr "設定された資格情報がMaxMindに拒否されました。"
+msgid "MaxMind returned an invalid database download redirect."
+msgstr "MaxMindから安全でないデータベースダウンロード転送先が返されました。"
 
-msgid "MaxMind returned an unsuccessful response."
-msgstr "MaxMindから正常でない応答が返されました。"
+msgid "MaxMind rejected the configured account ID or license key."
+msgstr "設定されたaccount IDまたはlicense keyがMaxMindに拒否されました。"
+
+msgid "MaxMind accepted the credentials, but this account is not permitted to download the selected GeoLite2 database. Check GeoLite enrollment and product permissions."
+msgstr "MaxMindの資格情報は受理されましたが、このaccountには選択したGeoLite2データベースのダウンロード権限がありません。GeoLiteの利用登録と製品権限を確認してください。"
+
+msgid "MaxMind temporarily rate-limited database downloads. Try again later."
+msgstr "MaxMindによりデータベースのダウンロードが一時的に制限されています。時間をおいて再試行してください。"
+
+msgid "MaxMind returned HTTP status %d."
+msgstr "MaxMindからHTTPステータス%dが返されました。"
 
 msgid "The downloaded GeoLite2 archive is invalid."
 msgstr "ダウンロードしたGeoLite2アーカイブが正しくありません。"

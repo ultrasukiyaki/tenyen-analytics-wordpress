@@ -46,7 +46,7 @@ Raw IP addresses are stored using reversible encryption; HMAC values support exa
 
 ## Updating
 
-Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.8.0 does not change the 0.7.1 schema or indexes. Existing event rows, aggregates, annotations, tags, watchlists, saved views, exclusions, settings, manually maintained GeoLite2 files, and keys are preserved. Automatic updates are disabled until an administrator explicitly configures credentials and enables them.
+Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.8.1 does not change the 0.7.1 schema or indexes. Existing event rows, aggregates, annotations, tags, watchlists, saved views, exclusions, settings, manually maintained GeoLite2 files, and keys are preserved. Automatic updates are disabled until an administrator explicitly configures credentials and enables them.
 
 ## Export, retention, and cleanup
 
