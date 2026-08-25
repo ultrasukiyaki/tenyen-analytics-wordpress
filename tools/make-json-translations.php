@@ -25,7 +25,10 @@ $header = [
     ],
 ];
 
-foreach (['assets/admin-charts.js', 'assets/admin-history.js', 'assets/dashboard-widget.js'] as $relative) {
+foreach ([
+    'assets/admin-charts.js', 'assets/admin-history.js', 'assets/admin-sessions.js',
+    'assets/admin-metadata.js', 'assets/admin-exclusions.js', 'assets/dashboard-widget.js',
+] as $relative) {
     $json = [
         'translation-revision-date' => gmdate('Y-m-d H:iO'),
         'generator' => 'tools/make-json-translations.php',

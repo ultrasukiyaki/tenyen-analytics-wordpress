@@ -22,6 +22,8 @@ final class TYA_Session_Repository
     public function listSessions(array $filters): array
     {
         [$where, $params] = $this->sessionWhere($filters);
+        $excludedP = $this->exclusion('p');
+        $excluded = $this->exclusion();
         $whereSql = implode(' AND ', $where);
         $countSql = "SELECT COUNT(DISTINCT session_id) FROM {$this->table} WHERE {$whereSql}";
         $total = (int)$this->wpdb->get_var($this->prepared($countSql, $params));
@@ -32,20 +34,20 @@ final class TYA_Session_Repository
 
         $sql = "SELECT s.*,
                     (SELECT p.path FROM {$this->table} p
-                     WHERE p.session_id=s.session_id AND p.event_type='pageview'
+                     WHERE p.session_id=s.session_id AND p.event_type='pageview'{$excludedP}
                      ORDER BY p.occurred_at ASC,p.event_id ASC LIMIT 1) landing_path,
                     (SELECT p.page_title FROM {$this->table} p
-                     WHERE p.session_id=s.session_id AND p.event_type='pageview'
+                     WHERE p.session_id=s.session_id AND p.event_type='pageview'{$excludedP}
                      ORDER BY p.occurred_at ASC,p.event_id ASC LIMIT 1) landing_title,
                     (SELECT p.path FROM {$this->table} p
-                     WHERE p.session_id=s.session_id AND p.event_type='pageview'
+                     WHERE p.session_id=s.session_id AND p.event_type='pageview'{$excludedP}
                      ORDER BY p.occurred_at DESC,p.event_id DESC LIMIT 1) exit_path,
                     (SELECT p.page_title FROM {$this->table} p
-                     WHERE p.session_id=s.session_id AND p.event_type='pageview'
+                     WHERE p.session_id=s.session_id AND p.event_type='pageview'{$excludedP}
                      ORDER BY p.occurred_at DESC,p.event_id DESC LIMIT 1) exit_title,
                     (SELECT SUM(x.max_duration) FROM (
                         SELECT session_id,path,MAX(duration_ms) max_duration
-                        FROM {$this->table} WHERE event_type='engagement'
+                        FROM {$this->table} WHERE event_type='engagement'{$excluded}
                         GROUP BY session_id,path
                     ) x WHERE x.session_id=s.session_id) engaged_ms
                 FROM (
@@ -80,6 +82,7 @@ final class TYA_Session_Repository
     /** @return array<string,mixed>|null */
     public function getSession(string $sessionId): ?array
     {
+        $excluded = $this->exclusion();
         $events = $this->wpdb->get_results(
             $this->wpdb->prepare(
                 "SELECT event_id,occurred_at,event_type,visitor_id,session_id,country_code,country_name,
@@ -87,7 +90,7 @@ final class TYA_Session_Repository
                     event_name,event_meta,traffic_channel,referrer_host,utm_source,utm_medium,
                     utm_campaign,utm_content,utm_term,user_agent,browser,os,device_type,
                     duration_ms,scroll_depth,is_bot
-                 FROM {$this->table} WHERE session_id=%s AND session_id<>''
+                 FROM {$this->table} WHERE session_id=%s AND session_id<>''{$excluded}
                  ORDER BY occurred_at ASC,event_id ASC",
                 $sessionId
             ),
@@ -142,12 +145,15 @@ final class TYA_Session_Repository
     /** @return array<string,mixed>|null */
     public function getVisitor(string $visitorId): ?array
     {
+        $excluded = $this->exclusion();
+        $excludedE = $this->exclusion('e');
+        $excludedF = $this->exclusion('f');
         $summary = $this->wpdb->get_row(
             $this->wpdb->prepare(
                 "SELECT MIN(occurred_at) first_seen,MAX(occurred_at) last_seen,
                     COUNT(DISTINCT NULLIF(session_id,'')) total_sessions,
                     COUNT(CASE WHEN event_type='pageview' THEN 1 END) total_pageviews
-                 FROM {$this->table} WHERE visitor_id=%s AND visitor_id<>''",
+                 FROM {$this->table} WHERE visitor_id=%s AND visitor_id<>''{$excluded}",
                 $visitorId
             ),
             ARRAY_A
@@ -158,7 +164,7 @@ final class TYA_Session_Repository
         $recent = $this->wpdb->get_row(
             $this->wpdb->prepare(
                 "SELECT country_name,region,asn,asn_org,browser,os,device_type,is_bot
-                 FROM {$this->table} WHERE visitor_id=%s
+                 FROM {$this->table} WHERE visitor_id=%s{$excluded}
                  ORDER BY occurred_at DESC,event_id DESC LIMIT 1",
                 $visitorId
             ),
@@ -168,7 +174,7 @@ final class TYA_Session_Repository
             $this->wpdb->prepare(
                 "SELECT session_id,MIN(occurred_at) started_at,MAX(occurred_at) ended_at,
                     COUNT(CASE WHEN event_type='pageview' THEN 1 END) pageviews
-                 FROM {$this->table} WHERE visitor_id=%s AND session_id<>''
+                 FROM {$this->table} WHERE visitor_id=%s AND session_id<>''{$excluded}
                  GROUP BY session_id ORDER BY started_at DESC,session_id DESC LIMIT 100",
                 $visitorId
             ),
@@ -177,7 +183,7 @@ final class TYA_Session_Repository
         $top = $this->wpdb->get_results(
             $this->wpdb->prepare(
                 "SELECT path,MAX(page_title) page_title,COUNT(*) pageviews
-                 FROM {$this->table} WHERE visitor_id=%s AND event_type='pageview'
+                 FROM {$this->table} WHERE visitor_id=%s AND event_type='pageview'{$excluded}
                  GROUP BY path ORDER BY pageviews DESC,path ASC LIMIT 5",
                 $visitorId
             ),
@@ -186,9 +192,9 @@ final class TYA_Session_Repository
         $landings = $this->wpdb->get_results(
             $this->wpdb->prepare(
                 "SELECT e.path,MAX(e.page_title) page_title,COUNT(*) sessions FROM {$this->table} e
-                 WHERE e.visitor_id=%s AND e.session_id<>'' AND e.event_type='pageview'
+                 WHERE e.visitor_id=%s AND e.session_id<>'' AND e.event_type='pageview'{$excludedE}
                    AND e.event_id=(SELECT f.event_id FROM {$this->table} f
-                       WHERE f.session_id=e.session_id AND f.event_type='pageview'
+                       WHERE f.session_id=e.session_id AND f.event_type='pageview'{$excludedF}
                        ORDER BY f.occurred_at ASC,f.event_id ASC LIMIT 1)
                  GROUP BY e.path ORDER BY sessions DESC,e.path ASC LIMIT 5",
                 $visitorId
@@ -198,9 +204,9 @@ final class TYA_Session_Repository
         $referrers = $this->wpdb->get_results(
             $this->wpdb->prepare(
                 "SELECT COALESCE(NULLIF(referrer,''),'Direct') referrer,COUNT(*) sessions
-                 FROM {$this->table} e WHERE visitor_id=%s AND session_id<>'' AND event_type='pageview'
+                 FROM {$this->table} e WHERE visitor_id=%s AND session_id<>'' AND event_type='pageview'{$excludedE}
                    AND event_id=(SELECT f.event_id FROM {$this->table} f
-                       WHERE f.session_id=e.session_id AND f.event_type='pageview'
+                       WHERE f.session_id=e.session_id AND f.event_type='pageview'{$excludedF}
                        ORDER BY f.occurred_at ASC,f.event_id ASC LIMIT 1)
                  GROUP BY referrer ORDER BY sessions DESC,referrer ASC LIMIT 5",
                 $visitorId
@@ -211,7 +217,7 @@ final class TYA_Session_Repository
             $this->wpdb->prepare(
                 "SELECT COALESCE(SUM(x.duration_ms),0) FROM (
                     SELECT visitor_id,session_id,path,MAX(duration_ms) duration_ms
-                    FROM {$this->table} WHERE visitor_id=%s AND event_type='engagement'
+                    FROM {$this->table} WHERE visitor_id=%s AND event_type='engagement'{$excluded}
                     GROUP BY visitor_id,session_id,path
                 ) x",
                 $visitorId
@@ -231,28 +237,32 @@ final class TYA_Session_Repository
     /** @return array<int,array<string,mixed>> */
     public function contentJourneyMetrics(string $startUtc, string $endUtc, string $actor): array
     {
-        $actorSql = $actor === 'human' ? ' AND p.is_bot=0' : ($actor === 'bot' ? ' AND p.is_bot=1' : '');
-        $sessionActorSql = $actor === 'human' ? ' AND is_bot=0' : ($actor === 'bot' ? ' AND is_bot=1' : '');
+        $actorSql = ($actor === 'human' ? ' AND p.is_bot=0' : ($actor === 'bot' ? ' AND p.is_bot=1' : '')) . $this->exclusion('p');
+        $sessionActorSql = $actor === 'human' ? ' AND b.is_bot=0' : ($actor === 'bot' ? ' AND b.is_bot=1' : '');
+        $excludedF = $this->exclusion('f');
+        $excludedL = $this->exclusion('l');
+        $excludedF2 = $this->exclusion('f2');
+        $excludedB = $this->exclusion('b');
         // Bounce rate = single-PV entry sessions / entry sessions.
         // Exit rate = sessions exiting at the path / pageviews at the path.
         $sql = "SELECT p.path,MAX(p.page_title) page_title,COUNT(*) pageviews,
                     COUNT(DISTINCT p.session_id) sessions,
                     COUNT(DISTINCT CASE WHEN p.event_id=(
                         SELECT f.event_id FROM {$this->table} f
-                        WHERE f.session_id=p.session_id AND f.event_type='pageview'
+                        WHERE f.session_id=p.session_id AND f.event_type='pageview'{$excludedF}
                         ORDER BY f.occurred_at ASC,f.event_id ASC LIMIT 1
                     ) THEN p.session_id END) entries,
                     COUNT(DISTINCT CASE WHEN p.event_id=(
                         SELECT l.event_id FROM {$this->table} l
-                        WHERE l.session_id=p.session_id AND l.event_type='pageview'
+                        WHERE l.session_id=p.session_id AND l.event_type='pageview'{$excludedL}
                         ORDER BY l.occurred_at DESC,l.event_id DESC LIMIT 1
                     ) THEN p.session_id END) exits,
                     COUNT(DISTINCT CASE WHEN p.event_id=(
                         SELECT f2.event_id FROM {$this->table} f2
-                        WHERE f2.session_id=p.session_id AND f2.event_type='pageview'
+                        WHERE f2.session_id=p.session_id AND f2.event_type='pageview'{$excludedF2}
                         ORDER BY f2.occurred_at ASC,f2.event_id ASC LIMIT 1
                     ) AND 1=(SELECT COUNT(*) FROM {$this->table} b
-                        WHERE b.session_id=p.session_id AND b.event_type='pageview'{$sessionActorSql})
+                        WHERE b.session_id=p.session_id AND b.event_type='pageview'{$sessionActorSql}{$excludedB})
                     THEN p.session_id END) bounces
                 FROM {$this->table} p
                 WHERE p.event_type='pageview' AND p.session_id<>''
@@ -309,7 +319,14 @@ final class TYA_Session_Repository
             $where[] = '(session_id LIKE %s OR visitor_id LIKE %s OR path LIKE %s OR page_title LIKE %s OR referrer LIKE %s OR asn_org LIKE %s OR browser LIKE %s OR os LIKE %s OR device_type LIKE %s)';
             array_push($params, ...array_fill(0, 9, $like));
         }
+        $excluded = $this->exclusion();
+        if ($excluded !== '') $where[] = substr($excluded, 5);
         return [$where, $params];
+    }
+
+    private function exclusion(string $alias = ''): string
+    {
+        return class_exists('TYA_Plugin') ? TYA_Plugin::instance()->analysisWhere($alias) : '';
     }
 
     /** @param array<int,mixed> $params */

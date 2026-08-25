@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tenyen Analytics for WordPress 0.6.2\n"
+"Project-Id-Version: Tenyen Analytics for WordPress 0.6.3\n"
 "PO-Revision-Date: 2026-07-23 00:00+0900\n"
 "Last-Translator: 10yendama.com\n"
 "Language-Team: Japanese\n"
@@ -791,3 +791,312 @@ msgstr "%d時間%d分"
 
 msgid "Other"
 msgstr "その他"
+
+msgid "Exclusions"
+msgstr "除外"
+
+msgid "Invalid request body."
+msgstr "リクエスト本文が正しくありません。"
+
+msgid "Exclusion rule not found."
+msgstr "除外ルールが見つかりません。"
+
+msgid "The exclusion-rule limit has been reached."
+msgstr "除外ルールの上限に達しました。"
+
+msgid "Could not save the exclusion rule."
+msgstr "除外ルールを保存できませんでした。"
+
+msgid "Exclude future collection or hide preserved historical rows from analysis."
+msgstr "今後の収集を除外するか、保持した履歴行を分析から非表示にします。"
+
+msgid "Collection exclusions are prospective. Analysis exclusions hide matching history but never delete it."
+msgstr "収集除外は今後のアクセスだけが対象です。分析除外は一致する履歴を非表示にしますが、削除はしません。"
+
+msgid "Add or edit rule"
+msgstr "ルールの追加・編集"
+
+msgid "Value"
+msgstr "値"
+
+msgid "Scope / action"
+msgstr "スコープ／処理"
+
+msgid "Exclude from collection"
+msgstr "収集から除外"
+
+msgid "Exclude from analysis"
+msgstr "分析から除外"
+
+msgid "Note"
+msgstr "メモ"
+
+msgid "Save rule"
+msgstr "ルールを保存"
+
+msgid "Cancel edit"
+msgstr "編集を取消"
+
+msgid "Rules"
+msgstr "ルール"
+
+msgid "Diagnostic"
+msgstr "診断"
+
+msgid "Test representative request fields. The result identifies the first matching rule, its precedence, action, and reason."
+msgstr "代表的なリクエスト項目をテストします。最初に一致したルール、優先順位、処理、理由を表示します。"
+
+msgid "Scope"
+msgstr "スコープ"
+
+msgid "Collection"
+msgstr "収集"
+
+msgid "Analysis"
+msgstr "分析"
+
+msgid "Path"
+msgstr "パス"
+
+msgid "Country code"
+msgstr "国コード"
+
+msgid "Region"
+msgstr "地域"
+
+msgid "UTM source"
+msgstr "UTM source"
+
+msgid "UTM medium"
+msgstr "UTM medium"
+
+msgid "UTM campaign"
+msgstr "UTM campaign"
+
+msgid "Administrator"
+msgstr "管理者"
+
+msgid "Bot"
+msgstr "Bot"
+
+msgid "Run diagnostic"
+msgstr "診断を実行"
+
+msgid "Invalid diagnostic scope."
+msgstr "診断スコープが正しくありません。"
+
+msgid "Event name"
+msgstr "イベント名"
+
+msgid "Source page"
+msgstr "発生ページ"
+
+msgid "Target domain"
+msgstr "リンク先ドメイン"
+
+msgid "Invalid analytics entity."
+msgstr "解析対象が正しくありません。"
+
+msgid "Invalid saved view."
+msgstr "保存ビューが正しくありません。"
+
+msgid "Saved view not found."
+msgstr "保存ビューが見つかりません。"
+
+msgid "Annotations"
+msgstr "注釈"
+
+msgid "Watched organizations"
+msgstr "ウォッチ対象の組織"
+
+msgid "Saved views"
+msgstr "保存ビュー"
+
+msgid "Referrer domain"
+msgstr "参照元ドメイン"
+
+msgid "No exclusion rules."
+msgstr "除外ルールはありません。"
+
+msgid "Created"
+msgstr "作成日時"
+
+msgid "Updated"
+msgstr "更新日時"
+
+msgid "Actions"
+msgstr "操作"
+
+msgid "Edit"
+msgstr "編集"
+
+msgid "Delete"
+msgstr "削除"
+
+msgid "Previous"
+msgstr "前へ"
+
+msgid "Next"
+msgstr "次へ"
+
+msgid "Delete this exclusion rule? Historical data will not be deleted."
+msgstr "この除外ルールを削除しますか？過去データは削除されません。"
+
+msgid "Rule deleted."
+msgstr "ルールを削除しました。"
+
+msgid "This type is collection-only."
+msgstr "この種別は収集専用です。"
+
+msgid "Rule saved."
+msgstr "ルールを保存しました。"
+
+msgid "Action"
+msgstr "処理"
+
+msgid "Matched rule"
+msgstr "一致ルール"
+
+msgid "Precedence"
+msgstr "優先順位"
+
+msgid "Reason"
+msgstr "理由"
+
+msgid "Exact IP"
+msgstr "IP完全一致"
+
+msgid "IP CIDR"
+msgstr "IP CIDR"
+
+msgid "Exact path"
+msgstr "パス完全一致"
+
+msgid "Path prefix"
+msgstr "パス前方一致"
+
+msgid "Administrator / self"
+msgstr "管理者／自己アクセス"
+
+msgid "Bot / crawler"
+msgstr "Bot／クローラー"
+
+msgid "updated"
+msgstr "更新"
+
+msgid "Load failed"
+msgstr "読み込み失敗"
+
+msgid "Server error. Please retry."
+msgstr "サーバーエラーです。再試行してください。"
+
+msgid "Tag name"
+msgstr "タグ名"
+
+msgid "Color"
+msgstr "色"
+
+msgid "Create tag"
+msgstr "タグを作成"
+
+msgid "Usage"
+msgstr "使用数"
+
+msgid "Name"
+msgstr "名前"
+
+msgid "Report"
+msgstr "レポート"
+
+msgid "Pinned"
+msgstr "ピン留め"
+
+msgid "Default"
+msgstr "既定"
+
+msgid "Alias / original"
+msgstr "別名／元の値"
+
+msgid "Watched"
+msgstr "ウォッチ中"
+
+msgid "Delete this tag?"
+msgstr "このタグを削除しますか？"
+
+msgid "entities"
+msgstr "対象"
+
+msgid "PV: %s"
+msgstr "PV: %s"
+
+msgid "No data is available for this period."
+msgstr "この期間のデータはありません。"
+
+msgid "Failed to load history:"
+msgstr "アクセス履歴の取得に失敗しました:"
+
+msgid "Tag"
+msgstr "タグ"
+
+msgid "No tags yet."
+msgstr "タグはまだありません。"
+
+msgid "No saved views yet."
+msgstr "保存ビューはまだありません。"
+
+msgid "No watched organizations yet."
+msgstr "ウォッチ対象の組織はまだありません。"
+
+msgid "No annotations yet."
+msgstr "注釈はまだありません。"
+
+msgid "Delete this saved view?"
+msgstr "この保存ビューを削除しますか？"
+
+msgid "Unsupported rule type."
+msgstr "未対応のルール種別です。"
+
+msgid "Unsupported rule scope."
+msgstr "未対応のルールスコープです。"
+
+msgid "This rule type is collection-only."
+msgstr "このルール種別は収集専用です。"
+
+msgid "Rule value must be plain text."
+msgstr "ルール値はプレーンテキストで入力してください。"
+
+msgid "Rule value contains invalid characters."
+msgstr "ルール値に使用できない文字が含まれています。"
+
+msgid "Rule value is required."
+msgstr "ルール値は必須です。"
+
+msgid "Invalid IP address."
+msgstr "IPアドレスが正しくありません。"
+
+msgid "Invalid IPv4 or IPv6 CIDR."
+msgstr "IPv4またはIPv6 CIDRが正しくありません。"
+
+msgid "Invalid ASN."
+msgstr "ASNが正しくありません。"
+
+msgid "Country must be a two-letter code."
+msgstr "国は2文字コードで入力してください。"
+
+msgid "Unsupported device type."
+msgstr "未対応の端末種別です。"
+
+msgid "Unsupported organization category."
+msgstr "未対応の組織カテゴリーです。"
+
+msgid "Invalid referrer domain."
+msgstr "参照元ドメインが正しくありません。"
+
+msgid "Invalid path."
+msgstr "パスが正しくありません。"
+
+msgid "Rule value is too long."
+msgstr "ルール値が長すぎます。"
+
+msgid "Invalid exclusion rule."
+msgstr "除外ルールが正しくありません。"

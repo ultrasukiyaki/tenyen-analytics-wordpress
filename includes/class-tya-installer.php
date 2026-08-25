@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Installer
 {
-    public const SCHEMA_VERSION = '0.6.2';
+    public const SCHEMA_VERSION = '0.6.3';
     public static function tableName(): string
     {
         global $wpdb;
@@ -84,6 +84,7 @@ final class TYA_Installer
         $tags = self::tagsTable();
         $relations = self::entityTagsTable();
         $views = self::savedViewsTable();
+        $exclusions = self::exclusionsTable();
         dbDelta("CREATE TABLE {$annotations} (
             annotation_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
             entity_type VARCHAR(32) NOT NULL,
@@ -135,6 +136,18 @@ final class TYA_Installer
             KEY owner_report (user_id,report),
             KEY owner_pinned (user_id,pinned,is_default)
         ) {$charset};");
+        dbDelta("CREATE TABLE {$exclusions} (
+            rule_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+            rule_type VARCHAR(32) NOT NULL,
+            rule_value VARCHAR(512) NOT NULL,
+            scope VARCHAR(16) NOT NULL,
+            enabled TINYINT(1) NOT NULL DEFAULT 1,
+            note VARCHAR(500) NOT NULL DEFAULT '',
+            created_at DATETIME NOT NULL,
+            updated_at DATETIME NOT NULL,
+            PRIMARY KEY  (rule_id),
+            KEY active_scope (enabled,scope,rule_type)
+        ) {$charset};");
         update_option('tya_schema_version', self::SCHEMA_VERSION, false);
 
         if (!get_option('tya_site_token')) {
@@ -166,6 +179,7 @@ final class TYA_Installer
     public static function tagsTable(): string { global $wpdb; return $wpdb->prefix . 'tya_tags'; }
     public static function entityTagsTable(): string { global $wpdb; return $wpdb->prefix . 'tya_entity_tags'; }
     public static function savedViewsTable(): string { global $wpdb; return $wpdb->prefix . 'tya_saved_views'; }
+    public static function exclusionsTable(): string { global $wpdb; return $wpdb->prefix . 'tya_exclusion_rules'; }
 
     public static function maybeUpgrade(): void
     {

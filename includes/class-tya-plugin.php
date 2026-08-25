@@ -17,10 +17,11 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Plugin
 {
-    public const UI_BUILD = '0.6.2-knowledge';
+    public const UI_BUILD = '0.6.3-exclusions';
     private static ?self $instance = null;
     private ?TYA_Session_Admin $sessionAdmin = null;
     private ?TYA_Metadata $metadata = null;
+    private ?TYA_Exclusions $exclusions = null;
 
     public static function instance(): self
     {
@@ -142,6 +143,17 @@ final class TYA_Plugin
                 'nonce' => wp_create_nonce('wp_rest'),
             ], JSON_UNESCAPED_SLASHES) . ';', 'before');
         }
+        if ($page === 'tenyen-analytics-exclusions') {
+            wp_enqueue_script('tenyen-analytics-exclusions', TYA_URL . 'assets/admin-exclusions.js', ['wp-i18n'], TYA_VERSION, true);
+            wp_set_script_translations('tenyen-analytics-exclusions', 'tenyen-analytics', TYA_DIR . 'languages');
+            wp_add_inline_script('tenyen-analytics-exclusions', 'window.TYAExclusions=' . wp_json_encode([
+                'endpoint' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/exclusions')),
+                'diagnose' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/exclusions/diagnose')),
+                'nonce' => wp_create_nonce('wp_rest'),
+                'types' => \Tenyen\Analytics\ExclusionRuleEngine::TYPES,
+                'analysisTypes' => \Tenyen\Analytics\ExclusionRuleEngine::ANALYSIS_TYPES,
+            ], JSON_UNESCAPED_SLASHES) . ';', 'before');
+        }
     }
 
     public function enqueueTracker(): void
@@ -177,6 +189,7 @@ final class TYA_Plugin
     public function registerRoutes(): void
     {
         $this->metadata()->registerRoutes();
+        $this->exclusions()->registerRoutes();
         register_rest_route('tenyen-analytics/v1', '/collect', [
             'methods' => WP_REST_Server::CREATABLE,
             'callback' => [$this, 'collect'],
@@ -240,10 +253,6 @@ final class TYA_Plugin
             return new WP_REST_Response(['ok' => false, 'error' => 'cross_site'], 403);
         }
 
-        if ((bool)get_option('tya_exclude_admins', 1) && is_user_logged_in() && current_user_can('manage_options')) {
-            return new WP_REST_Response(['ok' => true, 'excluded' => true], 202);
-        }
-
         $ip = IpResolver::resolve($_SERVER, (string)get_option('tya_proxy_header', ''));
         $crypto = $this->crypto();
         $ipHash = $ip !== '' ? $crypto->hashIp($ip) : null;
@@ -264,15 +273,31 @@ final class TYA_Plugin
         }
         $ua = substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 1024);
         $isBot = BotDetector::isBot($ua);
-        if ($isBot && !(bool)get_option('tya_log_bots', 1)) {
-            return new WP_REST_Response(['ok' => true, 'bot_excluded' => true], 202);
-        }
-
         $geo = (new GeoIp(
             (string)get_option('tya_city_db', ''),
             (string)get_option('tya_asn_db', '')
         ))->lookup($ip);
         $agent = UserAgentParser::parse($ua);
+        $classification = OrganizationClassifierV040::classify(
+            $geo['asn'] !== null ? (int)$geo['asn'] : null,
+            (string)$geo['asn_org'],
+            $isBot,
+            $this->organizationOverrides()
+        );
+        $diagnostic = $this->exclusions()->collectionDiagnostic([
+            'ip' => $ip, 'path' => $payload['path'],
+            'administrator' => is_user_logged_in() && current_user_can('manage_options'),
+            'bot' => $isBot, 'country' => $geo['country_code'], 'region' => $geo['region'],
+            'asn' => $geo['asn'], 'organization' => $geo['asn_org'], 'category' => $classification['category'],
+            'browser' => $agent['browser'], 'os' => $agent['os'], 'device' => $agent['device'],
+            'referrer_domain' => $attribution['referrer_host'], 'utm_source' => $attribution['utm_source'],
+            'utm_medium' => $attribution['utm_medium'], 'utm_campaign' => $attribution['utm_campaign'],
+        ]);
+        if ($diagnostic['excluded']) {
+            $response = new WP_REST_Response(['ok' => true, 'excluded' => true], 202);
+            $response->header('Cache-Control', 'no-store, private');
+            return $response;
+        }
 
         global $wpdb;
         $inserted = $wpdb->insert(
@@ -392,6 +417,7 @@ final class TYA_Plugin
             ['tenyen-analytics-referrers', __('Referrers', 'tenyen-analytics'), 'renderReferrers'],
             ['tenyen-analytics-organizations', __('ASN / Organizations', 'tenyen-analytics'), 'renderOrganizations'],
             ['tenyen-analytics-knowledge', __('Knowledge', 'tenyen-analytics'), 'renderKnowledge'],
+            ['tenyen-analytics-exclusions', __('Exclusions', 'tenyen-analytics'), 'renderExclusions'],
             ['tenyen-analytics-audience', __('Audience', 'tenyen-analytics'), 'renderAudience'],
             ['tenyen-analytics-engagement', __('Engagement', 'tenyen-analytics'), 'renderEngagement'],
             ['tenyen-analytics-system', __('System', 'tenyen-analytics'), 'renderSystem'],
@@ -417,6 +443,11 @@ final class TYA_Plugin
     public function renderKnowledge(): void
     {
         $this->metadata()->renderManager();
+    }
+
+    public function renderExclusions(): void
+    {
+        $this->exclusions()->renderManager();
     }
 
     public function registerSettings(): void
@@ -461,6 +492,7 @@ final class TYA_Plugin
         $table = TYA_Installer::tableName();
         $analysis = $this->analysisFilters();
         $actorSql = $this->actorSql($analysis['actor']);
+        $analysisOnly = $this->analysisWhere('');
         $summary = $wpdb->get_row($wpdb->prepare(
             "SELECT SUM(event_type='pageview') pageviews,
                     COUNT(DISTINCT CASE WHEN event_type='pageview' THEN NULLIF(visitor_id,'') END) visitors,
@@ -471,7 +503,7 @@ final class TYA_Plugin
             $analysis['start_utc'], $analysis['end_utc']
         ), ARRAY_A) ?: [];
         $summary['bot_events'] = (int)$wpdb->get_var($wpdb->prepare(
-            "SELECT COUNT(*) FROM {$table} WHERE occurred_at>=%s AND occurred_at<%s AND is_bot=1",
+            "SELECT COUNT(*) FROM {$table} WHERE occurred_at>=%s AND occurred_at<%s AND is_bot=1{$analysisOnly}",
             $analysis['start_utc'], $analysis['end_utc']
         ));
 
@@ -494,8 +526,8 @@ final class TYA_Plugin
              GROUP BY path ORDER BY pageviews DESC,sessions DESC LIMIT 5",
             $analysis['start_utc'], $analysis['end_utc']
         ), ARRAY_A) ?: [];
-        $recent = $wpdb->get_results("SELECT * FROM {$table} WHERE event_type='pageview' AND is_bot=0 ORDER BY event_id DESC LIMIT 8", ARRAY_A) ?: [];
-        $candidates = $wpdb->get_results("SELECT * FROM {$table} WHERE event_type='pageview' AND is_bot=0 AND asn_org<>'' ORDER BY event_id DESC LIMIT 120", ARRAY_A) ?: [];
+        $recent = $wpdb->get_results("SELECT * FROM {$table} WHERE event_type='pageview' AND is_bot=0{$analysisOnly} ORDER BY event_id DESC LIMIT 8", ARRAY_A) ?: [];
+        $candidates = $wpdb->get_results("SELECT * FROM {$table} WHERE event_type='pageview' AND is_bot=0 AND asn_org<>''{$analysisOnly} ORDER BY event_id DESC LIMIT 120", ARRAY_A) ?: [];
         $notable = [];
         foreach ($candidates as $row) {
             $classification = OrganizationClassifierV040::classify($row['asn'] !== null ? (int)$row['asn'] : null, (string)$row['asn_org'], false, $this->organizationOverrides());
@@ -553,9 +585,9 @@ final class TYA_Plugin
         $since = gmdate('Y-m-d H:i:s', time() - $minutes * MINUTE_IN_SECONDS);
         $rows = $wpdb->get_results($wpdb->prepare(
             "SELECT p.*,
-                COALESCE((SELECT MAX(e.duration_ms) FROM {$table} e WHERE e.session_id=p.session_id AND e.path=p.path AND e.event_type='engagement' AND e.occurred_at>=p.occurred_at),0) live_duration,
-                GREATEST(p.scroll_depth,COALESCE((SELECT MAX(e2.scroll_depth) FROM {$table} e2 WHERE e2.session_id=p.session_id AND e2.path=p.path AND e2.occurred_at>=p.occurred_at),0)) live_scroll
-             FROM {$table} p WHERE p.event_type='pageview' AND p.occurred_at>=%s ORDER BY p.event_id DESC LIMIT 100",
+                COALESCE((SELECT MAX(e.duration_ms) FROM {$table} e WHERE e.session_id=p.session_id AND e.path=p.path AND e.event_type='engagement' AND e.occurred_at>=p.occurred_at" . $this->analysisWhere('e') . "),0) live_duration,
+                GREATEST(p.scroll_depth,COALESCE((SELECT MAX(e2.scroll_depth) FROM {$table} e2 WHERE e2.session_id=p.session_id AND e2.path=p.path AND e2.occurred_at>=p.occurred_at" . $this->analysisWhere('e2') . "),0)) live_scroll
+             FROM {$table} p WHERE p.event_type='pageview' AND p.occurred_at>=%s" . $this->analysisWhere('p') . " ORDER BY p.event_id DESC LIMIT 100",
             $since
         ), ARRAY_A) ?: [];
         $this->pageStart(__('Realtime', 'tenyen-analytics'), __('This screen refreshes every 30 seconds with recent pageviews.', 'tenyen-analytics'));
@@ -587,7 +619,7 @@ final class TYA_Plugin
     {
         $this->ensureAdmin();
         global $wpdb;
-        $table=TYA_Installer::tableName();$analysis=$this->analysisFilters();$actorSql=$this->actorSql($analysis['actor']);
+        $table=TYA_Installer::tableName();$analysis=$this->analysisFilters();
         $rows=(new TYA_Session_Repository($wpdb,$table))->contentJourneyMetrics($analysis['start_utc'],$analysis['end_utc'],$analysis['actor']);
         $this->pageStart(__('Content', 'tenyen-analytics'), __('View page performance for posts and pages.', 'tenyen-analytics'));
         echo '<section class="tya-panel"><h2>'.esc_html__('Top content', 'tenyen-analytics').'</h2>';
@@ -679,8 +711,8 @@ final class TYA_Plugin
     public function renderEngagement(): void
     {
         $this->ensureAdmin();
-        global $wpdb;$table=TYA_Installer::tableName();$analysis=$this->analysisFilters();$actorSql=$this->actorSql($analysis['actor']);
-        $rows=$wpdb->get_results($wpdb->prepare("SELECT p.path,MAX(p.page_title) page_title,COUNT(*) pageviews,COALESCE(AVG((SELECT MAX(e.duration_ms) FROM {$table} e WHERE e.session_id=p.session_id AND e.path=p.path AND e.event_type='engagement' AND e.occurred_at>=p.occurred_at)),0) avg_duration,COALESCE(AVG((SELECT MAX(e2.scroll_depth) FROM {$table} e2 WHERE e2.session_id=p.session_id AND e2.path=p.path AND e2.event_type='engagement' AND e2.occurred_at>=p.occurred_at)),0) avg_scroll FROM {$table} p WHERE p.event_type='pageview' AND p.occurred_at>=%s AND p.occurred_at<%s".str_replace('is_bot','p.is_bot',$actorSql)." GROUP BY p.path ORDER BY pageviews DESC LIMIT 100",$analysis['start_utc'],$analysis['end_utc']),ARRAY_A)?:[];
+        global $wpdb;$table=TYA_Installer::tableName();$analysis=$this->analysisFilters();$actorSql=$this->actorSql($analysis['actor'], 'p');
+        $rows=$wpdb->get_results($wpdb->prepare("SELECT p.path,MAX(p.page_title) page_title,COUNT(*) pageviews,COALESCE(AVG((SELECT MAX(e.duration_ms) FROM {$table} e WHERE e.session_id=p.session_id AND e.path=p.path AND e.event_type='engagement' AND e.occurred_at>=p.occurred_at".$this->analysisWhere('e').")),0) avg_duration,COALESCE(AVG((SELECT MAX(e2.scroll_depth) FROM {$table} e2 WHERE e2.session_id=p.session_id AND e2.path=p.path AND e2.event_type='engagement' AND e2.occurred_at>=p.occurred_at".$this->analysisWhere('e2').")),0) avg_scroll FROM {$table} p WHERE p.event_type='pageview' AND p.occurred_at>=%s AND p.occurred_at<%s{$actorSql} GROUP BY p.path ORDER BY pageviews DESC LIMIT 100",$analysis['start_utc'],$analysis['end_utc']),ARRAY_A)?:[];
         $this->pageStart(__('Engagement', 'tenyen-analytics'), __('Monitor average visit time and scroll rate by page.', 'tenyen-analytics'));
         echo '<section class="tya-panel"><h2>'.esc_html__('Page engagement', 'tenyen-analytics').'</h2>';
         $this->analysisFilterForm($analysis);
@@ -737,9 +769,16 @@ final class TYA_Plugin
         if (!current_user_can('manage_options')) wp_die(__('You do not have permission.', 'tenyen-analytics'));
     }
 
-    private function actorSql(string $actor): string
+    private function actorSql(string $actor, string $alias = ''): string
     {
-        return $actor === 'human' ? ' AND is_bot=0' : ($actor === 'bot' ? ' AND is_bot=1' : '');
+        $column = $alias !== '' ? $alias . '.is_bot' : 'is_bot';
+        $actorSql = $actor === 'human' ? " AND {$column}=0" : ($actor === 'bot' ? " AND {$column}=1" : '');
+        return $actorSql . $this->analysisWhere($alias);
+    }
+
+    public function analysisWhere(string $alias = ''): string
+    {
+        return $this->exclusions()->analysisWhere($alias, $this->crypto());
     }
 
     private function pageStart(string $title, string $description): void
@@ -783,7 +822,8 @@ final class TYA_Plugin
         global $wpdb;
         $table = TYA_Installer::tableName();
 
-        $load = static function (string $column, int $limit = 60) use ($wpdb, $table): array {
+        $excluded = $this->analysisWhere('');
+        $load = static function (string $column, int $limit = 60) use ($wpdb, $table, $excluded): array {
             $allowed = ['country_name', 'browser', 'os', 'device_type'];
             if (!in_array($column, $allowed, true)) {
                 return [];
@@ -791,7 +831,7 @@ final class TYA_Plugin
             $rows = $wpdb->get_results(
                 "SELECT {$column} AS value, COUNT(*) AS hits
                  FROM {$table}
-                 WHERE {$column} <> ''
+                 WHERE {$column} <> ''{$excluded}
                  GROUP BY {$column}
                  ORDER BY hits DESC, {$column} ASC
                  LIMIT " . (int)$limit,
@@ -974,6 +1014,9 @@ final class TYA_Plugin
             }
             $where[] = '(' . implode(' OR ', $or) . ')';
         }
+
+        $analysisWhere = $this->analysisWhere('');
+        if ($analysisWhere !== '') $where[] = substr($analysisWhere, 5);
 
         $whereSql = 'WHERE ' . implode(' AND ', $where);
         $countSql = "SELECT COUNT(*) FROM {$table} {$whereSql}";
@@ -1600,26 +1643,27 @@ final class TYA_Plugin
         global $wpdb;
         [$todayStart, $todayEnd] = $this->todayUtcRange();
         $table = TYA_Installer::tableName();
+        $excluded = $this->analysisWhere('');
 
         $todaySummary = $wpdb->get_row($wpdb->prepare(
             "SELECT SUM(event_type='pageview') AS pageviews,
                     COUNT(DISTINCT CASE WHEN event_type='pageview' THEN NULLIF(visitor_id,'') END) AS visitors,
                     COUNT(DISTINCT CASE WHEN event_type='pageview' THEN NULLIF(session_id,'') END) AS sessions
-             FROM {$table} WHERE occurred_at >= %s AND occurred_at < %s",
+             FROM {$table} WHERE occurred_at >= %s AND occurred_at < %s{$excluded}",
             $todayStart,
             $todayEnd
         ), ARRAY_A) ?: [];
 
         $realtimeSessions = (int)$wpdb->get_var($wpdb->prepare(
             "SELECT COUNT(DISTINCT NULLIF(session_id,'')) FROM {$table}
-             WHERE event_type='pageview' AND is_bot=0 AND occurred_at >= %s",
+             WHERE event_type='pageview' AND is_bot=0 AND occurred_at >= %s{$excluded}",
             gmdate('Y-m-d H:i:s', time() - 30 * MINUTE_IN_SECONDS)
         ));
 
         $topPages = $wpdb->get_results($wpdb->prepare(
             "SELECT path, MAX(page_title) AS title, COUNT(*) AS pageviews
              FROM {$table}
-             WHERE event_type='pageview' AND occurred_at >= %s AND occurred_at < %s
+             WHERE event_type='pageview' AND occurred_at >= %s AND occurred_at < %s{$excluded}
              GROUP BY path ORDER BY pageviews DESC LIMIT 3",
             $todayStart,
             $todayEnd
@@ -1627,7 +1671,7 @@ final class TYA_Plugin
 
         $notableRows = $wpdb->get_results($wpdb->prepare(
             "SELECT DISTINCT asn, asn_org FROM {$table}
-             WHERE event_type='pageview' AND occurred_at >= %s AND occurred_at < %s AND asn_org <> ''
+             WHERE event_type='pageview' AND occurred_at >= %s AND occurred_at < %s AND asn_org <> ''{$excluded}
              ORDER BY occurred_at DESC LIMIT 300",
             $todayStart,
             $todayEnd
@@ -1692,5 +1736,10 @@ final class TYA_Plugin
     private function metadata(): TYA_Metadata
     {
         return $this->metadata ??= new TYA_Metadata();
+    }
+
+    private function exclusions(): TYA_Exclusions
+    {
+        return $this->exclusions ??= new TYA_Exclusions();
     }
 }

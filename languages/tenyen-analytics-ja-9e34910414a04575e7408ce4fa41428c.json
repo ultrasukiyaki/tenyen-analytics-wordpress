@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-07-29 19:52+0000",
+    "translation-revision-date": "2026-08-25 00:55+0000",
     "generator": "tools\/make-json-translations.php",
     "source": "assets\/admin-charts.js",
     "domain": "messages",
@@ -39,6 +39,9 @@
             ],
             "Knowledge": [
                 "ナレッジ"
+            ],
+            "Exclusions": [
+                "除外"
             ],
             "Audience": [
                 "利用環境"
@@ -446,13 +449,13 @@
                 "イベント"
             ],
             "Event name": [
-                "イベント種別"
+                "イベント名"
             ],
             "Source page": [
-                "人気ページ"
+                "発生ページ"
             ],
             "Target domain": [
-                "参照元ドメイン"
+                "リンク先ドメイン"
             ],
             "All countries": [
                 "すべての国"
@@ -551,7 +554,7 @@
                 "その他"
             ],
             "Invalid analytics entity.": [
-                "訪問者識別子が正しくありません。"
+                "解析対象が正しくありません。"
             ],
             "No more than 50 tags may be assigned.": [
                 "割り当てられるタグは50件までです。"
@@ -566,10 +569,10 @@
                 "同じ名前のタグがすでに存在します。"
             ],
             "Invalid saved view.": [
-                "セッション識別子が正しくありません。"
+                "保存ビューが正しくありません。"
             ],
             "Saved view not found.": [
-                "保存済みイベント"
+                "保存ビューが見つかりません。"
             ],
             "Saved view could not be saved.": [
                 "保存ビューを保存できませんでした。"
@@ -578,16 +581,16 @@
                 "ナレッジの項目"
             ],
             "Annotations": [
-                "地域"
+                "注釈"
             ],
             "Watched organizations": [
-                "注目組織"
+                "ウォッチ対象の組織"
             ],
             "Tags": [
                 "タグ"
             ],
             "Saved views": [
-                "保存済みイベント"
+                "保存ビュー"
             ],
             "The saved view contains an unsupported filter.": [
                 "保存ビューに未対応のフィルターが含まれています。"
@@ -600,6 +603,141 @@
             ],
             "Unsupported page size.": [
                 "未対応の表示件数です。"
+            ],
+            "Invalid request body.": [
+                "リクエスト本文が正しくありません。"
+            ],
+            "Exclusion rule not found.": [
+                "除外ルールが見つかりません。"
+            ],
+            "The exclusion-rule limit has been reached.": [
+                "除外ルールの上限に達しました。"
+            ],
+            "Could not save the exclusion rule.": [
+                "除外ルールを保存できませんでした。"
+            ],
+            "Invalid diagnostic scope.": [
+                "診断スコープが正しくありません。"
+            ],
+            "Add or edit rule": [
+                "ルールの追加・編集"
+            ],
+            "Value": [
+                "値"
+            ],
+            "Scope \/ action": [
+                "スコープ／処理"
+            ],
+            "Exclude from collection": [
+                "収集から除外"
+            ],
+            "Exclude from analysis": [
+                "分析から除外"
+            ],
+            "Note": [
+                "メモ"
+            ],
+            "Save rule": [
+                "ルールを保存"
+            ],
+            "Cancel edit": [
+                "編集を取消"
+            ],
+            "Rules": [
+                "ルール"
+            ],
+            "Diagnostic": [
+                "診断"
+            ],
+            "Scope": [
+                "スコープ"
+            ],
+            "Collection": [
+                "収集"
+            ],
+            "Analysis": [
+                "分析"
+            ],
+            "Path": [
+                "パス"
+            ],
+            "Country code": [
+                "国コード"
+            ],
+            "Region": [
+                "地域"
+            ],
+            "Organization category": [
+                "組織カテゴリー"
+            ],
+            "Referrer domain": [
+                "参照元ドメイン"
+            ],
+            "UTM source": [
+                "UTM source"
+            ],
+            "UTM medium": [
+                "UTM medium"
+            ],
+            "UTM campaign": [
+                "UTM campaign"
+            ],
+            "Administrator": [
+                "管理者"
+            ],
+            "Bot": [
+                "Bot"
+            ],
+            "Run diagnostic": [
+                "診断を実行"
+            ],
+            "Unsupported rule type.": [
+                "未対応のルール種別です。"
+            ],
+            "Unsupported rule scope.": [
+                "未対応のルールスコープです。"
+            ],
+            "This rule type is collection-only.": [
+                "このルール種別は収集専用です。"
+            ],
+            "Rule value must be plain text.": [
+                "ルール値はプレーンテキストで入力してください。"
+            ],
+            "Rule value contains invalid characters.": [
+                "ルール値に使用できない文字が含まれています。"
+            ],
+            "Rule value is required.": [
+                "ルール値は必須です。"
+            ],
+            "Invalid IP address.": [
+                "IPアドレスが正しくありません。"
+            ],
+            "Invalid IPv4 or IPv6 CIDR.": [
+                "IPv4またはIPv6 CIDRが正しくありません。"
+            ],
+            "Invalid ASN.": [
+                "ASNが正しくありません。"
+            ],
+            "Country must be a two-letter code.": [
+                "国は2文字コードで入力してください。"
+            ],
+            "Unsupported device type.": [
+                "未対応の端末種別です。"
+            ],
+            "Unsupported organization category.": [
+                "未対応の組織カテゴリーです。"
+            ],
+            "Invalid referrer domain.": [
+                "参照元ドメインが正しくありません。"
+            ],
+            "Invalid path.": [
+                "パスが正しくありません。"
+            ],
+            "Rule value is too long.": [
+                "ルール値が長すぎます。"
+            ],
+            "Invalid exclusion rule.": [
+                "除外ルールが正しくありません。"
             ],
             "Refresh": [
                 "更新"
@@ -673,9 +811,6 @@
             "Traffic channel": [
                 "流入チャネル"
             ],
-            "Referrer domain": [
-                "参照元ドメイン"
-            ],
             "Engaged time (estimated)": [
                 "エンゲージ時間（推定）"
             ],
@@ -684,9 +819,6 @@
             ],
             "Country \/ region": [
                 "国／地域"
-            ],
-            "Organization category": [
-                "組織カテゴリー"
             ],
             "Browser \/ OS \/ device": [
                 "ブラウザー／OS／デバイス"
@@ -732,6 +864,195 @@
             ],
             "Page %1$d of %2$d": [
                 "%2$dページ中%1$dページ"
+            ],
+            "No data is available for this period.": [
+                "この期間のデータはありません。"
+            ],
+            "Close history": [
+                "履歴を閉じる"
+            ],
+            "No data available.": [
+                "データがありません。"
+            ],
+            "updated": [
+                "更新"
+            ],
+            "Failed to load history:": [
+                "アクセス履歴の取得に失敗しました:"
+            ],
+            "Load failed": [
+                "読み込み失敗"
+            ],
+            "Server error. Please retry.": [
+                "サーバーエラーです。再試行してください。"
+            ],
+            "Tag name": [
+                "タグ名"
+            ],
+            "Color": [
+                "色"
+            ],
+            "Create tag": [
+                "タグを作成"
+            ],
+            "Tag": [
+                "タグ"
+            ],
+            "Usage": [
+                "使用数"
+            ],
+            "Actions": [
+                "操作"
+            ],
+            "Delete": [
+                "削除"
+            ],
+            "No tags yet.": [
+                "タグはまだありません。"
+            ],
+            "Name": [
+                "名前"
+            ],
+            "Report": [
+                "レポート"
+            ],
+            "Pinned": [
+                "ピン留め"
+            ],
+            "Default": [
+                "既定"
+            ],
+            "No saved views yet.": [
+                "保存ビューはまだありません。"
+            ],
+            "Alias \/ original": [
+                "別名／元の値"
+            ],
+            "Watched": [
+                "ウォッチ中"
+            ],
+            "No watched organizations yet.": [
+                "ウォッチ対象の組織はまだありません。"
+            ],
+            "No annotations yet.": [
+                "注釈はまだありません。"
+            ],
+            "Delete this tag?": [
+                "このタグを削除しますか？"
+            ],
+            "entities": [
+                "対象"
+            ],
+            "Delete this saved view?": [
+                "この保存ビューを削除しますか？"
+            ],
+            "Exact IP": [
+                "IP完全一致"
+            ],
+            "IP CIDR": [
+                "IP CIDR"
+            ],
+            "Exact path": [
+                "パス完全一致"
+            ],
+            "Path prefix": [
+                "パス前方一致"
+            ],
+            "Administrator \/ self": [
+                "管理者／自己アクセス"
+            ],
+            "Bot \/ crawler": [
+                "Bot／クローラー"
+            ],
+            "No exclusion rules.": [
+                "除外ルールはありません。"
+            ],
+            "Created": [
+                "作成日時"
+            ],
+            "Updated": [
+                "更新日時"
+            ],
+            "Edit": [
+                "編集"
+            ],
+            "Previous": [
+                "前へ"
+            ],
+            "Next": [
+                "次へ"
+            ],
+            "Delete this exclusion rule? Historical data will not be deleted.": [
+                "この除外ルールを削除しますか？過去データは削除されません。"
+            ],
+            "Rule deleted.": [
+                "ルールを削除しました。"
+            ],
+            "This type is collection-only.": [
+                "この種別は収集専用です。"
+            ],
+            "Rule saved.": [
+                "ルールを保存しました。"
+            ],
+            "Action": [
+                "処理"
+            ],
+            "Matched rule": [
+                "一致ルール"
+            ],
+            "Precedence": [
+                "優先順位"
+            ],
+            "Reason": [
+                "理由"
+            ],
+            "Never": [
+                "受信なし"
+            ],
+            "Failed to load analytics data.": [
+                "アクセスデータの取得に失敗しました。"
+            ],
+            "No analytics data is available yet.": [
+                "アクセスデータはまだありません。"
+            ],
+            "Today pageviews": [
+                "今日のページビュー"
+            ],
+            "Today visitors": [
+                "今日の推定ユニーク訪問者"
+            ],
+            "Today sessions": [
+                "今日のセッション"
+            ],
+            "Human sessions (30 min)": [
+                "Humanセッション（30分）"
+            ],
+            "Notable organizations": [
+                "注目組織"
+            ],
+            "Top pages today": [
+                "今日の上位ページ"
+            ],
+            "No top pages yet.": [
+                "上位ページはまだありません。"
+            ],
+            "PV: %s": [
+                "PV: %s"
+            ],
+            "Unable to parse response.": [
+                "応答を解析できません。"
+            ],
+            "Last received: %s": [
+                "最終受信: %s"
+            ],
+            "Open analytics dashboard": [
+                "アクセス解析ダッシュボードを開く"
+            ],
+            "An unexpected error occurred.": [
+                "予期しないエラーが発生しました。"
+            ],
+            "Retry": [
+                "再試行"
             ]
         }
     }

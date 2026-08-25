@@ -1,7 +1,7 @@
 {
     "translation-revision-date": "2026-08-25 00:55+0000",
     "generator": "tools\/make-json-translations.php",
-    "source": "assets\/dashboard-widget.js",
+    "source": "assets\/admin-sessions.js",
     "domain": "messages",
     "locale_data": {
         "messages": {

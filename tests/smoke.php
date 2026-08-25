@@ -94,8 +94,8 @@ if (str_contains($historyShell, "esc_html__(") || str_contains($historyShell, "e
 }
 
 $plugin->registerAdminMenu();
-if (count($GLOBALS['tya_submenus']) !== 12 || !in_array('tenyen-analytics-sessions', $GLOBALS['tya_submenus'], true) || !in_array('tenyen-analytics-knowledge', $GLOBALS['tya_submenus'], true)) {
-    throw new RuntimeException('Expected all twelve plugin submenu pages including sessions and knowledge.');
+if (count($GLOBALS['tya_submenus']) !== 13 || !in_array('tenyen-analytics-sessions', $GLOBALS['tya_submenus'], true) || !in_array('tenyen-analytics-knowledge', $GLOBALS['tya_submenus'], true) || !in_array('tenyen-analytics-exclusions', $GLOBALS['tya_submenus'], true)) {
+    throw new RuntimeException('Expected all thirteen plugin submenu pages including sessions, knowledge, and exclusions.');
 }
 
 $plugin->registerRoutes();
@@ -114,6 +114,11 @@ $tagRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/tags'] ?? null;
 $viewRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/saved-views'] ?? null;
 if (!$annotationRoute || !$tagRoute || !$viewRoute) {
     throw new RuntimeException('Metadata and saved-view REST routes did not register.');
+}
+$exclusionRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/exclusions'] ?? null;
+$diagnosticRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/exclusions/diagnose'] ?? null;
+if (!$exclusionRoute || !$diagnosticRoute) {
+    throw new RuntimeException('Exclusion management and diagnostic REST routes did not register.');
 }
 if (TYA_Metadata::entityKey('organization', 2516) !== '2516'
     || TYA_Metadata::entityKey('organization', 0) !== ''
@@ -139,6 +144,12 @@ foreach ([$sessionRoute, $sessionDetailRoute, $visitorRoute] as $route) {
     if (($route['permission_callback'])() !== false) {
         throw new RuntimeException('Unauthorized session analytics REST permission callback was allowed.');
     }
+}
+foreach ($exclusionRoute as $route) {
+    if (($route['permission_callback'])() !== false) throw new RuntimeException('Unauthorized exclusion REST operation was allowed.');
+}
+if (($diagnosticRoute['permission_callback'])() !== false) {
+    throw new RuntimeException('Unauthorized exclusion diagnostic was allowed.');
 }
 $response = $plugin->dashboardWidget(new WP_REST_Request());
 if ($response->status !== 403) {

@@ -2,6 +2,19 @@ English | [日本語](CHANGELOG.ja.md)
 
 # Changelog
 
+## 0.6.3 - 2026-08-25
+
+### Added
+- Added administrator-only collection and analysis exclusion rules for network, request, geography, organization, environment, referrer, and campaign attributes.
+- Added deterministic rule diagnostics with matched rule, precedence, action, and reason.
+
+### Security
+- Added strict type/scope allowlists, bounded plain-text values and notes, safe IPv4/IPv6 CIDR matching, safely encoded analysis predicates, REST capability checks, and nonce-protected administration.
+
+### Compatibility
+- Added one prefixed exclusion-rule table and a focused active-scope index.
+- Existing v0.6.2 analytics and metadata rows remain unchanged. Collection exclusions are prospective; analysis exclusions hide matching history without deleting it.
+
 ## 0.6.2 - 2026-07-30
 
 ### Added

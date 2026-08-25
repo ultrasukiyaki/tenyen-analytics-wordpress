@@ -30,6 +30,7 @@ composer.phar
 /coverage/
 /build/
 /dist/
+/prompts/
 .junit.xml
 
 # Local WordPress and test environments

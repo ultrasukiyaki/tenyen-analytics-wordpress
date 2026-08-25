@@ -3,7 +3,7 @@ Contributors: 10yendama
 Tags: analytics, privacy, pageviews, sessions, geolocation
 Requires at least: 6.2
 Requires PHP: 8.1
-Stable tag: 0.6.2
+Stable tag: 0.6.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,12 @@ No. Analytics data is preserved unless an administrator removes it manually.
 No. The built-in MMDB reader and local analytics reports work without Composer or an external analytics service.
 
 == Changelog ==
+
+= 0.6.3 =
+
+* Added collection and non-destructive analysis exclusion rules for IP, path, administrator, Bot, geography, organization, environment, referrer, and UTM attributes.
+* Added an administrator-only rule manager and deterministic diagnostic output.
+* Added one exclusion-rule table without changing historical analytics or metadata rows.
 
 = 0.6.2 =
 
@@ -75,6 +81,10 @@ No. The built-in MMDB reader and local analytics reports work without Composer o
 * Added a built-in MMDB reader and asynchronous access history.
 
 == Upgrade Notice ==
+
+= 0.6.3 =
+
+Adds a separate exclusion-rule table. Existing v0.6.2 analytics and metadata remain valid; exclusion rules never delete historical rows.
 
 = 0.6.2 =
 

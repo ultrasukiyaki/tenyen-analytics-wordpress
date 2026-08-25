@@ -3,7 +3,7 @@ set -euo pipefail
 
 project_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 version="$(sed -n "s/^define('TYA_VERSION', '\\([^']*\\)');$/\\1/p" "$project_dir/tenyen-analytics.php")"
-expected_version="0.6.2"
+expected_version="0.6.3"
 
 if [[ "$version" != "$expected_version" ]]; then
     echo "Expected version $expected_version, found ${version:-none}." >&2
@@ -25,6 +25,7 @@ mkdir -p "$plugin_dir" "$project_dir/dist"
         ! -path './.github/*' \
         ! -path './dist/*' \
         ! -path './tests/*' \
+        ! -path './prompts/*' \
         ! -path './tools/*' \
         ! -path './vendor/*' \
         ! -path './node_modules/*' \
@@ -57,7 +58,7 @@ if [[ "$top_levels" != 'tenyen-analytics-wordpress' ]]; then
     exit 1
 fi
 
-if unzip -Z1 "$archive" | grep -E '(^|/)(\.git|\.github|tests|tools|vendor|node_modules|dist)(/|$)|\.mmdb$|\.log$|composer\.lock$|(^|/)\.(gitignore|gitattributes|editorconfig)$' >/dev/null; then
+if unzip -Z1 "$archive" | grep -E '(^|/)(\.git|\.github|prompts|tests|tools|vendor|node_modules|dist)(/|$)|\.mmdb$|\.log$|composer\.lock$|(^|/)\.(gitignore|gitattributes|editorconfig)$' >/dev/null; then
     echo "Archive contains a forbidden development or local file." >&2
     exit 1
 fi

@@ -17,6 +17,7 @@ Tenyen Analytics is a self-hosted WordPress analytics plugin for pageviews, esti
 - Asynchronous access history and a compact WordPress Dashboard widget
 - Notable-organization categories while preserving MaxMind organization names verbatim
 - Administrator aliases, plain-text notes, reusable tags, organization watchlists, and private saved views
+- Prospective collection exclusions, non-destructive analysis exclusions, and rule diagnostics
 
 ## Requirements
 
@@ -33,7 +34,7 @@ GeoLite2 MMDB files are not included. The site administrator must obtain `GeoLit
 
 ## Dashboard and reports
 
-The Tenyen Analytics menu contains Dashboard, Real-time, Access History, Content, Referrers, ASN / Organizations, Audience, Engagement, System, and Settings. The standard WordPress Dashboard widget loads its totals asynchronously and is visible only to administrators with `manage_options`.
+The Tenyen Analytics menu contains Dashboard, Real-time, Access History, Sessions, Content, Referrers, ASN / Organizations, Knowledge, Exclusions, Audience, Engagement, System, and Settings. The standard WordPress Dashboard widget loads its totals asynchronously and is visible only to administrators with `manage_options`.
 
 ## Privacy and security
 
@@ -41,13 +42,19 @@ Raw IP addresses are stored using reversible encryption; HMAC values support exa
 
 ## Updating
 
-Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.6.2 adds separate metadata tables and preserves all v0.6.1 analytics rows and identifiers.
+Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.6.3 adds a separate exclusion-rule table and preserves all v0.6.2 analytics and metadata rows.
+
+## Exclusion rules
+
+The administrator-only Exclusions screen supports exact IPv4/IPv6, CIDR, exact path, path prefix, administrator/self, Bot, country, region, ASN, organization/category, browser, OS, device, referrer-domain, and UTM source/medium/campaign rules. Collection rules prevent matching future requests from being stored. Analysis rules hide matching stored rows from reports, history, sessions, and widgets without deleting them. CIDR, administrator, and organization-category rules are collection-only because the current historical schema cannot apply them in bounded SQL queries.
+
+Rules have a deterministic type precedence followed by rule ID. The diagnostic form identifies the first matching rule, precedence, action, and reason. Rule values and notes are bounded plain text; administrative routes require `manage_options` and a valid WordPress REST nonce. Existing **Exclude administrator access** and **Record bots as well** settings remain collection controls. Historical data is never automatically deleted by exclusion management.
 
 ## Administrator knowledge
 
 The Knowledge screen manages aliases, notes (up to 4,000 characters), tags (up to 50 characters and 50 per entity), watched ASN organizations, and private saved views. Supported identities are numeric ASN, the existing anonymous visitor ID, post ID or canonical content path, normalized referrer domain, a deterministic hash of the five first-touch UTM dimensions, and normalized external target domain. Aliases never overwrite raw values. Orphaned annotations remain manageable.
 
-Watching only marks and filters an ASN; it sends no notification and changes no analytics fact. Access was observed from an IP address registered to the ASN/organization—it does not identify a person, employment, affiliation, or intent. Saved views belong to one WordPress administrator. Relative date presets are recalculated when loaded; custom dates remain absolute. Pinned and one-per-report default states are supported by the storage/API model. Uninstall preserves the metadata tables under the existing data-retention policy. Notifications and exclusion management remain deferred.
+Watching only marks and filters an ASN; it sends no notification and changes no analytics fact. Access was observed from an IP address registered to the ASN/organization—it does not identify a person, employment, affiliation, or intent. Saved views belong to one WordPress administrator. Relative date presets are recalculated when loaded; custom dates remain absolute. Pinned and one-per-report default states are supported by the storage/API model. Uninstall preserves the metadata and exclusion-rule tables under the existing data-retention policy. Notifications remain deferred.
 
 ## Traffic attribution and events
 
