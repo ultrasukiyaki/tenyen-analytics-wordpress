@@ -2,6 +2,20 @@ English | [日本語](CHANGELOG.ja.md)
 
 # Changelog
 
+## 0.7.0 - 2026-08-25
+
+### Added
+- Added chunked CSV/JSON export for raw events, sessions, content, organizations, traffic sources, campaigns, and event summaries with current analytics, metadata, watchlist, tag, and exclusion filters.
+- Added privacy-preserving omit/masked IP modes and an explicitly confirmed administrator-only decrypted-IP mode.
+- Added unlimited/preset/custom retention, cleanup preview, bounded resumable WP-Cron deletion, overlap locking, and observable cleanup state.
+- Added table/database size, event/session range, monthly-count, retention, and cleanup diagnostics.
+
+### Security
+- Added spreadsheet-formula neutralization, stable JSON field allowlists, bounded filters, capability and nonce checks, safe cleanup identifiers, and non-sensitive failure reporting.
+
+### Compatibility
+- No schema or index change; schema version remains 0.6.3. Existing analytics, annotations, tags, watchlists, saved views, exclusions, settings, GeoLite files, and keys remain valid.
+
 ## 0.6.3 - 2026-08-25
 
 ### Added

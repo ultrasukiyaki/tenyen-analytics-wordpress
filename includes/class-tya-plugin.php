@@ -17,11 +17,12 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Plugin
 {
-    public const UI_BUILD = '0.6.3-exclusions';
+    public const UI_BUILD = '0.7.0-lifecycle';
     private static ?self $instance = null;
     private ?TYA_Session_Admin $sessionAdmin = null;
     private ?TYA_Metadata $metadata = null;
     private ?TYA_Exclusions $exclusions = null;
+    private ?TYA_Lifecycle $lifecycle = null;
 
     public static function instance(): self
     {
@@ -31,12 +32,12 @@ final class TYA_Plugin
     public function boot(): void
     {
         TYA_Installer::maybeUpgrade();
+        $this->lifecycle()->boot();
         add_action('wp_enqueue_scripts', [$this, 'enqueueTracker']);
         add_action('rest_api_init', [$this, 'registerRoutes']);
         add_action('admin_menu', [$this, 'registerAdminMenu']);
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminAssets']);
         add_action('admin_init', [$this, 'registerSettings']);
-        add_action('tya_daily_cleanup', [$this, 'cleanup']);
         add_action('admin_footer', [$this, 'renderAdminFooter']);
         add_filter('plugin_action_links_' . plugin_basename(TYA_FILE), [$this, 'actionLinks']);
 
@@ -154,6 +155,17 @@ final class TYA_Plugin
                 'analysisTypes' => \Tenyen\Analytics\ExclusionRuleEngine::ANALYSIS_TYPES,
             ], JSON_UNESCAPED_SLASHES) . ';', 'before');
         }
+        if ($page === 'tenyen-analytics-lifecycle') {
+            wp_enqueue_script('tenyen-analytics-lifecycle', TYA_URL . 'assets/admin-lifecycle.js', ['wp-i18n'], TYA_VERSION, true);
+            wp_set_script_translations('tenyen-analytics-lifecycle', 'tenyen-analytics', TYA_DIR . 'languages');
+            wp_add_inline_script('tenyen-analytics-lifecycle', 'window.TYALifecycle=' . wp_json_encode([
+                'diagnostics' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/lifecycle/diagnostics')),
+                'retention' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/lifecycle/retention')),
+                'preview' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/lifecycle/cleanup/preview')),
+                'cleanup' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/lifecycle/cleanup/run')),
+                'nonce' => wp_create_nonce('wp_rest'),
+            ], JSON_UNESCAPED_SLASHES) . ';', 'before');
+        }
     }
 
     public function enqueueTracker(): void
@@ -190,6 +202,7 @@ final class TYA_Plugin
     {
         $this->metadata()->registerRoutes();
         $this->exclusions()->registerRoutes();
+        $this->lifecycle()->registerRoutes();
         register_rest_route('tenyen-analytics/v1', '/collect', [
             'methods' => WP_REST_Server::CREATABLE,
             'callback' => [$this, 'collect'],
@@ -418,6 +431,7 @@ final class TYA_Plugin
             ['tenyen-analytics-organizations', __('ASN / Organizations', 'tenyen-analytics'), 'renderOrganizations'],
             ['tenyen-analytics-knowledge', __('Knowledge', 'tenyen-analytics'), 'renderKnowledge'],
             ['tenyen-analytics-exclusions', __('Exclusions', 'tenyen-analytics'), 'renderExclusions'],
+            ['tenyen-analytics-lifecycle', __('Data lifecycle', 'tenyen-analytics'), 'renderLifecycle'],
             ['tenyen-analytics-audience', __('Audience', 'tenyen-analytics'), 'renderAudience'],
             ['tenyen-analytics-engagement', __('Engagement', 'tenyen-analytics'), 'renderEngagement'],
             ['tenyen-analytics-system', __('System', 'tenyen-analytics'), 'renderSystem'],
@@ -450,10 +464,15 @@ final class TYA_Plugin
         $this->exclusions()->renderManager();
     }
 
+    public function renderLifecycle(): void
+    {
+        $this->lifecycle()->renderPage();
+    }
+
     public function registerSettings(): void
     {
         register_setting('tya_settings', 'tya_retention_days', [
-            'type' => 'integer', 'sanitize_callback' => static fn($v) => max(1, min(3650, (int)$v)), 'default' => 90,
+            'type' => 'integer', 'sanitize_callback' => [TYA_Lifecycle::class, 'sanitizeRetention'], 'default' => 90,
         ]);
         register_setting('tya_settings', 'tya_exclude_admins', [
             'type' => 'boolean', 'sanitize_callback' => static fn($v) => $v ? 1 : 0, 'default' => 1,
@@ -1292,7 +1311,7 @@ final class TYA_Plugin
         echo '<form method="post" action="options.php">';
         settings_fields('tya_settings');
         echo '<table class="form-table"><tbody>';
-        $this->numberRow(__('Raw log retention days', 'tenyen-analytics'), 'tya_retention_days', (int)get_option('tya_retention_days', 90), 1, 3650);
+        $this->numberRow(__('Raw log retention days (0 = unlimited)', 'tenyen-analytics'), 'tya_retention_days', TYA_Lifecycle::sanitizeRetention(get_option('tya_retention_days', 90)), 0, 3650);
         $this->checkboxRow(__('Exclude administrator access', 'tenyen-analytics'), 'tya_exclude_admins', (bool)get_option('tya_exclude_admins', 1));
         $this->checkboxRow(__('Record bots as well', 'tenyen-analytics'), 'tya_log_bots', (bool)get_option('tya_log_bots', 1));
         $this->checkboxRow(__('Track internal link clicks', 'tenyen-analytics'), 'tya_track_internal_links', (bool)get_option('tya_track_internal_links', 0));
@@ -1601,17 +1620,6 @@ final class TYA_Plugin
         return '<a class="tya-out-link" target="_blank" rel="noopener noreferrer" href="' . esc_url($url) . '">' . esc_html($label) . '</a>';
     }
 
-    public function cleanup(): void
-    {
-        global $wpdb;
-        $days = max(1, (int)get_option('tya_retention_days', 90));
-        $cutoff = gmdate('Y-m-d H:i:s', time() - $days * DAY_IN_SECONDS);
-        $wpdb->query($wpdb->prepare(
-            'DELETE FROM ' . TYA_Installer::tableName() . ' WHERE occurred_at < %s',
-            $cutoff
-        ));
-    }
-
     public function dashboardWidget(WP_REST_Request $request): WP_REST_Response
     {
         if (!current_user_can('manage_options')) {
@@ -1741,5 +1749,10 @@ final class TYA_Plugin
     private function exclusions(): TYA_Exclusions
     {
         return $this->exclusions ??= new TYA_Exclusions();
+    }
+
+    private function lifecycle(): TYA_Lifecycle
+    {
+        return $this->lifecycle ??= new TYA_Lifecycle();
     }
 }

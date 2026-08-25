@@ -18,6 +18,7 @@ Tenyen Analytics is a self-hosted WordPress analytics plugin for pageviews, esti
 - Notable-organization categories while preserving MaxMind organization names verbatim
 - Administrator aliases, plain-text notes, reusable tags, organization watchlists, and private saved views
 - Prospective collection exclusions, non-destructive analysis exclusions, and rule diagnostics
+- Chunked CSV/JSON exports, configurable raw-data retention, resumable cleanup, and storage diagnostics
 
 ## Requirements
 
@@ -34,7 +35,7 @@ GeoLite2 MMDB files are not included. The site administrator must obtain `GeoLit
 
 ## Dashboard and reports
 
-The Tenyen Analytics menu contains Dashboard, Real-time, Access History, Sessions, Content, Referrers, ASN / Organizations, Knowledge, Exclusions, Audience, Engagement, System, and Settings. The standard WordPress Dashboard widget loads its totals asynchronously and is visible only to administrators with `manage_options`.
+The Tenyen Analytics menu contains Dashboard, Real-time, Access History, Sessions, Content, Referrers, ASN / Organizations, Knowledge, Exclusions, Data lifecycle, Audience, Engagement, System, and Settings. The standard WordPress Dashboard widget loads its totals asynchronously and is visible only to administrators with `manage_options`.
 
 ## Privacy and security
 
@@ -42,7 +43,17 @@ Raw IP addresses are stored using reversible encryption; HMAC values support exa
 
 ## Updating
 
-Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.6.3 adds a separate exclusion-rule table and preserves all v0.6.2 analytics and metadata rows.
+Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.7.0 adds lifecycle controls without changing the v0.6.3 database schema or deleting existing analytics and metadata.
+
+## Export, retention, and cleanup
+
+The administrator-only Data lifecycle screen exports the raw access/event log, sessions, content summaries, organizations, traffic sources, campaigns, and event summaries as CSV or JSON. Exports are fetched in bounded chunks and respect date, Human/Bot, traffic, campaign, event, content, country/region, ASN/organization, tag, watchlist, and analysis-exclusion filters where meaningful. CSV cells beginning with spreadsheet formula characters are neutralized. JSON uses the documented `tenyen-analytics.export.v1` envelope with `schema`, `dataset`, `generated_at`, `columns`, and `rows` fields.
+
+IP addresses are omitted by default. Masked export zeroes the final IPv4 octet or retains only the first 48 IPv6 bits. Decrypted raw IP export requires `manage_options`, a valid nonce, selection of the raw mode, and a separate explicit-confirmation checkbox.
+
+Retention supports unlimited, 30, 90, 180, 365, or a validated custom value from 1 to 3,650 days. Cleanup preview shows the UTC cutoff and affected event/session counts. Cleanup deletes at most 1,000 expired events per run, uses an overlap lock, preserves its cutoff and deleted count across continuation runs, and schedules continued work through WP-Cron. Its observable state includes status, last run, next run, remaining rows, and a safe failure message. Until v0.7.1 daily aggregates are available, deleted raw rows permanently remove their historical detail and statistics. Cleanup never deletes settings, annotations, tags, saved views, exclusion rules, GeoLite files, or keys.
+
+Storage diagnostics show the analytics-table and database sizes, raw event/session counts, oldest/newest timestamps, up to 24 monthly counts, current retention, and cleanup state.
 
 ## Exclusion rules
 

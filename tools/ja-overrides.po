@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tenyen Analytics for WordPress 0.6.3\n"
+"Project-Id-Version: Tenyen Analytics for WordPress 0.7.0\n"
 "PO-Revision-Date: 2026-07-23 00:00+0900\n"
 "Last-Translator: 10yendama.com\n"
 "Language-Team: Japanese\n"
@@ -1100,3 +1100,171 @@ msgstr "ルール値が長すぎます。"
 
 msgid "Invalid exclusion rule."
 msgstr "除外ルールが正しくありません。"
+
+msgid "Data lifecycle"
+msgstr "データライフサイクル"
+
+msgid "Invalid retention preset."
+msgstr "保持期間の既定値が正しくありません。"
+
+msgid "Custom retention must be between 1 and 3650 days."
+msgstr "カスタム保持期間は1～3650日で指定してください。"
+
+msgid "Invalid retention mode."
+msgstr "保持モードが正しくありません。"
+
+msgid "Raw deletion permanently removes historical detail and statistics until daily aggregates are available in v0.7.1."
+msgstr "v0.7.1で日次集計が利用可能になるまでは、生データの削除によって履歴の詳細と統計が永久に失われます。"
+
+msgid "Cleanup failed. Review database health and retry."
+msgstr "削除処理に失敗しました。データベースの状態を確認して再試行してください。"
+
+msgid "Invalid export request."
+msgstr "エクスポート要求が正しくありません。"
+
+msgid "Raw IP export requires explicit confirmation."
+msgstr "生IPのエクスポートには明示確認が必要です。"
+
+msgid "Export analytics, control raw retention, run bounded cleanup, and inspect storage."
+msgstr "解析データの出力、生データ保持、件数制限付き削除、ストレージ確認を行います。"
+
+msgid "Until daily aggregates arrive in v0.7.1, deleting raw rows permanently removes their historical detail and statistics."
+msgstr "v0.7.1の日次集計が利用可能になるまでは、生の行を削除すると履歴の詳細と統計が永久に失われます。"
+
+msgid "Retention and cleanup"
+msgstr "保持と削除"
+
+msgid "Mode"
+msgstr "モード"
+
+msgid "Unlimited"
+msgstr "無期限"
+
+msgid "Preset"
+msgstr "既定期間"
+
+msgid "Custom days"
+msgstr "カスタム日数"
+
+msgid "Days"
+msgstr "日数"
+
+msgid "Save retention"
+msgstr "保持期間を保存"
+
+msgid "Preview cleanup"
+msgstr "削除をプレビュー"
+
+msgid "Run one cleanup batch"
+msgstr "削除を1バッチ実行"
+
+msgid "Storage diagnostics"
+msgstr "ストレージ診断"
+
+msgid "Export"
+msgstr "エクスポート"
+
+msgid "Dataset"
+msgstr "データセット"
+
+msgid "Format"
+msgstr "形式"
+
+msgid "IP privacy"
+msgstr "IPプライバシー"
+
+msgid "Omit IP"
+msgstr "IPを省略"
+
+msgid "Masked IP"
+msgstr "マスク済みIP"
+
+msgid "Decrypted raw IP"
+msgstr "復号した生IP"
+
+msgid "I explicitly authorize raw IP export"
+msgstr "生IPの出力を明示的に許可します"
+
+msgid "Campaign"
+msgstr "キャンペーン"
+
+msgid "Content path"
+msgstr "コンテンツパス"
+
+msgid "Tag ID"
+msgstr "タグID"
+
+msgid "Watched organizations only"
+msgstr "ウォッチ対象の組織のみ"
+
+msgid "Download export"
+msgstr "エクスポートをダウンロード"
+
+msgid "Raw log retention days (0 = unlimited)"
+msgstr "生ログ保持日数（0 = 無期限）"
+
+msgid "Analytics table size"
+msgstr "解析テーブル容量"
+
+msgid "Database size"
+msgstr "データベース容量"
+
+msgid "Raw events"
+msgstr "生イベント"
+
+msgid "Oldest record"
+msgstr "最古の記録"
+
+msgid "Newest record"
+msgstr "最新の記録"
+
+msgid "Retention"
+msgstr "保持期間"
+
+msgid "days"
+msgstr "日"
+
+msgid "Cleanup status"
+msgstr "削除状態"
+
+msgid "Last run"
+msgstr "前回実行"
+
+msgid "Next run"
+msgstr "次回実行"
+
+msgid "Failure"
+msgstr "失敗"
+
+msgid "Month"
+msgstr "月"
+
+msgid "Events"
+msgstr "イベント"
+
+msgid "Saving…"
+msgstr "保存しています…"
+
+msgid "Retention saved."
+msgstr "保持期間を保存しました。"
+
+msgid "Cutoff"
+msgstr "期限"
+
+msgid "Affected events"
+msgstr "対象イベント"
+
+msgid "Affected sessions"
+msgstr "対象セッション"
+
+msgid "Delete one bounded batch of expired raw events? This cannot be undone."
+msgstr "期限切れの生イベントを1バッチ削除しますか？この操作は元に戻せません。"
+
+msgid "Cleaning…"
+msgstr "削除しています…"
+
+msgid "Deleted total"
+msgstr "削除済み合計"
+
+msgid "Remaining"
+msgstr "残件数"

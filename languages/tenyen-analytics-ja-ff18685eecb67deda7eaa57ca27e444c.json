@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-08-25 00:55+0000",
+    "translation-revision-date": "2026-08-25 01:15+0000",
     "generator": "tools\/make-json-translations.php",
     "source": "assets\/admin-history.js",
     "domain": "messages",
@@ -42,6 +42,9 @@
             ],
             "Exclusions": [
                 "除外"
+            ],
+            "Data lifecycle": [
+                "データライフサイクル"
             ],
             "Audience": [
                 "利用環境"
@@ -502,8 +505,8 @@
             "ASN DB": [
                 "ASN DB"
             ],
-            "Raw log retention days": [
-                "生ログの保持日数"
+            "Raw log retention days (0 = unlimited)": [
+                "生ログ保持日数（0 = 無期限）"
             ],
             "Exclude administrator access": [
                 "管理者のアクセスを除外"
@@ -739,20 +742,107 @@
             "Invalid exclusion rule.": [
                 "除外ルールが正しくありません。"
             ],
-            "Refresh": [
-                "更新"
+            "Invalid retention preset.": [
+                "保持期間の既定値が正しくありません。"
+            ],
+            "Custom retention must be between 1 and 3650 days.": [
+                "カスタム保持期間は1～3650日で指定してください。"
+            ],
+            "Invalid retention mode.": [
+                "保持モードが正しくありません。"
+            ],
+            "Invalid export request.": [
+                "エクスポート要求が正しくありません。"
+            ],
+            "Raw IP export requires explicit confirmation.": [
+                "生IPのエクスポートには明示確認が必要です。"
+            ],
+            "Retention and cleanup": [
+                "保持と削除"
+            ],
+            "Mode": [
+                "モード"
+            ],
+            "Unlimited": [
+                "無期限"
+            ],
+            "Preset": [
+                "既定期間"
+            ],
+            "Custom days": [
+                "カスタム日数"
+            ],
+            "Days": [
+                "日数"
+            ],
+            "Save retention": [
+                "保持期間を保存"
+            ],
+            "Preview cleanup": [
+                "削除をプレビュー"
+            ],
+            "Run one cleanup batch": [
+                "削除を1バッチ実行"
+            ],
+            "Storage diagnostics": [
+                "ストレージ診断"
             ],
             "Loading…": [
                 "読み込んでいます…"
+            ],
+            "Export": [
+                "エクスポート"
+            ],
+            "Dataset": [
+                "データセット"
+            ],
+            "Format": [
+                "形式"
+            ],
+            "IP privacy": [
+                "IPプライバシー"
+            ],
+            "Omit IP": [
+                "IPを省略"
+            ],
+            "Masked IP": [
+                "マスク済みIP"
+            ],
+            "Decrypted raw IP": [
+                "復号した生IP"
+            ],
+            "I explicitly authorize raw IP export": [
+                "生IPの出力を明示的に許可します"
+            ],
+            "Visitor type": [
+                "訪問者種別"
+            ],
+            "Traffic channel": [
+                "流入チャネル"
+            ],
+            "Campaign": [
+                "キャンペーン"
+            ],
+            "Content path": [
+                "コンテンツパス"
+            ],
+            "Tag ID": [
+                "タグID"
+            ],
+            "Watched organizations only": [
+                "ウォッチ対象の組織のみ"
+            ],
+            "Download export": [
+                "エクスポートをダウンロード"
+            ],
+            "Refresh": [
+                "更新"
             ],
             "Browse ordered anonymous visitor journeys.": [
                 "匿名訪問者の時系列の訪問経路を確認します。"
             ],
             "Session, visitor, URL, referrer, or environment": [
                 "セッション、訪問者、URL、参照元、環境"
-            ],
-            "Visitor type": [
-                "訪問者種別"
             ],
             "Close": [
                 "閉じる"
@@ -807,9 +897,6 @@
             ],
             "Bounce (estimated)": [
                 "直帰（推定）"
-            ],
-            "Traffic channel": [
-                "流入チャネル"
             ],
             "Engaged time (estimated)": [
                 "エンゲージ時間（推定）"
@@ -1005,6 +1092,72 @@
             ],
             "Reason": [
                 "理由"
+            ],
+            "Analytics table size": [
+                "解析テーブル容量"
+            ],
+            "Database size": [
+                "データベース容量"
+            ],
+            "Raw events": [
+                "生イベント"
+            ],
+            "Oldest record": [
+                "最古の記録"
+            ],
+            "Newest record": [
+                "最新の記録"
+            ],
+            "Retention": [
+                "保持期間"
+            ],
+            "days": [
+                "日"
+            ],
+            "Cleanup status": [
+                "削除状態"
+            ],
+            "Last run": [
+                "前回実行"
+            ],
+            "Next run": [
+                "次回実行"
+            ],
+            "Failure": [
+                "失敗"
+            ],
+            "Month": [
+                "月"
+            ],
+            "Events": [
+                "イベント"
+            ],
+            "Saving…": [
+                "保存しています…"
+            ],
+            "Retention saved.": [
+                "保持期間を保存しました。"
+            ],
+            "Cutoff": [
+                "期限"
+            ],
+            "Affected events": [
+                "対象イベント"
+            ],
+            "Affected sessions": [
+                "対象セッション"
+            ],
+            "Delete one bounded batch of expired raw events? This cannot be undone.": [
+                "期限切れの生イベントを1バッチ削除しますか？この操作は元に戻せません。"
+            ],
+            "Cleaning…": [
+                "削除しています…"
+            ],
+            "Deleted total": [
+                "削除済み合計"
+            ],
+            "Remaining": [
+                "残件数"
             ],
             "Never": [
                 "受信なし"

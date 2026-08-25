@@ -194,5 +194,7 @@ final class TYA_Installer
         if ($timestamp) {
             wp_unschedule_event($timestamp, 'tya_daily_cleanup');
         }
+        $continuation = wp_next_scheduled('tya_cleanup_continue');
+        if ($continuation) wp_unschedule_event($continuation, 'tya_cleanup_continue');
     }
 }

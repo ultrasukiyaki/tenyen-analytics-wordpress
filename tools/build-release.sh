@@ -3,7 +3,7 @@ set -euo pipefail
 
 project_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 version="$(sed -n "s/^define('TYA_VERSION', '\\([^']*\\)');$/\\1/p" "$project_dir/tenyen-analytics.php")"
-expected_version="0.6.3"
+expected_version="0.7.0"
 
 if [[ "$version" != "$expected_version" ]]; then
     echo "Expected version $expected_version, found ${version:-none}." >&2

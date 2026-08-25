@@ -27,7 +27,7 @@ $header = [
 
 foreach ([
     'assets/admin-charts.js', 'assets/admin-history.js', 'assets/admin-sessions.js',
-    'assets/admin-metadata.js', 'assets/admin-exclusions.js', 'assets/dashboard-widget.js',
+    'assets/admin-metadata.js', 'assets/admin-exclusions.js', 'assets/admin-lifecycle.js', 'assets/dashboard-widget.js',
 ] as $relative) {
     $json = [
         'translation-revision-date' => gmdate('Y-m-d H:iO'),

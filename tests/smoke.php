@@ -32,6 +32,7 @@ function wp_json_encode(mixed $value, int $flags = 0): string|false { return jso
 function wp_strip_all_tags(string $value): string { return strip_tags($value); }
 function add_menu_page(): void {}
 function add_submenu_page($parent, $title, $label, $capability, $slug): void { $GLOBALS['tya_submenus'][] = $slug; }
+function wp_die(mixed $message='', mixed $title='', mixed $args=[]): never { throw new RuntimeException((string)$message); }
 function register_rest_route(string $namespace, string $route, array $args): void { $GLOBALS['tya_routes'][$namespace . $route] = $args; }
 function wp_add_dashboard_widget(string $id): void { $GLOBALS['tya_widgets'][] = $id; }
 
@@ -57,6 +58,9 @@ class WP_REST_Response
 require dirname(__DIR__) . '/tenyen-analytics.php';
 
 $plugin = TYA_Plugin::instance();
+if (TYA_VERSION !== '0.7.0' || TYA_Installer::SCHEMA_VERSION !== '0.6.3') {
+    throw new RuntimeException('v0.7.0 must preserve the v0.6.3 schema baseline.');
+}
 $sessionAdmin = new TYA_Session_Admin();
 $sessionHtmlMethod = new ReflectionMethod($sessionAdmin, 'sessionHtml');
 $sessionHtmlMethod->setAccessible(true);
@@ -94,8 +98,8 @@ if (str_contains($historyShell, "esc_html__(") || str_contains($historyShell, "e
 }
 
 $plugin->registerAdminMenu();
-if (count($GLOBALS['tya_submenus']) !== 13 || !in_array('tenyen-analytics-sessions', $GLOBALS['tya_submenus'], true) || !in_array('tenyen-analytics-knowledge', $GLOBALS['tya_submenus'], true) || !in_array('tenyen-analytics-exclusions', $GLOBALS['tya_submenus'], true)) {
-    throw new RuntimeException('Expected all thirteen plugin submenu pages including sessions, knowledge, and exclusions.');
+if (count($GLOBALS['tya_submenus']) !== 14 || !in_array('tenyen-analytics-sessions', $GLOBALS['tya_submenus'], true) || !in_array('tenyen-analytics-knowledge', $GLOBALS['tya_submenus'], true) || !in_array('tenyen-analytics-exclusions', $GLOBALS['tya_submenus'], true) || !in_array('tenyen-analytics-lifecycle', $GLOBALS['tya_submenus'], true)) {
+    throw new RuntimeException('Expected all fourteen plugin submenu pages including sessions, knowledge, exclusions, and data lifecycle.');
 }
 
 $plugin->registerRoutes();
@@ -119,6 +123,13 @@ $exclusionRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/exclusions']
 $diagnosticRoute = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/exclusions/diagnose'] ?? null;
 if (!$exclusionRoute || !$diagnosticRoute) {
     throw new RuntimeException('Exclusion management and diagnostic REST routes did not register.');
+}
+$lifecycleDiagnostics = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/lifecycle/diagnostics'] ?? null;
+$lifecycleRetention = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/lifecycle/retention'] ?? null;
+$lifecyclePreview = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/lifecycle/cleanup/preview'] ?? null;
+$lifecycleCleanup = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/lifecycle/cleanup/run'] ?? null;
+if (!$lifecycleDiagnostics || !$lifecycleRetention || !$lifecyclePreview || !$lifecycleCleanup) {
+    throw new RuntimeException('Lifecycle diagnostics, retention, preview, and cleanup REST routes did not register.');
 }
 if (TYA_Metadata::entityKey('organization', 2516) !== '2516'
     || TYA_Metadata::entityKey('organization', 0) !== ''
@@ -151,9 +162,15 @@ foreach ($exclusionRoute as $route) {
 if (($diagnosticRoute['permission_callback'])() !== false) {
     throw new RuntimeException('Unauthorized exclusion diagnostic was allowed.');
 }
+foreach ([$lifecycleDiagnostics,$lifecycleRetention,$lifecyclePreview,$lifecycleCleanup] as $route) {
+    if (($route['permission_callback'])() !== false) throw new RuntimeException('Unauthorized lifecycle REST operation was allowed.');
+}
 $response = $plugin->dashboardWidget(new WP_REST_Request());
 if ($response->status !== 403) {
     throw new RuntimeException('Unauthorized dashboard widget response was not denied.');
 }
+$denied = false;
+try { (new TYA_Lifecycle())->export(); } catch (RuntimeException $error) { $denied = str_contains($error->getMessage(), 'permission'); }
+if (!$denied) throw new RuntimeException('Unauthorized export was not denied.');
 
 echo "Smoke checks passed.\n";
