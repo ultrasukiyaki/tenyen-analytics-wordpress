@@ -2,6 +2,19 @@ English | [日本語](CHANGELOG.ja.md)
 
 # Changelog
 
+## 0.7.1 - 2026-08-25
+
+### Added
+- Added checkpointed, idempotent UTC daily aggregation with per-day and bounded date-range rebuilds, resumable WP-Cron catch-up, separate locking, and sampled source verification.
+- Added additive totals and numerators for pageviews, events, sessions, bounces, entries/exits, engagement, valid scroll samples, Human/Bot, traffic, referrers, campaigns, content, countries, environments, and bounded organization summaries.
+- Added mergeable fixed-size visitor/session sketches so raw-only, aggregate-only, and mixed reports use one non-overlapping boundary without summing daily unique counts.
+- Added aggregate status and rebuild controls to Data lifecycle. Cleanup now requires current source coverage for every affected UTC day and freezes the preserved boundary after successful deletion.
+
+### Performance and compatibility
+- Dashboard, timeline, content, organization, referrer, audience, engagement, and compatible summary exports now use daily aggregates for complete days while realtime, history, session, and visitor drill-down remain raw-only.
+- Added `tya_daily_aggregates` and `tya_daily_dimensions` with evidence-based day/type lookup indexes; schema version is 0.7.1. Existing events and administrator metadata remain unchanged.
+- High-cardinality dimensions are capped per day. Rates and averages are recomputed from stored numerators and denominators instead of averaging averages.
+
 ## 0.7.0 - 2026-08-25
 
 ### Added

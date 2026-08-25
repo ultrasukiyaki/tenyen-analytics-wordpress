@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-08-25 01:15+0000",
+    "translation-revision-date": "2026-08-25 01:54+0000",
     "generator": "tools\/make-json-translations.php",
     "source": "assets\/admin-exclusions.js",
     "domain": "messages",
@@ -742,6 +742,27 @@
             "Invalid exclusion rule.": [
                 "除外ルールが正しくありません。"
             ],
+            "Enter a valid aggregate date range.": [
+                "正しい集計期間を入力してください。"
+            ],
+            "Only completed UTC days can be aggregated.": [
+                "完了済みのUTC日だけを集計できます。"
+            ],
+            "Aggregate rebuilds are limited to 730 days.": [
+                "集計の再構築は730日以内に制限されています。"
+            ],
+            "Aggregation or cleanup is already running.": [
+                "集計または削除処理はすでに実行中です。"
+            ],
+            "Cleanup is currently running.": [
+                "現在、削除処理を実行中です。"
+            ],
+            "Aggregation failed. Review database health and retry.": [
+                "集計に失敗しました。データベースの状態を確認して再試行してください。"
+            ],
+            "Invalid cleanup cutoff.": [
+                "削除の基準日時が正しくありません。"
+            ],
             "Invalid retention preset.": [
                 "保持期間の既定値が正しくありません。"
             ],
@@ -751,11 +772,23 @@
             "Invalid retention mode.": [
                 "保持モードが正しくありません。"
             ],
+            "Cleanup is blocked while aggregation is running.": [
+                "集計の実行中は削除できません。"
+            ],
             "Invalid export request.": [
                 "エクスポート要求が正しくありません。"
             ],
             "Raw IP export requires explicit confirmation.": [
                 "生IPのエクスポートには明示確認が必要です。"
+            ],
+            "Daily aggregation": [
+                "日次集計"
+            ],
+            "Loading…": [
+                "読み込んでいます…"
+            ],
+            "Rebuild aggregates": [
+                "集計を再構築"
             ],
             "Retention and cleanup": [
                 "保持と削除"
@@ -786,9 +819,6 @@
             ],
             "Storage diagnostics": [
                 "ストレージ診断"
-            ],
-            "Loading…": [
-                "読み込んでいます…"
             ],
             "Export": [
                 "エクスポート"
@@ -1132,6 +1162,21 @@
             "Events": [
                 "イベント"
             ],
+            "Aggregated days": [
+                "集計済み日数"
+            ],
+            "Oldest aggregate": [
+                "最古の集計"
+            ],
+            "Newest aggregate": [
+                "最新の集計"
+            ],
+            "Checkpoint": [
+                "チェックポイント"
+            ],
+            "Sample verification": [
+                "標本照合"
+            ],
             "Saving…": [
                 "保存しています…"
             ],
@@ -1147,6 +1192,15 @@
             "Affected sessions": [
                 "対象セッション"
             ],
+            "Aggregate coverage": [
+                "集計カバレッジ"
+            ],
+            "Complete": [
+                "完全"
+            ],
+            "Incomplete": [
+                "不完全"
+            ],
             "Delete one bounded batch of expired raw events? This cannot be undone.": [
                 "期限切れの生イベントを1バッチ削除しますか？この操作は元に戻せません。"
             ],
@@ -1158,6 +1212,9 @@
             ],
             "Remaining": [
                 "残件数"
+            ],
+            "Aggregating…": [
+                "集計しています…"
             ],
             "Never": [
                 "受信なし"

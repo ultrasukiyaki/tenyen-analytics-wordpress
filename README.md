@@ -19,6 +19,7 @@ Tenyen Analytics is a self-hosted WordPress analytics plugin for pageviews, esti
 - Administrator aliases, plain-text notes, reusable tags, organization watchlists, and private saved views
 - Prospective collection exclusions, non-destructive analysis exclusions, and rule diagnostics
 - Chunked CSV/JSON exports, configurable raw-data retention, resumable cleanup, and storage diagnostics
+- Retention-safe UTC daily aggregates, resumable rebuilds, and mixed raw/aggregate long-range reports
 
 ## Requirements
 
@@ -43,7 +44,7 @@ Raw IP addresses are stored using reversible encryption; HMAC values support exa
 
 ## Updating
 
-Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.7.0 adds lifecycle controls without changing the v0.6.3 database schema or deleting existing analytics and metadata.
+Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Version 0.7.1 upgrades the schema from 0.6.3 by adding two aggregate tables. Existing event rows, annotations, tags, watchlists, saved views, exclusions, settings, GeoLite files, and keys are preserved.
 
 ## Export, retention, and cleanup
 
@@ -51,9 +52,17 @@ The administrator-only Data lifecycle screen exports the raw access/event log, s
 
 IP addresses are omitted by default. Masked export zeroes the final IPv4 octet or retains only the first 48 IPv6 bits. Decrypted raw IP export requires `manage_options`, a valid nonce, selection of the raw mode, and a separate explicit-confirmation checkbox.
 
-Retention supports unlimited, 30, 90, 180, 365, or a validated custom value from 1 to 3,650 days. Cleanup preview shows the UTC cutoff and affected event/session counts. Cleanup deletes at most 1,000 expired events per run, uses an overlap lock, preserves its cutoff and deleted count across continuation runs, and schedules continued work through WP-Cron. Its observable state includes status, last run, next run, remaining rows, and a safe failure message. Until v0.7.1 daily aggregates are available, deleted raw rows permanently remove their historical detail and statistics. Cleanup never deletes settings, annotations, tags, saved views, exclusion rules, GeoLite files, or keys.
+Retention supports unlimited, 30, 90, 180, 365, or a validated custom value from 1 to 3,650 days. Cleanup preview shows the whole-UTC-day cutoff, affected event/session counts, and aggregate coverage. Cleanup deletes at most 1,000 expired events per run, uses an overlap lock, preserves its cutoff and deleted count across continuation runs, and schedules continued work through WP-Cron. It is blocked until every affected UTC day has a current aggregate whose source count, maximum event ID, and analysis-exclusion signature match raw data. A successful cleanup freezes the preserved aggregate boundary. Cleanup never deletes settings, annotations, tags, saved views, exclusion rules, GeoLite files, or keys.
 
 Storage diagnostics show the analytics-table and database sizes, raw event/session counts, oldest/newest timestamps, up to 24 monthly counts, current retention, and cleanup state.
+
+## Daily aggregation and long-range reports
+
+WP-Cron incrementally aggregates completed UTC days and rechecks recent days for late events. Administrators can rebuild one day or a validated range of up to 730 days from Data lifecycle. Each run processes one day, records a checkpoint, uses a lock separate from cleanup, and resumes through WP-Cron. Status includes covered dates, checkpoint, next run, failure state, and a sampled raw-versus-aggregate source check.
+
+Daily totals preserve pageviews, events, estimated visitors and sessions, bounces, entries, exits, engaged time, valid scroll totals and sample counts, Bot events, and fixed-size mergeable visitor/session sketches. Bounded daily dimensions cover content, organizations, traffic channels, referrer domains, campaigns, events, countries, browsers, operating systems, and devices. Organization rows are limited to 100 per day; other potentially high-cardinality dimensions also have explicit caps.
+
+Reports select only complete aggregate days and query raw data for uncovered or partial-day ranges. These portions never overlap. Rates and means are recomputed from additive numerators and denominators. Realtime, access history, individual sessions, individual visitors, and raw event/session exports remain dependent on retained raw rows. After cleanup, later analysis-exclusion changes cannot rewrite frozen historical aggregates, which retain the exclusion policy used when coverage was approved.
 
 ## Exclusion rules
 

@@ -67,7 +67,7 @@ final class TYA_Lifecycle
         }
         update_option('tya_retention_days', $days, false);
         update_option(self::STATE_OPTION, $this->state('idle', null, 0, 0, ''), false);
-        return $this->response(['ok' => true, 'retention_days' => $days, 'warning' => $days > 0 ? __('Raw deletion permanently removes historical detail and statistics until daily aggregates are available in v0.7.1.', 'tenyen-analytics') : '']);
+        return $this->response(['ok' => true, 'retention_days' => $days, 'warning' => $days > 0 ? __('Raw cleanup requires complete daily aggregates. Detailed session and visitor drill-down is still permanently removed.', 'tenyen-analytics') : '']);
     }
 
     public function previewRest(): WP_REST_Response
@@ -78,7 +78,8 @@ final class TYA_Lifecycle
     public function cleanupRest(): WP_REST_Response
     {
         $result = $this->runBatch();
-        return $this->response(['ok' => $result['status'] !== 'failed', 'cleanup' => $result], $result['status'] === 'failed' ? 500 : 200);
+        $ok = !in_array($result['status'], ['failed', 'blocked'], true);
+        return $this->response(['ok' => $ok, 'cleanup' => $result, 'message' => (string)($result['error'] ?? '')], $result['status'] === 'failed' ? 500 : ($result['status'] === 'blocked' ? 409 : 200));
     }
 
     public function scheduledCleanup(): void
@@ -92,13 +93,14 @@ final class TYA_Lifecycle
         global $wpdb;
         $days = self::sanitizeRetention(get_option('tya_retention_days', 90));
         if ($days === 0) return ['retention_days' => 0, 'cutoff' => null, 'events' => 0, 'sessions' => 0];
-        $cutoff = gmdate('Y-m-d H:i:s', time() - $days * DAY_IN_SECONDS);
+        $cutoff = gmdate('Y-m-d', time() - $days * DAY_IN_SECONDS) . ' 00:00:00';
         $table = TYA_Installer::tableName();
         $row = $wpdb->get_row($wpdb->prepare(
             "SELECT COUNT(*) events,COUNT(DISTINCT NULLIF(session_id,'')) sessions FROM {$table} WHERE occurred_at<%s",
             $cutoff
         ), ARRAY_A) ?: [];
-        return ['retention_days' => $days, 'cutoff' => $cutoff, 'events' => (int)($row['events'] ?? 0), 'sessions' => (int)($row['sessions'] ?? 0)];
+        $coverage = (new TYA_Aggregation())->coverageBefore($cutoff);
+        return ['retention_days' => $days, 'cutoff' => $cutoff, 'events' => (int)($row['events'] ?? 0), 'sessions' => (int)($row['sessions'] ?? 0), 'aggregate_coverage' => $coverage];
     }
 
     /** @return array<string,mixed> */
@@ -119,11 +121,28 @@ final class TYA_Lifecycle
         if (!add_option(self::LOCK_OPTION, ['token' => $token, 'expires' => $now + 300], '', false)) return $this->state('locked', null, 0, 0, '');
 
         $previous = get_option(self::STATE_OPTION, []);
-        $cutoff = is_array($previous) && ($previous['status'] ?? '') === 'running' && !empty($previous['cutoff'])
-            ? (string)$previous['cutoff'] : gmdate('Y-m-d H:i:s', $now - $days * DAY_IN_SECONDS);
-        $deletedTotal = is_array($previous) && ($previous['status'] ?? '') === 'running' && ($previous['cutoff'] ?? '') === $cutoff
+        $resuming = is_array($previous) && ($previous['status'] ?? '') === 'running' && !empty($previous['cutoff']);
+        $cutoff = $resuming
+            ? (string)$previous['cutoff'] : gmdate('Y-m-d', $now - $days * DAY_IN_SECONDS) . ' 00:00:00';
+        $deletedTotal = $resuming && ($previous['cutoff'] ?? '') === $cutoff
             ? (int)($previous['deleted_total'] ?? 0) : 0;
         try {
+            $aggregationLock = get_option('tya_aggregation_lock', null);
+            $aggregationState = get_option('tya_aggregation_state', []);
+            if ((is_array($aggregationLock) && (int)($aggregationLock['expires'] ?? 0) > $now) || (is_array($aggregationState) && ($aggregationState['status'] ?? '') === 'running')) {
+                $state = $this->state('blocked', $cutoff, $deletedTotal, 0, __('Cleanup is blocked while aggregation is running.', 'tenyen-analytics'));
+                update_option(self::STATE_OPTION, $state, false);
+                return $state;
+            }
+            if (!$resuming) {
+                $coverage = (new TYA_Aggregation())->coverageBefore($cutoff);
+                if (!$coverage['complete']) {
+                    $state = $this->state('blocked', $cutoff, $deletedTotal, 0, (string)$coverage['message']);
+                    update_option(self::STATE_OPTION, $state, false);
+                    return $state;
+                }
+                update_option(self::STATE_OPTION, $this->state('running', $cutoff, $deletedTotal, 0, ''), false);
+            }
             $table = TYA_Installer::tableName();
             $ids = $wpdb->get_col($wpdb->prepare("SELECT event_id FROM {$table} WHERE occurred_at<%s ORDER BY event_id ASC LIMIT %d", $cutoff, self::BATCH_SIZE)) ?: [];
             $deleted = 0;
@@ -140,6 +159,10 @@ final class TYA_Lifecycle
             $status = $remaining > 0 ? 'running' : 'complete';
             $state = $this->state($status, $cutoff, $deletedTotal, $remaining, '');
             update_option(self::STATE_OPTION, $state, false);
+            if ($status === 'complete') {
+                $frozen = (string)get_option('tya_aggregate_frozen_before', '');
+                if ($frozen === '' || $cutoff > $frozen) update_option('tya_aggregate_frozen_before', $cutoff, false);
+            }
             if ($remaining > 0 && !wp_next_scheduled('tya_cleanup_continue')) wp_schedule_single_event(time() + MINUTE_IN_SECONDS, 'tya_cleanup_continue');
         } catch (Throwable) {
             $state = $this->state('failed', $cutoff, $deletedTotal, 0, __('Cleanup failed. Review database health and retry.', 'tenyen-analytics'));
@@ -242,6 +265,8 @@ final class TYA_Lifecycle
     private function exportChunk(string $dataset, array $filters, int $offset, int $cursor): array
     {
         global $wpdb;
+        $aggregateRows = $this->aggregateExportChunk($dataset, $filters, $offset);
+        if ($aggregateRows !== null) return $aggregateRows;
         $table = TYA_Installer::tableName();
         [$where, $params] = $this->exportWhere($filters, 'e');
         if ($dataset === 'events') {
@@ -269,6 +294,53 @@ final class TYA_Lifecycle
         $sql = "SELECT {$select} FROM {$table} e WHERE " . implode(' AND ', $where) . " GROUP BY {$group} ORDER BY {$group} LIMIT %d OFFSET %d";
         array_push($params, self::EXPORT_CHUNK, $offset);
         return $wpdb->get_results($wpdb->prepare($sql, ...$params), ARRAY_A) ?: [];
+    }
+
+    /** @param array<string,mixed> $filters @return array<int,array<string,mixed>>|null */
+    private function aggregateExportChunk(string $dataset,array $filters,int $offset): ?array
+    {
+        global $wpdb;
+        $type=match($dataset){'content'=>'content','organizations'=>'organization','traffic_sources'=>'traffic_source','campaigns'=>'campaign','event_summary'=>'event',default=>''};
+        if($type==='')return null;
+        $allowed=match($type){
+            'content'=>['path'],'organization'=>['asn','asn_org'],'traffic_source'=>['traffic_channel','referrer_host'],
+            'campaign'=>['utm_source','utm_medium','utm_campaign'],'event'=>['event_type','event_name'],default=>[],
+        };
+        foreach(['traffic_channel','referrer_host','utm_source','utm_medium','utm_campaign','event_type','event_name','path','country_code','region','asn','asn_org'] as $key)if($filters[$key]!==''&&!in_array($key,$allowed,true))return null;
+        if($filters['watched']&&$type!=='organization')return null;
+        if($filters['tag_id']>0&&!in_array($type,['organization','content','traffic_source'],true))return null;
+        $oldestAggregate=(string)$wpdb->get_var('SELECT MIN(aggregate_day) FROM '.TYA_Installer::dailyAggregatesTable());
+        $oldestRaw=(string)$wpdb->get_var('SELECT DATE(MIN(occurred_at)) FROM '.TYA_Installer::tableName());
+        $starts=array_values(array_filter([$filters['from'],$oldestAggregate,$oldestRaw],static fn(string $value):bool=>$value!==''));
+        if($starts===[])return null;
+        $start=($filters['from']!==''?$filters['from']:min($starts)).' 00:00:00';
+        $endDay=$filters['to']!==''?$filters['to']:gmdate('Y-m-d');
+        $end=gmdate('Y-m-d H:i:s',strtotime($endDay.' 00:00:00 UTC')+DAY_IN_SECONDS);
+        $aggregation=new TYA_Aggregation();
+        if($aggregation->boundary($start,$end,$filters['actor'])['source']==='raw')return null;
+        $cap=match($type){'content'=>500,'organization'=>100,'traffic_source'=>300,'campaign','event'=>200,default=>100};
+        $rows=$aggregation->dimensions($type,$start,$end,$filters['actor'],$cap,['watched'=>$filters['watched'],'tag_id'=>$filters['tag_id']]);
+        $rows=array_values(array_filter($rows,function(array $row)use($type,$filters):bool{
+            $key=(string)$row['dimension_key'];$parts=explode(chr(31),$key);
+            return match($type){
+                'content'=>$filters['path']===''||str_contains($key,$filters['path']),
+                'organization'=>($filters['asn']===''||(int)($parts[0]??0)===(int)$filters['asn'])&&($filters['asn_org']===''||stripos((string)($parts[1]??''),$filters['asn_org'])!==false),
+                'traffic_source'=>($filters['traffic_channel']===''||($parts[0]??'')===$filters['traffic_channel'])&&($filters['referrer_host']===''||($parts[1]??'')===$filters['referrer_host']),
+                'campaign'=>($filters['utm_source']===''||($parts[0]??'')===$filters['utm_source'])&&($filters['utm_medium']===''||($parts[1]??'')===$filters['utm_medium'])&&($filters['utm_campaign']===''||($parts[2]??'')===$filters['utm_campaign']),
+                'event'=>($filters['event_type']===''||($parts[0]??'')===$filters['event_type'])&&($filters['event_name']===''||($parts[1]??'')===$filters['event_name']),default=>true,
+            };
+        }));
+        $rows=array_slice($rows,$offset,self::EXPORT_CHUNK);
+        return array_map(static function(array $row)use($type):array{
+            $parts=explode(chr(31),(string)$row['dimension_key']);
+            return match($type){
+                'content'=>['path'=>$row['dimension_key'],'page_title'=>$row['dimension_label'],'pageviews'=>$row['pageviews'],'visitors'=>$row['visitors'],'sessions'=>$row['sessions']],
+                'organization'=>['asn'=>(int)($parts[0]??0),'organization'=>(string)($parts[1]??$row['dimension_label']),'events'=>$row['events'],'pageviews'=>$row['pageviews'],'visitors'=>$row['visitors'],'last_seen'=>$row['last_seen']],
+                'traffic_source'=>['traffic_channel'=>(string)($parts[0]??''),'referrer_host'=>(string)($parts[1]??''),'events'=>$row['events'],'pageviews'=>$row['pageviews'],'sessions'=>$row['sessions']],
+                'campaign'=>['utm_source'=>(string)($parts[0]??''),'utm_medium'=>(string)($parts[1]??''),'utm_campaign'=>(string)($parts[2]??''),'events'=>$row['events'],'pageviews'=>$row['pageviews'],'sessions'=>$row['sessions']],
+                default=>['event_type'=>(string)($parts[0]??''),'event_name'=>(string)($parts[1]??''),'events'=>$row['events'],'sessions'=>$row['sessions'],'last_seen'=>$row['last_seen']],
+            };
+        },$rows);
     }
 
     /** @param array<string,mixed> $filters @return array{0:array<int,string>,1:array<int,mixed>} */
@@ -385,7 +457,8 @@ final class TYA_Lifecycle
         if (!current_user_can('manage_options')) wp_die(__('You do not have permission.', 'tenyen-analytics'));
         ?>
         <div class="wrap tya-pages" id="tya-lifecycle"><header class="tya-page-head"><div><h1><?= esc_html__('Data lifecycle', 'tenyen-analytics') ?> <small>v<?= esc_html(TYA_VERSION) ?></small></h1><p><?= esc_html__('Export analytics, control raw retention, run bounded cleanup, and inspect storage.', 'tenyen-analytics') ?></p></div></header>
-        <div class="notice notice-warning inline"><p><?= esc_html__('Until daily aggregates arrive in v0.7.1, deleting raw rows permanently removes their historical detail and statistics.', 'tenyen-analytics') ?></p></div>
+        <div class="notice notice-warning inline"><p><?= esc_html__('Daily aggregates preserve supported totals, but raw cleanup permanently removes detailed session and visitor drill-down.', 'tenyen-analytics') ?></p></div>
+        <section class="tya-panel"><h2><?= esc_html__('Daily aggregation', 'tenyen-analytics') ?></h2><p><?= esc_html__('Completed UTC days are aggregated incrementally. Rebuild a day or range after late events or exclusion changes.', 'tenyen-analytics') ?></p><pre data-aggregation-status><?= esc_html__('Loading…', 'tenyen-analytics') ?></pre><form data-aggregation-form class="tya-exclusion-form"><label><?= esc_html__('From', 'tenyen-analytics') ?><input type="date" name="from" required></label><label><?= esc_html__('To', 'tenyen-analytics') ?><input type="date" name="to" required></label><button class="button"><?= esc_html__('Rebuild aggregates', 'tenyen-analytics') ?></button></form></section>
         <section class="tya-panel"><h2><?= esc_html__('Retention and cleanup', 'tenyen-analytics') ?></h2><form data-retention-form class="tya-exclusion-form"><label><?= esc_html__('Mode', 'tenyen-analytics') ?><select name="mode"><option value="unlimited"><?= esc_html__('Unlimited', 'tenyen-analytics') ?></option><option value="preset"><?= esc_html__('Preset', 'tenyen-analytics') ?></option><option value="custom"><?= esc_html__('Custom days', 'tenyen-analytics') ?></option></select></label><label><?= esc_html__('Days', 'tenyen-analytics') ?><input type="number" name="days" min="1" max="3650" value="90"></label><button class="button button-primary"><?= esc_html__('Save retention', 'tenyen-analytics') ?></button></form><p data-lifecycle-status aria-live="polite"></p><p><button class="button" data-cleanup-preview><?= esc_html__('Preview cleanup', 'tenyen-analytics') ?></button> <button class="button button-secondary" data-cleanup-run><?= esc_html__('Run one cleanup batch', 'tenyen-analytics') ?></button></p><pre data-cleanup-result></pre></section>
         <section class="tya-panel"><h2><?= esc_html__('Storage diagnostics', 'tenyen-analytics') ?></h2><div data-storage-diagnostics><?= esc_html__('Loading…', 'tenyen-analytics') ?></div></section>
         <section class="tya-panel"><h2><?= esc_html__('Export', 'tenyen-analytics') ?></h2><form method="get" action="<?= esc_url(admin_url('admin-post.php')) ?>" class="tya-exclusion-form" data-export-form><input type="hidden" name="action" value="tya_export"><?php wp_nonce_field('tya_export'); ?><label><?= esc_html__('Dataset', 'tenyen-analytics') ?><select name="dataset"><?php foreach (self::DATASETS as $dataset): ?><option value="<?= esc_attr($dataset) ?>"><?= esc_html($dataset) ?></option><?php endforeach; ?></select></label><label><?= esc_html__('Format', 'tenyen-analytics') ?><select name="format"><option value="csv">CSV</option><option value="json">JSON</option></select></label><label><?= esc_html__('IP privacy', 'tenyen-analytics') ?><select name="ip_mode"><option value="omit"><?= esc_html__('Omit IP', 'tenyen-analytics') ?></option><option value="masked"><?= esc_html__('Masked IP', 'tenyen-analytics') ?></option><option value="raw"><?= esc_html__('Decrypted raw IP', 'tenyen-analytics') ?></option></select></label><label><input type="checkbox" name="confirm_raw" value="1"> <?= esc_html__('I explicitly authorize raw IP export', 'tenyen-analytics') ?></label><label><?= esc_html__('From', 'tenyen-analytics') ?><input type="date" name="from"></label><label><?= esc_html__('To', 'tenyen-analytics') ?><input type="date" name="to"></label><label><?= esc_html__('Visitor type', 'tenyen-analytics') ?><select name="actor"><option value="all"><?= esc_html__('All', 'tenyen-analytics') ?></option><option value="human"><?= esc_html__('Humans only', 'tenyen-analytics') ?></option><option value="bot"><?= esc_html__('Bots only', 'tenyen-analytics') ?></option></select></label><label><?= esc_html__('Traffic channel', 'tenyen-analytics') ?><input name="traffic_channel" maxlength="32"></label><label><?= esc_html__('Referrer domain', 'tenyen-analytics') ?><input name="referrer_host" maxlength="255"></label><label><?= esc_html__('UTM source', 'tenyen-analytics') ?><input name="utm_source" maxlength="128"></label><label><?= esc_html__('UTM medium', 'tenyen-analytics') ?><input name="utm_medium" maxlength="128"></label><label><?= esc_html__('Campaign', 'tenyen-analytics') ?><input name="utm_campaign" maxlength="256"></label><label><?= esc_html__('Event type', 'tenyen-analytics') ?><input name="event_type" maxlength="32"></label><label><?= esc_html__('Event name', 'tenyen-analytics') ?><input name="event_name" maxlength="64"></label><label><?= esc_html__('Content path', 'tenyen-analytics') ?><input name="path" maxlength="512"></label><label><?= esc_html__('Country code', 'tenyen-analytics') ?><input name="country_code" maxlength="2"></label><label><?= esc_html__('Region', 'tenyen-analytics') ?><input name="region" maxlength="128"></label><label>ASN<input name="asn" maxlength="10"></label><label><?= esc_html__('Organization', 'tenyen-analytics') ?><input name="asn_org" maxlength="255"></label><label><?= esc_html__('Tag ID', 'tenyen-analytics') ?><input type="number" name="tag_id" min="0"></label><label><input type="checkbox" name="watched" value="1"> <?= esc_html__('Watched organizations only', 'tenyen-analytics') ?></label><button class="button button-primary"><?= esc_html__('Download export', 'tenyen-analytics') ?></button></form></section></div>

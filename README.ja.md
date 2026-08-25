@@ -19,6 +19,7 @@ Tenyen Analyticsは、ページビュー、推定ユニーク訪問者、セッ�
 - 管理者用の別名、プレーンテキストメモ、再利用可能なタグ、組織ウォッチリスト、非公開の保存ビュー
 - 将来の収集を止める除外、履歴を削除しない分析除外、ルール診断
 - 分割CSV／JSONエクスポート、設定可能な生データ保持、再開可能な削除、ストレージ診断
+- 保持に耐えるUTC日次集計、再開可能な再構築、raw／aggregate混在の長期レポート
 
 ## 要件
 
@@ -43,7 +44,7 @@ Tenyen Analyticsメニューには、ダッシュボード、リアルタイム�
 
 ## 更新
 
-WordPressをバックアップしてから、新しいプラグインをアップロードまたは上書きしてください。uploads内のGeoLite2ファイルは保持してください。v0.7.0はv0.6.3のDBスキーマを変更せず、既存の解析データやメタデータを削除せずにライフサイクル管理を追加します。
+WordPressをバックアップしてから、新しいプラグインをアップロードまたは上書きしてください。uploads内のGeoLite2ファイルは保持してください。v0.7.1は2つの集計tableを追加し、schemaを0.6.3から更新します。既存event row、注釈、tag、watchlist、保存view、除外、設定、GeoLite file、keyは維持します。
 
 ## エクスポート、保持、削除
 
@@ -51,9 +52,17 @@ WordPressをバックアップしてから、新しいプラグインをアッ�
 
 IPアドレスは初期状態で出力しません。マスク出力ではIPv4の最終オクテットを0にし、IPv6は先頭48bitだけを保持します。復号した生IPの出力には`manage_options`権限、有効なnonce、生IPモードの選択、独立した明示確認チェックが必要です。
 
-保持期間は無期限、30／90／180／365日、または1～3,650日の検証済みカスタム値に対応します。削除プレビューではUTCのcutoffと対象イベント／セッション数を表示します。削除は1回最大1,000イベントで、重複実行ロックを使い、継続実行でも同じcutoffと削除済み件数を保持し、残りをWP-Cronへ予約します。状態として実行状況、前回実行、次回実行、残件数、安全な失敗メッセージを確認できます。v0.7.1の日次集計が利用可能になるまでは、生の行を削除すると履歴の詳細と統計を永久に失います。設定、注釈、タグ、保存ビュー、除外ルール、GeoLiteファイル、鍵は削除しません。
+保持期間は無期限、30／90／180／365日、または1～3,650日の検証済みカスタム値に対応します。削除プレビューではUTC日境界のcutoff、対象event／session数、aggregate coverageを表示します。削除は1回最大1,000eventで、重複実行lockを使い、継続実行でも同じcutoffと削除済み件数を保持し、残りをWP-Cronへ予約します。対象となる全UTC日について、元件数、最大event ID、分析除外signatureがrawと一致する最新aggregateがなければ削除を遮断します。削除成功後は保存済みaggregate境界を固定します。設定、注釈、tag、保存view、除外rule、GeoLite file、keyは削除しません。
 
 ストレージ診断には解析テーブル／データベース容量、生イベント／セッション数、最古／最新日時、最大24か月の月別件数、現在の保持期間、削除状態を表示します。
+
+## 日次集計と長期レポート
+
+WP-Cronは完了済みUTC日を段階的に集計し、遅延eventに備えて直近日も再確認します。管理者は「データライフサイクル」から1日または最大730日の検証済み期間を再構築できます。1回に1日を処理し、checkpointを記録し、削除とは別のlockを使ってWP-Cronで再開します。状態には対象期間、checkpoint、次回実行、失敗状態、rawとaggregateの元データ標本照合を表示します。
+
+日次合計はpageview、event、推定visitor／session、bounce、entry、exit、engaged time、有効なscroll合計と標本数、Bot event、固定サイズで結合可能なvisitor／session sketchを保持します。上限付き日次dimensionはcontent、organization、traffic channel、referrer domain、campaign、event、country、browser、OS、deviceを対象にします。organizationは1日100件までとし、ほかの高カーディナリティdimensionにも明示的な上限があります。
+
+reportは完了済みのaggregate日だけを選び、未集計または日途中の範囲をrawから取得します。両者は重複しません。rateとmeanは加算可能な分子／分母から再計算します。realtime、access history、個別session、個別visitor、生event／session exportは保持中のraw rowに依存します。削除後に分析除外を変更しても固定済みの過去aggregateは書き換えられず、coverage承認時の除外方針を維持します。
 
 ## 除外ルール
 

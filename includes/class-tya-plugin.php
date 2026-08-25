@@ -17,11 +17,12 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Plugin
 {
-    public const UI_BUILD = '0.7.0-lifecycle';
+    public const UI_BUILD = '0.7.1-aggregation';
     private static ?self $instance = null;
     private ?TYA_Session_Admin $sessionAdmin = null;
     private ?TYA_Metadata $metadata = null;
     private ?TYA_Exclusions $exclusions = null;
+    private ?TYA_Aggregation $aggregation = null;
     private ?TYA_Lifecycle $lifecycle = null;
 
     public static function instance(): self
@@ -32,6 +33,7 @@ final class TYA_Plugin
     public function boot(): void
     {
         TYA_Installer::maybeUpgrade();
+        $this->aggregation()->boot();
         $this->lifecycle()->boot();
         add_action('wp_enqueue_scripts', [$this, 'enqueueTracker']);
         add_action('rest_api_init', [$this, 'registerRoutes']);
@@ -163,6 +165,8 @@ final class TYA_Plugin
                 'retention' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/lifecycle/retention')),
                 'preview' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/lifecycle/cleanup/preview')),
                 'cleanup' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/lifecycle/cleanup/run')),
+                'aggregationStatus' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/aggregation/status')),
+                'aggregationRebuild' => esc_url_raw(rest_url('tenyen-analytics/v1/admin/aggregation/rebuild')),
                 'nonce' => wp_create_nonce('wp_rest'),
             ], JSON_UNESCAPED_SLASHES) . ';', 'before');
         }
@@ -202,6 +206,7 @@ final class TYA_Plugin
     {
         $this->metadata()->registerRoutes();
         $this->exclusions()->registerRoutes();
+        $this->aggregation()->registerRoutes();
         $this->lifecycle()->registerRoutes();
         register_rest_route('tenyen-analytics/v1', '/collect', [
             'methods' => WP_REST_Server::CREATABLE,
@@ -512,19 +517,7 @@ final class TYA_Plugin
         $analysis = $this->analysisFilters();
         $actorSql = $this->actorSql($analysis['actor']);
         $analysisOnly = $this->analysisWhere('');
-        $summary = $wpdb->get_row($wpdb->prepare(
-            "SELECT SUM(event_type='pageview') pageviews,
-                    COUNT(DISTINCT CASE WHEN event_type='pageview' THEN NULLIF(visitor_id,'') END) visitors,
-                    COUNT(DISTINCT CASE WHEN event_type='pageview' THEN NULLIF(session_id,'') END) sessions,
-                    AVG(CASE WHEN event_type='engagement' AND duration_ms>0 THEN duration_ms END) avg_duration_ms,
-                    AVG(CASE WHEN event_type='engagement' THEN scroll_depth END) avg_scroll
-             FROM {$table} WHERE occurred_at>=%s AND occurred_at<%s{$actorSql}",
-            $analysis['start_utc'], $analysis['end_utc']
-        ), ARRAY_A) ?: [];
-        $summary['bot_events'] = (int)$wpdb->get_var($wpdb->prepare(
-            "SELECT COUNT(*) FROM {$table} WHERE occurred_at>=%s AND occurred_at<%s AND is_bot=1{$analysisOnly}",
-            $analysis['start_utc'], $analysis['end_utc']
-        ));
+        $summary = $this->aggregation()->summary($analysis['start_utc'], $analysis['end_utc'], $analysis['actor']);
 
         $offsetMinutes = intdiv($analysis['start_local']->getOffset(), 60);
         $grain = $analysis['days'] <= 2 ? 'hour' : ($analysis['days'] <= 62 ? 'day' : 'month');
@@ -532,19 +525,37 @@ final class TYA_Plugin
         $bucket = $grain === 'hour'
             ? "CONCAT(DATE({$local}),' ',LPAD(HOUR({$local}),2,'0'),':00')"
             : ($grain === 'day' ? "DATE({$local})" : "CONCAT(YEAR({$local}),'-',LPAD(MONTH({$local}),2,'0'),'-01')");
-        $timelineDb = $wpdb->get_results($wpdb->prepare(
-            "SELECT {$bucket} bucket,COUNT(*) pageviews,COUNT(DISTINCT NULLIF(visitor_id,'')) visitors,COUNT(DISTINCT NULLIF(session_id,'')) sessions
-             FROM {$table} WHERE event_type='pageview' AND occurred_at>=%s AND occurred_at<%s{$actorSql}
-             GROUP BY {$bucket} ORDER BY {$bucket}",
-            $analysis['start_utc'], $analysis['end_utc']
-        ), ARRAY_A) ?: [];
-        $timeline = $this->fillTimeline($timelineDb, $analysis['start_local'], $analysis['end_local'], $grain);
-        $topPages = $wpdb->get_results($wpdb->prepare(
-            "SELECT path,MAX(page_title) page_title,COUNT(*) pageviews,COUNT(DISTINCT session_id) sessions
-             FROM {$table} WHERE event_type='pageview' AND occurred_at>=%s AND occurred_at<%s{$actorSql}
-             GROUP BY path ORDER BY pageviews DESC,sessions DESC LIMIT 5",
-            $analysis['start_utc'], $analysis['end_utc']
-        ), ARRAY_A) ?: [];
+        if ($grain === 'hour') {
+            $timelineDb = $wpdb->get_results($wpdb->prepare(
+                "SELECT {$bucket} bucket,COUNT(*) pageviews,COUNT(DISTINCT NULLIF(visitor_id,'')) visitors,COUNT(DISTINCT NULLIF(session_id,'')) sessions
+                 FROM {$table} WHERE event_type='pageview' AND occurred_at>=%s AND occurred_at<%s{$actorSql}
+                 GROUP BY {$bucket} ORDER BY {$bucket}",
+                $analysis['start_utc'], $analysis['end_utc']
+            ), ARRAY_A) ?: [];
+        } else {
+            $timelineDb = $this->aggregation()->dailyTimeline($analysis['start_utc'], $analysis['end_utc'], $analysis['actor']);
+            if ($grain === 'month') {
+                $monthly = [];
+                foreach ($timelineDb as $row) {
+                    $key = substr($row['bucket'], 0, 7) . '-01';
+                    if (!isset($monthly[$key])) $monthly[$key] = ['bucket'=>$key,'pageviews'=>0,'visitors'=>0,'sessions'=>0];
+                    foreach (['pageviews','visitors','sessions'] as $metric) $monthly[$key][$metric] += (int)$row[$metric];
+                }
+                $timelineDb = array_values($monthly);
+            }
+        }
+        if ($grain === 'hour') {
+            $timelineStart=$analysis['start_local'];$timelineEnd=$analysis['end_local'];
+        } else {
+            $utc=new DateTimeZone('UTC');
+            $timelineStart=new DateTimeImmutable(substr($analysis['start_utc'],0,10),$utc);
+            $timelineEnd=new DateTimeImmutable(substr($analysis['end_utc'],0,10),$utc);
+            if(substr($analysis['end_utc'],11)!=='00:00:00')$timelineEnd=$timelineEnd->modify('+1 day');
+        }
+        $timeline = $this->fillTimeline($timelineDb, $timelineStart, $timelineEnd, $grain);
+        $topPages = array_map(static fn(array $row): array => [
+            'path'=>$row['dimension_key'],'page_title'=>$row['dimension_label'],'pageviews'=>$row['pageviews'],'sessions'=>$row['sessions'],
+        ], $this->aggregation()->dimensions('content',$analysis['start_utc'],$analysis['end_utc'],$analysis['actor'],5));
         $recent = $wpdb->get_results("SELECT * FROM {$table} WHERE event_type='pageview' AND is_bot=0{$analysisOnly} ORDER BY event_id DESC LIMIT 8", ARRAY_A) ?: [];
         $candidates = $wpdb->get_results("SELECT * FROM {$table} WHERE event_type='pageview' AND is_bot=0 AND asn_org<>''{$analysisOnly} ORDER BY event_id DESC LIMIT 120", ARRAY_A) ?: [];
         $notable = [];
@@ -573,7 +584,7 @@ final class TYA_Plugin
         ] as $label => $value) {
             echo '<div class="tya-card">'.esc_html($label).'<b>'.esc_html($value).'</b></div>';
         }
-        echo '</div><div class="tya-chart-card"><h3>'.esc_html__('Pageviews / Visitors / Sessions trend', 'tenyen-analytics').'</h3><canvas data-tya-line></canvas><div class="tya-chart-legend"><span>'.esc_html__('Pageviews', 'tenyen-analytics').'</span><span>'.esc_html__('Visitors', 'tenyen-analytics').'</span><span>'.esc_html__('Sessions', 'tenyen-analytics').'</span></div></div></section>';
+        echo '</div><div class="tya-chart-card"><h3>'.esc_html__('Pageviews / Visitors / Sessions trend', 'tenyen-analytics').($grain==='hour'?'':' <small>UTC</small>').'</h3><canvas data-tya-line></canvas><div class="tya-chart-legend"><span>'.esc_html__('Pageviews', 'tenyen-analytics').'</span><span>'.esc_html__('Visitors', 'tenyen-analytics').'</span><span>'.esc_html__('Sessions', 'tenyen-analytics').'</span></div></div></section>';
         echo '<div class="tya-insight-grid"><section class="tya-panel"><h2>'.esc_html__('Notable organization activity', 'tenyen-analytics').'</h2>';
         if ($notable === []) echo '<p class="description">'.esc_html__('No notable organization activity yet.', 'tenyen-analytics').'</p>';
         foreach (array_values($notable) as $row) {
@@ -637,9 +648,8 @@ final class TYA_Plugin
     public function renderContent(): void
     {
         $this->ensureAdmin();
-        global $wpdb;
-        $table=TYA_Installer::tableName();$analysis=$this->analysisFilters();
-        $rows=(new TYA_Session_Repository($wpdb,$table))->contentJourneyMetrics($analysis['start_utc'],$analysis['end_utc'],$analysis['actor']);
+        $analysis=$this->analysisFilters();
+        $rows=array_map(static fn(array $row):array=>array_merge($row,['path'=>$row['dimension_key'],'page_title'=>$row['dimension_label']]),$this->aggregation()->dimensions('content',$analysis['start_utc'],$analysis['end_utc'],$analysis['actor'],100));
         $this->pageStart(__('Content', 'tenyen-analytics'), __('View page performance for posts and pages.', 'tenyen-analytics'));
         echo '<section class="tya-panel"><h2>'.esc_html__('Top content', 'tenyen-analytics').'</h2>';
         $this->analysisFilterForm($analysis);
@@ -657,7 +667,7 @@ final class TYA_Plugin
     {
         $this->ensureAdmin();
         global $wpdb;$table=TYA_Installer::tableName();$analysis=$this->analysisFilters();$actorSql=$this->actorSql($analysis['actor']);
-        $rows = $wpdb->get_results($wpdb->prepare("SELECT CASE WHEN referrer='' THEN 'Direct' ELSE COALESCE(NULLIF(SUBSTRING_INDEX(SUBSTRING_INDEX(referrer,'/',3),'/',-1),''),'Unknown') END referrer_host,MAX(referrer) sample_url,COUNT(*) pageviews,COUNT(DISTINCT session_id) sessions FROM {$table} WHERE event_type='pageview' AND occurred_at>=%s AND occurred_at<%s{$actorSql} GROUP BY referrer_host ORDER BY pageviews DESC LIMIT 100",$analysis['start_utc'],$analysis['end_utc']),ARRAY_A)?:[];
+        $rows=array_map(static function(array $row):array{$host=(string)$row['dimension_key'];return array_merge($row,['referrer_host'=>$host,'sample_url'=>$host==='Direct'?'':'https://'.$host]);},$this->aggregation()->dimensions('referrer',$analysis['start_utc'],$analysis['end_utc'],$analysis['actor'],100));
         $clicks = $wpdb->get_results($wpdb->prepare("SELECT event_type,target_url,COUNT(*) events FROM {$table} WHERE event_type IN('outbound','download','internal_link_click') AND occurred_at>=%s AND occurred_at<%s{$actorSql} GROUP BY event_type,target_url ORDER BY events DESC LIMIT 50",$analysis['start_utc'],$analysis['end_utc']),ARRAY_A)?:[];
         $this->pageStart(__('Referrers', 'tenyen-analytics'), __('Check direct, search, external sources, and outbound clicks.', 'tenyen-analytics'));
         echo '<section class="tya-panel"><h2>'.esc_html__('Referrer domains', 'tenyen-analytics').'</h2>';
@@ -680,8 +690,8 @@ final class TYA_Plugin
     public function renderOrganizations(): void
     {
         $this->ensureAdmin();
-        global $wpdb;$table=TYA_Installer::tableName();$analysis=$this->analysisFilters();$actorSql=$this->actorSql($analysis['actor']);
-        $rows=$wpdb->get_results($wpdb->prepare("SELECT asn,asn_org,COUNT(*) pageviews,COUNT(DISTINCT visitor_id) visitors,COUNT(DISTINCT session_id) sessions,MAX(occurred_at) last_seen FROM {$table} WHERE event_type='pageview' AND occurred_at>=%s AND occurred_at<%s{$actorSql} GROUP BY asn,asn_org ORDER BY pageviews DESC LIMIT 200",$analysis['start_utc'],$analysis['end_utc']),ARRAY_A)?:[];
+        $analysis=$this->analysisFilters();
+        $rows=array_map(static function(array $row):array{$parts=explode(chr(31),(string)$row['dimension_key'],2);return array_merge($row,['asn'=>(int)($parts[0]??0),'asn_org'=>(string)($parts[1]??$row['dimension_label'])]);},$this->aggregation()->dimensions('organization',$analysis['start_utc'],$analysis['end_utc'],$analysis['actor'],100));
         $this->pageStart(__('ASN & organizations', 'tenyen-analytics'), __('Classify network organizations registered to incoming IPs.', 'tenyen-analytics'));
         echo '<section class="tya-panel"><h2>'.esc_html__('ASN & organization ranking', 'tenyen-analytics').'</h2>';
         $this->analysisFilterForm($analysis);
@@ -699,15 +709,15 @@ final class TYA_Plugin
     public function renderAudience(): void
     {
         $this->ensureAdmin();
-        global $wpdb;$table=TYA_Installer::tableName();$analysis=$this->analysisFilters();$actorSql=$this->actorSql($analysis['actor']);
-        $total=(int)$wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table} WHERE event_type='pageview' AND occurred_at>=%s AND occurred_at<%s{$actorSql}",$analysis['start_utc'],$analysis['end_utc']));$breakdowns=[];
+        $analysis=$this->analysisFilters();
+        $total=(int)$this->aggregation()->summary($analysis['start_utc'],$analysis['end_utc'],$analysis['actor'])['pageviews'];$breakdowns=[];
         foreach ([
             'browser' => [__('Browser', 'tenyen-analytics'), 'browser'],
             'os' => [__('OS', 'tenyen-analytics'), 'os'],
             'device' => [__('Device', 'tenyen-analytics'), 'device_type'],
             'country' => [__('Country', 'tenyen-analytics'), 'country_name'],
         ] as $key => [$title, $column]) {
-            $items = $wpdb->get_results($wpdb->prepare("SELECT COALESCE(NULLIF({$column},''),'Unknown') label,COUNT(*) value FROM {$table} WHERE event_type='pageview' AND occurred_at>=%s AND occurred_at<%s{$actorSql} GROUP BY {$column} ORDER BY value DESC LIMIT 8", $analysis['start_utc'], $analysis['end_utc']), ARRAY_A) ?: [];
+            $items = array_map(static fn(array $row):array=>['label'=>$row['dimension_label']?:$row['dimension_key'],'value'=>$row['pageviews']],$this->aggregation()->dimensions($key,$analysis['start_utc'],$analysis['end_utc'],$analysis['actor'],8));
             $breakdowns[$key] = ['title' => $title, 'rows' => $this->withOther($items, $total)];
         }
         $this->pageStart(__('Audience', 'tenyen-analytics'), __('Review browser, OS, device, and country composition.', 'tenyen-analytics'));
@@ -730,8 +740,8 @@ final class TYA_Plugin
     public function renderEngagement(): void
     {
         $this->ensureAdmin();
-        global $wpdb;$table=TYA_Installer::tableName();$analysis=$this->analysisFilters();$actorSql=$this->actorSql($analysis['actor'], 'p');
-        $rows=$wpdb->get_results($wpdb->prepare("SELECT p.path,MAX(p.page_title) page_title,COUNT(*) pageviews,COALESCE(AVG((SELECT MAX(e.duration_ms) FROM {$table} e WHERE e.session_id=p.session_id AND e.path=p.path AND e.event_type='engagement' AND e.occurred_at>=p.occurred_at".$this->analysisWhere('e').")),0) avg_duration,COALESCE(AVG((SELECT MAX(e2.scroll_depth) FROM {$table} e2 WHERE e2.session_id=p.session_id AND e2.path=p.path AND e2.event_type='engagement' AND e2.occurred_at>=p.occurred_at".$this->analysisWhere('e2').")),0) avg_scroll FROM {$table} p WHERE p.event_type='pageview' AND p.occurred_at>=%s AND p.occurred_at<%s{$actorSql} GROUP BY p.path ORDER BY pageviews DESC LIMIT 100",$analysis['start_utc'],$analysis['end_utc']),ARRAY_A)?:[];
+        $analysis=$this->analysisFilters();
+        $rows=array_map(static fn(array $row):array=>array_merge($row,['path'=>$row['dimension_key'],'page_title'=>$row['dimension_label']]),$this->aggregation()->dimensions('content',$analysis['start_utc'],$analysis['end_utc'],$analysis['actor'],100));
         $this->pageStart(__('Engagement', 'tenyen-analytics'), __('Monitor average visit time and scroll rate by page.', 'tenyen-analytics'));
         echo '<section class="tya-panel"><h2>'.esc_html__('Page engagement', 'tenyen-analytics').'</h2>';
         $this->analysisFilterForm($analysis);
@@ -1754,5 +1764,10 @@ final class TYA_Plugin
     private function lifecycle(): TYA_Lifecycle
     {
         return $this->lifecycle ??= new TYA_Lifecycle();
+    }
+
+    private function aggregation(): TYA_Aggregation
+    {
+        return $this->aggregation ??= new TYA_Aggregation();
     }
 }

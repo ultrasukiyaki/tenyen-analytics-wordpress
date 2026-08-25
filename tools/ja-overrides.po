@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Tenyen Analytics for WordPress 0.7.0\n"
+"Project-Id-Version: Tenyen Analytics for WordPress 0.7.1\n"
 "PO-Revision-Date: 2026-07-23 00:00+0900\n"
 "Last-Translator: 10yendama.com\n"
 "Language-Team: Japanese\n"
@@ -1113,9 +1113,6 @@ msgstr "カスタム保持期間は1～3650日で指定してください。"
 msgid "Invalid retention mode."
 msgstr "保持モードが正しくありません。"
 
-msgid "Raw deletion permanently removes historical detail and statistics until daily aggregates are available in v0.7.1."
-msgstr "v0.7.1で日次集計が利用可能になるまでは、生データの削除によって履歴の詳細と統計が永久に失われます。"
-
 msgid "Cleanup failed. Review database health and retry."
 msgstr "削除処理に失敗しました。データベースの状態を確認して再試行してください。"
 
@@ -1127,9 +1124,6 @@ msgstr "生IPのエクスポートには明示確認が必要です。"
 
 msgid "Export analytics, control raw retention, run bounded cleanup, and inspect storage."
 msgstr "解析データの出力、生データ保持、件数制限付き削除、ストレージ確認を行います。"
-
-msgid "Until daily aggregates arrive in v0.7.1, deleting raw rows permanently removes their historical detail and statistics."
-msgstr "v0.7.1の日次集計が利用可能になるまでは、生の行を削除すると履歴の詳細と統計が永久に失われます。"
 
 msgid "Retention and cleanup"
 msgstr "保持と削除"
@@ -1235,6 +1229,75 @@ msgstr "次回実行"
 
 msgid "Failure"
 msgstr "失敗"
+
+msgid "Enter a valid aggregate date range."
+msgstr "正しい集計期間を入力してください。"
+
+msgid "Only completed UTC days can be aggregated."
+msgstr "完了済みのUTC日だけを集計できます。"
+
+msgid "Aggregate rebuilds are limited to 730 days."
+msgstr "集計の再構築は730日以内に制限されています。"
+
+msgid "Cleanup is currently running."
+msgstr "現在、削除処理を実行中です。"
+
+msgid "Aggregation or cleanup is already running."
+msgstr "集計または削除処理はすでに実行中です。"
+
+msgid "Aggregation failed. Review database health and retry."
+msgstr "集計に失敗しました。データベースの状態を確認して再試行してください。"
+
+msgid "Invalid cleanup cutoff."
+msgstr "削除の基準日時が正しくありません。"
+
+msgid "Cleanup is blocked until every affected UTC day has a current aggregate."
+msgstr "対象となるすべてのUTC日に最新の集計が作成されるまで削除できません。"
+
+msgid "Raw cleanup requires complete daily aggregates. Detailed session and visitor drill-down is still permanently removed."
+msgstr "生データの削除には完全な日次集計が必要です。セッションと訪問者の詳細表示は永久に失われます。"
+
+msgid "Cleanup is blocked while aggregation is running."
+msgstr "集計の実行中は削除できません。"
+
+msgid "Daily aggregates preserve supported totals, but raw cleanup permanently removes detailed session and visitor drill-down."
+msgstr "日次集計は対応する合計を維持しますが、生データを削除するとセッションと訪問者の詳細表示は永久に失われます。"
+
+msgid "Daily aggregation"
+msgstr "日次集計"
+
+msgid "Completed UTC days are aggregated incrementally. Rebuild a day or range after late events or exclusion changes."
+msgstr "完了済みのUTC日を段階的に集計します。遅延イベントや除外変更の後は日付または期間を再構築してください。"
+
+msgid "Rebuild aggregates"
+msgstr "集計を再構築"
+
+msgid "Aggregated days"
+msgstr "集計済み日数"
+
+msgid "Oldest aggregate"
+msgstr "最古の集計"
+
+msgid "Newest aggregate"
+msgstr "最新の集計"
+
+msgid "Checkpoint"
+msgstr "チェックポイント"
+
+msgid "Sample verification"
+msgstr "標本照合"
+
+msgid "Aggregate coverage"
+msgstr "集計カバレッジ"
+
+msgid "Complete"
+msgstr "完全"
+
+msgid "Incomplete"
+msgstr "不完全"
+
+msgid "Aggregating…"
+msgstr "集計しています…"
 
 msgid "Month"
 msgstr "月"

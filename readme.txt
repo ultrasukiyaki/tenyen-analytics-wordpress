@@ -3,7 +3,7 @@ Contributors: 10yendama
 Tags: analytics, privacy, pageviews, sessions, geolocation
 Requires at least: 6.2
 Requires PHP: 8.1
-Stable tag: 0.7.0
+Stable tag: 0.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,13 @@ No. Analytics data is preserved unless an administrator removes it manually.
 No. The built-in MMDB reader and local analytics reports work without Composer or an external analytics service.
 
 == Changelog ==
+
+= 0.7.1 =
+
+* Added checkpointed, idempotent UTC daily aggregates and resumable day/range rebuilds.
+* Added non-overlapping raw/aggregate reporting with mergeable visitor/session estimates and additive engagement formulas.
+* Cleanup now requires verified aggregate coverage before deleting raw history.
+* Added two aggregate tables and bounded high-cardinality dimensions; existing analytics and metadata remain intact.
 
 = 0.7.0 =
 
@@ -87,6 +94,10 @@ No. The built-in MMDB reader and local analytics reports work without Composer o
 * Added a built-in MMDB reader and asynchronous access history.
 
 == Upgrade Notice ==
+
+= 0.7.1 =
+
+Adds two daily-aggregate tables and preserves supported long-range statistics before raw cleanup. Back up WordPress and allow aggregation to complete before enabling finite retention.
 
 = 0.7.0 =
 

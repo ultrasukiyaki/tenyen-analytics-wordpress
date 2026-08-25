@@ -32,8 +32,9 @@ function add_action(string $hook, callable $callback): void { $GLOBALS['tya_acti
 class WP_REST_Request { public function __construct(private array $json=[]) {} public function get_json_params(): array { return $this->json; } }
 class WP_REST_Response { public function __construct(public mixed $data, public int $status=200) {} public function header(string $name, string $value): void {} }
 
-final class TYA_Installer { public static function tableName(): string { return 'wp_tya_events'; } public static function annotationsTable(): string { return 'wp_tya_annotations'; } public static function entityTagsTable(): string { return 'wp_tya_entity_tags'; } }
+final class TYA_Installer { public static function tableName(): string { return 'wp_tya_events'; } public static function dailyAggregatesTable(): string { return 'wp_tya_daily'; } public static function annotationsTable(): string { return 'wp_tya_annotations'; } public static function entityTagsTable(): string { return 'wp_tya_entity_tags'; } }
 final class TYA_Plugin { public static function instance(): self { static $instance; return $instance ??= new self(); } public function analysisWhere(string $alias=''): string { return ' AND NOT (' . $alias . '.is_bot=1)'; } }
+final class TYA_Aggregation { public function coverageBefore(string $cutoff): array { $complete=$GLOBALS['tya_coverage_complete']??true; return ['complete'=>$complete,'cutoff'=>substr($cutoff,0,10).' 00:00:00','missing_days'=>$complete?0:1,'message'=>$complete?'':'Cleanup is blocked until every affected UTC day has a current aggregate.']; } public function boundary(string $start,string $end,string $actor): array { return ['aggregate_days'=>['2026-08-01'],'raw_ranges'=>[],'source'=>'aggregate']; } public function dimensions(string $type,string $start,string $end,string $actor,int $limit,array $filters=[]): array { return $GLOBALS['tya_aggregate_dimensions']??[]; } }
 
 final class LifecycleWpdb
 {
@@ -59,7 +60,7 @@ final class LifecycleWpdb
         $ids=array_map('intval',explode(',',$match[1])); $before=count($this->expired);
         $this->expired=array_values(array_diff($this->expired,$ids)); $count=$before-count($this->expired); $this->deleted+=$count; return $count;
     }
-    public function get_var(string $query): int { return str_contains($query,'information_schema') ? 4096 : count($this->expired); }
+    public function get_var(string $query): int|string { if(str_contains($query,'MIN(aggregate_day)')||str_contains($query,'DATE(MIN(occurred_at))'))return '2026-08-01';return str_contains($query,'information_schema') ? 4096 : count($this->expired); }
     public function get_row(string $query, string $output): array
     {
         if (str_starts_with($query,'SHOW TABLE STATUS')) return ['Data_length'=>1024,'Index_length'=>512];
@@ -116,12 +117,23 @@ assertLifecycle($unlimitedSave->status===200 && get_option('tya_retention_days')
 $GLOBALS['tya_options']['tya_retention_days']=90;
 $GLOBALS['wpdb']->expired=range(1,1500);
 $preview=$lifecycle->preview();
-assertLifecycle($preview['events']===1500 && $preview['sessions']===3 && $preview['cutoff']!==null,'Cleanup preview failed.');
+assertLifecycle($preview['events']===1500 && $preview['sessions']===3 && $preview['cutoff']!==null && $preview['aggregate_coverage']['complete'],'Cleanup preview failed.');
+$GLOBALS['tya_coverage_complete']=false;
+$blockedCoverage=$lifecycle->runBatch();
+assertLifecycle($blockedCoverage['status']==='blocked' && count($GLOBALS['wpdb']->expired)===1500,'Cleanup was not blocked on incomplete aggregate coverage.');
+$GLOBALS['tya_coverage_complete']=true;
+$GLOBALS['tya_options']['tya_aggregation_state']=['status'=>'running'];
+$blockedAggregation=$lifecycle->runBatch();
+assertLifecycle($blockedAggregation['status']==='blocked' && count($GLOBALS['wpdb']->expired)===1500,'Cleanup ran between resumable aggregation batches.');
+unset($GLOBALS['tya_options']['tya_aggregation_state']);
 $first=$lifecycle->runBatch();
 assertLifecycle($first['status']==='running' && $first['deleted_total']===1000 && $first['remaining']===500,'First cleanup batch failed.');
 assertLifecycle(isset($GLOBALS['tya_scheduled']['tya_cleanup_continue']),'Cleanup continuation was not scheduled.');
+$GLOBALS['tya_coverage_complete']=false;
 $second=$lifecycle->runBatch();
 assertLifecycle($second['status']==='complete' && $second['deleted_total']===1500 && $second['remaining']===0,'Cleanup resume failed.');
+assertLifecycle(get_option('tya_aggregate_frozen_before','')===$second['cutoff'],'Completed cleanup did not freeze its preserved aggregate boundary.');
+$GLOBALS['tya_coverage_complete']=true;
 assertLifecycle($GLOBALS['tya_options']['tya_annotation_sentinel']==='preserve','Cleanup changed unrelated metadata.');
 
 $GLOBALS['wpdb']->expired=[2001];
@@ -160,6 +172,10 @@ assertLifecycle(str_contains($GLOBALS['wpdb']->lastQuery,'NOT (e.is_bot=1)'),'An
 $filtered=$filters; $filtered['event_type']='pageview'; $filtered['utm_campaign']='launch'; $filtered['country_code']='JP'; $filtered['watched']=true; $filtered['tag_id']=5;
 ob_start(); $stream->invoke($lifecycle,'events','json','omit',$filtered); ob_end_clean();
 assertLifecycle(str_contains($GLOBALS['wpdb']->lastQuery,"e.event_type='pageview'") && str_contains($GLOBALS['wpdb']->lastQuery,"e.utm_campaign='launch'") && str_contains($GLOBALS['wpdb']->lastQuery,'wp_tya_annotations') && str_contains($GLOBALS['wpdb']->lastQuery,'r.tag_id=5'),'Filtered export query failed.');
+$GLOBALS['tya_aggregate_dimensions']=[['dimension_key'=>'newsletter'.chr(31).'email'.chr(31).'launch','dimension_label'=>'launch','events'=>9,'pageviews'=>7,'sessions'=>4,'visitors'=>3,'last_seen'=>'2026-08-01 12:00:00']];
+$aggregateExport=new ReflectionMethod($lifecycle,'aggregateExportChunk');$aggregateExport->setAccessible(true);
+$campaignExport=$aggregateExport->invoke($lifecycle,'campaigns',$filters,0);
+assertLifecycle($campaignExport[0]['utm_source']==='newsletter'&&$campaignExport[0]['events']===9,'Aggregate-backed summary export failed.');
 ob_start(); $stream->invoke($lifecycle,'events','csv','omit',$filters); $csv=ob_get_clean();
 assertLifecycle(str_contains($csv,"'=HYPERLINK"),'CSV export did not neutralize a formula field.');
 $GLOBALS['wpdb']->exportRows=[];

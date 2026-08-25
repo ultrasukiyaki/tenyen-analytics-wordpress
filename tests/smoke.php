@@ -58,8 +58,8 @@ class WP_REST_Response
 require dirname(__DIR__) . '/tenyen-analytics.php';
 
 $plugin = TYA_Plugin::instance();
-if (TYA_VERSION !== '0.7.0' || TYA_Installer::SCHEMA_VERSION !== '0.6.3') {
-    throw new RuntimeException('v0.7.0 must preserve the v0.6.3 schema baseline.');
+if (TYA_VERSION !== '0.7.1' || TYA_Installer::SCHEMA_VERSION !== '0.7.1') {
+    throw new RuntimeException('v0.7.1 aggregate schema upgrade failed.');
 }
 $sessionAdmin = new TYA_Session_Admin();
 $sessionHtmlMethod = new ReflectionMethod($sessionAdmin, 'sessionHtml');
@@ -131,6 +131,9 @@ $lifecycleCleanup = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/lifecycle/
 if (!$lifecycleDiagnostics || !$lifecycleRetention || !$lifecyclePreview || !$lifecycleCleanup) {
     throw new RuntimeException('Lifecycle diagnostics, retention, preview, and cleanup REST routes did not register.');
 }
+$aggregationStatus = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/aggregation/status'] ?? null;
+$aggregationRebuild = $GLOBALS['tya_routes']['tenyen-analytics/v1/admin/aggregation/rebuild'] ?? null;
+if (!$aggregationStatus || !$aggregationRebuild) throw new RuntimeException('Aggregation status and rebuild REST routes did not register.');
 if (TYA_Metadata::entityKey('organization', 2516) !== '2516'
     || TYA_Metadata::entityKey('organization', 0) !== ''
     || TYA_Metadata::entityKey('visitor', 'visitor_A-1') !== 'visitor_A-1'
@@ -164,6 +167,9 @@ if (($diagnosticRoute['permission_callback'])() !== false) {
 }
 foreach ([$lifecycleDiagnostics,$lifecycleRetention,$lifecyclePreview,$lifecycleCleanup] as $route) {
     if (($route['permission_callback'])() !== false) throw new RuntimeException('Unauthorized lifecycle REST operation was allowed.');
+}
+foreach ([$aggregationStatus,$aggregationRebuild] as $route) {
+    if (($route['permission_callback'])() !== false) throw new RuntimeException('Unauthorized aggregate operation was allowed.');
 }
 $response = $plugin->dashboardWidget(new WP_REST_Request());
 if ($response->status !== 403) {

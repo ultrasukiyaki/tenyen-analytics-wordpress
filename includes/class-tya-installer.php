@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Installer
 {
-    public const SCHEMA_VERSION = '0.6.3';
+    public const SCHEMA_VERSION = '0.7.1';
     public static function tableName(): string
     {
         global $wpdb;
@@ -85,6 +85,8 @@ final class TYA_Installer
         $relations = self::entityTagsTable();
         $views = self::savedViewsTable();
         $exclusions = self::exclusionsTable();
+        $daily = self::dailyAggregatesTable();
+        $dimensions = self::dailyDimensionsTable();
         dbDelta("CREATE TABLE {$annotations} (
             annotation_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
             entity_type VARCHAR(32) NOT NULL,
@@ -148,6 +150,55 @@ final class TYA_Installer
             PRIMARY KEY  (rule_id),
             KEY active_scope (enabled,scope,rule_type)
         ) {$charset};");
+        dbDelta("CREATE TABLE {$daily} (
+            aggregate_day DATE NOT NULL,
+            actor VARCHAR(8) NOT NULL,
+            pageviews BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            events BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            visitors BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            sessions BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            bounces BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            entries BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            exits BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            engaged_ms BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            engagement_samples BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            scroll_sum BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            scroll_samples BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            bot_events BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            visitor_sketch MEDIUMBLOB NULL,
+            session_sketch MEDIUMBLOB NULL,
+            source_events BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            source_max_event_id BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            rule_signature CHAR(64) NOT NULL,
+            generated_at DATETIME NOT NULL,
+            PRIMARY KEY  (aggregate_day,actor),
+            KEY actor_signature_day (actor,rule_signature,aggregate_day)
+        ) {$charset};");
+        dbDelta("CREATE TABLE {$dimensions} (
+            aggregate_day DATE NOT NULL,
+            actor VARCHAR(8) NOT NULL,
+            dimension_type VARCHAR(24) NOT NULL,
+            dimension_hash BINARY(32) NOT NULL,
+            dimension_key VARCHAR(512) NOT NULL DEFAULT '',
+            dimension_label VARCHAR(512) NOT NULL DEFAULT '',
+            pageviews BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            events BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            visitors BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            sessions BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            bounces BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            entries BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            exits BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            engaged_ms BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            engagement_samples BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            scroll_sum BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            scroll_samples BIGINT UNSIGNED NOT NULL DEFAULT 0,
+            last_seen DATETIME NULL,
+            rule_signature CHAR(64) NOT NULL,
+            generated_at DATETIME NOT NULL,
+            PRIMARY KEY  (aggregate_day,actor,dimension_type,dimension_hash),
+            KEY type_actor_day (dimension_type,actor,aggregate_day),
+            KEY dimension_lookup (dimension_type,dimension_hash)
+        ) {$charset};");
         update_option('tya_schema_version', self::SCHEMA_VERSION, false);
 
         if (!get_option('tya_site_token')) {
@@ -173,6 +224,9 @@ final class TYA_Installer
         if (!wp_next_scheduled('tya_daily_cleanup')) {
             wp_schedule_event(time() + HOUR_IN_SECONDS, 'daily', 'tya_daily_cleanup');
         }
+        if (!wp_next_scheduled('tya_daily_aggregation')) {
+            wp_schedule_event(time() + 2 * HOUR_IN_SECONDS, 'daily', 'tya_daily_aggregation');
+        }
     }
 
     public static function annotationsTable(): string { global $wpdb; return $wpdb->prefix . 'tya_annotations'; }
@@ -180,6 +234,8 @@ final class TYA_Installer
     public static function entityTagsTable(): string { global $wpdb; return $wpdb->prefix . 'tya_entity_tags'; }
     public static function savedViewsTable(): string { global $wpdb; return $wpdb->prefix . 'tya_saved_views'; }
     public static function exclusionsTable(): string { global $wpdb; return $wpdb->prefix . 'tya_exclusion_rules'; }
+    public static function dailyAggregatesTable(): string { global $wpdb; return $wpdb->prefix . 'tya_daily_aggregates'; }
+    public static function dailyDimensionsTable(): string { global $wpdb; return $wpdb->prefix . 'tya_daily_dimensions'; }
 
     public static function maybeUpgrade(): void
     {
@@ -196,5 +252,9 @@ final class TYA_Installer
         }
         $continuation = wp_next_scheduled('tya_cleanup_continue');
         if ($continuation) wp_unschedule_event($continuation, 'tya_cleanup_continue');
+        foreach (['tya_daily_aggregation', 'tya_aggregation_continue'] as $hook) {
+            $timestamp = wp_next_scheduled($hook);
+            if ($timestamp) wp_unschedule_event($timestamp, $hook);
+        }
     }
 }

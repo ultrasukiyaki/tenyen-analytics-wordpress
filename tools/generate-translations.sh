@@ -22,7 +22,7 @@ xgettext \
     --keyword=esc_html__ \
     --keyword=esc_attr__ \
     --package-name='Tenyen Analytics for WordPress' \
-    --package-version='0.7.0' \
+    --package-version='0.7.1' \
     --msgid-bugs-address='https://www.10yendama.com/' \
     --copyright-holder='10yendama.com' \
     --output="$php_pot" \
@@ -30,6 +30,7 @@ xgettext \
     "$project_dir/includes/class-tya-plugin.php" \
     "$project_dir/includes/class-tya-metadata.php" \
     "$project_dir/includes/class-tya-exclusions.php" \
+    "$project_dir/includes/class-tya-aggregation.php" \
     "$project_dir/includes/class-tya-lifecycle.php" \
     "$project_dir/includes/admin/class-tya-dashboard-widget.php" \
     "$project_dir/includes/admin/class-tya-session-admin.php"
@@ -39,7 +40,7 @@ xgettext \
     --from-code=UTF-8 \
     --keyword=__ \
     --package-name='Tenyen Analytics for WordPress' \
-    --package-version='0.7.0' \
+    --package-version='0.7.1' \
     --msgid-bugs-address='https://www.10yendama.com/' \
     --copyright-holder='10yendama.com' \
     --output="$js_pot" \
@@ -61,6 +62,7 @@ fi
 
 msgcat --use-first "$project_dir/tools/ja-overrides.po" "$po" --output-file="$merged"
 msgmerge --quiet "$merged" "$pot" --output-file="$po"
+msgattrib --no-obsolete --output-file="$po" "$po"
 
 msgfmt --check --output-file="$language_dir/tenyen-analytics-ja.mo" "$po"
 
