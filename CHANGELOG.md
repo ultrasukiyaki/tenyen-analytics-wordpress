@@ -2,6 +2,21 @@ English | [日本語](CHANGELOG.ja.md)
 
 # Changelog
 
+## 0.9.0 - 2026-10-29
+
+### Added
+- Added shared country/code, region/city, ASN/organization, and environment presentation across recent views, realtime, history, sessions, and anonymous visitor details.
+- Added cached PTR hostname display in access history instead of decrypted raw IP, with bounded asynchronous refresh, positive/negative expiry, failure backoff, overlap locking, and orphan cleanup.
+- Added the idempotent `tya_hostname_cache` table and automatic WP-Cron scheduling without changing existing event columns.
+
+### Fixed
+- Session context now comes from one most-recent included event instead of independently mixing maximum values from different events.
+- Session pagination continues to default to 25 rows when the page-size parameter is omitted.
+
+### Security and compatibility
+- Collection and administrator page requests never perform reverse DNS. Only public IP addresses are queried through the host resolver, at most 20 per bounded background run.
+- Existing events, aggregates, annotations, tags, saved views, exclusions, settings, encrypted credentials, and City/ASN MMDB files are preserved.
+
 ## 0.8.1 - 2026-08-25
 
 ### Fixed

@@ -2,7 +2,7 @@
   'use strict';
 
   const { __ } = window.wp?.i18n || {};
-  const validColumns = ['datetime', 'event', 'ip', 'location', 'organization', 'page', 'referrer', 'environment', 'details'];
+  const validColumns = ['datetime', 'event', 'hostname', 'location', 'organization', 'page', 'referrer', 'environment', 'details'];
 
   function escapeHtml(value) {
     return String(value).replace(/[&<>'"]/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[character]));
@@ -14,7 +14,7 @@
     const lifecycle = new AbortController();
     const signal = lifecycle.signal;
     const storageKey = config.storageKey || 'tenyenAnalytics.history.v1';
-    const defaults = Object.assign({collapsed:false,density:'compact',perPage:25,actor:'human',event:'all',autoRefresh:0,wrap:false,stickyHeader:true,order:'desc',visibleColumns:['datetime','event','organization','page','referrer','environment','details']}, config.defaults || {});
+    const defaults = Object.assign({collapsed:false,density:'compact',perPage:25,actor:'human',event:'all',autoRefresh:0,wrap:false,stickyHeader:true,order:'desc',visibleColumns:['datetime','event','hostname','location','organization','page','referrer','environment','details']}, config.defaults || {});
     const form = section.querySelector('[data-history-form]');
     const body = section.querySelector('[data-history-body]');
     const settings = section.querySelector('[data-history-settings]');
@@ -37,7 +37,9 @@
       result.event = ['all','pageview','engagement','external_click','download'].includes(result.event) ? result.event : defaults.event;
       result.autoRefresh = [0,30,60,300].includes(Number(result.autoRefresh)) ? Number(result.autoRefresh) : 0;
       result.wrap = Boolean(result.wrap); result.stickyHeader = Boolean(result.stickyHeader); result.order = result.order === 'asc' ? 'asc' : 'desc';
-      const requested = Array.isArray(result.visibleColumns) ? result.visibleColumns : defaults.visibleColumns;
+      const requested = Array.isArray(result.visibleColumns)
+        ? result.visibleColumns.map(column => column === 'ip' ? 'hostname' : column)
+        : defaults.visibleColumns;
       result.visibleColumns = requested.filter((column,index) => validColumns.includes(column) && requested.indexOf(column) === index);
       if (!result.visibleColumns.includes('details')) result.visibleColumns.push('details');
       if (result.visibleColumns.length < 2) result.visibleColumns = defaults.visibleColumns.slice();

@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Tenyen Analytics for WordPress 0.8.1\n"
+"Project-Id-Version: Tenyen Analytics for WordPress 0.9.0\n"
 "Report-Msgid-Bugs-To: https://www.10yendama.com/\n"
-"POT-Creation-Date: 2026-08-25 12:12+0900\n"
+"POT-Creation-Date: 2026-10-29 21:43+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,957 +17,967 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:55
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:61
 msgid "Analytics"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:435
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:441
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-dashboard-widget.php:25
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-dashboard-widget.php:75
 msgid "Tenyen Analytics"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:443
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:586
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:449
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:592
 msgid "Dashboard"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:444
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:636
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:450
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:642
 msgid "Realtime"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:445
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:451
 msgid "Access History"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:446
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:584
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:593
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:600
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:670
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:688
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:711
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:34
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:452
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:590
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:599
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:606
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:676
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:694
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:717
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:35
 msgid "Sessions"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:447
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:666
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:453
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:672
 msgid "Content"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:448
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:685
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:454
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:691
 msgid "Referrers"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:449
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:455
 msgid "ASN / Organizations"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:450
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:456
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-metadata.php:219
 msgid "Knowledge"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:451
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:457
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-exclusions.php:158
 msgid "Exclusions"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:452
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:459
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:458
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:461
 msgid "Data lifecycle"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:453
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:736
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:459
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:742
 msgid "Audience"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:454
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:758
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:460
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:764
 msgid "Engagement"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:455
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:782
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:461
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:788
 msgid "System"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:456
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:462
 msgid "Settings"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:584
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:591
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:600
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:670
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:688
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:711
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:761
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:193
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:590
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:597
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:606
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:676
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:694
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:717
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:767
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:195
 msgid "Pageviews"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:584
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:600
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:711
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:590
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:606
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:717
 msgid "Visitors"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:586
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:592
 msgid "A compact entry point for monitoring site-wide activity."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:587
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:593
 msgid "Period analysis"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:592
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:598
 msgid "Estimated visitors"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:594
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:761
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:600
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:767
 msgid "Average duration"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:595
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:761
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:601
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:767
 msgid "Average scroll"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:596
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:602
 msgid "Bot events"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:600
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:606
 msgid "Pageviews / Visitors / Sessions trend"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:601
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:607
 msgid "Notable organization activity"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:602
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:608
 msgid "No notable organization activity yet."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:608
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:614
 msgid "Popular pages"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:609
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:642
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:744
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:615
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:648
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:750
 msgid "pageviews"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:609
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:615
 msgid "sessions"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:610
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:674
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:693
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:698
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:717
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:765
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:616
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:680
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:699
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:704
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:723
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:771
 msgid "No data"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:611
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:617
 msgid "Recent views"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:611
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:642
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1110
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1245
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:617
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:648
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1116
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1251
 msgid "Date"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:611
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:617
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:648
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1119
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1161
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1254
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:205
+msgid "Location"
+msgstr ""
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:617
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-exclusions.php:173
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "Organization"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:611
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:642
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:670
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:761
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1115
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1250
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:617
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:648
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:676
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:767
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1121
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1256
 msgid "Page"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:611
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:642
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:688
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1116
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1251
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:158
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:216
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:617
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:648
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:694
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1122
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1257
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:160
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:218
 msgid "Referrer"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:616
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:622
 msgid "No data yet."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:636
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:642
 msgid "This screen refreshes every 30 seconds with recent pageviews."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:638
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1260
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:644
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1266
 msgid "Interval"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:640
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:646
 #, php-format
 msgid "%d minutes"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:642
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:863
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:49
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:648
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:869
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:50
 msgid "Apply"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:642
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:648
 msgid "Status"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:642
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1156
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1302
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:648
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1162
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1308
 msgid "ASN / organization"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:642
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:648
 msgid "Duration / scroll"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:645
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:651
 msgid "Viewed & measured"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:645
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:651
 msgid "New view"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:648
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:654
 msgid "No activity in this timeframe yet."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:656
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:662
 msgid "History"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:656
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:662
 msgid "Browse raw events with asynchronous search, filters, and paging."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:666
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:672
 msgid "View page performance for posts and pages."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:667
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:673
 msgid "Top content"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:669
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:675
 msgid ""
 "Bounce rate is single-page entry sessions divided by entry sessions. Exit "
 "rate is exit sessions divided by pageviews."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:670
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:676
 msgid "Entries"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:670
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:676
 msgid "Exits"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:670
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:676
 msgid "Bounces"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:670
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:676
 msgid "Bounce rate (estimated)"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:670
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:676
 msgid "Exit rate"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:670
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:676
 msgid "Pageviews per session"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:685
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:691
 msgid "Check direct, search, external sources, and outbound clicks."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:686
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:692
 msgid "Referrer domains"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:694
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:700
 msgid "External clicks & downloads"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:694
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:700
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-exclusions.php:163
 msgid "Type"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:694
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1164
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:217
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:700
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1170
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:219
 msgid "Target URL"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:694
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:700
 msgid "Count"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:708
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:714
 msgid "ASN & organizations"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:708
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:714
 msgid "Classify network organizations registered to incoming IPs."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:709
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:715
 msgid "ASN & organization ranking"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:711
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:717
 msgid ""
 "Displayed organizations are not a definitive identification of individual "
 "visitors."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:711
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1153
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:717
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1159
 msgid "Classification"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:711
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:204
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:717
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:206
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:247
 msgid "ASN / registered organization"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:711
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:233
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:717
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:242
 msgid "Last seen"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:714
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1619
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:720
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1625
 msgid "Unknown"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:728
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1311
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:734
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1317
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-exclusions.php:173
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:44
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:45
 msgid "Browser"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:729
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1312
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:735
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1318
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-exclusions.php:173
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:45
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:46
 msgid "OS"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:730
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1313
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:736
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1319
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-exclusions.php:173
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:46
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:47
 msgid "Device"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:731
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1310
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:43
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:737
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1316
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:44
 msgid "Country"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:736
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:742
 msgid "Review browser, OS, device, and country composition."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:737
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:743
 msgid "Audience environment"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:758
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:764
 msgid "Monitor average visit time and scroll rate by page."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:759
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:765
 msgid "Page engagement"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:783
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:789
 msgid "Check collection, database, and GeoLite2 status in one place."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:790
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:796
 msgid "Saved events"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:790
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1179
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:796
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1185
 msgid "items"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:791
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:797
 msgid "Last received"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:791
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:797
 msgid "Not received"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:792
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:798
 msgid "GeoIP Reader"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:792
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:798
 msgid "Official Reader"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:792
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:798
 msgid "Built-in Reader"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:792
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:798
 msgid "Unavailable"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:793
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:794
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1344
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:799
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:800
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1350
 msgid "Unconfigured"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:800
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:806
 msgid "Collection endpoints"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:801
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:807
 msgid "REST API"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:802
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:808
 msgid "History API"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:803
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:809
 msgid "DB table"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:804
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:810
 msgid "UI build"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:807
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:813
 msgid "GeoLite2 database maintenance"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:808
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:814
 msgid ""
 "Automatic updates use MaxMind Basic Authentication over HTTPS. The license "
 "key is encrypted at rest and never returned to the browser."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:810
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:816
 msgid "MaxMind account ID"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:811
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:817
 msgid "MaxMind license key"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:812
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:818
 msgid "Enable weekly automatic updates"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:813
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:819
 msgid "Remove saved license key"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:814
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:820
 msgid "Save update settings"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:815
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:821
 msgid "Database"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:815
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:821
 msgid "City and ASN"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:815
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:821
 msgid "Update now"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:816
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:461
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:822
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:463
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:465
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-dashboard-widget.php:79
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:53
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:54
 msgid "Loading…"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:822
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:910
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1338
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1661
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:828
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:916
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1344
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1667
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-metadata.php:218
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-exclusions.php:155
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:206
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:457
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:29
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:70
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:80
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:96
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:208
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:459
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:30
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:71
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:81
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:97
 msgid "You do not have permission."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:851
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:857
 msgid "Period"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:852
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:858
 msgid "Today"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:852
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:858
 msgid "Yesterday"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:852
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:858
 msgid "Last 7 days"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:852
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:858
 msgid "Last 30 days"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:852
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:858
 msgid "This month"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:852
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:858
 msgid "Custom"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:856
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:862
 msgid "Start date"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:857
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:863
 msgid "End date"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:858
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:864
 msgid "Actor"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:859
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1305
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:42
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:865
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1311
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:43
 msgid "Humans only"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:859
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1306
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:42
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:865
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1312
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:43
 msgid "Bots only"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:859
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1284
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1307
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:42
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:865
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1290
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1313
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:43
 msgid "All"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:864
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:870
 msgid ""
 "Unique visitors are estimated by deduplicating visitor_id within the "
 "selected period."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1111
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1246
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1117
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1252
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "Event type"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1113
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1155
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1248
-msgid "Location"
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1118
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1160
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1253
+msgid "Hostname"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1114
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1249
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1120
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1255
 msgid "ASN / candidate organization"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1117
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1252
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:158
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1123
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1258
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:160
 msgid "Environment"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1118
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1148
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1253
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:59
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:158
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:171
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:242
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:243
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1124
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1154
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1259
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:60
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:160
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:173
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:254
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:255
 msgid "Details"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1122
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1128
 msgid "No matching access records found."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1157
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1163
 msgid "Duration"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1158
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1164
 msgid "Scroll"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1159
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:190
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1165
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:192
 msgid "Session"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1160
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1303
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1166
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1309
 msgid "Visitor"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1161
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1167
 msgid "Screen"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1162
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1168
 msgid "User-Agent"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1163
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1169
 msgid "Full referrer"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1179
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1185
 msgid "of"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1195
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1201
 msgid "History paging"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1197
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1485
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:252
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1203
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1491
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:264
 msgid "‹ Previous"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1210
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1486
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:254
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1216
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1492
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:266
 msgid "Next ›"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1223
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1229
 msgid "Detailed access history"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1224
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1230
 msgid "Not loaded"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1227
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1233
 msgid "Open history"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1228
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1234
 msgid "Display settings"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1235
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1241
 msgid "Display density"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1236
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1242
 msgid "Compact"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1237
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1243
 msgid "Standard"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1238
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1244
 msgid "Wrap cells"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1239
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1245
 msgid "Sticky header"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1240
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1246
 msgid "Collapsed by default"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1243
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1249
 msgid "Visible columns"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1259
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1265
 msgid "Auto refresh"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1262
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1268
 msgid "Disabled"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1263
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1269
 msgid "30 seconds"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1264
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1270
 msgid "1 minute"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1265
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1271
 msgid "5 minutes"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1268
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1274
 msgid ""
 "Display settings are saved to localStorage in this browser. The access data "
 "itself is not stored here."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1272
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1278
 msgid "Apply settings"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1273
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1279
 msgid "Reset to defaults"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1279
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1321
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:39
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1285
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1327
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:40
 msgid "Search"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1279
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1285
 msgid "IP, URL, title, location, ASN, environment"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1280
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:461
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:40
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1286
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:463
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:41
 msgid "From"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1281
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:461
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:41
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1287
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:463
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:42
 msgid "To"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1282
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1288
 msgid "Event"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1296
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:213
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1302
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:215
 msgid "Event name"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1297
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1303
 msgid "Source page"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1298
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1304
 msgid "Target domain"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1310
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1316
 msgid "All countries"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1311
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1317
 msgid "All browsers"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1312
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1318
 msgid "All operating systems"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1313
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1319
 msgid "All devices"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1314
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:47
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1320
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:48
 msgid "Items per page"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1317
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:48
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1323
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:49
 msgid "Sort order"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1318
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:48
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1324
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:49
 msgid "Newest first"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1318
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:48
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1324
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:49
 msgid "Oldest first"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1322
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:50
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1328
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:51
 msgid "Reset"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1325
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1331
 msgid ""
 "Search, filters, and paging update asynchronously without reloading the "
 "whole page. Raw IP search is exact; others are partial matches."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1327
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1333
 msgid "Open the history panel to load events."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1343
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1349
 msgid "Tenyen Analytics Settings"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1344
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1350
 msgid "Reader"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1344
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1350
 msgid "Not installed"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1344
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1350
 msgid "City DB"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1344
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1350
 msgid "ASN DB"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1348
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1354
 msgid "Raw log retention days (0 = unlimited)"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1349
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1355
 msgid "Exclude administrator access"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1350
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1356
 msgid "Record bots as well"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1351
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1357
 msgid "Track internal link clicks"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1352
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1358
 msgid "Track generic button clicks"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1353
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1359
 msgid "Track opted-in form submissions"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1354
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1360
 msgid "IP header to use"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1357
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1363
 msgid "REMOTE_ADDR (default)"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1364
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1370
 msgid "Change only if you understand your proxy configuration."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1367
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1373
 msgid "Organization classification overrides"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1368
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1374
 msgid ""
 "one per line. Categories are research / government / company / isp / cloud / "
 "proxy / bot / unknown."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1371
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1377
 msgid "Site token"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1381
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1387
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-exclusions.php:167
 msgid "Enabled"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1519
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1525
 msgid "confidence"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1526
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1532
 #, php-format
 msgid "%d sec"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1531
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1537
 #, php-format
 msgid "%d min %02d sec"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1534
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1540
 #, php-format
 msgid "%d hr %d min"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1623
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-plugin.php:1629
 msgid "Other"
 msgstr ""
 
@@ -1149,33 +1159,34 @@ msgid "Path"
 msgstr ""
 
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-exclusions.php:173
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "Country code"
 msgstr ""
 
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-exclusions.php:173
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "Region"
 msgstr ""
 
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-exclusions.php:173
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:205
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:207
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:248
 msgid "Organization category"
 msgstr ""
 
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-exclusions.php:173
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:195
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:197
 msgid "Referrer domain"
 msgstr ""
 
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-exclusions.php:173
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "UTM source"
 msgstr ""
 
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-exclusions.php:173
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "UTM medium"
 msgstr ""
 
@@ -1315,143 +1326,143 @@ msgstr ""
 msgid "Cleanup is blocked while aggregation is running."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:168
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:170
 msgid "Cleanup failed. Review database health and retry."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:213
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:215
 msgid "Invalid export request."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:214
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:216
 msgid "Raw IP export requires explicit confirmation."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:459
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:461
 msgid ""
 "Export analytics, control raw retention, run bounded cleanup, and inspect "
 "storage."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:460
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:462
 msgid ""
 "Daily aggregates preserve supported totals, but raw cleanup permanently "
 "removes detailed session and visitor drill-down."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:461
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:463
 msgid "Daily aggregation"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:461
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:463
 msgid ""
 "Completed UTC days are aggregated incrementally. Rebuild a day or range "
 "after late events or exclusion changes."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:461
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:463
 msgid "Rebuild aggregates"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:462
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
 msgid "Retention and cleanup"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:462
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
 msgid "Mode"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:462
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
 msgid "Unlimited"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:462
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
 msgid "Preset"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:462
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
 msgid "Custom days"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:462
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
 msgid "Days"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:462
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
 msgid "Save retention"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:462
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
 msgid "Preview cleanup"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:462
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
 msgid "Run one cleanup batch"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:463
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:465
 msgid "Storage diagnostics"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "Export"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "Dataset"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "Format"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "IP privacy"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "Omit IP"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "Masked IP"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "Decrypted raw IP"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "I explicitly authorize raw IP export"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:42
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:43
 msgid "Visitor type"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:194
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:196
 msgid "Traffic channel"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "Campaign"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "Content path"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "Tag ID"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "Watched organizations only"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:464
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/class-tya-lifecycle.php:466
 msgid "Download export"
 msgstr ""
 
@@ -1597,178 +1608,186 @@ msgstr ""
 msgid "GeoLite2 validation failed. The existing database was kept."
 msgstr ""
 
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/core/src/HostnameCache.php:40
+msgid "Awaiting hostname lookup"
+msgstr ""
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/core/src/HostnameCache.php:45
+msgid "Hostname unavailable"
+msgstr ""
+
 #: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-dashboard-widget.php:76
 msgid "Refresh"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:35
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:36
 msgid "Browse ordered anonymous visitor journeys."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:39
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:40
 msgid "Session, visitor, URL, referrer, or environment"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:52
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:53
 msgid ""
 "Legacy events without a session ID are excluded. Duration and bounce are "
 "estimated analytics metrics."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:59
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:60
 msgid "Close"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:84
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:85
 msgid "Invalid session identifier."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:88
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:89
 msgid "Session no longer available."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:90
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:91
 msgid "Session detail"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:100
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:101
 msgid "Invalid visitor identifier."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:104
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:105
 msgid "Anonymous visitor no longer available."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:106
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:107
 msgid "Anonymous visitor detail"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:153
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:155
 #, php-format
 msgid "%1$s–%2$s of %3$s sessions"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:155
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:242
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:157
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:254
 msgid "Session start"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:155
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:242
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:157
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:254
 msgid "Last activity"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:156
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:191
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:231
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:158
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:193
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:240
 msgid "Anonymous visitor"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:156
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:158
 msgid "Estimated duration"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:157
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:159
 msgid "Landing page"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:157
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:159
 msgid "Exit page"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:160
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:162
 msgid "No sessions found."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:169
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:171
 msgid "Direct"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:192
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:194
 msgid "Start / last activity"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:193
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:195
 msgid "Bounce (estimated)"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:201
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:236
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:203
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:245
 msgid "Engaged time (estimated)"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:202
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:204
 msgid "Session span"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:203
-msgid "Country / region"
-msgstr ""
-
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:206
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:208
 msgid "Browser / OS / device"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:208
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:210
 msgid "Ordered journey"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:215
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:217
 msgid "Final engagement"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:218
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:220
 msgid "Metadata"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:219
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:221
 msgid "Raw event"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:229
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:238
 msgid ""
 "This is an anonymous browser identifier. It may change when browser storage "
 "is cleared or another browser or device is used, and is not proof of a "
 "person’s identity."
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:232
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:241
 msgid "First seen"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:234
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:243
 msgid "Total sessions"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:235
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:244
 msgid "Total pageviews"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:237
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:246
+msgid "Most recent location"
+msgstr ""
+
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:249
 msgid "Most recent environment"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:239
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:251
 msgid "Common landing pages"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:240
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:252
 msgid "Common content"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:241
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:253
 msgid "Common referrers"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:242
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:254
 msgid "Historical sessions"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:251
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:263
 msgid "Session paging"
 msgstr ""
 
-#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:253
+#: /home/oresama/Apps/Sources/Utilities/tenyen-analytics-wordpress/includes/admin/class-tya-session-admin.php:265
 #, php-format
 msgid "Page %1$d of %2$d"
 msgstr ""

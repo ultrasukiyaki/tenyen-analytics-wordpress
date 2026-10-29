@@ -3,7 +3,7 @@ Contributors: 10yendama
 Tags: analytics, privacy, pageviews, sessions, geolocation
 Requires at least: 6.2
 Requires PHP: 8.1
-Stable tag: 0.8.1
+Stable tag: 0.9.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,11 @@ No. Analytics data is preserved unless an administrator removes it manually.
 No. The built-in MMDB reader and local analytics reports work without Composer or an external analytics service.
 
 == Changelog ==
+
+= 0.9.0 =
+* Adds shared country, region, city, ASN, organization, and environment context across recent, realtime, session, visitor, and history views.
+* Replaces raw-IP display in access history with bounded, cached reverse-DNS hostnames refreshed asynchronously by WP-Cron.
+* Adds an idempotent hostname-cache table while preserving existing events, settings, credentials, aggregates, metadata, exclusions, and GeoLite2 databases.
 
 = 0.8.1 =
 
@@ -108,6 +113,10 @@ No. The built-in MMDB reader and local analytics reports work without Composer o
 * Added a built-in MMDB reader and asynchronous access history.
 
 == Upgrade Notice ==
+
+= 0.9.0 =
+
+Adds consistent visitor context and a hostname cache for access history. Existing events, analytics data, settings, credentials, and GeoLite2 databases are preserved; hostname lookup runs asynchronously through WP-Cron.
 
 = 0.8.1 =
 

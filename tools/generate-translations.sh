@@ -22,7 +22,7 @@ xgettext \
     --keyword=esc_html__ \
     --keyword=esc_attr__ \
     --package-name='Tenyen Analytics for WordPress' \
-    --package-version='0.8.1' \
+    --package-version='0.9.0' \
     --msgid-bugs-address='https://www.10yendama.com/' \
     --copyright-holder='10yendama.com' \
     --output="$php_pot" \
@@ -33,6 +33,7 @@ xgettext \
     "$project_dir/includes/class-tya-aggregation.php" \
     "$project_dir/includes/class-tya-lifecycle.php" \
     "$project_dir/includes/class-tya-geolite-updater.php" \
+    "$project_dir/includes/core/src/HostnameCache.php" \
     "$project_dir/includes/admin/class-tya-dashboard-widget.php" \
     "$project_dir/includes/admin/class-tya-session-admin.php"
 
@@ -41,7 +42,7 @@ xgettext \
     --from-code=UTF-8 \
     --keyword=__ \
     --package-name='Tenyen Analytics for WordPress' \
-    --package-version='0.8.1' \
+    --package-version='0.9.0' \
     --msgid-bugs-address='https://www.10yendama.com/' \
     --copyright-holder='10yendama.com' \
     --output="$js_pot" \

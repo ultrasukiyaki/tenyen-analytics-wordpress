@@ -60,8 +60,8 @@ class WP_REST_Response
 require dirname(__DIR__) . '/tenyen-analytics.php';
 
 $plugin = TYA_Plugin::instance();
-if (TYA_VERSION !== '0.8.1' || TYA_Installer::SCHEMA_VERSION !== '0.7.1') {
-    throw new RuntimeException('v0.8.1 application version or retained aggregate schema version is incorrect.');
+if (TYA_VERSION !== '0.9.0' || TYA_Installer::SCHEMA_VERSION !== '0.9.0') {
+    throw new RuntimeException('v0.9.0 application or schema version is incorrect.');
 }
 $sessionAdmin = new TYA_Session_Admin();
 $sessionHtmlMethod = new ReflectionMethod($sessionAdmin, 'sessionHtml');
@@ -77,7 +77,7 @@ $sessionHtml = $sessionHtmlMethod->invoke($sessionAdmin, [
     'bounce' => true,
     'environment' => [
         'asn' => 2516, 'asn_org' => 'KDDI CORPORATION', 'is_bot' => 0,
-        'country_name' => 'Japan', 'region' => 'Tokyo', 'browser' => 'Chrome',
+        'country_code' => 'JP', 'country_name' => 'Japan', 'region' => 'Tokyo', 'city' => 'Chiyoda', 'browser' => 'Chrome',
         'os' => 'Windows', 'device_type' => 'desktop',
     ],
     'engagement_by_path' => ['/one' => ['duration_ms' => 1000, 'scroll_depth' => 50]],
@@ -86,7 +86,7 @@ $sessionHtml = $sessionHtmlMethod->invoke($sessionAdmin, [
         'path' => '/one', 'page_title' => 'One', 'referrer' => '', 'target_url' => '',
     ]],
 ]);
-if (!str_contains($sessionHtml, 'KDDI CORPORATION') || !str_contains($sessionHtml, 'Ordered journey')) {
+if (!str_contains($sessionHtml, 'Japan (JP) / Tokyo / Chiyoda') || !str_contains($sessionHtml, 'AS2516 KDDI CORPORATION') || !str_contains($sessionHtml, 'Ordered journey')) {
     throw new RuntimeException('Session detail HTML did not render with organization classification.');
 }
 $historyShellMethod = new ReflectionMethod($plugin, 'renderHistoryShell');

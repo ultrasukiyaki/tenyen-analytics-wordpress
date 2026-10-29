@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Installer
 {
-    public const SCHEMA_VERSION = '0.7.1';
+    public const SCHEMA_VERSION = '0.9.0';
     public static function tableName(): string
     {
         global $wpdb;
@@ -87,6 +87,7 @@ final class TYA_Installer
         $exclusions = self::exclusionsTable();
         $daily = self::dailyAggregatesTable();
         $dimensions = self::dailyDimensionsTable();
+        $hostnames = self::hostnameCacheTable();
         dbDelta("CREATE TABLE {$annotations} (
             annotation_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
             entity_type VARCHAR(32) NOT NULL,
@@ -199,6 +200,15 @@ final class TYA_Installer
             KEY type_actor_day (dimension_type,actor,aggregate_day),
             KEY dimension_lookup (dimension_type,dimension_hash)
         ) {$charset};");
+        dbDelta("CREATE TABLE {$hostnames} (
+            ip_hash BINARY(32) NOT NULL,
+            hostname VARCHAR(253) NOT NULL DEFAULT '',
+            status VARCHAR(16) NOT NULL DEFAULT 'unavailable',
+            expires_at DATETIME NOT NULL,
+            updated_at DATETIME NOT NULL,
+            PRIMARY KEY  (ip_hash),
+            KEY expiry (expires_at)
+        ) {$charset};");
         update_option('tya_schema_version', self::SCHEMA_VERSION, false);
 
         if (!get_option('tya_site_token')) {
@@ -231,6 +241,9 @@ final class TYA_Installer
         if (!wp_next_scheduled('tya_daily_aggregation')) {
             wp_schedule_event(time() + 2 * HOUR_IN_SECONDS, 'daily', 'tya_daily_aggregation');
         }
+        if (!wp_next_scheduled('tya_hostname_refresh')) {
+            wp_schedule_single_event(time() + MINUTE_IN_SECONDS, 'tya_hostname_refresh');
+        }
     }
 
     public static function annotationsTable(): string { global $wpdb; return $wpdb->prefix . 'tya_annotations'; }
@@ -240,6 +253,7 @@ final class TYA_Installer
     public static function exclusionsTable(): string { global $wpdb; return $wpdb->prefix . 'tya_exclusion_rules'; }
     public static function dailyAggregatesTable(): string { global $wpdb; return $wpdb->prefix . 'tya_daily_aggregates'; }
     public static function dailyDimensionsTable(): string { global $wpdb; return $wpdb->prefix . 'tya_daily_dimensions'; }
+    public static function hostnameCacheTable(): string { global $wpdb; return $wpdb->prefix . 'tya_hostname_cache'; }
 
     public static function maybeUpgrade(): void
     {
@@ -264,5 +278,7 @@ final class TYA_Installer
             $timestamp = wp_next_scheduled($hook);
             if ($timestamp) wp_unschedule_event($timestamp, $hook);
         }
+        $hostname = wp_next_scheduled('tya_hostname_refresh');
+        if ($hostname) wp_unschedule_event($hostname, 'tya_hostname_refresh');
     }
 }

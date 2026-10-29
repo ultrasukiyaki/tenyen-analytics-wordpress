@@ -6,7 +6,7 @@ define('ABSPATH', __DIR__ . '/wordpress/');
 define('DAY_IN_SECONDS', 86400);
 define('HOUR_IN_SECONDS', 3600);
 define('MINUTE_IN_SECONDS', 60);
-define('TYA_VERSION', '0.8.1');
+define('TYA_VERSION', '0.9.0');
 define('AUTH_KEY', 'test-auth-key-that-is-not-a-real-secret');
 define('SECURE_AUTH_SALT', 'test-secure-salt-that-is-not-a-real-secret');
 

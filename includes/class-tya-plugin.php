@@ -5,11 +5,13 @@ declare(strict_types=1);
 use Tenyen\Analytics\BotDetector;
 use Tenyen\Analytics\Crypto;
 use Tenyen\Analytics\GeoIp;
+use Tenyen\Analytics\HostnameCache;
 use Tenyen\Analytics\IpResolver;
 use Tenyen\Analytics\OrganizationClassifierV040;
 use Tenyen\Analytics\Payload;
 use Tenyen\Analytics\TrafficAttribution;
 use Tenyen\Analytics\UserAgentParser;
+use Tenyen\Analytics\VisitorContext;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -17,7 +19,7 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Plugin
 {
-    public const UI_BUILD = '0.8.1-geolite-hotfix';
+    public const UI_BUILD = '0.9.0-visitor-context';
     private static ?self $instance = null;
     private ?TYA_Session_Admin $sessionAdmin = null;
     private ?TYA_Metadata $metadata = null;
@@ -37,6 +39,10 @@ final class TYA_Plugin
         $this->aggregation()->boot();
         $this->lifecycle()->boot();
         $this->geoLiteUpdater()->boot();
+        add_action('tya_hostname_refresh', [$this, 'refreshHostnames']);
+        if (!wp_next_scheduled('tya_hostname_refresh')) {
+            wp_schedule_single_event(time() + MINUTE_IN_SECONDS, 'tya_hostname_refresh');
+        }
         add_action('wp_enqueue_scripts', [$this, 'enqueueTracker']);
         add_action('rest_api_init', [$this, 'registerRoutes']);
         add_action('admin_menu', [$this, 'registerAdminMenu']);
@@ -120,7 +126,7 @@ final class TYA_Plugin
                     'wrap' => false,
                     'stickyHeader' => true,
                     'order' => 'desc',
-                    'visibleColumns' => ['datetime', 'event', 'organization', 'page', 'referrer', 'environment', 'details'],
+                    'visibleColumns' => ['datetime', 'event', 'hostname', 'location', 'organization', 'page', 'referrer', 'environment', 'details'],
                 ],
                 'options' => $this->historyFilterOptions(),
             ];
@@ -608,12 +614,12 @@ final class TYA_Plugin
         echo '</section><section class="tya-panel"><h2>'.esc_html__('Popular pages', 'tenyen-analytics').'</h2><ol class="tya-rank">';
         foreach ($topPages as $row) echo '<li><b>'.$this->pageLink((string)$row['path'],(string)$row['page_title']).'</b><br><span class="description">'.number_format((int)$row['pageviews']).' '.esc_html__('pageviews', 'tenyen-analytics').' / '.number_format((int)$row['sessions']).' '.esc_html__('sessions', 'tenyen-analytics').'</span></li>';
         if ($topPages === []) echo '<li>'.esc_html__('No data', 'tenyen-analytics').'</li>';
-        echo '</ol></section></div><section class="tya-panel"><h2>'.esc_html__('Recent views', 'tenyen-analytics').'</h2><div class="tya-table-wrap"><table><thead><tr><th>'.esc_html__('Date', 'tenyen-analytics').'</th><th>'.esc_html__('Organization', 'tenyen-analytics').'</th><th>'.esc_html__('Page', 'tenyen-analytics').'</th><th>'.esc_html__('Referrer', 'tenyen-analytics').'</th></tr></thead><tbody>';
+        echo '</ol></section></div><section class="tya-panel"><h2>'.esc_html__('Recent views', 'tenyen-analytics').'</h2><div class="tya-table-wrap"><table><thead><tr><th>'.esc_html__('Date', 'tenyen-analytics').'</th><th>'.esc_html__('Location', 'tenyen-analytics').'</th><th>'.esc_html__('Organization', 'tenyen-analytics').'</th><th>'.esc_html__('Page', 'tenyen-analytics').'</th><th>'.esc_html__('Referrer', 'tenyen-analytics').'</th></tr></thead><tbody>';
         foreach ($recent as $row) {
             $classification = OrganizationClassifierV040::classify($row['asn'] !== null ? (int)$row['asn'] : null, (string)$row['asn_org'], false, $this->organizationOverrides());
-            echo '<tr><td>'.esc_html(get_date_from_gmt((string)$row['occurred_at'],'m-d H:i:s')).'</td><td>'.$this->organizationBadge($classification).'<br>'.esc_html(trim(($row['asn']?'AS'.(int)$row['asn'].' ':'').$row['asn_org'])?:'―').'</td><td>'.$this->pageLink((string)$row['path'],(string)$row['page_title']).'</td><td>'.$this->referrerLink((string)$row['referrer']).'</td></tr>';
+            echo '<tr><td>'.esc_html(get_date_from_gmt((string)$row['occurred_at'],'m-d H:i:s')).'</td><td>'.esc_html(VisitorContext::location($row)).'</td><td>'.$this->organizationBadge($classification).'<br>'.esc_html(VisitorContext::organization($row)).'</td><td>'.$this->pageLink((string)$row['path'],(string)$row['page_title']).'</td><td>'.$this->referrerLink((string)$row['referrer']).'</td></tr>';
         }
-        if ($recent === []) echo '<tr><td colspan="4">'.esc_html__('No data yet.', 'tenyen-analytics').'</td></tr>';
+        if ($recent === []) echo '<tr><td colspan="5">'.esc_html__('No data yet.', 'tenyen-analytics').'</td></tr>';
         echo '</tbody></table></div></section>';
         $this->chartInit($payload);
         $this->pageEnd();
@@ -639,13 +645,13 @@ final class TYA_Plugin
         foreach ([5,15,30,60,180] as $value) {
             echo '<option value="'.$value.'"'.selected($minutes,$value,false).'>'.sprintf(esc_html__('%d minutes', 'tenyen-analytics'), $value).'</option>';
         }
-        echo '</select></label><button class="button button-primary">' . esc_html__('Apply', 'tenyen-analytics') . '</button></form><p class="description">'.number_format(count($rows)).' '.esc_html__('pageviews', 'tenyen-analytics').'</p><div class="tya-table-wrap"><table><thead><tr><th>'.esc_html__('Date', 'tenyen-analytics').'</th><th>'.esc_html__('Status', 'tenyen-analytics').'</th><th>'.esc_html__('Page', 'tenyen-analytics').'</th><th>'.esc_html__('ASN / organization', 'tenyen-analytics').'</th><th>'.esc_html__('Referrer', 'tenyen-analytics').'</th><th>'.esc_html__('Duration / scroll', 'tenyen-analytics').'</th></tr></thead><tbody>';
+        echo '</select></label><button class="button button-primary">' . esc_html__('Apply', 'tenyen-analytics') . '</button></form><p class="description">'.number_format(count($rows)).' '.esc_html__('pageviews', 'tenyen-analytics').'</p><div class="tya-table-wrap"><table><thead><tr><th>'.esc_html__('Date', 'tenyen-analytics').'</th><th>'.esc_html__('Status', 'tenyen-analytics').'</th><th>'.esc_html__('Page', 'tenyen-analytics').'</th><th>'.esc_html__('Location', 'tenyen-analytics').'</th><th>'.esc_html__('ASN / organization', 'tenyen-analytics').'</th><th>'.esc_html__('Referrer', 'tenyen-analytics').'</th><th>'.esc_html__('Duration / scroll', 'tenyen-analytics').'</th></tr></thead><tbody>';
         foreach ($rows as $row) {
             $classification = OrganizationClassifierV040::classify($row['asn'] !== null ? (int)$row['asn'] : null, (string)$row['asn_org'], (bool)$row['is_bot'], $this->organizationOverrides());
             $state = (int)$row['is_bot'] ? 'Bot' : ((int)$row['live_duration'] > 0 ? __('Viewed & measured', 'tenyen-analytics') : __('New view', 'tenyen-analytics'));
-            echo '<tr><td>'.esc_html(get_date_from_gmt((string)$row['occurred_at'],'H:i:s')).'</td><td><span class="tya-state">'.esc_html($state).'</span></td><td>'.$this->pageLink((string)$row['path'],(string)$row['page_title']).'<br><code>'.esc_html((string)$row['path']).'</code></td><td>'.$this->organizationBadge($classification).'<br>'.esc_html(trim(($row['asn']?'AS'.(int)$row['asn'].' ':'').$row['asn_org'])?:'―').'</td><td>'.$this->referrerLink((string)$row['referrer']).'</td><td>'.esc_html($this->formatDuration((int)$row['live_duration'])).' / '.(int)$row['live_scroll'].'%</td></tr>';
+            echo '<tr><td>'.esc_html(get_date_from_gmt((string)$row['occurred_at'],'H:i:s')).'</td><td><span class="tya-state">'.esc_html($state).'</span></td><td>'.$this->pageLink((string)$row['path'],(string)$row['page_title']).'<br><code>'.esc_html((string)$row['path']).'</code></td><td>'.esc_html(VisitorContext::location($row)).'</td><td>'.$this->organizationBadge($classification).'<br>'.esc_html(VisitorContext::organization($row)).'</td><td>'.$this->referrerLink((string)$row['referrer']).'</td><td>'.esc_html($this->formatDuration((int)$row['live_duration'])).' / '.(int)$row['live_scroll'].'%</td></tr>';
         }
-        if ($rows === []) echo '<tr><td colspan="6">'.esc_html__('No activity in this timeframe yet.', 'tenyen-analytics').'</td></tr>';
+        if ($rows === []) echo '<tr><td colspan="7">'.esc_html__('No activity in this timeframe yet.', 'tenyen-analytics').'</td></tr>';
         echo '</tbody></table></div></section><script>setTimeout(function(){location.reload();},30000);</script>';
         $this->pageEnd();
     }
@@ -1100,7 +1106,7 @@ final class TYA_Plugin
     /** @param array<int,array<string,mixed>> $rows */
     private function renderHistoryTable(array $rows): string
     {
-        $crypto = $this->crypto();
+        $hostnames = $this->hostnameCache()->forRows($rows);
         $overrides = $this->organizationOverrides();
         ob_start();
         ?>
@@ -1109,7 +1115,7 @@ final class TYA_Plugin
                 <thead><tr>
                     <th data-col="datetime"><?= esc_html__('Date', 'tenyen-analytics') ?></th>
                     <th data-col="event"><?= esc_html__('Event type', 'tenyen-analytics') ?></th>
-                    <th data-col="ip">IP</th>
+                    <th data-col="hostname"><?= esc_html__('Hostname', 'tenyen-analytics') ?></th>
                     <th data-col="location"><?= esc_html__('Location', 'tenyen-analytics') ?></th>
                     <th data-col="organization"><?= esc_html__('ASN / candidate organization', 'tenyen-analytics') ?></th>
                     <th data-col="page"><?= esc_html__('Page', 'tenyen-analytics') ?></th>
@@ -1122,10 +1128,10 @@ final class TYA_Plugin
                     <tr><td colspan="9"><div class="tya-history-empty"><?= esc_html__('No matching access records found.', 'tenyen-analytics') ?></div></td></tr>
                 <?php endif; ?>
                 <?php foreach ($rows as $row):
-                    $ip = $crypto->decryptIp($row['ip_encrypted'] ?? '');
+                    $hash = is_string($row['ip_hash'] ?? null) ? bin2hex($row['ip_hash']) : '';
+                    $hostname = HostnameCache::display($hostnames[$hash] ?? null);
                     $localTime = get_date_from_gmt((string)$row['occurred_at'], 'Y-m-d H:i:s');
-                    $location = implode(' / ', array_filter([$row['country_name'], $row['region'], $row['city']]));
-                    $asn = $row['asn'] ? 'AS' . (int)$row['asn'] : '';
+                    $location = VisitorContext::location($row);
                     $org = trim((string)$row['asn_org']);
                     $classification = OrganizationClassifierV040::classify(
                         $row['asn'] !== null ? (int)$row['asn'] : null,
@@ -1133,15 +1139,15 @@ final class TYA_Plugin
                         (bool)$row['is_bot'],
                         $overrides
                     );
-                    $environment = trim((string)$row['browser'] . ' / ' . (string)$row['os'] . ' / ' . (string)$row['device_type'], ' /');
-                    $asnText = trim($asn . ' ' . $org);
+                    $environment = VisitorContext::environment($row);
+                    $asnText = VisitorContext::organization($row);
                 ?>
                     <tr>
                         <td data-col="datetime" title="<?= esc_attr($localTime) ?>"><span class="tya-history-cell-primary"><?= esc_html($localTime) ?></span></td>
                         <td data-col="event"><span class="tya-history-cell-primary"><?= esc_html((string)$row['event_type']) ?></span><?php if ((int)$row['is_bot']): ?><span class="tya-history-cell-secondary">Bot</span><?php endif; ?></td>
-                        <td data-col="ip" class="tya-history-ip" title="<?= esc_attr($ip ?: '―') ?>"><?= esc_html($ip ?: '―') ?></td>
-                        <td data-col="location" title="<?= esc_attr($location ?: '―') ?>"><?= esc_html($location ?: '―') ?></td>
-                        <td data-col="organization" class="tya-history-org" title="<?= esc_attr($asnText ?: '―') ?>"><?= $this->organizationBadge($classification) ?><span class="tya-history-cell-secondary"><?= esc_html($asnText ?: '―') ?></span></td>
+                        <td data-col="hostname" class="tya-history-hostname" title="<?= esc_attr($hostname) ?>"><?= esc_html($hostname) ?></td>
+                        <td data-col="location" title="<?= esc_attr($location) ?>"><?= esc_html($location) ?></td>
+                        <td data-col="organization" class="tya-history-org" title="<?= esc_attr($asnText) ?>"><?= $this->organizationBadge($classification) ?><span class="tya-history-cell-secondary"><?= esc_html($asnText) ?></span></td>
                         <td data-col="page" class="tya-history-page" title="<?= esc_attr((string)$row['page_title']) ?>"><span class="tya-history-cell-primary"><?= $this->pageLink((string)$row['path'], (string)$row['page_title']) ?></span><span class="tya-history-cell-secondary"><code><?= esc_html((string)$row['path']) ?></code></span></td>
                         <td data-col="referrer" class="tya-history-referrer" title="<?= esc_attr((string)$row['referrer']) ?>"><?= $this->referrerLink((string)$row['referrer']) ?></td>
                         <td data-col="environment" class="tya-history-environment" title="<?= esc_attr($environment) ?>"><?= esc_html($environment ?: '―') ?></td>
@@ -1151,9 +1157,9 @@ final class TYA_Plugin
                         <td colspan="9">
                             <div class="tya-history-detail-grid">
                                 <dl><dt><?= esc_html__('Classification', 'tenyen-analytics') ?></dt><dd><?= esc_html($classification['reason'] . ' (' . $classification['confidence'] . '%)') ?></dd></dl>
-                                <dl><dt>IP</dt><dd><code><?= esc_html($ip ?: '―') ?></code></dd></dl>
-                                <dl><dt><?= esc_html__('Location', 'tenyen-analytics') ?></dt><dd><?= esc_html($location ?: '―') ?></dd></dl>
-                                <dl><dt><?= esc_html__('ASN / organization', 'tenyen-analytics') ?></dt><dd><?= esc_html($asnText ?: '―') ?></dd></dl>
+                                <dl><dt><?= esc_html__('Hostname', 'tenyen-analytics') ?></dt><dd><code><?= esc_html($hostname) ?></code></dd></dl>
+                                <dl><dt><?= esc_html__('Location', 'tenyen-analytics') ?></dt><dd><?= esc_html($location) ?></dd></dl>
+                                <dl><dt><?= esc_html__('ASN / organization', 'tenyen-analytics') ?></dt><dd><?= esc_html($asnText) ?></dd></dl>
                                 <dl><dt><?= esc_html__('Duration', 'tenyen-analytics') ?></dt><dd><?= esc_html($this->formatDuration((int)$row['duration_ms'])) ?></dd></dl>
                                 <dl><dt><?= esc_html__('Scroll', 'tenyen-analytics') ?></dt><dd><?= esc_html((string)(int)$row['scroll_depth']) ?>%</dd></dl>
                                 <dl><dt><?= esc_html__('Session', 'tenyen-analytics') ?></dt><dd><?php if ((string)$row['session_id'] !== ''): ?><a href="<?= esc_url(add_query_arg(['page' => 'tenyen-analytics-sessions', 'session' => (string)$row['session_id']], admin_url('admin.php'))) ?>"><code><?= esc_html((string)$row['session_id']) ?></code></a><?php else: ?>―<?php endif; ?></dd></dl>
@@ -1244,7 +1250,7 @@ final class TYA_Plugin
                         <?php foreach ([
                             'datetime' => __('Date', 'tenyen-analytics'),
                             'event' => __('Event type', 'tenyen-analytics'),
-                            'ip' => 'IP',
+                            'hostname' => __('Hostname', 'tenyen-analytics'),
                             'location' => __('Location', 'tenyen-analytics'),
                             'organization' => __('ASN / candidate organization', 'tenyen-analytics'),
                             'page' => __('Page', 'tenyen-analytics'),
@@ -1798,5 +1804,22 @@ final class TYA_Plugin
     private function geoLiteUpdater(): TYA_GeoLite_Updater
     {
         return $this->geoLiteUpdater ??= new TYA_GeoLite_Updater();
+    }
+
+    public function refreshHostnames(): void
+    {
+        try {
+            $this->hostnameCache()->run($this->crypto());
+        } finally {
+            if (!wp_next_scheduled('tya_hostname_refresh')) {
+                wp_schedule_single_event(time() + MINUTE_IN_SECONDS, 'tya_hostname_refresh');
+            }
+        }
+    }
+
+    private function hostnameCache(): HostnameCache
+    {
+        global $wpdb;
+        return new HostnameCache($wpdb, TYA_Installer::tableName(), TYA_Installer::hostnameCacheTable());
     }
 }

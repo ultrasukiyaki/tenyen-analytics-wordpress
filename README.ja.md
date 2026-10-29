@@ -6,6 +6,8 @@
 
 Tenyen Analyticsは、ページビュー、推定ユニーク訪問者、セッション、エンゲージメント、参照元、利用環境、GeoLite2の地域・ASN情報、Bot判定をWordPress内で集計するセルフホスト型プラグインです。外部のアクセス解析サービスは必要ありません。
 
+v0.9.0では、最近の閲覧、リアルタイム、セッション、匿名訪問者詳細の国／地域とASN情報を補完します。アクセス履歴では復号済み生IPの代わりに、キャッシュ済み逆引きホスト名を表示します。ホスト名更新は上限付きWP-Cronで非同期に実行し、収集や画面表示を遅延させません。詳細は[訪問者情報とホスト名表示](docs/VISITOR_CONTEXT.ja.md)を参照してください。
+
 ![Tenyen Analyticsのダッシュボード](screenshot_dashboard.png)
 
 ## 機能
@@ -46,7 +48,7 @@ Tenyen Analyticsメニューには、ダッシュボード、リアルタイム�
 
 ## 更新
 
-WordPressをバックアップしてから、新しいプラグインをアップロードまたは上書きしてください。uploads内のGeoLite2ファイルは保持してください。v0.8.1はv0.7.1のschemaとindexを変更しません。既存event row、aggregate、注釈、tag、watchlist、保存view、除外、設定、手動管理のGeoLite2 file、keyは維持します。管理者が資格情報を設定して明示的に有効化するまで自動更新は無効です。
+WordPressをバックアップしてから、新しいプラグインをアップロードまたは上書きしてください。uploads内のGeoLite2ファイルは保持してください。v0.8.1からv0.9.0への更新では、既存event列を変更せずhostname cache tableを自動追加します。既存event row、aggregate、注釈、tag、watchlist、保存view、除外、設定、手動管理のGeoLite2 file、keyは維持します。管理者が資格情報を設定して明示的に有効化するまでGeoLite2自動更新は無効です。
 
 ## エクスポート、保持、削除
 

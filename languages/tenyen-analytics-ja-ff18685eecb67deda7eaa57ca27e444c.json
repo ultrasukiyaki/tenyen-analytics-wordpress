@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-08-25 03:12+0000",
+    "translation-revision-date": "2026-10-29 12:43+0000",
     "generator": "tools\/make-json-translations.php",
     "source": "assets\/admin-history.js",
     "domain": "messages",
@@ -108,6 +108,9 @@
             ],
             "Date": [
                 "日時"
+            ],
+            "Location": [
+                "地域"
             ],
             "Organization": [
                 "組織"
@@ -364,8 +367,8 @@
             "Event type": [
                 "イベント種別"
             ],
-            "Location": [
-                "地域"
+            "Hostname": [
+                "ホスト名"
             ],
             "ASN \/ candidate organization": [
                 "ASN／候補組織"
@@ -988,6 +991,12 @@
             "GeoLite2 validation failed. The existing database was kept.": [
                 "GeoLite2の検証に失敗しました。既存のデータベースは維持されました。"
             ],
+            "Awaiting hostname lookup": [
+                "ホスト名の検索待ち"
+            ],
+            "Hostname unavailable": [
+                "ホスト名を取得できません"
+            ],
             "Refresh": [
                 "更新"
             ],
@@ -1057,9 +1066,6 @@
             "Session span": [
                 "セッションの経過時間"
             ],
-            "Country \/ region": [
-                "国／地域"
-            ],
             "Browser \/ OS \/ device": [
                 "ブラウザー／OS／デバイス"
             ],
@@ -1083,6 +1089,9 @@
             ],
             "Total pageviews": [
                 "合計ページビュー"
+            ],
+            "Most recent location": [
+                "最新の地域"
             ],
             "Most recent environment": [
                 "最近の利用環境"

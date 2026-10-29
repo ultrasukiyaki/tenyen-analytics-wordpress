@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Tenyen\Analytics\OrganizationClassifierV040;
+use Tenyen\Analytics\VisitorContext;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -130,7 +131,8 @@ final class TYA_Session_Admin
             if (!$time) return '';
             return $time->modify($end ? '+1 day' : '+0 day')->setTimezone(new DateTimeZone('UTC'))->format('Y-m-d H:i:s');
         };
-        $perPage = in_array((int)($source['per_page'] ?? 25), [25, 50, 100], true) ? (int)$source['per_page'] : 25;
+        $requestedPerPage = (int)($source['per_page'] ?? 25);
+        $perPage = in_array($requestedPerPage, [25, 50, 100], true) ? $requestedPerPage : 25;
         return [
             'query' => $clean($source['q'] ?? '', 255),
             'actor' => $actor,
@@ -167,7 +169,7 @@ final class TYA_Session_Admin
                 <td class="tya-break"><?= esc_html((string)($row['landing_title'] ?: $row['landing_path'] ?: '―')) ?></td>
                 <td class="tya-break"><?= esc_html((string)($row['exit_title'] ?: $row['exit_path'] ?: '―')) ?></td>
                 <td class="tya-break"><?= esc_html((string)($row['referrer'] ?: __('Direct', 'tenyen-analytics'))) ?></td>
-                <td class="tya-break"><?= esc_html(trim(($row['country_name'] ?: '') . ' / ' . ($row['asn'] ? 'AS' . $row['asn'] : '') . ' ' . ($row['asn_org'] ?: '') . ' / ' . ($row['browser'] ?: '') . ' / ' . ($row['os'] ?: '') . ' / ' . ($row['device_type'] ?: ''), ' /') ?: '―') ?><br><?= (int)$row['is_bot'] ? 'Bot' : 'Human' ?></td>
+                <td class="tya-break"><?= esc_html(VisitorContext::location($row)) ?><br><?= esc_html(VisitorContext::organization($row)) ?><br><?= esc_html(VisitorContext::environment($row)) ?><br><?= (int)$row['is_bot'] ? 'Bot' : 'Human' ?></td>
                 <td><button class="button" data-session-id="<?= esc_attr((string)$row['session_id']) ?>"><?= esc_html__('Details', 'tenyen-analytics') ?></button></td>
             </tr>
         <?php endforeach; ?></tbody></table></div>
@@ -200,8 +202,8 @@ final class TYA_Session_Admin
             ])) ?: '―') ?></dd></dl>
             <dl><dt><?= esc_html__('Engaged time (estimated)', 'tenyen-analytics') ?></dt><dd><?= esc_html($this->duration((int)$session['engaged_ms'])) ?></dd></dl>
             <dl><dt><?= esc_html__('Session span', 'tenyen-analytics') ?></dt><dd><?= esc_html($this->duration((int)$session['span_seconds'] * 1000)) ?></dd></dl>
-            <dl><dt><?= esc_html__('Country / region', 'tenyen-analytics') ?></dt><dd><?= esc_html(trim($environment['country_name'] . ' / ' . $environment['region'], ' /') ?: '―') ?></dd></dl>
-            <dl><dt><?= esc_html__('ASN / registered organization', 'tenyen-analytics') ?></dt><dd><?= esc_html(trim(($environment['asn'] ? 'AS' . $environment['asn'] : '') . ' ' . $environment['asn_org']) ?: '―') ?></dd></dl>
+            <dl><dt><?= esc_html__('Location', 'tenyen-analytics') ?></dt><dd><?= esc_html(VisitorContext::location($environment)) ?></dd></dl>
+            <dl><dt><?= esc_html__('ASN / registered organization', 'tenyen-analytics') ?></dt><dd><?= esc_html(VisitorContext::organization($environment)) ?></dd></dl>
             <dl><dt><?= esc_html__('Organization category', 'tenyen-analytics') ?></dt><dd><?= esc_html($classification['category']) ?></dd></dl>
             <dl><dt><?= esc_html__('Browser / OS / device', 'tenyen-analytics') ?></dt><dd><?= esc_html(trim($environment['browser'] . ' / ' . $environment['os'] . ' / ' . $environment['device_type'], ' /') ?: '―') ?></dd></dl>
         </div>
@@ -225,6 +227,13 @@ final class TYA_Session_Admin
     /** @param array<string,mixed> $visitor */
     private function visitorHtml(array $visitor): string
     {
+        $recent = is_array($visitor['recent'] ?? null) ? $visitor['recent'] : [];
+        $classification = OrganizationClassifierV040::classify(
+            isset($recent['asn']) && $recent['asn'] !== null ? (int)$recent['asn'] : null,
+            (string)($recent['asn_org'] ?? ''),
+            (bool)($recent['is_bot'] ?? false),
+            []
+        );
         ob_start(); ?>
         <div class="notice notice-info inline"><p><?= esc_html__('This is an anonymous browser identifier. It may change when browser storage is cleared or another browser or device is used, and is not proof of a person’s identity.', 'tenyen-analytics') ?></p></div>
         <div class="tya-detail-grid">
@@ -234,7 +243,10 @@ final class TYA_Session_Admin
             <dl><dt><?= esc_html__('Total sessions', 'tenyen-analytics') ?></dt><dd><?= (int)$visitor['total_sessions'] ?></dd></dl>
             <dl><dt><?= esc_html__('Total pageviews', 'tenyen-analytics') ?></dt><dd><?= (int)$visitor['total_pageviews'] ?></dd></dl>
             <dl><dt><?= esc_html__('Engaged time (estimated)', 'tenyen-analytics') ?></dt><dd><?= esc_html($this->duration((int)$visitor['engaged_ms'])) ?></dd></dl>
-            <dl><dt><?= esc_html__('Most recent environment', 'tenyen-analytics') ?></dt><dd><?= esc_html(trim(($visitor['recent']['browser'] ?? '') . ' / ' . ($visitor['recent']['os'] ?? '') . ' / ' . ($visitor['recent']['device_type'] ?? ''), ' /') ?: '―') ?></dd></dl>
+            <dl><dt><?= esc_html__('Most recent location', 'tenyen-analytics') ?></dt><dd><?= esc_html(VisitorContext::location($recent)) ?></dd></dl>
+            <dl><dt><?= esc_html__('ASN / registered organization', 'tenyen-analytics') ?></dt><dd><?= esc_html(VisitorContext::organization($recent)) ?></dd></dl>
+            <dl><dt><?= esc_html__('Organization category', 'tenyen-analytics') ?></dt><dd><?= esc_html($classification['category']) ?></dd></dl>
+            <dl><dt><?= esc_html__('Most recent environment', 'tenyen-analytics') ?></dt><dd><?= esc_html(VisitorContext::environment($recent)) ?></dd></dl>
         </div>
         <h3><?= esc_html__('Common landing pages', 'tenyen-analytics') ?></h3><ol><?php foreach ($visitor['common_landings'] as $row): ?><li class="tya-break"><?= esc_html($row['page_title'] ?: $row['path']) ?> (<?= (int)$row['sessions'] ?>)</li><?php endforeach; ?></ol>
         <h3><?= esc_html__('Common content', 'tenyen-analytics') ?></h3><ol><?php foreach ($visitor['common_content'] as $row): ?><li class="tya-break"><?= esc_html($row['page_title'] ?: $row['path']) ?> (<?= (int)$row['pageviews'] ?>)</li><?php endforeach; ?></ol>

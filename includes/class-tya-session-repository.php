@@ -32,7 +32,7 @@ final class TYA_Session_Repository
         $offset = ($page - 1) * $filters['per_page'];
         $direction = $filters['order'] === 'asc' ? 'ASC' : 'DESC';
 
-        $sql = "SELECT s.*,
+        $sql = "SELECT s.*,c.country_name,c.country_code,c.region,c.city,c.asn,c.asn_org,c.browser,c.os,c.device_type,c.user_agent,c.is_bot,
                     (SELECT p.path FROM {$this->table} p
                      WHERE p.session_id=s.session_id AND p.event_type='pageview'{$excludedP}
                      ORDER BY p.occurred_at ASC,p.event_id ASC LIMIT 1) landing_path,
@@ -53,15 +53,11 @@ final class TYA_Session_Repository
                 FROM (
                     SELECT session_id,MIN(occurred_at) started_at,MAX(occurred_at) ended_at,
                         COUNT(CASE WHEN event_type='pageview' THEN 1 END) pageviews,
-                        MAX(visitor_id) visitor_id,MAX(referrer) referrer,
-                        MAX(country_name) country_name,MAX(country_code) country_code,
-                        MAX(region) region,MAX(asn) asn,MAX(asn_org) asn_org,
-                        MAX(browser) browser,MAX(os) os,MAX(device_type) device_type,
-                        MAX(user_agent) user_agent,MAX(is_bot) is_bot
+                        MAX(visitor_id) visitor_id,MAX(referrer) referrer,MAX(event_id) context_event_id
                     FROM {$this->table}
                     WHERE {$whereSql}
                     GROUP BY session_id
-                ) s
+                ) s LEFT JOIN {$this->table} c ON c.event_id=s.context_event_id
                 ORDER BY s.started_at {$direction},s.session_id {$direction}
                 LIMIT %d OFFSET %d";
         $rows = $this->wpdb->get_results(
@@ -163,7 +159,7 @@ final class TYA_Session_Repository
         }
         $recent = $this->wpdb->get_row(
             $this->wpdb->prepare(
-                "SELECT country_name,region,asn,asn_org,browser,os,device_type,is_bot
+                "SELECT country_code,country_name,region,city,asn,asn_org,browser,os,device_type,is_bot
                  FROM {$this->table} WHERE visitor_id=%s{$excluded}
                  ORDER BY occurred_at DESC,event_id DESC LIMIT 1",
                 $visitorId

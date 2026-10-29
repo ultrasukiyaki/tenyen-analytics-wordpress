@@ -152,6 +152,8 @@ final class TYA_Lifecycle
                     $deleteResult = $wpdb->query("DELETE FROM {$table} WHERE event_id IN (" . implode(',', $ids) . ')');
                     if ($deleteResult === false) throw new RuntimeException('cleanup_delete_failed');
                     $deleted = (int)$deleteResult;
+                    $hostnames = TYA_Installer::hostnameCacheTable();
+                    $wpdb->query("DELETE c FROM {$hostnames} c WHERE NOT EXISTS (SELECT 1 FROM {$table} e WHERE e.ip_hash=c.ip_hash)");
                 }
             }
             $deletedTotal += max(0, $deleted);
