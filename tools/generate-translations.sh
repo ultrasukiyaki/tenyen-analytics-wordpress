@@ -22,7 +22,7 @@ xgettext \
     --keyword=esc_html__ \
     --keyword=esc_attr__ \
     --package-name='Tenyen Analytics for WordPress' \
-    --package-version='0.9.0' \
+    --package-version='0.9.1' \
     --msgid-bugs-address='https://www.10yendama.com/' \
     --copyright-holder='10yendama.com' \
     --output="$php_pot" \
@@ -42,7 +42,7 @@ xgettext \
     --from-code=UTF-8 \
     --keyword=__ \
     --package-name='Tenyen Analytics for WordPress' \
-    --package-version='0.9.0' \
+    --package-version='0.9.1' \
     --msgid-bugs-address='https://www.10yendama.com/' \
     --copyright-holder='10yendama.com' \
     --output="$js_pot" \

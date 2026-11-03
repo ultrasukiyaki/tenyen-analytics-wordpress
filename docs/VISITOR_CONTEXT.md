@@ -1,8 +1,8 @@
-# Visitor context and hostname display (v0.9.0)
+# Visitor context and hostname display (v0.9.x)
 
 Dashboard recent views and realtime rows show stored country code/name, region, and city alongside ASN and registered organization. Session lists, session details, and anonymous visitor details use the same formatting. Missing values appear as `—`. ASN registrations and PTR hostnames describe network infrastructure; neither verifies a visitor's employer or identity.
 
-Access history displays a reverse-DNS hostname instead of the decrypted IP, including expanded details. If no cached result exists, the UI shows “Awaiting hostname lookup”; negative or failed results show “Hostname unavailable”. Existing browser column preferences are retained, and a previously visible IP column is migrated to Hostname. Location follows the saved visibility preference.
+Access history displays a cached reverse-DNS hostname when available, including expanded details. While no cached hostname exists, after a negative response, or after a resolver failure, it falls back to the decrypted IP address. “Awaiting hostname lookup” or “Hostname unavailable” appears only when the stored IP cannot be decrypted. Existing browser column preferences are retained, and a previously visible IP column is migrated to Hostname / IP. Location follows the saved visibility preference.
 
 ## Hostname refresh
 
@@ -14,4 +14,4 @@ The worker uses the first valid nameserver in `/etc/resolv.conf` and never calls
 
 ## Upgrade and retention
 
-The normal idempotent schema migration adds the prefixed `tya_hostname_cache` table, keyed by the existing IP hash with an expiry index. No existing event columns are changed. Raw-log cleanup also removes cache entries with no remaining source events. Hostnames remain administrator-only and are not added to existing exports.
+The normal idempotent schema migration adds the prefixed `tya_hostname_cache` table, keyed by the existing IP hash with an expiry index. No existing event columns are changed. Raw-log cleanup also removes cache entries with no remaining source events. Hostnames and fallback IP addresses remain administrator-only and are not added to existing exports.

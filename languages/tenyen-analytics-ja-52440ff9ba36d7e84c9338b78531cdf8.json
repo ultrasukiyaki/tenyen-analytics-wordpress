@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-10-29 12:43+0000",
+    "translation-revision-date": "2026-11-03 06:16+0000",
     "generator": "tools\/make-json-translations.php",
     "source": "assets\/admin-metadata.js",
     "domain": "messages",
@@ -367,8 +367,8 @@
             "Event type": [
                 "イベント種別"
             ],
-            "Hostname": [
-                "ホスト名"
+            "Hostname \/ IP": [
+                "ホスト名 \/ IP"
             ],
             "ASN \/ candidate organization": [
                 "ASN／候補組織"

@@ -59,11 +59,15 @@ $check(ReverseDns::response($servfail, 42, $question)['status'] === 'failed', 'D
 
 $future = gmdate('Y-m-d H:i:s', time() + 60);
 $check(HostnameCache::display(null) === 'Awaiting hostname lookup', 'uncached pending');
+$check(HostnameCache::display(null, '192.0.2.1') === '192.0.2.1', 'uncached IP fallback');
 $check(HostnameCache::display(['status'=>'resolved','hostname'=>'DNS.Example.COM','expires_at'=>$future]) === 'dns.example.com', 'cached hostname');
 $check(HostnameCache::display(['status'=>'resolved','hostname'=>'<script>','expires_at'=>$future]) === 'Hostname unavailable', 'hostile cached PTR hidden');
+$check(HostnameCache::display(['status'=>'resolved','hostname'=>'<script>','expires_at'=>$future], '2001:db8::1') === '2001:db8::1', 'invalid PTR IP fallback');
 foreach (['unavailable','failed'] as $status) {
     $check(HostnameCache::display(['status'=>$status,'hostname'=>'','expires_at'=>$future]) === 'Hostname unavailable', 'negative display '.$status);
+    $check(HostnameCache::display(['status'=>$status,'hostname'=>'','expires_at'=>$future], '192.0.2.2') === '192.0.2.2', 'negative IP fallback '.$status);
 }
 $check(HostnameCache::display(['status'=>'resolved','hostname'=>'dns.example.com','expires_at'=>'2000-01-01 00:00:00']) === 'Awaiting hostname lookup', 'expired cache');
+$check(HostnameCache::display(['status'=>'resolved','hostname'=>'dns.example.com','expires_at'=>'2000-01-01 00:00:00'], '192.0.2.3') === '192.0.2.3', 'expired IP fallback');
 
 echo "visitor-context: {$checks} checks passed\n";

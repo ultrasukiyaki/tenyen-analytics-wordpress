@@ -34,15 +34,17 @@ final class HostnameCache
         return $result;
     }
 
-    public static function display(?array $entry): string
+    public static function display(?array $entry, string $fallbackIp = ''): string
     {
+        $fallbackIp = trim($fallbackIp);
+        if (!filter_var($fallbackIp, FILTER_VALIDATE_IP)) $fallbackIp = '';
         if (!$entry || (string)($entry['expires_at'] ?? '') <= gmdate('Y-m-d H:i:s')) {
-            return __('Awaiting hostname lookup', 'tenyen-analytics');
+            return $fallbackIp !== '' ? $fallbackIp : __('Awaiting hostname lookup', 'tenyen-analytics');
         }
         $hostname = ReverseDns::hostname((string)($entry['hostname'] ?? ''));
         return ($entry['status'] ?? '') === 'resolved' && $hostname !== ''
             ? $hostname
-            : __('Hostname unavailable', 'tenyen-analytics');
+            : ($fallbackIp !== '' ? $fallbackIp : __('Hostname unavailable', 'tenyen-analytics'));
     }
 
     /** @return array{processed:int,busy:bool} */

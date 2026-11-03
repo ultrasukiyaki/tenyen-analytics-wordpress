@@ -6,7 +6,7 @@ English | [日本語](README.ja.md)
 
 Tenyen Analytics is a self-hosted WordPress analytics plugin for pageviews, estimated unique visitors, sessions, engagement, referrers, audience details, GeoLite2 location and ASN insights, and bot detection. Analytics reports stay in WordPress and do not require an external analytics service.
 
-Version 0.9.0 completes country/location and ASN context across recent views, realtime, sessions, and anonymous visitor details. Access history displays cached reverse-DNS hostnames instead of decrypted raw IP addresses. Hostname refresh runs asynchronously in bounded WP-Cron jobs and never delays collection or page rendering. See [visitor context and hostname display](docs/VISITOR_CONTEXT.md).
+Version 0.9.1 displays cached reverse-DNS hostnames when available and falls back to the decrypted IP otherwise. Country/location and ASN context remain consistent across recent views, realtime, sessions, and anonymous visitor details. Hostname refresh runs asynchronously in bounded WP-Cron jobs and never delays collection or page rendering. See [visitor context and hostname display](docs/VISITOR_CONTEXT.md).
 
 ![Tenyen Analytics dashboard](screenshot_dashboard.png)
 
@@ -48,7 +48,7 @@ Raw IP addresses are stored using reversible encryption; HMAC values support exa
 
 ## Updating
 
-Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Upgrading from 0.8.1 to 0.9.0 automatically adds the hostname-cache table without changing existing event columns. Existing event rows, aggregates, annotations, tags, watchlists, saved views, exclusions, settings, manually maintained GeoLite2 files, and keys are preserved. Automatic GeoLite2 updates remain disabled until an administrator explicitly configures credentials and enables them.
+Back up WordPress, then overwrite or upload the new plugin version. Keep GeoLite2 files in the uploads directory. Upgrading from 0.9.0 to 0.9.1 requires no schema migration. Upgrading from 0.8.1 automatically adds the hostname-cache table without changing existing event columns. Existing event rows, aggregates, annotations, tags, watchlists, saved views, exclusions, settings, manually maintained GeoLite2 files, and keys are preserved. Automatic GeoLite2 updates remain disabled until an administrator explicitly configures credentials and enables them.
 
 ## Export, retention, and cleanup
 

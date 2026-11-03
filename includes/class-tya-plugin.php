@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 
 final class TYA_Plugin
 {
-    public const UI_BUILD = '0.9.0-visitor-context';
+    public const UI_BUILD = '0.9.1-hostname-fallback';
     private static ?self $instance = null;
     private ?TYA_Session_Admin $sessionAdmin = null;
     private ?TYA_Metadata $metadata = null;
@@ -1107,6 +1107,7 @@ final class TYA_Plugin
     private function renderHistoryTable(array $rows): string
     {
         $hostnames = $this->hostnameCache()->forRows($rows);
+        $crypto = $this->crypto();
         $overrides = $this->organizationOverrides();
         ob_start();
         ?>
@@ -1115,7 +1116,7 @@ final class TYA_Plugin
                 <thead><tr>
                     <th data-col="datetime"><?= esc_html__('Date', 'tenyen-analytics') ?></th>
                     <th data-col="event"><?= esc_html__('Event type', 'tenyen-analytics') ?></th>
-                    <th data-col="hostname"><?= esc_html__('Hostname', 'tenyen-analytics') ?></th>
+                    <th data-col="hostname"><?= esc_html__('Hostname / IP', 'tenyen-analytics') ?></th>
                     <th data-col="location"><?= esc_html__('Location', 'tenyen-analytics') ?></th>
                     <th data-col="organization"><?= esc_html__('ASN / candidate organization', 'tenyen-analytics') ?></th>
                     <th data-col="page"><?= esc_html__('Page', 'tenyen-analytics') ?></th>
@@ -1129,7 +1130,8 @@ final class TYA_Plugin
                 <?php endif; ?>
                 <?php foreach ($rows as $row):
                     $hash = is_string($row['ip_hash'] ?? null) ? bin2hex($row['ip_hash']) : '';
-                    $hostname = HostnameCache::display($hostnames[$hash] ?? null);
+                    $ip = $crypto->decryptIp(is_string($row['ip_encrypted'] ?? null) ? $row['ip_encrypted'] : null);
+                    $hostname = HostnameCache::display($hostnames[$hash] ?? null, $ip);
                     $localTime = get_date_from_gmt((string)$row['occurred_at'], 'Y-m-d H:i:s');
                     $location = VisitorContext::location($row);
                     $org = trim((string)$row['asn_org']);
@@ -1157,7 +1159,7 @@ final class TYA_Plugin
                         <td colspan="9">
                             <div class="tya-history-detail-grid">
                                 <dl><dt><?= esc_html__('Classification', 'tenyen-analytics') ?></dt><dd><?= esc_html($classification['reason'] . ' (' . $classification['confidence'] . '%)') ?></dd></dl>
-                                <dl><dt><?= esc_html__('Hostname', 'tenyen-analytics') ?></dt><dd><code><?= esc_html($hostname) ?></code></dd></dl>
+                                <dl><dt><?= esc_html__('Hostname / IP', 'tenyen-analytics') ?></dt><dd><code><?= esc_html($hostname) ?></code></dd></dl>
                                 <dl><dt><?= esc_html__('Location', 'tenyen-analytics') ?></dt><dd><?= esc_html($location) ?></dd></dl>
                                 <dl><dt><?= esc_html__('ASN / organization', 'tenyen-analytics') ?></dt><dd><?= esc_html($asnText) ?></dd></dl>
                                 <dl><dt><?= esc_html__('Duration', 'tenyen-analytics') ?></dt><dd><?= esc_html($this->formatDuration((int)$row['duration_ms'])) ?></dd></dl>
@@ -1250,7 +1252,7 @@ final class TYA_Plugin
                         <?php foreach ([
                             'datetime' => __('Date', 'tenyen-analytics'),
                             'event' => __('Event type', 'tenyen-analytics'),
-                            'hostname' => __('Hostname', 'tenyen-analytics'),
+                            'hostname' => __('Hostname / IP', 'tenyen-analytics'),
                             'location' => __('Location', 'tenyen-analytics'),
                             'organization' => __('ASN / candidate organization', 'tenyen-analytics'),
                             'page' => __('Page', 'tenyen-analytics'),

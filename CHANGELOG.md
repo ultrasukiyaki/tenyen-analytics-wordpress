@@ -2,6 +2,11 @@ English | [日本語](CHANGELOG.ja.md)
 
 # Changelog
 
+## 0.9.1 - 2026-11-03
+
+### Changed
+- Access history now falls back to the decrypted IP address when a cached reverse-DNS hostname is pending, unavailable, invalid, or expired.
+
 ## 0.9.0 - 2026-10-29
 
 ### Added
